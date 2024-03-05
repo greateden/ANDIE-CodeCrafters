@@ -48,8 +48,8 @@ public class Andie {
      */
     private static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
-        JFrame frame = new JFrame("ANDIE");
-
+        JFrame frame = new JFrame("ANDIE: CodeCrafters");
+        //JFrame.setDefaultLookAndFeelDecorated(true);
         Image image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
         frame.setIconImage(image);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,6 +82,10 @@ public class Andie {
         // Actions that affect the representation of colour in the image
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
+
+        // Provides an about page and link to online docs
+        HelpActions helpActions = new HelpActions();
+        menuBar.add(helpActions.createMenu());
         
         frame.setJMenuBar(menuBar);
         frame.pack();
