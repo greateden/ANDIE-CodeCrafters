@@ -1,6 +1,7 @@
 package cosc202.andie;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class test {
     
@@ -17,14 +18,20 @@ public class test {
            getpos(scanner.nextInt(),2*radius+1);
         }
         */
+        double sum =0;
         for(int i = 0; i < size ; i++){
            String[] posString = getpos(i,(2*radius+1)).split(",");
            int x = Integer.parseInt(posString[0]);
            int y = Integer.parseInt(posString[1]);
-           System.out.println(x + "," + y);
-           System.out.println(GaussianEquation(x,y, (double)1 / 3));
-           array[i] = (float)GaussianEquation(x,y, (double)1 / 3);
+           double result = GaussianEquation(x,y, (double)1 / 3);
+           sum = sum + result;
+           array[i] = (float)result;
         }
+        for(int i = 0; i < size ; i++){
+            array[i] = array[i]/ (float)sum;
+        }
+    
+        System.out.println("check");
         
 
 
