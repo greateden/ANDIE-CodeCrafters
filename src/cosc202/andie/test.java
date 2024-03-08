@@ -9,7 +9,7 @@ public class test {
 
        
 
-        int radius = 1;
+        int radius = 3;
         int size = (2*radius+1) * (2*radius+1);
         float [] array = new float[size];
          /** 
@@ -23,7 +23,7 @@ public class test {
            String[] posString = getpos(i,(2*radius+1)).split(",");
            int x = Integer.parseInt(posString[0]);
            int y = Integer.parseInt(posString[1]);
-           double result = GaussianEquation(x,y, (double)1 / 3);
+           double result = GaussianEquation(x,y, (double)radius / 3);
            sum = sum + result;
            array[i] = (float)result;
         }
@@ -31,8 +31,14 @@ public class test {
             array[i] = array[i]/ (float)sum;
         }
     
-        System.out.println("check");
-        
+        //*  */
+        for (int i = 0; i < array.length; i++) {
+            System.out.printf("%.3f \t", array[i]);
+            if ((i + 1) % (2*radius+1) == 0) {
+                System.out.println(); 
+            }
+        }
+    
 
 
 
