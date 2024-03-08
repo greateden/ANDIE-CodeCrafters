@@ -5,19 +5,25 @@ import java.util.Scanner;
 public class test {
     
     public static void main(String[] args) throws Exception {
-        //double middle = GaussianEquation(0,0,);
-        //double x1 = GaussianEquation(1,0,(double)1/3);
-        //double adjust = (middle + (4*x1));
-        //System.out.printf("%.3f \n",middle / adjust);
-        //System.out.printf("%.3f",x1 / adjust);
+
        
 
         int radius = 1;
         int size = (2*radius+1) * (2*radius+1);
         float [] array = new float[size];
+         /** 
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+           getpos(scanner.nextInt(),2*radius+1);
+        }
+        */
         for(int i = 0; i < size ; i++){
-           // String[] xyStrings = String.split(getpos(i,(2*radius+1)), ",");
-
+           String[] posString = getpos(i,(2*radius+1)).split(",");
+           int x = Integer.parseInt(posString[0]);
+           int y = Integer.parseInt(posString[1]);
+           System.out.println(x + "," + y);
+           System.out.println(GaussianEquation(x,y, (double)1 / 3));
+           array[i] = (float)GaussianEquation(x,y, (double)1 / 3);
         }
         
 
@@ -35,7 +41,7 @@ public class test {
     }
 
     public static String getpos(int num , int height){
-        int center = (height*height) / 2;
+        int center = (height) / 2;
         int x = num % height -center;
         int y = center - num / height;
         return x +","+ y;
