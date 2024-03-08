@@ -19,7 +19,18 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
     public BufferedImage apply(BufferedImage input) {
         int size = (2*radius+1) * (2*radius+1);
         float [] array = new float[size];
-        Arrays.fill(array, 1.0f/size);
+        double sum =0;
+        for(int i = 0; i < size ; i++){
+            String[] posString = getpos(i,(2*radius+1)).split(",");
+            int x = Integer.parseInt(posString[0]);
+            int y = Integer.parseInt(posString[1]);
+            double result = GaussianEquation(x,y, (double)radius / 3);
+            sum = sum + result;
+            array[i] = (float)result;
+         }
+        for(int i = 0; i < size ; i++){
+             array[i] = array[i]/ (float)sum;
+         }
 
         Kernel kernel = new Kernel(2*radius+1, 2*radius+1, array);
         ConvolveOp convOp = new ConvolveOp(kernel);
@@ -29,6 +40,7 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
         return output;
     }
 
+
     public static double GaussianEquation(int x , int y, double sd){
         double sdPow = Math.pow(sd, 2);
         double l1 = 1/(2 * Math.PI * sdPow);
@@ -36,6 +48,13 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
         double e = Math.pow(Math.E, -(el1 / (2 * sdPow)));
 
         return l1 * e;
+    }
+
+    public static String getpos(int num , int height){
+        int center = (height) / 2;
+        int x = num % height -center;
+        int y = center - num / height;
+        return x +","+ y;
     }
 
 
