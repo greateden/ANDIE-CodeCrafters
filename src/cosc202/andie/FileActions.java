@@ -42,7 +42,7 @@ public class FileActions {
 
     /**
      * <p>
-     * Create a menu contianing the list of File actions.
+     * Create a menu containing the list of File actions.
      * </p>
      * 
      * @return The File menu UI element.
