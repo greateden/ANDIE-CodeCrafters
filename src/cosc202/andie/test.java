@@ -7,17 +7,10 @@ public class test {
     
     public static void main(String[] args) throws Exception {
 
-       
-
+    
         int radius = 3;
         int size = (2*radius+1) * (2*radius+1);
         float [] array = new float[size];
-         /** 
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-           getpos(scanner.nextInt(),2*radius+1);
-        }
-        */
         double sum =0;
         for(int i = 0; i < size ; i++){
            String[] posString = getpos(i,(2*radius+1)).split(",");
@@ -31,19 +24,19 @@ public class test {
             array[i] = array[i]/ (float)sum;
         }
     
-        //*  */
+        /** Code to print the array in a easy to read form
         for (int i = 0; i < array.length; i++) {
             System.out.printf("%.3f \t", array[i]);
             if ((i + 1) % (2*radius+1) == 0) {
                 System.out.println(); 
             }
         }
-    
+        */
 
 
 
     }
-
+    // Test push
     public static double GaussianEquation(int x , int y, double sd){
         double sdPow = Math.pow(sd, 2);
         double l1 = 1/(2 * Math.PI * sdPow);
