@@ -92,9 +92,9 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                 int a1 = 0; //Counter to help fit a square kernel into a 1-D array.
                 for(int k=i-side/2; k<i+side/2; k++){
                     for(int l=j-side/2; l<j+side/2; l++){
-                        if(k >0 && k < input.getWidth() && l >0 && l <= input.getHeight()){
+                        if(k >0 && k < input.getHeight() && l >0 && l < input.getWidth()){
                             //Taken from MeanFilter.
-                            argb = input.getRGB(k, l);
+                            argb = input.getRGB(l,k);
                             int a = (argb & 0xFF000000) >> 24;
                             int r = (argb & 0x00FF0000) >> 16;
                             int g = (argb & 0x0000FF00) >> 8;
