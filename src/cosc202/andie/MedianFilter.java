@@ -87,12 +87,12 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
     
         //int r,g,b;
-        for(int i=0; i<input.getHeight()-side; i++){
-            for(int j=0; j<input.getWidth()-side; j++){
+        for(int i=0; i<input.getHeight(); i++){
+            for(int j=0; j<input.getWidth(); j++){
                 int a1 = 0; //Counter to help fit a square kernel into a 1-D array.
-                for(int k=i-radius; k<i+radius; k++){
-                    for(int l=j-radius; l<j+radius; l++){
-                        if(i >=0 && i < input.getHeight() && j >=0 && j <= input.getWidth()){
+                for(int k=i-side/2; k<i+side/2; k++){
+                    for(int l=j-side/2; l<j+side/2; l++){
+                        if(k >0 && k < input.getWidth() && l >0 && l <= input.getHeight()){
                             //Taken from MeanFilter.
                             argb = input.getRGB(k, l);
                             int a = (argb & 0xFF000000) >> 24;
@@ -119,10 +119,10 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                 Arrays.sort(aMedian);
 
                 //Find the middle? Must be the radius probably.
-                nr = rMedian[a1/2];
-                ng = gMedian[a1/2];
-                nb = bMedian[a1/2];
-                na = aMedian[a1/2];
+                nr = rMedian[radius];
+                ng = gMedian[radius];
+                nb = bMedian[radius];
+                na = aMedian[radius];
 
                 //Apply the filter now.
                 argb = (na << 24) | (nr << 16) | (ng << 8) | nb;
