@@ -44,22 +44,10 @@ public class ImageInvert implements ImageOperation, java.io.Serializable {
      * @return The resulting inverted image.
      */
     public BufferedImage apply(BufferedImage input) {
-        //int r,g,b;
+        
         for (int y = 0; y < input.getHeight(); ++y) {
             for (int x = 0; x < input.getWidth(); ++x) {
-                /* 
-                Color col = new Color(input.getRGB(y,x));
-                r = col.getRed();
-                g = col.getGreen();
-                b = col.getBlue();
-
-                r = 255-r;
-                g = 255-g;
-                b = 255-b;
-
-                Color toSet = new Color(r,g,b);
-                input.setRGB(y,x,toSet.getRGB());
-                */
+                
                 
                 int argb = input.getRGB(x, y);
                 int a = (argb & 0xFF000000) >> 24;

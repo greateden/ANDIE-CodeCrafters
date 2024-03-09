@@ -2,7 +2,6 @@ package cosc202.andie;
 
 import java.awt.image.*;
 import java.util.*;
-import java.awt.Color;
 
 /**
  * <p>
@@ -85,36 +84,31 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
 
         int argb; //argb values for transformation.
 
-        //BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
+        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
     
         //int r,g,b;
-        for(int i=0; i<input.getHeight(); i++){
-            for(int j=0; j<input.getWidth(); j++){
+        for(int i=0; i<input.getHeight()-side; i++){
+            for(int j=0; j<input.getWidth()-side; j++){
                 int a1 = 0; //Counter to help fit a square kernel into a 1-D array.
-                for(int k=i; k<i+side; k++){
-                    for(int l=j; l<j+side; l++){
+                for(int k=i-radius; k<i+radius; k++){
+                    for(int l=j-radius; l<j+radius; l++){
+                        if(i >=0 && i < input.getHeight() && j >=0 && j <= input.getWidth()){
+                            //Taken from MeanFilter.
+                            argb = input.getRGB(k, l);
+                            int a = (argb & 0xFF000000) >> 24;
+                            int r = (argb & 0x00FF0000) >> 16;
+                            int g = (argb & 0x0000FF00) >> 8;
+                            int b = (argb & 0x000000FF);
 
-                        //Taken from MeanFilter.
-                        argb = input.getRGB(k, l);
-                        int a = (argb & 0xFF000000) >> 24;
-                        int r = (argb & 0x00FF0000) >> 16;
-                        int g = (argb & 0x0000FF00) >> 8;
-                        int b = (argb & 0x000000FF);
+                            //Filling the arrays.
+                            rMedian[a1] = r;
+                            gMedian[a1] = g;
+                            bMedian[a1] = b;
+                            aMedian[a1] = a;
 
-                        /* 
-                        Color col = new Color(input.getRGB(i,j));
-                        r = col.getRed();
-                        g = col.getGreen();
-                        b = col.getBlue(); */
-
-                        //Filling the arrays.
-                        rMedian[a1] = r;
-                        gMedian[a1] = g;
-                        bMedian[a1] = b;
-                        aMedian[a1] = a;
-
-                        //Incrementing the counter.
-                        a1++;
+                            //Incrementing the counter.
+                            a1++;
+                        }
                     }
                 }
 
@@ -125,19 +119,19 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                 Arrays.sort(aMedian);
 
                 //Find the middle? Must be the radius probably.
-                nr = rMedian[radius];
-                ng = gMedian[radius];
-                nb = bMedian[radius];
-                na = aMedian[radius];
+                nr = rMedian[a1/2];
+                ng = gMedian[a1/2];
+                nb = bMedian[a1/2];
+                na = aMedian[a1/2];
 
                 //Apply the filter now.
                 argb = (na << 24) | (nr << 16) | (ng << 8) | nb;
-                input.setRGB(i,j,argb);
+                output.setRGB(j,i, argb);
             }
         }
 
         
-        return input;
+        return output;
     }
 
 
