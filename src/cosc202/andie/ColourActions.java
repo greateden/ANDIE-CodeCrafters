@@ -3,6 +3,7 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.prefs.Preferences;
 
 /**
  * <p>
@@ -27,6 +28,7 @@ public class ColourActions {
     /** A list of actions for the Colour menu. */
     protected ArrayList<Action> actions;
 
+    
     /**
      * <p>
      * Create a set of Colour menu actions.
@@ -34,12 +36,13 @@ public class ColourActions {
      */
     public ColourActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ConvertToGreyAction("convertToGreyAction", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ImageInvertAction("ImageInvertAction", null, "Invert colours of image", Integer.valueOf(KeyEvent.VK_G)));
     }
 
     /**
      * <p>
-     * Create a menu contianing the list of Colour actions.
+     * Create a menu containing the list of Colour actions.
      * </p>
      * 
      * @return The colour menu UI element.
@@ -91,6 +94,43 @@ public class ColourActions {
          */
         public void actionPerformed(ActionEvent e) {
             target.getImage().apply(new ConvertToGrey());
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
+    }
+
+    //Same as above, but edited to work for imageInvert().
+    public class ImageInvertAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new imageInvert action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
+        ImageInvertAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the invert image command is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the Image Invert is triggered.
+         * It changes the image.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            target.getImage().apply(new ImageInvert());
             target.repaint();
             target.getParent().revalidate();
         }
