@@ -40,7 +40,7 @@ public class EditActions {
 
     /**
      * <p>
-     * Create a menu contianing the list of Edit actions.
+     * Create a menu containing the list of Edit actions.
      * </p>
      * 
      * @return The edit menu UI element.

@@ -90,7 +90,7 @@ class EditableImage {
      * 
      * <p>
      * This method makes a cloned copy of a BufferedImage.
-     * This requires knoweldge of some details about the internals of the BufferedImage,
+     * This requires knowledge of some details about the internals of the BufferedImage,
      * but essentially comes down to making a new BufferedImage made up of copies of
      * the internal parts of the input.
      * </p>
@@ -158,6 +158,8 @@ class EditableImage {
             fileIn.close();
         } catch (Exception ex) {
             // Could be no file or something else. Carry on for now.
+            ops.clear();
+            redoOps.clear();
         }
         this.refresh();
     }
@@ -194,7 +196,7 @@ class EditableImage {
 
     /**
      * <p>
-     * Save an image to a speficied file.
+     * Save an image to a specified file.
      * </p>
      * 
      * <p>
