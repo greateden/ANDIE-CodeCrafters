@@ -36,8 +36,8 @@ public class ColourActions {
      */
     public ColourActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ConvertToGreyAction("convertToGreyAction", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new ImageInvertAction("ImageInvertAction", null, "Invert colours of image", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ConvertToGreyAction("Convert to Grey", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ImageInvertAction("Invert Colour", null, "Invert colours of image", Integer.valueOf(KeyEvent.VK_G)));
     }
 
     /**
