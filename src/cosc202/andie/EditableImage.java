@@ -14,7 +14,7 @@ import javax.imageio.*;
  * The EditableImage represents an image with a series of operations applied to it.
  * It is fairly core to the ANDIE program, being the central data structure.
  * The operations are applied to a copy of the original image so that they can be undone.
- * THis is what is meant by "A Non-Destructive Image Editor" - you can always undo back to the original image.
+ * This is what is meant by "A Non-Destructive Image Editor" - you can always undo back to the original image.
  * </p>
  * 
  * <p>
