@@ -49,7 +49,7 @@ public class ColourActions {
 
     /**
      * <p>
-     * Create a menu contianing the list of Colour actions.
+     * Create a menu containing the list of Colour actions.
      * </p>
      * 
      * @return The colour menu UI element.

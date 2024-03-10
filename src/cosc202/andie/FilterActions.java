@@ -39,7 +39,7 @@ public class FilterActions {
 
     /**
      * <p>
-     * Create a menu contianing the list of Filter actions.
+     * Create a menu containing the list of Filter actions.
      * </p>
      * 
      * @return The filter menu UI element.
@@ -84,7 +84,7 @@ public class FilterActions {
          * 
          * <p>
          * This method is called whenever the MeanFilterAction is triggered.
-         * It prompts the user for a filter radius, then applys an appropriately sized {@link MeanFilter}.
+         * It prompts the user for a filter radius, then applies an appropriately sized {@link MeanFilter}.
          * </p>
          * 
          * @param e The event triggering this callback.
