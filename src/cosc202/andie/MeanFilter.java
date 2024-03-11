@@ -10,7 +10,7 @@ import java.util.*;
  * 
  * <p>
  * A Mean filter blurs an image by replacing each pixel by the average of the
- * pixels in a surrounding neighbourhood, and can be implemented by a convoloution.
+ * pixels in a surrounding neighbourhood, and can be implemented by a convolution.
  * </p>
  * 
  * <p> 

@@ -1,6 +1,10 @@
 package cosc202.andie;
 
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
+
 import javax.swing.*;
 import javax.imageio.*;
 
@@ -31,7 +35,7 @@ public class Andie {
      * <p>
      * This method sets up an interface consisting of an active image (an {@code ImagePanel})
      * and various menus which can be used to trigger operations to load, save, edit, etc. 
-     * These operations are implemented {@link ImageOperation}s and triggerd via 
+     * These operations are implemented {@link ImageOperation}s and triggered via
      * {@code ImageAction}s grouped by their general purpose into menus.
      * </p>
      * 
@@ -108,7 +112,10 @@ public class Andie {
      */
     public static void main(String[] args) throws Exception {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
+
             public void run() {
+                
+
                 try {
                     createAndShowGUI();
                 } catch (Exception ex) {
