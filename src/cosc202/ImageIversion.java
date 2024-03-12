@@ -1,7 +1,9 @@
 /**Author  yuxing zhang 10th march */
-package cosc202.andie;
+package cosc202;
 
 import java.awt.image.*;
+
+import cosc202.andie.ImageOperation;
 
 
 public class ImageInversion implements ImageOperation, java.io.Serializable {

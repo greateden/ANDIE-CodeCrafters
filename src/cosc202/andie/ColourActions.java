@@ -4,6 +4,8 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import cosc202.ImageInversion;
+
 /**
  * <p>
  * Actions provided by the Colour menu.
