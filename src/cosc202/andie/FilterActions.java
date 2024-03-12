@@ -35,6 +35,7 @@ public class FilterActions {
     public FilterActions() {
         actions = new ArrayList<Action>();
         actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new SoftBlurFilterAction("Soft blur", null, "Apply a soft blur", Integer.valueOf(KeyEvent.VK_B)));
         actions.add(new SharpenFilterAction("Sharpen filter", null, "Apply a sharpen filter", Integer.valueOf(KeyEvent.VK_S)));
         actions.add(new GaussianFilterAction("Gaussian filter", null, "Apply a Gaussian filter", Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new MedianFilterAction("Median filter", null, "Apply a median filter", Integer.valueOf(KeyEvent.VK_PAGE_DOWN)));
@@ -212,6 +213,46 @@ public class FilterActions {
             target.getParent().revalidate();
         }
 
+    }
+
+    /**
+     * <p>
+     * Action to apply a blur to an image with Soft blur filter.
+     * </p>
+     * 
+     * @see SoftBlurFilter
+     */
+    public class SoftBlurFilterAction extends ImageAction{
+
+        /**
+         * <p>
+         * Create a new Soft Blur filter action.
+         * </p>
+         * 
+         * @param name The name of the action (ignored if null).
+         * @param icon An icon to use to represent the action (ignored if null).
+         * @param desc A brief description of the action  (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         */
+        SoftBlurFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic){
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * This method is called whenever the SoftBlurFilterAction is triggered.
+         * It applys the soft blur filter.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Create and apply soft blur filter
+            target.getImage().apply(new SoftBlurFilter());
+            target.repaint();
+            target.getParent().revalidate();
+        }
     }
 
     /**
