@@ -88,8 +88,8 @@ public class Andie {
         menuBar.add(colourActions.createMenu());
 
         //Actions that alter the image such as image flip/rotate
-        ImageMenuBar ImageMenuBar = new ImageMenuBar();
-        menuBar.add(ImageMenuBar.createMenu());
+        ImageMenuBar imageMenuBar = new ImageMenuBar();
+        menuBar.add(imageMenuBar.createMenu());
 
         // Provides an about page and link to online docs
         HelpActions helpActions = new HelpActions();
