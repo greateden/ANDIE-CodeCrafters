@@ -1,8 +1,13 @@
 package cosc202.andie;
 
 import java.util.*;
+import java.awt.Component;
 import java.awt.event.*;
+import java.io.File;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * <p>
@@ -22,6 +27,8 @@ import javax.swing.*;
  * 
  * @author Steven Mills
  * @version 1.0
+ * @modified_by Eden the Greatest
+ * @modified_date 15 MAR 2024
  */
 public class FileActions {
 
@@ -96,25 +103,103 @@ public class FileActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            if (isOpened == false) {
-                JFileChooser fileChooser = new JFileChooser();
-                int result = fileChooser.showOpenDialog(target);
 
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    try {
-                        String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
-                        target.getImage().open(imageFilepath);
-                        isOpened = true;
-                    } catch (Exception ex) {
-                        System.exit(1);
-                    }
+            EditableImage ei = new EditableImage();
+
+            if (isOpened == true && !ei.isOpsEmpty()) {
+                // do u wanna save it
+                // JPanel panel = new JPanel();
+                // panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+                // JLabel label = new JLabel("Do you want to save the file before open another
+                // file?");
+                // label.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+                // JPanel buttonPanel = new JPanel();
+                // buttonPanel.add(new JButton("Cancel (C)"));
+                // buttonPanel.add(new JButton("No (N)"));
+                // buttonPanel.add(new JButton("Yes (Y)"));
+
+                // panel.add(label);
+                // panel.add(buttonPanel);
+
+                // int option = JOptionPane.showOptionDialog(null, panel, "Color Selection",
+                // JOptionPane.OK_CANCEL_OPTION,
+                // JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+                Object[] options = { "Yes (Y)", "No (N)", "Cancel (C)" };
+
+                int n = JOptionPane.showOptionDialog(null,
+                        "Do you want to save the file before open another file?",
+                        "Warning",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[2]);
+
+                if (n == 0) {
+                    FileSaveAction saveAction = new FileSaveAction("Save", null, "Save",
+                            Integer.valueOf(KeyEvent.VK_A));
+                    saveAction.actionPerformed(e);
+                    // break;
+                } else if (n == 1) {
+                    openFile();
+                    // break;
+                } else {
+                    // break;
                 }
-
-                target.repaint();
-                target.getParent().revalidate();
             } else {
-                   //do u wanna save it 
+                openFile();
             }
+        }
+
+        public void openFile() {
+            JFileChooser fileChooser = new JFileChooser();
+
+            // Cannot resolve .dYSM files
+            FileNameExtensionFilter filterJPG = new FileNameExtensionFilter(
+                    "JPG, JPEG", "jpg", "jpeg");
+            fileChooser.setFileFilter(filterJPG);
+
+            FileNameExtensionFilter filterGIF = new FileNameExtensionFilter(
+                    "GIF", "gif");
+            fileChooser.setFileFilter(filterGIF);
+
+            FileNameExtensionFilter filterTIF = new FileNameExtensionFilter(
+                    "TIF, TIFF", "tif", "tiff");
+            fileChooser.setFileFilter(filterTIF);
+
+            FileNameExtensionFilter filterPNG = new FileNameExtensionFilter(
+                    "PNG", "png");
+            fileChooser.setFileFilter(filterPNG);
+
+            FileNameExtensionFilter filterBMP = new FileNameExtensionFilter(
+                    "BMP", "bmp");
+            fileChooser.setFileFilter(filterBMP);
+
+            FileNameExtensionFilter filterWBEP = new FileNameExtensionFilter(
+                    "WBEP", "wbep");
+            fileChooser.setFileFilter(filterWBEP);
+
+            FileNameExtensionFilter filterAllTypes = new FileNameExtensionFilter(
+                    "All Supported File Types", "jpg", "jpeg", "gif", "tif", "tiff", "png", "bmp", "wbep");
+            fileChooser.setFileFilter(filterAllTypes);
+
+            int result = fileChooser.showOpenDialog(target);
+
+            if (result == JFileChooser.APPROVE_OPTION) {
+                try {
+                    String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                    target.getImage().open(imageFilepath);
+                    isOpened = true;
+                } catch (Exception ex) {
+                    System.exit(1);
+                }
+            }
+
+            target.repaint();
+            target.getParent().revalidate();
         }
 
     }
@@ -156,8 +241,16 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             try {
-                target.getImage().save();
-                // TODO if hasn't been saved, go to save as
+                // if hasn't been saved, create a new instance of Save As and call the
+                // actionPerformed() method
+                if (isSaved == false) {
+                    FileSaveAsAction saveAsAction = new FileSaveAsAction("Save As", null, "Save a copy",
+                            Integer.valueOf(KeyEvent.VK_A));
+                    saveAsAction.actionPerformed(e);
+                    isSaved = true;
+                } else {
+                    target.getImage().save();
+                }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
                         "Warning", JOptionPane.WARNING_MESSAGE);
@@ -174,6 +267,7 @@ public class FileActions {
      * @see EditableImage#saveAs(String)
      */
     public class FileSaveAsAction extends ImageAction {
+        //TODO Add the real export function here!
 
         /**
          * <p>
@@ -203,12 +297,27 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser();
+
+            fileChooser.setAcceptAllFileFilterUsed(false); // Disable the "All files" filter
+
+            // Add file filters for different image formats
+            fileChooser.addChoosableFileFilter(new ImageFileFilter("JPG", "Joint Photographic Experts Group"));
+            fileChooser.addChoosableFileFilter(new ImageFileFilter("TIFF", "Tagged Image File Format"));
+            fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", "Portable Network Graphics"));
+            fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", "Bitmap Image File"));
+            fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
+            fileChooser
+                    .addChoosableFileFilter(new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
+
             if (isOpened == true) {
                 int result = fileChooser.showSaveDialog(target);
 
                 if (result == JFileChooser.APPROVE_OPTION) {
                     try {
                         String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                        // Get the selected file filter
+                        FileFilter selectedFilter = fileChooser.getFileFilter();
+                        String format = ((ImageFileFilter) selectedFilter).getExtension();
                         target.getImage().saveAs(imageFilepath);
                         isSaved = true;
                     } catch (Exception ex) {
@@ -219,6 +328,32 @@ public class FileActions {
             } else {
                 JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
                         "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+
+        private class ImageFileFilter extends FileFilter {
+            private String extension;
+            private String description;
+
+            public ImageFileFilter(String extension, String description) {
+                this.extension = extension.toLowerCase();
+                this.description = description;
+            }
+
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                }
+                String name = f.getName().toLowerCase();
+                return name.endsWith("." + extension);
+            }
+
+            public String getDescription() {
+                return description + String.format(" (*.%s)", extension);
+            }
+
+            public String getExtension() {
+                return extension;
             }
         }
 
