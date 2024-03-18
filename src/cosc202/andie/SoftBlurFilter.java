@@ -1,5 +1,7 @@
 package cosc202.andie;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.*;
 
 /**
@@ -40,9 +42,29 @@ public class SoftBlurFilter implements ImageOperation, java.io.Serializable{
         // Make filter from 3x3 array
         Kernel kernel = new Kernel(3, 3, array);
         // Apply as a convolution
-        ConvolveOp convOp = new ConvolveOp(kernel, 1, null);
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
-        convOp.filter(input, output);
+        ConvolveOp convOp = new ConvolveOp(kernel);
+        
+        //Makes a transpearent border to stop convolution from being applied to non-existant pixels
+
+        //Creates image one pixel bigger then original image
+        int borderWidth = input.getWidth() + 2;
+        int borderHeight = input.getHeight() + 2;
+        BufferedImage borderImage = new BufferedImage(borderWidth, borderHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = borderImage.createGraphics();
+
+        //fills image with transparent pixels
+        g2.setColor(new Color(0,0,0,0)); 
+        g2.fillRect(0, 0, borderWidth, borderHeight);
+
+        //Adding original image to the middle
+        g2.drawImage(input,1,1, null);
+
+        //Applies convolution to bordered image
+        BufferedImage output = convOp.filter(borderImage, null);
+
+        //Crops image back to original size
+        output = output.getSubimage(1, 1, input.getWidth(), input.getHeight());
+
         return output;
     }
 }
