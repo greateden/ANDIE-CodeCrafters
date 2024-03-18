@@ -3,9 +3,12 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
-
 import cosc202.andie.FilterActions.GaussianFilterAction;
+import javax.swing.plaf.basic.BasicButtonListener;
 
+//import cosc202.andie.ResizePannel;
+
+import java.awt.*;
 /**
  * <p>
  * Actions provided by the Image menu.
@@ -16,15 +19,16 @@ import cosc202.andie.FilterActions.GaussianFilterAction;
  * This includes image rotation and flipping.
  * </p>
  * 
- * <p> 
- * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+ * <p>
+ * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
+ * 4.0</a>
  * </p>
  * 
  * @author CodeCrafters
  * @version 1.0
  */
 public class ImageMenuBar {
-    
+
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
 
@@ -38,6 +42,7 @@ public class ImageMenuBar {
         actions.add(new ImageMenuBarFlipHorizontal("Flip Horizontal", null, "Flips the image along the y-axis", Integer.valueOf(KeyEvent.VK_H)));
         actions.add(new ImageMenuBarFlipVertical("Flip Vertical", null, "Flips the image along the x-axis", Integer.valueOf(KeyEvent.VK_V)));
         actions.add(new RotateImageAction("Rotate Image", null, "Apply an Image rotation at set theta", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new ImageResizeAction("Image Resize", null, "Resize the Image", Integer.valueOf(KeyEvent.VK_J)));
     }
 
     /**
@@ -50,7 +55,7 @@ public class ImageMenuBar {
     public JMenu createMenu() {
         JMenu fileMenu = new JMenu("Image");
 
-        for(Action action: actions) {
+        for (Action action : actions) {
             fileMenu.add(new JMenuItem(action));
         }
 
@@ -64,10 +69,10 @@ public class ImageMenuBar {
          * Create a new Flip Horizontal action
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         ImageMenuBarFlipHorizontal(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -75,7 +80,7 @@ public class ImageMenuBar {
             putValue(MNEMONIC_KEY, mnemonic);
         }
 
-         /**
+        /**
          * <p>
          * Callback for when the about-us action is triggered.
          * </p>
@@ -93,8 +98,6 @@ public class ImageMenuBar {
             target.getParent().revalidate();
         }
     }
-    
-
 
     public class ImageMenuBarFlipVertical extends ImageAction {
 
@@ -103,10 +106,10 @@ public class ImageMenuBar {
          * Create a new Flip Vertical action
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         ImageMenuBarFlipVertical(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -114,7 +117,7 @@ public class ImageMenuBar {
             putValue(MNEMONIC_KEY, mnemonic);
         }
 
-         /**
+        /**
          * <p>
          * Callback for when Flip vertical is pressed..
          * </p>
@@ -131,8 +134,8 @@ public class ImageMenuBar {
             target.getParent().revalidate();
         }
     }
-
-    /**
+}
+     /**
      *  Action class code layout created by Steven Mills
      */
     public class RotateImageAction extends ImageAction {
@@ -185,9 +188,144 @@ public class ImageMenuBar {
             target.repaint();
             target.getParent().revalidate();
         }
+  /**
+     * <p>
+     * Action to resieze an image.
+     * @made by Yuxing Zhang
+     * </p>
+     * 
+     */
+    public class ImageResizeAction extends ImageAction {
+        int height;
+        int width;
+        JLabel widthJLabel, heightLabel, titleLabel,blankLabel;
+        JTextField widthField, heightField;
+        JButton goButton;
+   
+        /**
+         * <p>
+         * Create a Image Resize Action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ImageResizeAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
 
-    }
-}
+        /**
+         * <p>
+         * Callback for when the Image Resize action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the Image Resize Action is triggered.
+         * It resizes the image.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            // ResizePannel rp = new ResizePannel();
+             //Create a panel
+             createPanel();
+
+            // int height = rp.getHeight();
+            // int width = rp.getWidth();
+            // System.out.println(height);
+            // System.out.println(width);
+
+            // target.getImage().apply(new ImageResize());
+            // target.repaint();
+            // target.getParent().revalidate();
+        }
+
     
 
+    protected void createPanel(){
+        
+        //Write code to create the panel
+       // JPanel panel=new JPanel();
+       
+       JDialog  dialog = new JDialog (Andie.getFrame(),"Resize",true);
+       dialog.setPreferredSize(new Dimension(500, 400));
+       dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        
+        JPanel p = new JPanel();
+        p.setLayout(new GridLayout(4, 2));
+ ;
+
+        p.setPreferredSize(new Dimension(250, 350));
+        titleLabel = new JLabel("Set the size of the new image");
+        titleLabel.setPreferredSize(new Dimension(200, 50));
+        blankLabel = new JLabel("                       ");
+
+
+        heightLabel = new JLabel("Height:");
+        heightLabel.setPreferredSize(new Dimension(100, 50));
+        widthJLabel = new JLabel("Width:");
+        widthJLabel.setPreferredSize(new Dimension(100, 50));
+
+        widthField = new JTextField(5);
+        heightField = new JTextField(5);
+        heightField.setPreferredSize(new Dimension(100, 50));
+        widthField.setPreferredSize(new Dimension(100, 50));
+
+        goButton = new JButton("Go!");
+        goButton.setOpaque(true);
+        goButton.setBackground(Color.black);
+        goButton.setPreferredSize(new Dimension(200, 50));
+
+        //panel.add(frame);
+        
+
+//add all the lables and buttons to the panel
+        p.add(titleLabel);
+        p.add(blankLabel);
+        p.add(heightLabel);
+        p.add(heightField);
+        p.add(widthJLabel);
+        p.add(widthField);
+        p.add(goButton);
+
+        JPanel buttonPanel = new JPanel();
+        ButtonListener bl = new ButtonListener();
+        buttonPanel.add(goButton);
+        goButton.addActionListener(bl);
+        p.add(buttonPanel);
+
+        // dialog.getContentPane().add(p);
+        dialog.getContentPane().add(p);
+        dialog.pack();
+        dialog.setVisible(true);
+       // frame.getContentPane().add(dialog);
+
+    
+
+        
+
+    }
+    public class ButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+
+            JButton source = (JButton) ae.getSource();;
+            if (source == goButton) {
+                height = Integer.parseInt(heightField.getText());
+                width = Integer.parseInt(widthField.getText());
+            }
+            //  new ImageResize(height, width);
+            target.getImage().apply(new ImageResize(height, width));
+        target.repaint();
+        target.getParent().revalidate();
+        }
+    }
+    }
+    
+}
 
