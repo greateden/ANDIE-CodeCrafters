@@ -38,7 +38,6 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
         ConvolveOp convOp = new ConvolveOp(kernel);
 
         //Makes a transpearent border to stop convolution from being applied to non-existant pixels
-
         //Creates image one pixel bigger then original image
         int borderWidth = input.getWidth() + 2;
         int borderHeight = input.getHeight() + 2;
