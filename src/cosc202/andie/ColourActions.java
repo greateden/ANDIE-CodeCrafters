@@ -33,7 +33,7 @@ public class ColourActions {
     /** A list of actions for the Colour menu. */
     protected ArrayList<Action> actions;
 
-    //ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
+    ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
 
     /**
      * <p>
@@ -42,7 +42,7 @@ public class ColourActions {
      */
     public ColourActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ConvertToGreyAction(("convertToGreyAction"), null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ConvertToGreyAction(bundle.getString("convertToGreyAction"), null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
         actions.add(new ImageInvertAction("Invert Colour", null, "Invert colours of image", Integer.valueOf(KeyEvent.VK_G)));
         // I am using key C as the hotkey
         // addeed RGBSwapping function's button

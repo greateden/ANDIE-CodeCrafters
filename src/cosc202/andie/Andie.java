@@ -123,13 +123,14 @@ public class Andie {
             public void run() {
                 
                 //Making preferences and locale
-                Preferences prefs = Preferences.userNodeForPackage(Andie.class);
-                //Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
-                Locale en_NZ = Locale.of("en", "NZ");
-                Locale.setDefault(en_NZ);
+                Preferences p = Preferences.userNodeForPackage(Andie.class);
+                Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
+                //Locale en_NZ = Locale.of("en", "NZ");
+                //Locale.setDefault(en_NZ);
 
                 //Now making the ResourceBundle
-                //ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
+                ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+                System.out.println(bundle.getString("convertToGreyAction"));
 
                 try {
                     createAndShowGUI();
