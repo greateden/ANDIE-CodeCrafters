@@ -4,10 +4,12 @@ import java.util.*;
 import java.awt.Component;
 import java.awt.event.*;
 import java.io.File;
-
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
+import java.awt.image.BufferedImage;
 
 /**
  * <p>
@@ -44,10 +46,10 @@ public class FileActions {
      */
     public FileActions() {
         actions = new ArrayList<Action>();
-        actions.add(new FileOpenAction("Open", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new FileSaveAction("Save", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(new FileExitAction("Exit", null, "Exit the program", Integer.valueOf(0)));
+        actions.add(new FileOpenAction("Open (O)", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new FileSaveAction("Save (S)", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new FileSaveAsAction("Save As (A)", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileExitAction("Exit (Q)", null, "Exit the program", Integer.valueOf(KeyEvent.VK_Q)));
     }
 
     /**
@@ -306,8 +308,7 @@ public class FileActions {
             fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", "Portable Network Graphics"));
             fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", "Bitmap Image File"));
             fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
-            fileChooser
-                    .addChoosableFileFilter(new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
+            fileChooser.addChoosableFileFilter(new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
 
             if (isOpened == true) {
                 int result = fileChooser.showSaveDialog(target);
@@ -325,6 +326,26 @@ public class FileActions {
                                 "Error", JOptionPane.WARNING_MESSAGE);
                     }
                 }
+//         try {
+//             // Load the source image
+//             File input = new File("source.jpg");
+//             BufferedImage image = ImageIO.read(input);
+
+//             // Create an ImageAction instance
+//             ImageAction action = new ImageAction();
+
+//             // Load the operations from the .ops file
+//             action.loadOps("transform.ops");
+
+//             // Apply the operations to the image
+//             BufferedImage result = action.apply(image);
+
+//             // Save the result to a file
+//             File output = new File("output.jpg");
+//             ImageIO.write(result, "jpg", output);
+//         } catch (Exception e) {
+//             e.printStackTrace();
+//         }
             } else {
                 JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
                         "Warning", JOptionPane.WARNING_MESSAGE);
