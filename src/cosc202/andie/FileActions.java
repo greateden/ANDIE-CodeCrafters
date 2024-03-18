@@ -10,6 +10,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 
 /**
  * <p>
@@ -48,7 +49,8 @@ public class FileActions {
         actions = new ArrayList<Action>();
         actions.add(new FileOpenAction("Open (O)", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new FileSaveAction("Save (S)", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction("Save As (A)", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileExportAction("Export (E)", null, "Export an image without the .ops file",
+                Integer.valueOf(KeyEvent.VK_E)));
         actions.add(new FileExitAction("Exit (Q)", null, "Exit the program", Integer.valueOf(KeyEvent.VK_Q)));
     }
 
@@ -144,12 +146,9 @@ public class FileActions {
                     FileSaveAction saveAction = new FileSaveAction("Save", null, "Save",
                             Integer.valueOf(KeyEvent.VK_A));
                     saveAction.actionPerformed(e);
-                    // break;
                 } else if (n == 1) {
                     openFile();
-                    // break;
                 } else {
-                    // break;
                 }
             } else {
                 openFile();
@@ -202,6 +201,104 @@ public class FileActions {
 
             target.repaint();
             target.getParent().revalidate();
+        }
+
+    }
+
+    /**
+     * <p>
+     * Action to save an image without saving the .ops file.
+     * i.e., to actually make changes to the image.
+     * </p>
+     * 
+     * @see EditableImage#open(String)
+     */
+    public class FileExportAction extends ImageAction {
+        // TODO Add the real export function here!
+
+        /**
+         * <p>
+         * Create a new file-open action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        FileExportAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the file export action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the FileExportAction is triggered.
+         * It prompts the user to select a format they wants to export and export
+         * to an image without .ops file.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser fileChooser = new JFileChooser();
+
+            fileChooser.setAcceptAllFileFilterUsed(false); // Disable the "All files" filter
+
+            // Add file filters for different image formats
+            fileChooser.addChoosableFileFilter(new ImageFileFilter("JPG", "Joint Photographic Experts Group"));
+            fileChooser.addChoosableFileFilter(new ImageFileFilter("TIFF", "Tagged Image File Format"));
+            fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", "Portable Network Graphics"));
+            fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", "Bitmap Image File"));
+            fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
+            fileChooser
+                    .addChoosableFileFilter(new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
+
+            if (isOpened == true) {
+                int result = fileChooser.showSaveDialog(target);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                        FileFilter selectedFilter = fileChooser.getFileFilter();
+                        String format = ((ImageFileFilter) selectedFilter).getExtension();
+                        ImageIO.write(target.getImage().getCurrentImage(), format, new File(imageFilepath));
+                    } catch (Exception err) {
+                        err.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
+                            "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+
+        private class ImageFileFilter extends FileFilter {
+            private String extension;
+            private String description;
+
+            public ImageFileFilter(String extension, String description) {
+                this.extension = extension.toLowerCase();
+                this.description = description;
+            }
+
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                }
+                String name = f.getName().toLowerCase();
+                return name.endsWith("." + extension);
+            }
+
+            public String getDescription() {
+                return description + String.format(" (*.%s)", extension);
+            }
+
+            public String getExtension() {
+                return extension;
+            }
         }
 
     }
@@ -269,7 +366,6 @@ public class FileActions {
      * @see EditableImage#saveAs(String)
      */
     public class FileSaveAsAction extends ImageAction {
-        //TODO Add the real export function here!
 
         /**
          * <p>
@@ -308,7 +404,8 @@ public class FileActions {
             fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", "Portable Network Graphics"));
             fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", "Bitmap Image File"));
             fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
-            fileChooser.addChoosableFileFilter(new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
+            fileChooser
+                    .addChoosableFileFilter(new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
 
             if (isOpened == true) {
                 int result = fileChooser.showSaveDialog(target);
@@ -326,26 +423,6 @@ public class FileActions {
                                 "Error", JOptionPane.WARNING_MESSAGE);
                     }
                 }
-//         try {
-//             // Load the source image
-//             File input = new File("source.jpg");
-//             BufferedImage image = ImageIO.read(input);
-
-//             // Create an ImageAction instance
-//             ImageAction action = new ImageAction();
-
-//             // Load the operations from the .ops file
-//             action.loadOps("transform.ops");
-
-//             // Apply the operations to the image
-//             BufferedImage result = action.apply(image);
-
-//             // Save the result to a file
-//             File output = new File("output.jpg");
-//             ImageIO.write(result, "jpg", output);
-//         } catch (Exception e) {
-//             e.printStackTrace();
-//         }
             } else {
                 JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
                         "Warning", JOptionPane.WARNING_MESSAGE);
@@ -420,5 +497,4 @@ public class FileActions {
         }
 
     }
-
 }
