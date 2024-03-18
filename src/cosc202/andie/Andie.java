@@ -26,7 +26,7 @@ import javax.imageio.*;
  * @version 1.0
  */
 public class Andie {
-
+    private static JFrame frame;
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -52,7 +52,7 @@ public class Andie {
      */
     private static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
-        JFrame frame = new JFrame("ANDIE: CodeCrafters");
+        frame = new JFrame("ANDIE: CodeCrafters");
         //JFrame.setDefaultLookAndFeelDecorated(true);
         Image image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
         frame.setIconImage(image);
@@ -98,6 +98,9 @@ public class Andie {
         frame.setJMenuBar(menuBar);
         frame.pack();
         frame.setVisible(true);
+    }
+    public static JFrame getFrame(){
+    return frame;
     }
 
     /**
