@@ -7,9 +7,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.File;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 
 /**
  * <p>
@@ -211,8 +208,6 @@ public class FileActions {
      * @see EditableImage#open(String)
      */
     public class FileExportAction extends ImageAction {
-        // TODO Add the real export function here!
-
         /**
          * <p>
          * Create a new file-open action.
