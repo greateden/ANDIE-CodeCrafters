@@ -55,7 +55,8 @@ class EditableImage {
     private String opsFilename;
 
     // the data field below is for FileActions.FileOpenAction to ID whether we have
-    // an empty stack or not
+    // made a new change to the file or not; this will not look into the stack as
+    // the user may open a new file which has been edited before.
     public static boolean isOpsNotEmptyStatus;
 
     /*
@@ -190,9 +191,6 @@ class EditableImage {
             redoOps.clear();
             objIn.close();
             fileIn.close();
-            // the command below is for FileActions.FileOpenAction to ID whether we have an
-            // empty stack or not
-            isOpsNotEmptyStatus = isOpsNotEmpty();
         } catch (Exception ex) {
             // Could be no file or something else. Carry on for now.
             ops.clear();
@@ -262,6 +260,11 @@ class EditableImage {
      * @param op The operation to apply.
      */
     public void apply(ImageOperation op) {
+        // the command below is for FileActions.FileOpenAction to ID whether we have
+        // made a new change to the file or not; this will not look into the stack as
+        // the user may open a new file which has been edited before.
+        isOpsNotEmptyStatus = isOpsNotEmpty();
+
         current = op.apply(current);
         ops.add(op);
     }
