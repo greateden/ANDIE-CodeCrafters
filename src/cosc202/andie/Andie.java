@@ -26,7 +26,7 @@ import javax.imageio.*;
  * @version 1.0
  */
 public class Andie {
-
+    private static JFrame frame;
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -52,7 +52,7 @@ public class Andie {
      */
     private static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
-        JFrame frame = new JFrame("ANDIE: CodeCrafters");
+        frame = new JFrame("ANDIE: CodeCrafters");
         //JFrame.setDefaultLookAndFeelDecorated(true);
         Image image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
         frame.setIconImage(image);
@@ -99,6 +99,9 @@ public class Andie {
         frame.pack();
         frame.setVisible(true);
     }
+    public static JFrame getFrame(){
+    return frame;
+    }
 
     /**
      * <p>
@@ -119,6 +122,15 @@ public class Andie {
 
             public void run() {
                 
+                //Making preferences and locale
+                Preferences p = Preferences.userNodeForPackage(Andie.class);
+                Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
+                //Locale en_NZ = Locale.of("en", "NZ");
+                //Locale.setDefault(en_NZ);
+
+                //Now making the ResourceBundle
+                ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+                System.out.println(bundle.getString("convertToGreyAction"));
 
                 try {
                     createAndShowGUI();

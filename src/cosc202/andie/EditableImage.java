@@ -46,10 +46,6 @@ class EditableImage {
     /** The file where the operation sequence is stored. */
     private String opsFilename;
 
-    public boolean isOpsEmpty(){
-        return ops.empty();
-    }
-
     /**
      * <p>
      * Create a new EditableImage.

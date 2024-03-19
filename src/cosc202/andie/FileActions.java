@@ -1,7 +1,6 @@
 package cosc202.andie;
 
 import java.util.*;
-import java.awt.Component;
 import java.awt.event.*;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -30,8 +29,6 @@ import java.awt.image.RenderedImage;
  * 
  * @author Steven Mills
  * @version 1.0
- * @modified_by Eden the Greatest
- * @modified_date 15 MAR 2024
  */
 public class FileActions {
 
@@ -189,15 +186,15 @@ public class FileActions {
 
             int result = fileChooser.showOpenDialog(target);
 
-            if (result == JFileChooser.APPROVE_OPTION) {
-                try {
-                    String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
-                    target.getImage().open(imageFilepath);
-                    isOpened = true;
-                } catch (Exception ex) {
-                    System.exit(1);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                        target.getImage().open(imageFilepath);
+                        isOpened = true;
+                    } catch (Exception ex) {
+                        System.exit(1);
+                    }
                 }
-            }
 
             target.repaint();
             target.getParent().revalidate();
@@ -395,27 +392,12 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser();
-
-            fileChooser.setAcceptAllFileFilterUsed(false); // Disable the "All files" filter
-
-            // Add file filters for different image formats
-            fileChooser.addChoosableFileFilter(new ImageFileFilter("JPG", "Joint Photographic Experts Group"));
-            fileChooser.addChoosableFileFilter(new ImageFileFilter("TIFF", "Tagged Image File Format"));
-            fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", "Portable Network Graphics"));
-            fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", "Bitmap Image File"));
-            fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
-            fileChooser
-                    .addChoosableFileFilter(new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
-
             if (isOpened == true) {
                 int result = fileChooser.showSaveDialog(target);
 
                 if (result == JFileChooser.APPROVE_OPTION) {
                     try {
                         String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
-                        // Get the selected file filter
-                        FileFilter selectedFilter = fileChooser.getFileFilter();
-                        String format = ((ImageFileFilter) selectedFilter).getExtension();
                         target.getImage().saveAs(imageFilepath);
                         isSaved = true;
                     } catch (Exception ex) {
@@ -426,32 +408,6 @@ public class FileActions {
             } else {
                 JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
                         "Warning", JOptionPane.WARNING_MESSAGE);
-            }
-        }
-
-        private class ImageFileFilter extends FileFilter {
-            private String extension;
-            private String description;
-
-            public ImageFileFilter(String extension, String description) {
-                this.extension = extension.toLowerCase();
-                this.description = description;
-            }
-
-            public boolean accept(File f) {
-                if (f.isDirectory()) {
-                    return true;
-                }
-                String name = f.getName().toLowerCase();
-                return name.endsWith("." + extension);
-            }
-
-            public String getDescription() {
-                return description + String.format(" (*.%s)", extension);
-            }
-
-            public String getExtension() {
-                return extension;
             }
         }
 
