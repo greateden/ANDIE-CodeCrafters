@@ -59,6 +59,9 @@ class EditableImage {
     // the user may open a new file which has been edited before.
     public static boolean isOpsNotEmptyStatus;
 
+    //to help determine whether to "save" or "save as"
+    public static boolean hasOpsFile;
+
     /*
      * A method for determing whether to call "save as" or "save"
      * when user trying to save an image.
@@ -191,8 +194,10 @@ class EditableImage {
             redoOps.clear();
             objIn.close();
             fileIn.close();
+            hasOpsFile = true;
         } catch (Exception ex) {
             // Could be no file or something else. Carry on for now.
+            hasOpsFile = false;
             ops.clear();
             redoOps.clear();
         }

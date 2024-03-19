@@ -32,7 +32,7 @@ public class FileActions {
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
     protected boolean isOpened = false;
-    protected boolean isSaved = false;
+    // protected boolean isSaved = false;
 
     /**
      * <p>
@@ -42,8 +42,11 @@ public class FileActions {
     public FileActions() {
         actions = new ArrayList<Action>();
         actions.add(new FileOpenAction("Open       (O)", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new FileSaveAction("Save         (S)", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction("Save As   (A)", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileSaveAction("Save         (S)", null,
+                "Save the file, will need to save file to a new file location for the first saving",
+                Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new FileSaveAsAction("Save As   (A)", null, "Save to a new file location",
+                Integer.valueOf(KeyEvent.VK_A)));
         actions.add(new FileExportAction("Export    (E)", null, "Export an image without the .ops file",
                 Integer.valueOf(KeyEvent.VK_E)));
         actions.add(new FileExitAction("Exit         (Q)", null, "Exit the program", Integer.valueOf(KeyEvent.VK_Q)));
@@ -321,9 +324,9 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             try {
-                // if hasn't been saved, create a new instance of Save As and call the
-                // actionPerformed() method
-                if (isSaved == false) {
+                // if no .ops file detected, go to save as
+                // to keep the original image.
+                if (EditableImage.hasOpsFile == false) {
                     FileSaveAsAction saveAsAction = new FileSaveAsAction("Save As", null, "Save a copy",
                             Integer.valueOf(KeyEvent.VK_A));
                     saveAsAction.actionPerformed(e);
@@ -400,7 +403,7 @@ public class FileActions {
                     try {
                         String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                         target.getImage().saveAs(imageFilepath);
-                        isSaved = true;
+                        // isSaved = true;
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, "What did you just do my dear user...",
                                 "Error", JOptionPane.WARNING_MESSAGE);
