@@ -3,8 +3,7 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
-import cosc202.andie.FilterActions.GaussianFilterAction;
-import javax.swing.plaf.basic.BasicButtonListener;
+
 
 //import cosc202.andie.ResizePannel;
 
