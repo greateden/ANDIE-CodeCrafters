@@ -41,11 +41,12 @@ public class FileActions {
      */
     public FileActions() {
         actions = new ArrayList<Action>();
-        actions.add(new FileOpenAction("Open (O)", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new FileSaveAction("Save (S)", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileExportAction("Export (E)", null, "Export an image without the .ops file",
+        actions.add(new FileOpenAction("Open       (O)", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new FileSaveAction("Save         (S)", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new FileSaveAsAction("Save As   (A)", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileExportAction("Export    (E)", null, "Export an image without the .ops file",
                 Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new FileExitAction("Exit (Q)", null, "Exit the program", Integer.valueOf(KeyEvent.VK_Q)));
+        actions.add(new FileExitAction("Exit         (Q)", null, "Exit the program", Integer.valueOf(KeyEvent.VK_Q)));
     }
 
     /**
@@ -102,28 +103,11 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
 
-            EditableImage ei = new EditableImage();
+            // dead bug showing here
+            // do not create a new instance cuz otherwise the stack will defo be empty!!!
+            // EditableImage ei = new EditableImage();
 
-            if (isOpened == true && !ei.isOpsEmpty()) {
-                // do u wanna save it
-                // JPanel panel = new JPanel();
-                // panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-                // JLabel label = new JLabel("Do you want to save the file before open another
-                // file?");
-                // label.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-                // JPanel buttonPanel = new JPanel();
-                // buttonPanel.add(new JButton("Cancel (C)"));
-                // buttonPanel.add(new JButton("No (N)"));
-                // buttonPanel.add(new JButton("Yes (Y)"));
-
-                // panel.add(label);
-                // panel.add(buttonPanel);
-
-                // int option = JOptionPane.showOptionDialog(null, panel, "Color Selection",
-                // JOptionPane.OK_CANCEL_OPTION,
-                // JOptionPane.PLAIN_MESSAGE, null, null, null);
+            if (isOpened == true && EditableImage.isOpsNotEmptyStatus == true) {
 
                 Object[] options = { "Yes (Y)", "No (N)", "Cancel (C)" };
 
@@ -136,13 +120,15 @@ public class FileActions {
                         options,
                         options[2]);
 
-                if (n == 0) {
+                if (n == 0) { // yes
                     FileSaveAction saveAction = new FileSaveAction("Save", null, "Save",
                             Integer.valueOf(KeyEvent.VK_A));
                     saveAction.actionPerformed(e);
-                } else if (n == 1) {
+                } else if (n == 1) { // no
                     openFile();
                 } else {
+                    // Should change this statement to case control cuz the "else" here is
+                    // useless...
                 }
             } else {
                 openFile();
@@ -183,15 +169,17 @@ public class FileActions {
 
             int result = fileChooser.showOpenDialog(target);
 
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    try {
-                        String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
-                        target.getImage().open(imageFilepath);
-                        isOpened = true;
-                    } catch (Exception ex) {
-                        System.exit(1);
-                    }
+            if (result == JFileChooser.APPROVE_OPTION) {
+                try {
+                    isOpened = true;
+                    String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                    target.getImage().open(imageFilepath);
+                    // debugging
+                    // System.out.println("approve " + isOpened);
+                } catch (Exception ex) {
+                    System.exit(1);
                 }
+            }
 
             target.repaint();
             target.getParent().revalidate();
@@ -236,20 +224,22 @@ public class FileActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new JFileChooser();
 
-            fileChooser.setAcceptAllFileFilterUsed(false); // Disable the "All files" filter
+            if (isOpened == true) { // The user doesn't have to save first when exporting images
+                JFileChooser fileChooser = new JFileChooser();
 
-            // Add file filters for different image formats
-            fileChooser.addChoosableFileFilter(new ImageFileFilter("JPG", "Joint Photographic Experts Group"));
-            fileChooser.addChoosableFileFilter(new ImageFileFilter("TIFF", "Tagged Image File Format"));
-            fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", "Portable Network Graphics"));
-            fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", "Bitmap Image File"));
-            fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
-            fileChooser
-                    .addChoosableFileFilter(new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
+                fileChooser.setAcceptAllFileFilterUsed(false); // Disable the "All files" filter
 
-            if (isOpened == true) {
+                // Add file filters for different image formats
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("JPG", "Joint Photographic Experts Group"));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("TIFF", "Tagged Image File Format"));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", "Portable Network Graphics"));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", "Bitmap Image File"));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
+                fileChooser
+                        .addChoosableFileFilter(
+                                new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
+
                 int result = fileChooser.showSaveDialog(target);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     try {
@@ -260,10 +250,10 @@ public class FileActions {
                     } catch (Exception err) {
                         err.printStackTrace();
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -292,7 +282,6 @@ public class FileActions {
                 return extension;
             }
         }
-
     }
 
     /**
@@ -338,7 +327,10 @@ public class FileActions {
                     FileSaveAsAction saveAsAction = new FileSaveAsAction("Save As", null, "Save a copy",
                             Integer.valueOf(KeyEvent.VK_A));
                     saveAsAction.actionPerformed(e);
-                    isSaved = true;
+                    // No need for the command below because otherwise if the user clicked
+                    // the button and closed the new window without saving anything,
+                    // the command below will set the value to true and cause bugs!
+                    // isSaved = true;
                 } else {
                     target.getImage().save();
                 }
@@ -387,7 +379,21 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser();
+
             if (isOpened == true) {
+
+                fileChooser.setAcceptAllFileFilterUsed(false); // Disable the "All files" filter
+
+                // Add file filters for different image formats
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("JPG", "Joint Photographic Experts Group"));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("TIFF", "Tagged Image File Format"));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", "Portable Network Graphics"));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", "Bitmap Image File"));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
+                fileChooser
+                        .addChoosableFileFilter(
+                                new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
+
                 int result = fileChooser.showSaveDialog(target);
 
                 if (result == JFileChooser.APPROVE_OPTION) {
@@ -403,6 +409,32 @@ public class FileActions {
             } else {
                 JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
                         "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+
+        private class ImageFileFilter extends FileFilter {
+            private String extension;
+            private String description;
+
+            public ImageFileFilter(String extension, String description) {
+                this.extension = extension.toLowerCase();
+                this.description = description;
+            }
+
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                }
+                String name = f.getName().toLowerCase();
+                return name.endsWith("." + extension);
+            }
+
+            public String getDescription() {
+                return description + String.format(" (*.%s)", extension);
+            }
+
+            public String getExtension() {
+                return extension;
             }
         }
 

@@ -274,7 +274,7 @@ public class ColourActions {
                 } else if (!(R == 0 && G == 0 && B == 0) && (R == 1 && G == 2 && B == 3)){
                     JOptionPane.showMessageDialog(null, "With all due respect, you didn't change anything.", "Warning",
                             JOptionPane.WARNING_MESSAGE);
-                //Will educate the user if they didn't give any inputs and still wanna hit the OK button/
+                //Will educate the user if they didn't give any inputs and still wanna hit the OK button
                 } else if (R == 0 && G == 0 && B == 0) {
                     JOptionPane.showMessageDialog(null, "Please at least choose something, that's the basic respect to your human brain.", "Warning",
                             JOptionPane.WARNING_MESSAGE);
