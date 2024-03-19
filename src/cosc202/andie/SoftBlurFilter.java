@@ -13,6 +13,9 @@ import java.awt.image.*;
  * This filter blurs an image by mixing a little bit of neighbouring pixels, to a lesser extent of the mean filter 
  * Implimented by using a convoultion.
  * </p>
+ * 
+ * @author Emma
+ * @version 1.0
  */
 public class SoftBlurFilter implements ImageOperation, java.io.Serializable{
 
@@ -45,7 +48,6 @@ public class SoftBlurFilter implements ImageOperation, java.io.Serializable{
         ConvolveOp convOp = new ConvolveOp(kernel);
         
         //Makes a transpearent border to stop convolution from being applied to non-existant pixels
-
         //Creates image one pixel bigger then original image
         int borderWidth = input.getWidth() + 2;
         int borderHeight = input.getHeight() + 2;

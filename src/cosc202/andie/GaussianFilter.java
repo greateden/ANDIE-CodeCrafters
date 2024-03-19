@@ -3,7 +3,6 @@ package cosc202.andie;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.*;
-import java.util.*;
 
 
 public class GaussianFilter implements ImageOperation, java.io.Serializable {
@@ -38,7 +37,6 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
         ConvolveOp convOp = new ConvolveOp(kernel);
 
         //Makes a transpearent border to stop convolution from being applied to non-existant pixels
-
         //Creates image one pixel bigger then original image
         int borderWidth = input.getWidth() + 2;
         int borderHeight = input.getHeight() + 2;

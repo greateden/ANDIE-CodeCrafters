@@ -3,8 +3,7 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
-import cosc202.andie.FilterActions.GaussianFilterAction;
-import javax.swing.plaf.basic.BasicButtonListener;
+
 
 //import cosc202.andie.ResizePannel;
 
@@ -134,7 +133,7 @@ public class ImageMenuBar {
             target.getParent().revalidate();
         }
     }
-}
+
      /**
      *  Action class code layout created by Steven Mills
      */
@@ -188,6 +187,7 @@ public class ImageMenuBar {
             target.repaint();
             target.getParent().revalidate();
         }
+    }
   /**
      * <p>
      * Action to resieze an image.
@@ -328,4 +328,5 @@ public class ImageMenuBar {
     }
     
 }
+
 
