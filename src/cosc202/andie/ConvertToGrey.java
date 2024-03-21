@@ -21,7 +21,6 @@ import java.awt.image.*;
  * @version 1.0
  */
 public class ConvertToGrey implements ImageOperation, java.io.Serializable {
-// hellllo world
     /**
      * <p>
      * Create a new CovertToGrey operation.
