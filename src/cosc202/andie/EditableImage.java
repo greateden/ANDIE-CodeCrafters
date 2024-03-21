@@ -171,6 +171,7 @@ class EditableImage {
      * @throws Exception If something goes wrong.
      */
     public void open(String filePath) throws Exception {
+        System.out.println("Opne function");
         imageFilename = filePath;
         opsFilename = imageFilename + ".ops";
         File imageFile = new File(imageFilename);
@@ -202,6 +203,7 @@ class EditableImage {
             redoOps.clear();
         }
         this.refresh();
+        System.out.println("Opne function bottom");
     }
 
     /**
