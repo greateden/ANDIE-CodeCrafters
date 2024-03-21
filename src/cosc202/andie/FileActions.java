@@ -38,7 +38,9 @@ public class FileActions {
      * Create a set of File menu actions.
      * </p>
      */
+    
     public FileActions() {
+        
         actions = new ArrayList<Action>();
         actions.add(new FileOpenAction("Open       (O)", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new FileSaveAction("Save         (S)", null,
@@ -123,9 +125,8 @@ public class FileActions {
                         options[2]);
 
                 if (n == 0) { // yes
-                    FileSaveAction saveAction = new FileSaveAction("Save", null, "Save",
-                            Integer.valueOf(KeyEvent.VK_A));
-                    saveAction.actionPerformed(e);
+                    actions.get(1).actionPerformed(e);
+
                 } else if (n == 1) { // no
                     openFile();
                 } else {

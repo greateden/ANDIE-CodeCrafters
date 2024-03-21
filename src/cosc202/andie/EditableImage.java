@@ -69,17 +69,17 @@ class EditableImage {
      * @see FileActions
      */
 
-    public boolean isOpsNotEmpty() {
+    // public boolean isOpsNotEmpty() {
 
-        return !ops.empty();
-    }
+    //     return !ops.empty();
+    // }
 
     /**
      * <p>
      * Create a new EditableImage.
      * </p>
      * 
-     * <p>
+     * <p>ƒ
      * A new EditableImage has no image (it is a null reference), and an empty stack
      * of operations.
      * </p>
@@ -268,12 +268,13 @@ class EditableImage {
         // the command below is for FileActions.FileOpenAction to ID whether we have
         // made a new change to the file or not; this will not look into the stack as
         // the user may open a new file which has been edited before.
-        isOpsNotEmptyStatus = isOpsNotEmpty();
+        isOpsNotEmptyStatus = true;
 
         current = op.apply(current);
         ops.add(op);
-    }
+        //System.out.println();
 
+    }
     /**
      * <p>
      * Undo the last {@link ImageOperation} applied to the image.
