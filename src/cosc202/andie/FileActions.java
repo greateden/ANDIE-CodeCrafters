@@ -96,7 +96,7 @@ public class FileActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            if (isOpened == false) {
+             if (isOpened == false) {
                 JFileChooser fileChooser = new JFileChooser();
                 int result = fileChooser.showOpenDialog(target);
 
@@ -106,6 +106,7 @@ public class FileActions {
                         target.getImage().open(imageFilepath);
                         isOpened = true;
                     } catch (Exception ex) {
+                        System.out.println(ex);
                         System.exit(1);
                     }
                 }

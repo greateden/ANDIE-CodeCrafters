@@ -134,7 +134,7 @@ public class ImageMenuBar {
             target.getParent().revalidate();
         }
     }
-}
+
      /**
      *  Action class code layout created by Steven Mills
      */
@@ -188,6 +188,7 @@ public class ImageMenuBar {
             target.repaint();
             target.getParent().revalidate();
         }
+    }
   /**
      * <p>
      * Action to resieze an image.
@@ -232,7 +233,7 @@ public class ImageMenuBar {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            // ResizePannel rp = new ResizePannel();
+           
              //Create a panel
              createPanel();
 
@@ -250,8 +251,8 @@ public class ImageMenuBar {
 
     protected void createPanel(){
         
-        //Write code to create the panel
-       // JPanel panel=new JPanel();
+        
+       // Create a JDialog 
        
        JDialog  dialog = new JDialog (Andie.getFrame(),"Resize",true);
        dialog.setPreferredSize(new Dimension(500, 400));
@@ -262,7 +263,7 @@ public class ImageMenuBar {
  ;
 
         p.setPreferredSize(new Dimension(250, 350));
-        titleLabel = new JLabel("Set the size of the new image");
+        titleLabel = new JLabel("Set the size of the new image (Please put in integers)");
         titleLabel.setPreferredSize(new Dimension(200, 50));
         blankLabel = new JLabel("                       ");
 
@@ -306,21 +307,29 @@ public class ImageMenuBar {
         dialog.setVisible(true);
        // frame.getContentPane().add(dialog);
 
-    
-
-        
-
     }
+
+    
     public class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
 
-            JButton source = (JButton) ae.getSource();;
+            JButton source = (JButton) ae.getSource();
+            
             if (source == goButton) {
+                try{
                 height = Integer.parseInt(heightField.getText());
                 width = Integer.parseInt(widthField.getText());
+
+                //catch if user input not int value
+                }catch(NumberFormatException ex){
+                    heightField.setText("");
+                    widthField.setText("");
+                }
             }
-            //  new ImageResize(height, width);
-            target.getImage().apply(new ImageResize(height, width));
+
+
+            //  
+        target.getImage().apply(new ImageResize(height, width));
         target.repaint();
         target.getParent().revalidate();
         }
@@ -328,4 +337,5 @@ public class ImageMenuBar {
     }
     
 }
+
 
