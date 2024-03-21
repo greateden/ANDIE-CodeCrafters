@@ -39,7 +39,7 @@ public ImageResize(){};
 
    
 
-    BufferedImage resultImage = new BufferedImage(height, width, BufferedImage.TYPE_INT_ARGB);
+    BufferedImage resultImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
     Image scaled; 
     //= inp.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);

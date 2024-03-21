@@ -263,7 +263,7 @@ public class ImageMenuBar {
  ;
 
         p.setPreferredSize(new Dimension(250, 350));
-        titleLabel = new JLabel("Set the size of the new image");
+        titleLabel = new JLabel("Set the size of the new image (Please put in integers)");
         titleLabel.setPreferredSize(new Dimension(200, 50));
         blankLabel = new JLabel("                       ");
 
@@ -307,18 +307,22 @@ public class ImageMenuBar {
         dialog.setVisible(true);
        // frame.getContentPane().add(dialog);
 
-    
-
-        
-
     }
+
+    
     public class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
 
-            JButton source = (JButton) ae.getSource();;
+            JButton source = (JButton) ae.getSource();
+            
             if (source == goButton) {
+                try{
                 height = Integer.parseInt(heightField.getText());
                 width = Integer.parseInt(widthField.getText());
+                }catch(NumberFormatException ex){
+                    heightField.setText("");
+                    widthField.setText("");
+                }
             }
             //  new ImageResize(height, width);
             target.getImage().apply(new ImageResize(height, width));
