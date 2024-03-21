@@ -15,11 +15,13 @@ import javax.imageio.*;
  * 
  * <p>
  * This class is the entry point for the program.
- * It creates a Graphical User Interface (GUI) that provides access to various image editing and processing operations.
+ * It creates a Graphical User Interface (GUI) that provides access to various
+ * image editing and processing operations.
  * </p>
  * 
  * <p>
- * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+ * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
+ * 4.0</a>
  * </p>
  * 
  * @author Steven Mills
@@ -27,14 +29,17 @@ import javax.imageio.*;
  */
 public class Andie {
     private static JFrame frame;
+
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
      * </p>
      * 
      * <p>
-     * This method sets up an interface consisting of an active image (an {@code ImagePanel})
-     * and various menus which can be used to trigger operations to load, save, edit, etc. 
+     * This method sets up an interface consisting of an active image (an
+     * {@code ImagePanel})
+     * and various menus which can be used to trigger operations to load, save,
+     * edit, etc.
      * These operations are implemented {@link ImageOperation}s and triggered via
      * {@code ImageAction}s grouped by their general purpose into menus.
      * </p>
@@ -53,7 +58,7 @@ public class Andie {
     private static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
         frame = new JFrame("ANDIE: CodeCrafters");
-        //JFrame.setDefaultLookAndFeelDecorated(true);
+        // JFrame.setDefaultLookAndFeelDecorated(true);
         Image image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
         frame.setIconImage(image);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,11 +68,12 @@ public class Andie {
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
-        
+
         // Add in menus for various types of action the user may perform.
         JMenuBar menuBar = new JMenuBar();
 
-        // File menus are pretty standard, so things that usually go in File menus go here.
+        // File menus are pretty standard, so things that usually go in File menus go
+        // here.
         FileActions fileActions = new FileActions();
         menuBar.add(fileActions.createMenu());
 
@@ -75,11 +81,13 @@ public class Andie {
         EditActions editActions = new EditActions();
         menuBar.add(editActions.createMenu());
 
-        // View actions control how the image is displayed, but do not alter its actual content
+        // View actions control how the image is displayed, but do not alter its actual
+        // content
         ViewActions viewActions = new ViewActions();
         menuBar.add(viewActions.createMenu());
 
-        // Filters apply a per-pixel operation to the image, generally based on a local window
+        // Filters apply a per-pixel operation to the image, generally based on a local
+        // window
         FilterActions filterActions = new FilterActions();
         menuBar.add(filterActions.createMenu());
 
@@ -87,20 +95,21 @@ public class Andie {
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
 
-        //Actions that alter the image such as image flip/rotate
+        // Actions that alter the image such as image flip/rotate
         ImageMenuBar imageMenuBar = new ImageMenuBar();
         menuBar.add(imageMenuBar.createMenu());
 
         // Provides an about page and link to online docs
         HelpActions helpActions = new HelpActions();
         menuBar.add(helpActions.createMenu());
-        
+
         frame.setJMenuBar(menuBar);
         frame.pack();
         frame.setVisible(true);
     }
-    public static JFrame getFrame(){
-    return frame;
+
+    public static JFrame getFrame() {
+        return frame;
     }
 
     /**
@@ -121,15 +130,17 @@ public class Andie {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
             public void run() {
-                
-                //Making preferences and locale
-                Preferences prefs = Preferences.userNodeForPackage(Andie.class);
-                //Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
-                Locale en_NZ = Locale.of("en", "NZ");
-                Locale.setDefault(en_NZ);
 
-                //Now making the ResourceBundle
-                //ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
+                // Making preferences and locale
+                Preferences p = Preferences.userNodeForPackage(Andie.class);
+                Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
+                // Locale en_NZ = Locale.of("en", "NZ");
+                // Locale.setDefault(en_NZ);
+
+                // Now making the ResourceBundle
+                ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+                //Line below is for testing the bundle
+                //System.out.println(bundle.getString("convertToGreyAction"));
 
                 try {
                     createAndShowGUI();

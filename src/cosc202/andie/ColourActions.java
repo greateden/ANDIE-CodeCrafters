@@ -4,7 +4,6 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
-import java.util.prefs.Preferences;
 
 /**
  * <p>
@@ -33,7 +32,7 @@ public class ColourActions {
     /** A list of actions for the Colour menu. */
     protected ArrayList<Action> actions;
 
-    //ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
+    ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
 
     /**
      * <p>
@@ -42,7 +41,7 @@ public class ColourActions {
      */
     public ColourActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ConvertToGreyAction(("convertToGreyAction"), null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ConvertToGreyAction(bundle.getString("convertToGreyAction"), null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
         actions.add(new ImageInvertAction("Invert Colour", null, "Invert colours of image", Integer.valueOf(KeyEvent.VK_G)));
         // I am using key C as the hotkey
         // addeed RGBSwapping function's button
@@ -275,7 +274,7 @@ public class ColourActions {
                 } else if (!(R == 0 && G == 0 && B == 0) && (R == 1 && G == 2 && B == 3)){
                     JOptionPane.showMessageDialog(null, "With all due respect, you didn't change anything.", "Warning",
                             JOptionPane.WARNING_MESSAGE);
-                //Will educate the user if they didn't give any inputs and still wanna hit the OK button/
+                //Will educate the user if they didn't give any inputs and still wanna hit the OK button
                 } else if (R == 0 && G == 0 && B == 0) {
                     JOptionPane.showMessageDialog(null, "Please at least choose something, that's the basic respect to your human brain.", "Warning",
                             JOptionPane.WARNING_MESSAGE);
