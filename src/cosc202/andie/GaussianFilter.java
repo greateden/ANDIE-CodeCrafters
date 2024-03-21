@@ -3,21 +3,53 @@ package cosc202.andie;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.*;
-import java.util.*;
 
+
+/**
+ * <p>
+ * This class implements the ImageOperation interface and applies a Gaussian blur filter to a BufferedImage.
+ * </p>
+ * 
+ * <p>
+ *   A Gaussian blur filter applies a Gaussian distribution to soften and blur an image. It achieves this by 
+ *   replacing each pixel with a weighted average of itself and its surrounding pixels, with the weights based on a 
+ *   Gaussian function that is normally distributed. This distribution gives more weight to pixels closer to the center, resulting in a smooth blur.
+ * </p>
+ * 
+ * 
+ * @see java.awt.image.ConvolveOp
+ * @see ImageOperation
+ * @see BufferedImage
+ * @author Angus Lyall
+ * @version 1.0
+*/
 
 public class GaussianFilter implements ImageOperation, java.io.Serializable {
-
+    /**
+     * The radius of the Gaussian filter. This determines the size of the mask and the strength of the blur.
+    */
     private int radius;
+
+    /**
+     * Constructor that sets the radius of the Gaussian filter.
+     * @param radius the radius of the filter
+    */
 
     GaussianFilter(int radius){
         this.radius = radius;
     }
-    
+    /**
+     * Default constructor that creates a GaussianFilter with a radius of 2.
+    */
     GaussianFilter() {
         this(2);
     }
-
+    /**
+     * Applies the Gaussian blur filter to a BufferedImage.
+     * 
+     * @param input the BufferedImage to apply the filter to
+     * @return a new BufferedImage with the applied Gaussian blur
+    */
     public BufferedImage apply(BufferedImage input) {
         int size = (2*radius+1) * (2*radius+1);
         float [] array = new float[size];
@@ -60,7 +92,14 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
         return output;
     }
 
-
+    /**
+     * Calculates the value at a specific position in the Gaussian filter mask.
+     * 
+     * @param x the x coordinate in the mask
+     * @param y the y coordinate in the mask
+     * @param sd the standard deviation of the Gaussian distribution (controls the blur strength)
+     * @return the value at the specified position in the mask
+    */
     public static double GaussianEquation(int x , int y, double sd){
         double sdPow = Math.pow(sd, 2);
         double l1 = 1/(2 * Math.PI * sdPow);
@@ -70,6 +109,13 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
         return l1 * e;
     }
 
+    /**
+     * Calculates the relative position (x, y) 
+     * basicilly converts the index of an array to grid coords centered around the middle of the grid / array
+     * @param num the one-dimensional index in the filter array
+     * @param height the height of the Gaussian filter mask
+     * @return a String containing the x and y coordinates separated by a comma (",")
+    */
     public static String getpos(int num , int height){
         int center = (height) / 2;
         int x = num % height -center;

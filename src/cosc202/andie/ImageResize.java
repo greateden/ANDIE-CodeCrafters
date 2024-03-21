@@ -1,9 +1,7 @@
 package cosc202.andie;
 
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.util.Scanner;
 
 public class ImageResize implements ImageOperation, java.io.Serializable {
 
@@ -30,7 +28,7 @@ public ImageResize(){};
     int oriWidth = input.getWidth();
     int oriHeight = input.getHeight();
     Image inp = (Image) input;
-    Image temp;
+    //Image temp;
 
     // Scanner sc=new Scanner(System.in);
 

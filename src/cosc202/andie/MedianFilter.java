@@ -85,7 +85,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         int argb; //argb values for transformation.
 
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
-    
+  
         //int r,g,b;
         for(int i=0; i<input.getHeight(); i++){
             for(int j=0; j<input.getWidth(); j++){
