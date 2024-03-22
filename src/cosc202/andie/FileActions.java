@@ -1,6 +1,7 @@
 package cosc202.andie;
 
 import java.util.*;
+import java.util.prefs.Preferences;
 import java.awt.event.*;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -55,7 +56,7 @@ public class FileActions {
         actions.add(new FileExportAction(bundle.getString("ExportAction"), null, bundle.getString("ExportDesc"),
                 Integer.valueOf(KeyEvent.VK_E)));
         actions.add(new FileExitAction(bundle.getString("ExitAction"), null, bundle.getString("ExitDesc"), Integer.valueOf(KeyEvent.VK_Q)));
-        actions.add(new ChangeLanguageAction("Change language"),null , "Change language", Integer.valueOf(KeyEvent.VK_L));
+        actions.add(new FileChangeLanguageAction("Change language",null , "Change language", Integer.valueOf(KeyEvent.VK_L)));
     }
 
     /**
@@ -495,13 +496,13 @@ public class FileActions {
      * </p>
      * 
      */
-    public class ChangeLanguageAction extends AbstractAction {
+    public class FileChangeLanguageAction extends ImageAction {
         int height;
         int width;
         JLabel widthJLabel, heightLabel, titleLabel,blankLabel;
         JTextField widthField, heightField;
-        JButton Bahasa;
-        JButton English;
+        JButton bahasaButton;
+        JButton englishButton;
    
         /**
          * <p>
@@ -513,7 +514,7 @@ public class FileActions {
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
-        ChangeLanguageAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+        FileChangeLanguageAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
 
@@ -579,15 +580,15 @@ public class FileActions {
 
         */
 
-        JButton EnglishButton = new JButton("English");
-        EnglishButton.setOpaque(true);
-        EnglishButton.setBackground(Color.black);
-        EnglishButton.setPreferredSize(new Dimension(200, 50));
+        JButton englishButton = new JButton("English");
+        englishButton.setOpaque(true);
+        englishButton.setBackground(Color.black);
+        englishButton.setPreferredSize(new Dimension(200, 50));
 
-        JButton BahasaButton = new JButton("Bahasa");
-        BahasaButton.setOpaque(true);
-        BahasaButton.setBackground(Color.black);
-        BahasaButton.setPreferredSize(new Dimension(200,50));
+        JButton bahasaButton = new JButton("Bahasa");
+        bahasaButton.setOpaque(true);
+        bahasaButton.setBackground(Color.black);
+        bahasaButton.setPreferredSize(new Dimension(200,50));
 
         //panel.add(frame);
         
@@ -599,19 +600,19 @@ public class FileActions {
         //p.add(heightField);
         //p.add(widthJLabel);
         //p.add(widthField);
-        p.add(EnglishButton);
-        p.add(BahasaButton);
+        p.add(englishButton);
+        p.add(bahasaButton);
 
         JPanel buttonPanel = new JPanel();
         ButtonListener bl = new ButtonListener();
-        buttonPanel.add(EnglishButton);
-        EnglishButton.addActionListener(bl);
+        buttonPanel.add(englishButton);
+        englishButton.addActionListener(bl);
         p.add(buttonPanel);
 
         JPanel buttonPanel2 = new JPanel();
         ButtonListener b2 = new ButtonListener();
-        BahasaButton.add(BahasaButton);
-        BahasaButton.addActionListener(b2);
+        bahasaButton.add(bahasaButton);
+        bahasaButton.addActionListener(b2);
         p.add(buttonPanel2);
 
         // dialog.getContentPane().add(p);
@@ -629,10 +630,14 @@ public class FileActions {
         public void actionPerformed(ActionEvent ae) {
 
             JButton source = (JButton) ae.getSource();;
-            if (source == BahasaButton) {
-                
+            if (source == bahasaButton) {
+                Preferences p = Preferences.userNodeForPackage(Andie.class);
+                Locale.setDefault(new Locale(p.get("language", "id"), p.get("country", "ID")));
             }
-            //Action here
+            else if(source == englishButton){
+                Preferences p = Preferences.userNodeForPackage(Andie.class);
+                Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
+            }
         }
     }
     }
