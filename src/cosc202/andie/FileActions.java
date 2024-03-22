@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 
 /**
  * <p>
@@ -28,6 +29,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @version 1.0
  */
 public class FileActions {
+
+    ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
     protected boolean isOpened = false;
@@ -42,15 +46,16 @@ public class FileActions {
     public FileActions() {
 
         actions = new ArrayList<Action>();
-        actions.add(new FileOpenAction("Open       (O)", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new FileSaveAction("Save         (S)", null,
-                "Save the file, will need to save file to a new file location for the first saving",
+        actions.add(new FileOpenAction(bundle.getString("OpenAction"), null, bundle.getString("OpenDesc"), Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new FileSaveAction(bundle.getString("SaveAction"), null,
+                bundle.getString("SaveDesc"),
                 Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction("Save As   (A)", null, "Save to a new file location",
+        actions.add(new FileSaveAsAction(bundle.getString("SaveAsAction"), null, bundle.getString("SaveAsDesc"),
                 Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(new FileExportAction("Export    (E)", null, "Export an image without the .ops file",
+        actions.add(new FileExportAction(bundle.getString("ExportAction"), null, bundle.getString("ExportDesc"),
                 Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new FileExitAction("Exit         (Q)", null, "Exit the program", Integer.valueOf(KeyEvent.VK_Q)));
+        actions.add(new FileExitAction(bundle.getString("ExitAction"), null, bundle.getString("ExitDesc"), Integer.valueOf(KeyEvent.VK_Q)));
+        actions.add(new ChangeLanguageAction("Change language"),null , "Change language", Integer.valueOf(KeyEvent.VK_L));
     }
 
     /**
@@ -61,7 +66,7 @@ public class FileActions {
      * @return The File menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu("File");
+        JMenu fileMenu = new JMenu(bundle.getString("File"));
 
         for (Action action : actions) {
             fileMenu.add(new JMenuItem(action));
@@ -113,11 +118,11 @@ public class FileActions {
 
             if (isOpened == true && EditableImage.isOpsNotEmptyStatus == true) {
 
-                Object[] options = { "Yes (Y)", "No (N)", "Cancel (C)" };
+                Object[] options = { bundle.getString("Yes"), bundle.getString("No"), bundle.getString("Cancel") };
 
                 int n = JOptionPane.showOptionDialog(null,
-                        "Do you want to save the file before open another file?",
-                        "Warning",
+                        bundle.getString("DoYouWantToSave"),
+                        bundle.getString("Warning"),
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
                         null,
@@ -168,7 +173,7 @@ public class FileActions {
             fileChooser.setFileFilter(filterWBEP);
 
             FileNameExtensionFilter filterAllTypes = new FileNameExtensionFilter(
-                    "All Supported File Types", "jpg", "jpeg", "gif", "tif", "tiff", "png", "bmp", "wbep");
+                    bundle.getString("AllSupportedFileTypes"), "jpg", "jpeg", "gif", "tif", "tiff", "png", "bmp", "wbep");
             fileChooser.setFileFilter(filterAllTypes);
 
             int result = fileChooser.showOpenDialog(target);
@@ -240,7 +245,7 @@ public class FileActions {
                 fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
                 fileChooser
                         .addChoosableFileFilter(
-                                new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
+                                new ImageFileFilter("GIF", bundle.getString("Memetype")));
 
                 int result = fileChooser.showSaveDialog(target);
                 if (result == JFileChooser.APPROVE_OPTION) {
@@ -254,8 +259,8 @@ public class FileActions {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                        "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, bundle.getString("YouDidNotOpen"),
+                        bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -337,8 +342,8 @@ public class FileActions {
                     target.getImage().save();
                 }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                        "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, bundle.getString("YouDidNotOpen"),
+                        bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -394,7 +399,7 @@ public class FileActions {
                 fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
                 fileChooser
                         .addChoosableFileFilter(
-                                new ImageFileFilter("GIF", "The file type that you mainly used for memes"));
+                                new ImageFileFilter("GIF", bundle.getString("Memetype")));
 
                 int result = fileChooser.showSaveDialog(target);
 
@@ -404,13 +409,13 @@ public class FileActions {
                         target.getImage().saveAs(imageFilepath);
                         // isSaved = true;
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "What did you just do my dear user...",
-                                "Error", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, bundle.getString("MyDearUser"),
+                            bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                        "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, bundle.getString("YouDidNotOpen"),
+                        bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -481,5 +486,154 @@ public class FileActions {
             System.exit(0);
         }
 
+    }
+
+      /**
+     * <p>
+     * Action to change the language.
+     * by Kevin Sathyanath, adapted from Yuxing's Resize Image work.
+     * </p>
+     * 
+     */
+    public class ChangeLanguageAction extends AbstractAction {
+        int height;
+        int width;
+        JLabel widthJLabel, heightLabel, titleLabel,blankLabel;
+        JTextField widthField, heightField;
+        JButton Bahasa;
+        JButton English;
+   
+        /**
+         * <p>
+         * Create a Language Change Action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ChangeLanguageAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the Change Language action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the Change Language Action is triggered.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            // ResizePannel rp = new ResizePannel();
+             //Create a panel
+             createPanel();
+
+            // int height = rp.getHeight();
+            // int width = rp.getWidth();
+            // System.out.println(height);
+            // System.out.println(width);
+
+            // target.getImage().apply(new ImageResize());
+            // target.repaint();
+            // target.getParent().revalidate();
+        }
+
+    
+
+    protected void createPanel(){
+        
+        //Write code to create the panel
+       // JPanel panel=new JPanel();
+       
+       JDialog  dialog = new JDialog (Andie.getFrame(),"Change Language",true);
+       dialog.setPreferredSize(new Dimension(500, 400));
+       dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        
+        JPanel p = new JPanel();
+        p.setLayout(new FlowLayout());
+ ;
+
+        p.setPreferredSize(new Dimension(250, 350));
+        titleLabel = new JLabel("Change Language");
+        titleLabel.setPreferredSize(new Dimension(200, 50));
+        blankLabel = new JLabel("                       ");
+
+        /* 
+        heightLabel = new JLabel(bundle.getString("Height"));
+        heightLabel.setPreferredSize(new Dimension(100, 50));
+        widthJLabel = new JLabel(bundle.getString("Width"));
+        widthJLabel.setPreferredSize(new Dimension(100, 50));
+
+        widthField = new JTextField(5);
+        heightField = new JTextField(5);
+        heightField.setPreferredSize(new Dimension(100, 50));
+        widthField.setPreferredSize(new Dimension(100, 50));
+
+        */
+
+        JButton EnglishButton = new JButton("English");
+        EnglishButton.setOpaque(true);
+        EnglishButton.setBackground(Color.black);
+        EnglishButton.setPreferredSize(new Dimension(200, 50));
+
+        JButton BahasaButton = new JButton("Bahasa");
+        BahasaButton.setOpaque(true);
+        BahasaButton.setBackground(Color.black);
+        BahasaButton.setPreferredSize(new Dimension(200,50));
+
+        //panel.add(frame);
+        
+
+//add all the lables and buttons to the panel
+        p.add(titleLabel);
+        p.add(blankLabel);
+        //p.add(heightLabel);
+        //p.add(heightField);
+        //p.add(widthJLabel);
+        //p.add(widthField);
+        p.add(EnglishButton);
+        p.add(BahasaButton);
+
+        JPanel buttonPanel = new JPanel();
+        ButtonListener bl = new ButtonListener();
+        buttonPanel.add(EnglishButton);
+        EnglishButton.addActionListener(bl);
+        p.add(buttonPanel);
+
+        JPanel buttonPanel2 = new JPanel();
+        ButtonListener b2 = new ButtonListener();
+        BahasaButton.add(BahasaButton);
+        BahasaButton.addActionListener(b2);
+        p.add(buttonPanel2);
+
+        // dialog.getContentPane().add(p);
+        dialog.getContentPane().add(p);
+        dialog.pack();
+        dialog.setVisible(true);
+       // frame.getContentPane().add(dialog);
+
+    
+
+        
+
+    }
+    public class ButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+
+            JButton source = (JButton) ae.getSource();;
+            if (source == BahasaButton) {
+                
+            }
+            //Action here
+        }
+    }
     }
 }
