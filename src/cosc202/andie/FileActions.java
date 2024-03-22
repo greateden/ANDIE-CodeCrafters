@@ -533,18 +533,11 @@ public class FileActions {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            // ResizePannel rp = new ResizePannel();
+            
              //Create a panel
              createPanel();
 
-            // int height = rp.getHeight();
-            // int width = rp.getWidth();
-            // System.out.println(height);
-            // System.out.println(width);
-
-            // target.getImage().apply(new ImageResize());
-            // target.repaint();
-            // target.getParent().revalidate();
+            
         }
 
     
@@ -559,7 +552,7 @@ public class FileActions {
        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         
         JPanel p = new JPanel();
-        p.setLayout(new FlowLayout());
+        p.setLayout(new GridLayout(4,2));
  ;
 
         p.setPreferredSize(new Dimension(250, 350));
