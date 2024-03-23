@@ -496,7 +496,7 @@ public class FileActions {
      * </p>
      * 
      */
-    public class FileChangeLanguageAction extends ImageAction {
+    public class FileChangeLanguageAction extends ImageAction implements ActionListener {
         int height;
         int width;
         JLabel widthJLabel, heightLabel, titleLabel,blankLabel;
@@ -533,20 +533,114 @@ public class FileActions {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            
-             //Create a panel
-             createPanel();
+            JFrame l = new JFrame();
 
-            
+        //Set behaviour of frame
+        l.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        l.setBounds(200,200,500,500);
+        Container c = l.getContentPane();
+        c.setLayout(new FlowLayout());
+
+        JButton english = new JButton("English - NZ");
+        JButton bahasa = new JButton("Bahasa Indonesia - ID");
+
+        english.setSize(100,30);
+        english.setLocation(100,100);
+        c.add(english);
+        bahasa.setSize(100,30);
+        bahasa.setLocation(100,200);
+        c.add(bahasa);
+
+        //english.setEnabled(false);
+
+        english.addActionListener(new ActionListener(){     //Anonymous inner class to show behaviour of english button
+
+
+            public void actionPerformed(ActionEvent e){
+
+                Preferences p = Preferences.userNodeForPackage(Andie.class);
+                Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
+
+            }
+
+        });  //End of anonymous inner class
+
+
+
+
+
+        bahasa.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent e){
+
+                Preferences p = Preferences.userNodeForPackage(Andie.class);
+                Locale.setDefault(new Locale(p.get("language", "id"), p.get("country", "ID")));
+            }
+
+        });
+
+        l.setVisible(true);
+            /* 
+            if(e.getSource() == englishButton){
+                Preferences p = Preferences.userNodeForPackage(Andie.class);
+                Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
+            }
+            if(e.getSource() == bahasaButton){
+                Preferences p = Preferences.userNodeForPackage(Andie.class);
+                Locale.setDefault(new Locale(p.get("language", "id"), p.get("country", "ID")));
+            }
+             //Create a panel
+             //createPanel();
+
+            */
         }
 
     
 
     protected void createPanel(){
         
+        JFrame l = new JFrame();
+
+        //Set behaviour of frame
+        l.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        l.setBounds(200,200,500,500);
+        Container c = l.getContentPane();
+        c.setLayout(new FlowLayout());
+
+        JButton english = new JButton("English - NZ");
+        JButton bahasa = new JButton("Bahasa Indonesia - ID");
+
+        english.setSize(100,30);
+        english.setLocation(100,100);
+        c.add(english);
+        bahasa.setSize(100,30);
+        bahasa.setLocation(100,200);
+        c.add(bahasa);
+
+        //english.setEnabled(false);
+
+        english.addActionListener(this);
+        bahasa.addActionListener(this);
+
+        l.setVisible(true);
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //Write code to create the panel
        // JPanel panel=new JPanel();
-       
+       /* 
        JDialog  dialog = new JDialog (Andie.getFrame(),"Change Language",true);
        dialog.setPreferredSize(new Dimension(500, 400));
        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -560,7 +654,7 @@ public class FileActions {
         titleLabel.setPreferredSize(new Dimension(200, 50));
         blankLabel = new JLabel("                       ");
 
-        /* 
+        
         heightLabel = new JLabel(bundle.getString("Height"));
         heightLabel.setPreferredSize(new Dimension(100, 50));
         widthJLabel = new JLabel(bundle.getString("Width"));
@@ -571,7 +665,7 @@ public class FileActions {
         heightField.setPreferredSize(new Dimension(100, 50));
         widthField.setPreferredSize(new Dimension(100, 50));
 
-        */
+        
 
         JButton englishButton = new JButton("English");
         englishButton.setOpaque(true);
@@ -631,7 +725,7 @@ public class FileActions {
                 Preferences p = Preferences.userNodeForPackage(Andie.class);
                 Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
             }
-        }
-    }
+        } */
+    } 
     }
 }
