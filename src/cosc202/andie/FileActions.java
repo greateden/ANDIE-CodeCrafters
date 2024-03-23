@@ -556,10 +556,13 @@ public class FileActions {
         english.addActionListener(new ActionListener(){     //Anonymous inner class to show behaviour of english button
 
 
+            @SuppressWarnings("deprecation")
             public void actionPerformed(ActionEvent e){
 
                 Preferences p = Preferences.userNodeForPackage(Andie.class);
                 Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
+                ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+
 
             }
 
@@ -571,10 +574,13 @@ public class FileActions {
 
         bahasa.addActionListener(new ActionListener(){
 
+            @SuppressWarnings("deprecation")
             public void actionPerformed(ActionEvent e){
 
                 Preferences p = Preferences.userNodeForPackage(Andie.class);
                 Locale.setDefault(new Locale(p.get("language", "id"), p.get("country", "ID")));
+                ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+
             }
 
         });

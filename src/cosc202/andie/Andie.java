@@ -129,6 +129,7 @@ public class Andie {
     public static void main(String[] args) throws Exception {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
+            @SuppressWarnings("deprecation")
             public void run() {
 
                 // Making preferences and locale
