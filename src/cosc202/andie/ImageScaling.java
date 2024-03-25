@@ -1,33 +1,38 @@
 package cosc202.andie;
-
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-public class ImageResize implements ImageOperation, java.io.Serializable {
 
-  private int width;
-  private int height;
+public class ImageScaling  implements ImageOperation, java.io.Serializable{
+  
+    private double scalePercentage;
+   // private int heightPer;
 
-public ImageResize(){};
+   public ImageScaling(double scalePercentage){
+    this.scalePercentage = scalePercentage;
+   // this.widthPer = widthPer;
 
-  public ImageResize(int height, int width) {
+   }
 
-    this.height = height;
-    this.width = width;
-    
-  }
-
-  @Override
-  public BufferedImage apply(BufferedImage input) {
-   
+   public BufferedImage apply(BufferedImage input) {
 
     int oriWidth = input.getWidth();
     int oriHeight = input.getHeight();
+
+    
     Image inp = (Image) input;
+     
+    int height=(int) (oriHeight*scalePercentage);
+    int width=(int) (oriWidth*scalePercentage);
+
+
+
    
+
     BufferedImage resultImage = new BufferedImage(height, width, BufferedImage.TYPE_INT_ARGB);
 
     Image scaled; 
+
     //= inp.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
 
     if (oriWidth > width && oriHeight > height) {
@@ -47,4 +52,6 @@ public ImageResize(){};
     return resultImage;
 
   }
+
+    
 }
