@@ -29,7 +29,7 @@ public class HelpActions {
      * @return The Help menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu(bundle.getString("Help"));
+        JMenu fileMenu = new JMenu(Andie.bundle.getString("Help"));
 
         for(Action action: actions) {
             fileMenu.add(new JMenuItem(action));
