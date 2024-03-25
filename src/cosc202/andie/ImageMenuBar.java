@@ -28,6 +28,8 @@ import java.awt.*;
  */
 public class ImageMenuBar {
 
+    ResourceBundle bundle = Andie.bundle;
+
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
     private JMenu fileMenu;
@@ -39,16 +41,13 @@ public class ImageMenuBar {
      */
     public ImageMenuBar() {
         actions = new ArrayList<Action>();
-        actions.add(new ImageMenuBarFlipHorizontal("Flip Horizontal", null, "Flips the image along the y-axis",
-                Integer.valueOf(KeyEvent.VK_H)));
-        actions.add(new ImageMenuBarFlipVertical("Flip Vertical", null, "Flips the image along the x-axis",
-                Integer.valueOf(KeyEvent.VK_V)));
-        actions.add(new RotateImageAction("Rotate Image", null, "Apply an Image rotation at set theta",
-                Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new ImageResizeAction("Image Resize", null, "Resize the Image", Integer.valueOf(KeyEvent.VK_J)));
-        
-         scalAct= new ImageScalingAction("Image Scaling",null,"ReScaling the imgae",null);
+        actions.add(new ImageMenuBarFlipHorizontal(bundle.getString("FlipHorizontal"), null, bundle.getString("FHDesc"), Integer.valueOf(KeyEvent.VK_H)));
+        actions.add(new ImageMenuBarFlipVertical(bundle.getString("FlipVertical"), null, bundle.getString("FVDesc"), Integer.valueOf(KeyEvent.VK_V)));
+        actions.add(new RotateImageAction(bundle.getString("RotateImageAction"), null, bundle.getString("RIADesc"), Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new ImageResizeAction(bundle.getString("ImageResizeAction"), null, bundle.getString("ImageResizeAction"), Integer.valueOf(KeyEvent.VK_J)));
+        scalAct= new ImageScalingAction("Image Scaling",null,"ReScaling the imgae",null);
         actions.add(scalAct);
+
     }
 
     /**

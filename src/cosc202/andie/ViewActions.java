@@ -25,6 +25,8 @@ import javax.swing.*;
  * @version 1.0
  */
 public class ViewActions {
+    
+    ResourceBundle bundle = Andie.bundle;
 
     /**
      * A list of actions for the View menu.
@@ -38,9 +40,16 @@ public class ViewActions {
      */
     public ViewActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ZoomInAction("Zoom In", null, "Zoom In", Integer.valueOf(KeyEvent.VK_PLUS)));
-        actions.add(new ZoomOutAction("Zoom Out", null, "Zoom Out", Integer.valueOf(KeyEvent.VK_MINUS)));
-        actions.add(new ZoomFullAction("Zoom Full", null, "Zoom Full", Integer.valueOf(KeyEvent.VK_1)));
+        /*
+        actions.add(new ZoomInAction("Zoom in", null, "Zoom in", Integer.valueOf(KeyEvent.VK_PLUS)));
+        actions.add(new ZoomOutAction("Zoom out", null, "Zoom out", Integer.valueOf(KeyEvent.VK_MINUS)));
+        actions.add(new ZoomFullAction("Zoom full", null, "Zoom full", Integer.valueOf(KeyEvent.VK_1)));
+        */
+
+        actions.add(new ZoomInAction(bundle.getString("ZoomInAction"), null, bundle.getString("ZoomInAction"), Integer.valueOf(KeyEvent.VK_PLUS)));
+        actions.add(new ZoomOutAction(bundle.getString("ZoomOutAction"), null, bundle.getString("ZoomOutAction"), Integer.valueOf(KeyEvent.VK_MINUS)));
+        actions.add(new ZoomFullAction(bundle.getString("ZoomFullAction"), null, bundle.getString("ZoomFullAction"), Integer.valueOf(KeyEvent.VK_1)));
+
     }
 
     /**
@@ -51,7 +60,9 @@ public class ViewActions {
      * @return The view menu UI element.
      */
     public JMenu createMenu() {
-        JMenu viewMenu = new JMenu("View");
+        //JMenu viewMenu = new JMenu("View");
+        JMenu viewMenu = new JMenu(bundle.getString("View"));
+
 
         for (Action action : actions) {
             viewMenu.add(new JMenuItem(action));

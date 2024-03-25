@@ -42,13 +42,11 @@ public class ColourActions {
      */
     public ColourActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ConvertToGreyAction(bundle.getString("convertToGreyAction"), null, "Convert to greyscale",
-                Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new ImageInvertAction("Invert Colour", null, "Invert colours of image",
-                Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ConvertToGreyAction(bundle.getString("convertToGreyAction"), null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ImageInvertAction(bundle.getString("invertColour"), null, bundle.getString("ImageInvertDesc"), Integer.valueOf(KeyEvent.VK_G)));
         // I am using key C as the hotkey
         // addeed RGBSwapping function's button
-        actions.add(new RGBSwappingAction("Colour Channel Cycling", null, "Swap the colour channels around",
+        actions.add(new RGBSwappingAction(bundle.getString("RGBSwappingAction"), null, bundle.getString("RGBSwapDesc"),
                 Integer.valueOf(KeyEvent.VK_C)));
     }
 
@@ -60,7 +58,7 @@ public class ColourActions {
      * @return The colour menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu("Colour");
+        JMenu fileMenu = new JMenu(bundle.getString("Colour"));
 
         for (Action action : actions) {
             fileMenu.add(new JMenuItem(action));
@@ -200,36 +198,43 @@ public class ColourActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            try {
-                // Default value of the orders of R, G and B.
-                int R = 0;
-                int G = 0;
-                int B = 0;
+             // Default value of the orders of R, G and B.
+             int R = 0;
+             int G = 0;
+             int B = 0;
 
+            JRadioButton r1 = new JRadioButton("R");
+            JRadioButton r2 = new JRadioButton("G");
+            JRadioButton r3 = new JRadioButton("B");
+
+            JRadioButton g1 = new JRadioButton("R");
+            JRadioButton g2 = new JRadioButton("G");
+            JRadioButton g3 = new JRadioButton("B");
+
+            JRadioButton b1 = new JRadioButton("R");
+            JRadioButton b2 = new JRadioButton("G");
+            JRadioButton b3 = new JRadioButton("B");
+
+            try {
+               
                 // Create the dialog panel
                 JPanel panel = new JPanel(new GridLayout(3, 3));
 
-                JRadioButton r1 = new JRadioButton("R");
-                JRadioButton r2 = new JRadioButton("G");
-                JRadioButton r3 = new JRadioButton("B");
+                
 
                 ButtonGroup group1 = new ButtonGroup();
                 group1.add(r1);
                 group1.add(r2);
                 group1.add(r3);
 
-                JRadioButton g1 = new JRadioButton("R");
-                JRadioButton g2 = new JRadioButton("G");
-                JRadioButton g3 = new JRadioButton("B");
+                
 
                 ButtonGroup group2 = new ButtonGroup();
                 group2.add(g1);
                 group2.add(g2);
                 group2.add(g3);
 
-                JRadioButton b1 = new JRadioButton("R");
-                JRadioButton b2 = new JRadioButton("G");
-                JRadioButton b3 = new JRadioButton("B");
+                
 
                 ButtonGroup group3 = new ButtonGroup();
                 group3.add(b1);
@@ -246,9 +251,9 @@ public class ColourActions {
                 panel.add(g3);
                 panel.add(b3);
 
-                // Show the option dialog
-                int option = JOptionPane.showOptionDialog(null, panel, "Color Selection", JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.PLAIN_MESSAGE, null, null, null);
+            // Show the option dialog
+            int option = JOptionPane.showOptionDialog(null, panel, bundle.getString("ColourSelection"), JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE, null, null, null);
 
                 // If cancel or close the tab, do nothing
                 // If click ok, run the function but with input testify.
@@ -317,7 +322,40 @@ public class ColourActions {
                     JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
                             "Warning", JOptionPane.WARNING_MESSAGE);
                 }
-            }
+
+                if (b1.isSelected()) {
+                    B = 1;
+                } else if (b2.isSelected()) {
+                    B = 2;
+                } else if (b3.isSelected()) {
+                    B = 3;
+                }
+
+                //Fun fact: put the code below outside of the if statement to trick the users!!!
+                //Especially useful on 1st Apr
+
+                //If user gave half an input, will say we don't understand what you're tryna do
+                if (!(R == 0 && G == 0 && B == 0) && (R == B || B == G || R == B || R == 0 || G == 0 || B == 0)) {
+                    JOptionPane.showMessageDialog(null, bundle.getString("CannotProcess"), bundle.getString("Warning"),
+                            JOptionPane.WARNING_MESSAGE);
+                    actionPerformed(e);
+                //If user gave full input but with the same RGB order, will give them a friendly notice.
+                } else if (!(R == 0 && G == 0 && B == 0) && (R == 1 && G == 2 && B == 3)){
+                    JOptionPane.showMessageDialog(null, bundle.getString("WithRespect"), bundle.getString("Warning"),
+                            JOptionPane.WARNING_MESSAGE);
+                //Will educate the user if they didn't give any inputs and still wanna hit the OK button
+                } else if (R == 0 && G == 0 && B == 0) {
+                    JOptionPane.showMessageDialog(null, bundle.getString("PleaseChoose"), bundle.getString("Warning"),
+                            JOptionPane.WARNING_MESSAGE);
+                    actionPerformed(e);
+                //If a legal input (i.e., passed all the ifs above), will apply the filter.
+                } else {
+                    // Apply the filter
+                    target.getImage().apply(new RGBSwapping(R, G, B));
+                    target.repaint();
+                    target.getParent().revalidate();
+                }
+            }            
         }
     }
 }
