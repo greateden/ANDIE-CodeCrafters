@@ -28,7 +28,7 @@ import java.awt.*;
  */
 public class ImageMenuBar {
 
-    ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+    ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;

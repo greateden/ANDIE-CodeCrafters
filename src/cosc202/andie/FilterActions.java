@@ -24,7 +24,7 @@ import javax.swing.*;
  */
 public class FilterActions {
 
-    ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+    ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
@@ -51,7 +51,7 @@ public class FilterActions {
      * @return The filter menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu(bundle.getString("Filter"));
+        JMenu fileMenu = new JMenu(Andie.bundle.getString("Filter"));
 
         for(Action action: actions) {
             fileMenu.add(new JMenuItem(action));
@@ -200,6 +200,8 @@ public class FilterActions {
             // Pop-up dialog box to ask for the radius value.
             SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
             JSpinner radiusSpinner = new JSpinner(radiusModel);
+            System.out.println("the language is"+ Andie.bundle.getString("EnterFilterRadius"));
+
             int option = JOptionPane.showOptionDialog(null, radiusSpinner, bundle.getString("EnterFilterRadius"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
             // Check the return value from the dialog box.

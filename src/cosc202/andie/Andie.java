@@ -29,6 +29,9 @@ import javax.imageio.*;
  */
 public class Andie {
     private static JFrame frame;
+    private static ImagePanel imagePanel;
+    public static ResourceBundle bundle;
+    public static JMenuBar menuBar;
 
     /**
      * <p>
@@ -64,13 +67,13 @@ public class Andie {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // The main content area is an ImagePanel
-        ImagePanel imagePanel = new ImagePanel();
+        imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
 
         // Add in menus for various types of action the user may perform.
-        JMenuBar menuBar = new JMenuBar();
+        menuBar = new JMenuBar();
 
         // File menus are pretty standard, so things that usually go in File menus go
         // here.
@@ -112,6 +115,20 @@ public class Andie {
         return frame;
     }
 
+
+    public static void setLanguage(){
+        /*frame.repaint();
+        imagePanel.repaint();
+        menuBar.repaint();*/
+        frame.dispose();
+        try{
+            createAndShowGUI();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+    }
     /**
      * <p>
      * Main entry point to the ANDIE program.
@@ -135,11 +152,14 @@ public class Andie {
                 // Making preferences and locale
                 Preferences p = Preferences.userNodeForPackage(Andie.class);
                 Locale.setDefault(new Locale(p.get("language", "id"), p.get("country", "ID")));
+                System.out.println(p.get("language", "fail"));
                 //Locale en_NZ = Locale.of("en", "NZ");
                 //Locale.setDefault(en_NZ);
 
                 // Now making the ResourceBundle
-                ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+                //ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+                bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+
                 //Line below is for testing the bundle
                 //System.out.println(bundle.getString("convertToGreyAction"));
 

@@ -9,7 +9,7 @@ public class HelpActions {
     /** A list of actions for the Help menu. */
     protected ArrayList<Action> actions;
 
-    ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+    ResourceBundle bundle = Andie.bundle;
 
     /**
      * <p>

@@ -24,7 +24,7 @@ import javax.swing.*;
  */
 public class EditActions {
 
-     ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+     ResourceBundle bundle = Andie.bundle;
 
      /** A list of actions for the Edit menu. */
     protected ArrayList<Action> actions;

@@ -31,7 +31,7 @@ import java.awt.*;
  */
 public class FileActions {
 
-    ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+    ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
@@ -565,8 +565,14 @@ public class FileActions {
             public void actionPerformed(ActionEvent e){
 
                 Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
-                ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+                Locale.setDefault(new Locale( "en", "NZ"));
+                p.put("language", "en");
+                p.put("country", "NZ");
+                Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+                
+                System.out.println(p.get("language", "id"));
+                Andie.setLanguage();
+                System.out.println(Andie.bundle.getString("EnterFilterRadius"));
 
 
             }
@@ -583,8 +589,14 @@ public class FileActions {
             public void actionPerformed(ActionEvent e){
 
                 Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale(p.get("language", "id"), p.get("country", "ID")));
-                ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+                Locale.setDefault(new Locale( "id", "ID"));
+                p.put("language","id");
+                p.put("country", "ID");
+                Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+                System.out.println(p.get("language", "en"));
+                Andie.setLanguage();
+                System.out.println(Andie.bundle.getString("EnterFilterRadius"));
+
 
             }
 
