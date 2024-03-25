@@ -61,7 +61,7 @@ public class ViewActions {
      */
     public JMenu createMenu() {
         //JMenu viewMenu = new JMenu("View");
-        JMenu viewMenu = new JMenu(bundle.getString("View"));
+        JMenu viewMenu = new JMenu(Andie.bundle.getString("View"));
 
 
         for (Action action : actions) {
