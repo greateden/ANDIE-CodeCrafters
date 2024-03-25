@@ -30,7 +30,8 @@ public class ImageMenuBar {
 
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
-
+    private JMenu fileMenu;
+    private ImageScalingAction scalAct;
     /**
      * <p>
      * Create a set of Image menu actions.
@@ -45,6 +46,9 @@ public class ImageMenuBar {
         actions.add(new RotateImageAction("Rotate Image", null, "Apply an Image rotation at set theta",
                 Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new ImageResizeAction("Image Resize", null, "Resize the Image", Integer.valueOf(KeyEvent.VK_J)));
+        
+         scalAct= new ImageScalingAction("Image Scaling",null,"ReScaling the imgae",null);
+        actions.add(scalAct);
     }
 
     /**
@@ -55,11 +59,17 @@ public class ImageMenuBar {
      * @return The Image menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu("Image");
+        fileMenu = new JMenu("Image");
 
         for (Action action : actions) {
-            fileMenu.add(new JMenuItem(action));
+            if (action != scalAct) {
+                fileMenu.add(new JMenuItem(action));     
+            }
+            
         }
+
+        //JMenuItem scaleMenu = fileMenu.getItem(4);
+        scalAct.createSubMenu();
 
         return fileMenu;
     }
@@ -224,6 +234,7 @@ public class ImageMenuBar {
      * 
      */
     public class ImageResizeAction extends ImageAction {
+
         int height;
         int width;
         JLabel widthJLabel, heightLabel, titleLabel, blankLabel;
@@ -259,6 +270,7 @@ public class ImageMenuBar {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            createPanel();
 
             // ResizePannel rp = new ResizePannel();
             // Create a panel
@@ -380,4 +392,78 @@ public class ImageMenuBar {
         }
     }
 
+    public class ImageScalingAction extends ImageAction {
+        // int height;
+        // int width;
+        /**
+         * <p>
+         * Create a Image Scale Action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ImageScalingAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            
+           
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           
+           // createSubMenu();
+            throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        }
+    
+        
+      
+        public void createSubMenu() {
+
+            
+            JMenu scaleMenu = new JMenu("Image Scale");
+            JMenuItem scale25 = new JMenuItem("25%");
+            JMenuItem scale50 = new JMenuItem("50%");
+            JMenuItem scale75 = new JMenuItem("75%");
+            JMenuItem scale125 = new JMenuItem("125%");
+            JMenuItem scale150 = new JMenuItem("150%");
+
+            scale25.addActionListener(new ScaleActionListener(0.25));
+            scale50.addActionListener(new ScaleActionListener(0.5));
+            scale75.addActionListener(new ScaleActionListener(0.75));
+            scale125.addActionListener(new ScaleActionListener(1.25));
+            scale150.addActionListener(new ScaleActionListener(1.5));
+
+            scaleMenu.add(scale25);
+            scaleMenu.add(scale50);
+            scaleMenu.add(scale75);
+            scaleMenu.add(scale125);
+            scaleMenu.add(scale150);
+
+            fileMenu.add(scaleMenu);
+
+            
+        }
+
+        public class ScaleActionListener implements ActionListener {
+            private double scalePercentage;
+    
+            public ScaleActionListener(double scalePercentage) {
+                this.scalePercentage = scalePercentage;
+            }
+           
+            public void actionPerformed(ActionEvent e) {
+
+                target.getImage().apply(new ImageScaling(scalePercentage));
+                target.repaint();
+                target.getParent().revalidate();
+
+              
+            }
+        }
+
+        
+
+    }
 }
