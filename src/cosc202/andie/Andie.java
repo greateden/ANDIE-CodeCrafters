@@ -134,7 +134,7 @@ public class Andie {
 
                 // Making preferences and locale
                 Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "EN")));
+                Locale.setDefault(new Locale(p.get("language", "id"), p.get("country", "ID")));
                 //Locale en_NZ = Locale.of("en", "NZ");
                 //Locale.setDefault(en_NZ);
 
