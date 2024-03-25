@@ -9,6 +9,8 @@ public class HelpActions {
     /** A list of actions for the Help menu. */
     protected ArrayList<Action> actions;
 
+    ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+
     /**
      * <p>
      * Create a set of Help menu actions.
@@ -16,7 +18,7 @@ public class HelpActions {
      */
     public HelpActions() {
         actions = new ArrayList<Action>();
-        actions.add(new HelpActionsAboutUs("About us", null, "A little bit about the team", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new HelpActionsAboutUs(bundle.getString("AboutUs"), null, bundle.getString("AboutUsMessage"), Integer.valueOf(KeyEvent.VK_G)));
     }
 
     /**
@@ -27,7 +29,7 @@ public class HelpActions {
      * @return The Help menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu("Help");
+        JMenu fileMenu = new JMenu(bundle.getString("Help"));
 
         for(Action action: actions) {
             fileMenu.add(new JMenuItem(action));
@@ -67,7 +69,7 @@ public class HelpActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, "A project for COSC202 made by:\n\n   Angus Lyall\n   Emma Boult\n   Yuxing Zhang\n   Eden Li\n   Kevin Sathyanath\n", "About us", 1);
+            JOptionPane.showMessageDialog(null, bundle.getString("TeamMessage"), bundle.getString("AboutUs"), 1);
         }
     }
 

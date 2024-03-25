@@ -36,7 +36,7 @@ public class FilterActions {
      */
     public FilterActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MeanFilterAction(bundle.getString("MeanFilterAction"), null, bundle.getString("MeanFIlterDesc"), Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new MeanFilterAction(bundle.getString("MeanFilterAction"), null, bundle.getString("MeanFilterDesc"), Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new SoftBlurFilterAction(bundle.getString("SoftBlur"), null, bundle.getString("SoftBlurDesc"), Integer.valueOf(KeyEvent.VK_B)));
         actions.add(new SharpenFilterAction(bundle.getString("SharpenFilter"), null, bundle.getString("SharpenDesc"), Integer.valueOf(KeyEvent.VK_S)));
         actions.add(new GaussianFilterAction(bundle.getString("GaussianFilter"), null, bundle.getString("GaussianDesc"), Integer.valueOf(KeyEvent.VK_M)));

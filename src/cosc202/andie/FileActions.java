@@ -56,7 +56,7 @@ public class FileActions {
         actions.add(new FileExportAction(bundle.getString("ExportAction"), null, bundle.getString("ExportDesc"),
                 Integer.valueOf(KeyEvent.VK_E)));
         actions.add(new FileExitAction(bundle.getString("ExitAction"), null, bundle.getString("ExitDesc"), Integer.valueOf(KeyEvent.VK_Q)));
-        actions.add(new FileChangeLanguageAction("Change language",null , "Change language", Integer.valueOf(KeyEvent.VK_L)));
+        actions.add(new FileChangeLanguageAction(bundle.getString("ChangeLanguage"),null , bundle.getString("ChangeLanguage"), Integer.valueOf(KeyEvent.VK_L)));
     }
 
     /**
@@ -67,7 +67,7 @@ public class FileActions {
      * @return The File menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu(bundle.getString("File"));
+        JMenu fileMenu = new JMenu(bundle.getString(bundle.getString("File")));
 
         for (Action action : actions) {
             fileMenu.add(new JMenuItem(action));

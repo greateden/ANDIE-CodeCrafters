@@ -28,6 +28,8 @@ import java.awt.*;
  */
 public class ImageMenuBar {
 
+    ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
 
@@ -38,10 +40,10 @@ public class ImageMenuBar {
      */
     public ImageMenuBar() {
         actions = new ArrayList<Action>();
-        actions.add(new ImageMenuBarFlipHorizontal("Flip Horizontal", null, "Flips the image along the y-axis", Integer.valueOf(KeyEvent.VK_H)));
-        actions.add(new ImageMenuBarFlipVertical("Flip Vertical", null, "Flips the image along the x-axis", Integer.valueOf(KeyEvent.VK_V)));
-        actions.add(new RotateImageAction("Rotate Image", null, "Apply an Image rotation at set theta", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new ImageResizeAction("Image Resize", null, "Resize the Image", Integer.valueOf(KeyEvent.VK_J)));
+        actions.add(new ImageMenuBarFlipHorizontal(bundle.getString("FlipHorizontal"), null, bundle.getString("FHDesc"), Integer.valueOf(KeyEvent.VK_H)));
+        actions.add(new ImageMenuBarFlipVertical(bundle.getString("FlipVertical"), null, bundle.getString("FVDesc"), Integer.valueOf(KeyEvent.VK_V)));
+        actions.add(new RotateImageAction(bundle.getString("RotateImageAction"), null, bundle.getString("RIADesc"), Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new ImageResizeAction(bundle.getString("ImageResizeAction"), null, bundle.getString("ImageResizeAction"), Integer.valueOf(KeyEvent.VK_J)));
     }
 
     /**
@@ -52,7 +54,7 @@ public class ImageMenuBar {
      * @return The Image menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu("Image");
+        JMenu fileMenu = new JMenu(bundle.getString("Image"));
 
         for (Action action : actions) {
             fileMenu.add(new JMenuItem(action));
@@ -253,7 +255,7 @@ public class ImageMenuBar {
         //Write code to create the panel
        // JPanel panel=new JPanel();
        
-       JDialog  dialog = new JDialog (Andie.getFrame(),"Resize",true);
+       JDialog  dialog = new JDialog (Andie.getFrame(),bundle.getString("Resize"),true);
        dialog.setPreferredSize(new Dimension(500, 400));
        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         
@@ -262,14 +264,14 @@ public class ImageMenuBar {
  ;
 
         p.setPreferredSize(new Dimension(250, 350));
-        titleLabel = new JLabel("Set the size of the new image");
+        titleLabel = new JLabel(bundle.getString("SetTheSize"));
         titleLabel.setPreferredSize(new Dimension(200, 50));
         blankLabel = new JLabel("                       ");
 
 
-        heightLabel = new JLabel("Height:");
+        heightLabel = new JLabel(bundle.getString("Height"));
         heightLabel.setPreferredSize(new Dimension(100, 50));
-        widthJLabel = new JLabel("Width:");
+        widthJLabel = new JLabel(bundle.getString("Width"));
         widthJLabel.setPreferredSize(new Dimension(100, 50));
 
         widthField = new JTextField(5);
@@ -277,7 +279,7 @@ public class ImageMenuBar {
         heightField.setPreferredSize(new Dimension(100, 50));
         widthField.setPreferredSize(new Dimension(100, 50));
 
-        goButton = new JButton("Go!");
+        goButton = new JButton(bundle.getString("Go"));
         goButton.setOpaque(true);
         goButton.setBackground(Color.black);
         goButton.setPreferredSize(new Dimension(200, 50));

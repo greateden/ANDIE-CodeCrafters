@@ -42,10 +42,10 @@ public class ColourActions {
     public ColourActions() {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction(bundle.getString("convertToGreyAction"), null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new ImageInvertAction("Invert Colour", null, "Invert colours of image", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ImageInvertAction(bundle.getString("invertColour"), null, bundle.getString("ImageInvertDesc"), Integer.valueOf(KeyEvent.VK_G)));
         // I am using key C as the hotkey
         // addeed RGBSwapping function's button
-        actions.add(new RGBSwappingAction("Colour Channel Cycling", null, "Swap the colour channels around",
+        actions.add(new RGBSwappingAction(bundle.getString("RGBSwappingAction"), null, bundle.getString("RGBSwapDesc"),
                 Integer.valueOf(KeyEvent.VK_C)));
     }
 
@@ -229,7 +229,7 @@ public class ColourActions {
             panel.add(b3);
 
             // Show the option dialog
-            int option = JOptionPane.showOptionDialog(null, panel, "Color Selection", JOptionPane.OK_CANCEL_OPTION,
+            int option = JOptionPane.showOptionDialog(null, panel, bundle.getString("ColourSelection"), JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.PLAIN_MESSAGE, null, null, null);
 
             // If cancel or close the tab, do nothing
@@ -267,16 +267,16 @@ public class ColourActions {
 
                 //If user gave half an input, will say we don't understand what you're tryna do
                 if (!(R == 0 && G == 0 && B == 0) && (R == B || B == G || R == B || R == 0 || G == 0 || B == 0)) {
-                    JOptionPane.showMessageDialog(null, "Cannot proceed your weird request, please choose again.", "Warning",
+                    JOptionPane.showMessageDialog(null, bundle.getString("CannotProcess"), bundle.getString("Warning"),
                             JOptionPane.WARNING_MESSAGE);
                     actionPerformed(e);
                 //If user gave full input but with the same RGB order, will give them a friendly notice.
                 } else if (!(R == 0 && G == 0 && B == 0) && (R == 1 && G == 2 && B == 3)){
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't change anything.", "Warning",
+                    JOptionPane.showMessageDialog(null, bundle.getString("WithRespect"), bundle.getString("Warning"),
                             JOptionPane.WARNING_MESSAGE);
                 //Will educate the user if they didn't give any inputs and still wanna hit the OK button
                 } else if (R == 0 && G == 0 && B == 0) {
-                    JOptionPane.showMessageDialog(null, "Please at least choose something, that's the basic respect to your human brain.", "Warning",
+                    JOptionPane.showMessageDialog(null, bundle.getString("PleaseChoose"), bundle.getString("Warning"),
                             JOptionPane.WARNING_MESSAGE);
                     actionPerformed(e);
                 //If a legal input (i.e., passed all the ifs above), will apply the filter.
