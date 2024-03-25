@@ -533,22 +533,27 @@ public class FileActions {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+
+        String[] languages =  { "English" , "Bahasa Indonesia"};
+
+        
+            
             JFrame l = new JFrame();
 
         //Set behaviour of frame
         l.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        l.setBounds(200,200,500,500);
+        l.setBounds(200,200,300,200);
         Container c = l.getContentPane();
         c.setLayout(new FlowLayout());
 
         JButton english = new JButton("English - NZ");
         JButton bahasa = new JButton("Bahasa Indonesia - ID");
 
-        english.setSize(100,30);
+        english.setSize(500,30);
         english.setLocation(100,100);
         c.add(english);
-        bahasa.setSize(100,30);
-        bahasa.setLocation(100,200);
+        bahasa.setSize(400,30);
+        bahasa.setLocation(100,250);
         c.add(bahasa);
 
         //english.setEnabled(false);
@@ -630,108 +635,6 @@ public class FileActions {
 
         l.setVisible(true);
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //Write code to create the panel
-       // JPanel panel=new JPanel();
-       /* 
-       JDialog  dialog = new JDialog (Andie.getFrame(),"Change Language",true);
-       dialog.setPreferredSize(new Dimension(500, 400));
-       dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        
-        JPanel p = new JPanel();
-        p.setLayout(new GridLayout(4,2));
- ;
-
-        p.setPreferredSize(new Dimension(250, 350));
-        titleLabel = new JLabel("Change Language");
-        titleLabel.setPreferredSize(new Dimension(200, 50));
-        blankLabel = new JLabel("                       ");
-
-        
-        heightLabel = new JLabel(bundle.getString("Height"));
-        heightLabel.setPreferredSize(new Dimension(100, 50));
-        widthJLabel = new JLabel(bundle.getString("Width"));
-        widthJLabel.setPreferredSize(new Dimension(100, 50));
-
-        widthField = new JTextField(5);
-        heightField = new JTextField(5);
-        heightField.setPreferredSize(new Dimension(100, 50));
-        widthField.setPreferredSize(new Dimension(100, 50));
-
-        
-
-        JButton englishButton = new JButton("English");
-        englishButton.setOpaque(true);
-        englishButton.setBackground(Color.black);
-        englishButton.setPreferredSize(new Dimension(200, 50));
-
-        JButton bahasaButton = new JButton("Bahasa");
-        bahasaButton.setOpaque(true);
-        bahasaButton.setBackground(Color.black);
-        bahasaButton.setPreferredSize(new Dimension(200,50));
-
-        //panel.add(frame);
-        
-
-//add all the lables and buttons to the panel
-        p.add(titleLabel);
-        p.add(blankLabel);
-        //p.add(heightLabel);
-        //p.add(heightField);
-        //p.add(widthJLabel);
-        //p.add(widthField);
-        p.add(englishButton);
-        p.add(bahasaButton);
-
-        JPanel buttonPanel = new JPanel();
-        ButtonListener bl = new ButtonListener();
-        buttonPanel.add(englishButton);
-        englishButton.addActionListener(bl);
-        p.add(buttonPanel);
-
-        JPanel buttonPanel2 = new JPanel();
-        ButtonListener b2 = new ButtonListener();
-        bahasaButton.add(bahasaButton);
-        bahasaButton.addActionListener(b2);
-        p.add(buttonPanel2);
-
-        // dialog.getContentPane().add(p);
-        dialog.getContentPane().add(p);
-        dialog.pack();
-        dialog.setVisible(true);
-       // frame.getContentPane().add(dialog);
-
-    
-
-        
-
-    }
-    public class ButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-
-            JButton source = (JButton) ae.getSource();;
-            if (source == bahasaButton) {
-                Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale(p.get("language", "id"), p.get("country", "ID")));
-            }
-            else if(source == englishButton){
-                Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
-            }
-        } */
     } 
     }
 }
