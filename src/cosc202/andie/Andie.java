@@ -72,6 +72,12 @@ public class Andie {
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
 
+        createMenuBar();
+
+        
+    }
+
+    private static void createMenuBar() {
         // Add in menus for various types of action the user may perform.
         menuBar = new JMenuBar();
 
@@ -120,13 +126,16 @@ public class Andie {
         /*frame.repaint();
         imagePanel.repaint();
         menuBar.repaint();*/
-        frame.dispose();
+        /*frame.dispose();
         try{
             createAndShowGUI();
         }
         catch(Exception e){
             System.out.println(e);
-        }
+        }*/
+
+
+       createMenuBar();
         
     }
     /**

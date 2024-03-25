@@ -119,11 +119,11 @@ public class FileActions {
 
             if (isOpened == true && EditableImage.isOpsNotEmptyStatus == true) {
 
-                Object[] options = { bundle.getString("Yes"), bundle.getString("No"), bundle.getString("Cancel") };
+                Object[] options = { "Yes (Y)", "No (N)", "Cancel (C)" };
 
                 int n = JOptionPane.showOptionDialog(null,
-                        bundle.getString("DoYouWantToSave"),
-                        bundle.getString("Warning"),
+                        "Do you want to save the file before open another file?",
+                        "Warning",
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
                         null,
@@ -174,7 +174,7 @@ public class FileActions {
             fileChooser.setFileFilter(filterWBEP);
 
             FileNameExtensionFilter filterAllTypes = new FileNameExtensionFilter(
-                    bundle.getString("AllSupportedFileTypes"), "jpg", "jpeg", "gif", "tif", "tiff", "png", "bmp", "wbep");
+                    "All Supported File Types", "jpg", "jpeg", "gif", "tif", "tiff", "png", "bmp", "wbep");
             fileChooser.setFileFilter(filterAllTypes);
 
             int result = fileChooser.showOpenDialog(target);
@@ -194,6 +194,7 @@ public class FileActions {
         }
 
     }
+
 
     /**
      * <p>
