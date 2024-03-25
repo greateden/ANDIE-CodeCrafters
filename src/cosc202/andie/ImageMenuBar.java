@@ -105,9 +105,16 @@ public class ImageMenuBar {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new ImageFlipHorizontal());
-            target.repaint();
-            target.getParent().revalidate();
+            try {
+                target.getImage().apply(new ImageFlipHorizontal());
+                target.repaint();
+                target.getParent().revalidate();
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
+                            "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            }
         }
     }
 
@@ -141,9 +148,16 @@ public class ImageMenuBar {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new ImageFlipVertical());
-            target.repaint();
-            target.getParent().revalidate();
+            try {
+                target.getImage().apply(new ImageFlipVertical());
+                target.repaint();
+                target.getParent().revalidate();
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
+                            "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            }
         }
     }
 
@@ -182,25 +196,32 @@ public class ImageMenuBar {
         public void actionPerformed(ActionEvent e) {
 
             // Determine the radius - ask the user.
-            int deg = 1;
+            try {
+                int deg = 1;
 
-            // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel degModel = new SpinnerNumberModel(1, 1, 360, 1);
-            JSpinner degSpinner = new JSpinner(degModel);
-            int option = JOptionPane.showOptionDialog(null, degSpinner, "Enter rotation theta",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                // Pop-up dialog box to ask for the radius value.
+                SpinnerNumberModel degModel = new SpinnerNumberModel(1, 1, 360, 1);
+                JSpinner degSpinner = new JSpinner(degModel);
+                int option = JOptionPane.showOptionDialog(null, degSpinner, "Enter rotation theta",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-            // Check the return value from the dialog box.
-            if (option == JOptionPane.CANCEL_OPTION) {
-                return;
-            } else if (option == JOptionPane.OK_OPTION) {
-                deg = degModel.getNumber().intValue();
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+                    deg = degModel.getNumber().intValue();
+                }
+
+                // Create and apply the filter
+                target.getImage().apply(new ImageRotate(deg));
+                target.repaint();
+                target.getParent().revalidate();
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
+                            "Warning", JOptionPane.WARNING_MESSAGE);
+                }
             }
-
-            // Create and apply the filter
-            target.getImage().apply(new ImageRotate(deg));
-            target.repaint();
-            target.getParent().revalidate();
         }
     }
 
@@ -251,19 +272,40 @@ public class ImageMenuBar {
         public void actionPerformed(ActionEvent e) {
             createPanel();
 
+            // ResizePannel rp = new ResizePannel();
+            // Create a panel
+            try {
+                createPanel();
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
+                            "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+
+            }
+
+            // int height = rp.getHeight();
+            // int width = rp.getWidth();
+            // System.out.println(height);
+            // System.out.println(width);
+
+            // target.getImage().apply(new ImageResize());
+            // target.repaint();
+            // target.getParent().revalidate();
         }
 
         protected void createPanel() {
-            // int oriWidth = input.getWidth();
-            // int oriHeight = input.getHeight();
-           
+
+            // Write code to create the panel
+            // JPanel panel=new JPanel();
+
             JDialog dialog = new JDialog(Andie.getFrame(), "Resize", true);
             dialog.setPreferredSize(new Dimension(500, 400));
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
             JPanel p = new JPanel();
             p.setLayout(new GridLayout(4, 2));
-            
+            ;
 
             p.setPreferredSize(new Dimension(250, 350));
             titleLabel = new JLabel("Set the size of the new image");
@@ -285,7 +327,7 @@ public class ImageMenuBar {
             goButton.setBackground(Color.black);
             goButton.setPreferredSize(new Dimension(200, 50));
 
-            
+            // panel.add(frame);
 
             // add all the lables and buttons to the panel
             p.add(titleLabel);
@@ -312,23 +354,40 @@ public class ImageMenuBar {
 
         public class ButtonListener implements ActionListener {
             public void actionPerformed(ActionEvent ae) {
-
                 JButton source = (JButton) ae.getSource();
-                
-                if (source == goButton) {
-                    try{
-                    height = Integer.parseInt(heightField.getText());
-                    width = Integer.parseInt(widthField.getText());
+                try {
+                    if (source == goButton) {
+                        height = Integer.parseInt(heightField.getText());
+                        width = Integer.parseInt(widthField.getText());
                     }
-                    catch(NumberFormatException ne){
-                        heightField.setText(" ");
-                        widthField.setText(" ");
+                    target.getImage().apply(new ImageResize(height, width));
+                    target.repaint();
+                    target.getParent().revalidate();
+                } catch (Exception e) {
+                    System.out.println(e);
+                    if (e instanceof NumberFormatException) {
+                        JOptionPane.showMessageDialog(null,
+                                "Please at least enter a positive integer, that's the basic respect to the human brain",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    } else if (e instanceof java.lang.NegativeArraySizeException) {
+                        JOptionPane.showMessageDialog(null,
+                                "Please enter a smaller number, as this is only a small app.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    } else if (e instanceof java.lang.IllegalArgumentException) {
+                        JOptionPane.showMessageDialog(null,
+                                "Please enter a positive/smaller number, which is the basic respect to math and all other related sciences.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    } else if (e instanceof NullPointerException) {
+                        JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
+                                "Warning", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        // show message dialog and print the e into the box, saying that's an unexpected
+                        // error.
+                        JOptionPane.showMessageDialog(null,
+                                "Unexpected error.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-               
-                target.getImage().apply(new ImageResize(height, width));
-                target.repaint();
-                target.getParent().revalidate();
             }
         }
     }
