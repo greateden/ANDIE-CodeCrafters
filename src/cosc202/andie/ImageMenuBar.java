@@ -58,7 +58,7 @@ public class ImageMenuBar {
      * @return The Image menu UI element.
      */
     public JMenu createMenu() {
-        fileMenu = new JMenu("Image");
+        fileMenu = new JMenu(Andie.bundle.getString("Image"));
 
         for (Action action : actions) {
             if (action != scalAct) {

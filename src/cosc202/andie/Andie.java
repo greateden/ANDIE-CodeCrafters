@@ -33,6 +33,14 @@ public class Andie {
     public static ResourceBundle bundle;
     public static JMenuBar menuBar;
 
+    private static FileActions fileActions;
+    private static EditActions editActions;
+    private static ViewActions viewActions;
+    private static FilterActions filterActions;
+    private static ImageMenuBar imageMenuBar;
+    private static ColourActions colourActions;
+    private static HelpActions helpActions;
+
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -71,6 +79,20 @@ public class Andie {
         ImageAction.setTarget(imagePanel);
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
+        fileActions = new FileActions();
+        editActions = new EditActions();
+        viewActions = new ViewActions();
+        filterActions = new FilterActions();
+        imageMenuBar = new ImageMenuBar();
+        colourActions = new ColourActions();
+        helpActions = new HelpActions();
+
+
+
+
+
+
+
 
         createMenuBar();
 
@@ -79,40 +101,34 @@ public class Andie {
 
     private static void createMenuBar() {
         // Add in menus for various types of action the user may perform.
-        menuBar = new JMenuBar();
+        JMenuBar newMenuBar = new JMenuBar();
 
         // File menus are pretty standard, so things that usually go in File menus go
         // here.
-        FileActions fileActions = new FileActions();
-        menuBar.add(fileActions.createMenu());
+        newMenuBar.add(fileActions.createMenu());
 
         // Likewise Edit menus are very common, so should be clear what might go here.
-        EditActions editActions = new EditActions();
-        menuBar.add(editActions.createMenu());
+        newMenuBar.add(editActions.createMenu());
 
         // View actions control how the image is displayed, but do not alter its actual
         // content
-        ViewActions viewActions = new ViewActions();
-        menuBar.add(viewActions.createMenu());
+        newMenuBar.add(viewActions.createMenu());
 
         // Filters apply a per-pixel operation to the image, generally based on a local
         // window
-        FilterActions filterActions = new FilterActions();
-        menuBar.add(filterActions.createMenu());
+        newMenuBar.add(filterActions.createMenu());
 
         // Actions that affect the representation of colour in the image
-        ColourActions colourActions = new ColourActions();
-        menuBar.add(colourActions.createMenu());
+        newMenuBar.add(colourActions.createMenu());
 
         // Actions that alter the image such as image flip/rotate
-        ImageMenuBar imageMenuBar = new ImageMenuBar();
-        menuBar.add(imageMenuBar.createMenu());
+        newMenuBar.add(imageMenuBar.createMenu());
 
         // Provides an about page and link to online docs
-        HelpActions helpActions = new HelpActions();
-        menuBar.add(helpActions.createMenu());
+        newMenuBar.add(helpActions.createMenu());
 
-        frame.setJMenuBar(menuBar);
+        frame.setJMenuBar(newMenuBar);
+        frame.repaint();
         frame.pack();
         frame.setVisible(true);
     }

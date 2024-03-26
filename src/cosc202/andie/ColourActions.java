@@ -33,7 +33,7 @@ public class ColourActions {
     /** A list of actions for the Colour menu. */
     protected ArrayList<Action> actions;
 
-    ResourceBundle bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+    ResourceBundle bundle = Andie.bundle;
 
     /**
      * <p>
@@ -58,7 +58,7 @@ public class ColourActions {
      * @return The colour menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu(bundle.getString("Colour"));
+        JMenu fileMenu = new JMenu(Andie.bundle.getString("Colour"));
 
         for (Action action : actions) {
             fileMenu.add(new JMenuItem(action));
