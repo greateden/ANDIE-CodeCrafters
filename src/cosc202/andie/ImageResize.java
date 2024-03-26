@@ -14,16 +14,27 @@ public ImageResize(){};
 
     this.height = height;
     this.width = width;
-    
+    // ImageAction.target.getImage().apply(new ImageResize(height, width));
+    // ImageAction.target.repaint();
+    // ImageAction.target.getParent().revalidate();
   }
 
   @Override
   public BufferedImage apply(BufferedImage input) {
-   
+    // ResizePannel rp = new ResizePannel();
+    //         int height = rp.getHeight();
+    //         int width = rp.getWidth();
 
     int oriWidth = input.getWidth();
     int oriHeight = input.getHeight();
     Image inp = (Image) input;
+    //Image temp;
+
+    // Scanner sc=new Scanner(System.in);
+
+    // int height=sc.nextInt();
+    // int width=sc.nextInt();
+
    
 
     BufferedImage resultImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
