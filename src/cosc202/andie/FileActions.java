@@ -535,7 +535,7 @@ public class FileActions {
         public void actionPerformed(ActionEvent e) {
 
 
-        String[] languages =  { "English" , "Bahasa Indonesia"};
+        String[] languages =  { "English" , "Bahasa Indonesia", "繁體中文"};
 
         
             
@@ -549,6 +549,7 @@ public class FileActions {
 
         JButton english = new JButton("English - NZ");
         JButton bahasa = new JButton("Bahasa Indonesia - ID");
+        JButton traChinese = new JButton("繁體中文 - TW");
 
         english.setSize(500,30);
         english.setLocation(100,100);
@@ -556,6 +557,9 @@ public class FileActions {
         bahasa.setSize(400,30);
         bahasa.setLocation(100,250);
         c.add(bahasa);
+        traChinese.setSize(400,30);
+        traChinese.setLocation(100,400);
+        c.add(traChinese);
 
         //english.setEnabled(false);
 
@@ -602,6 +606,27 @@ public class FileActions {
             }
 
         });
+
+        traChinese.addActionListener(new ActionListener(){     //Anonymous inner class to show behaviour of english button
+
+
+            @SuppressWarnings("deprecation")
+            public void actionPerformed(ActionEvent e){
+
+                Preferences p = Preferences.userNodeForPackage(Andie.class);
+                Locale.setDefault(new Locale( "zh", "TW"));
+                p.put("language", "zh");
+                p.put("country", "TW");
+                Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+                
+                System.out.println(p.get("language", "zh"));
+                Andie.setLanguage();
+                System.out.println(Andie.bundle.getString("EnterFilterRadius"));
+
+
+            }
+
+        });  //End of
 
         l.setVisible(true);
             /* 
