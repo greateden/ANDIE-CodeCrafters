@@ -27,8 +27,8 @@ import javax.swing.*;
  * @version 1.0
  */
 public class ViewActions {
-    
-    ResourceBundle bundle = Andie.bundle;
+
+  //  public ResourceBundle bundle = Andie.bundle;
 
     /**
      * A list of actions for the View menu.
@@ -43,14 +43,20 @@ public class ViewActions {
     public ViewActions() {
         actions = new ArrayList<Action>();
         /*
-        actions.add(new ZoomInAction("Zoom in", null, "Zoom in", Integer.valueOf(KeyEvent.VK_PLUS)));
-        actions.add(new ZoomOutAction("Zoom out", null, "Zoom out", Integer.valueOf(KeyEvent.VK_MINUS)));
-        actions.add(new ZoomFullAction("Zoom full", null, "Zoom full", Integer.valueOf(KeyEvent.VK_1)));
-        */
+         * actions.add(new ZoomInAction("Zoom in", null, "Zoom in",
+         * Integer.valueOf(KeyEvent.VK_PLUS)));
+         * actions.add(new ZoomOutAction("Zoom out", null, "Zoom out",
+         * Integer.valueOf(KeyEvent.VK_MINUS)));
+         * actions.add(new ZoomFullAction("Zoom full", null, "Zoom full",
+         * Integer.valueOf(KeyEvent.VK_1)));
+         */
 
-        actions.add(new ZoomInAction(bundle.getString("ZoomInAction"), null, bundle.getString("ZoomInAction"), Integer.valueOf(KeyEvent.VK_PLUS)));
-        actions.add(new ZoomOutAction(bundle.getString("ZoomOutAction"), null, bundle.getString("ZoomOutAction"), Integer.valueOf(KeyEvent.VK_MINUS)));
-        actions.add(new ZoomFullAction(bundle.getString("ZoomFullAction"), null, bundle.getString("ZoomFullAction"), Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(new ZoomInAction(Andie.bundle.getString("ZoomInAction"), null, Andie.bundle.getString("ZoomInAction"),
+                Integer.valueOf(KeyEvent.VK_PLUS)));
+        actions.add(new ZoomOutAction(Andie.bundle.getString("ZoomOutAction"), null, Andie.bundle.getString("ZoomOutAction"),
+                Integer.valueOf(KeyEvent.VK_MINUS)));
+        actions.add(new ZoomFullAction(Andie.bundle.getString("ZoomFullAction"), null, Andie.bundle.getString("ZoomFullAction"),
+                Integer.valueOf(KeyEvent.VK_1)));
 
     }
 
@@ -62,11 +68,10 @@ public class ViewActions {
      * @return The view menu UI element.
      */
     public JMenu createMenu() {
-        //JMenu viewMenu = new JMenu("View");
+        // JMenu viewMenu = new JMenu("View");
         JMenu viewMenu = new JMenu(Andie.bundle.getString("View"));
 
-
-        for (Action action  : actions) {
+        for (Action action : actions) {
             viewMenu.add(new JMenuItem(action));
         }
 
@@ -118,21 +123,14 @@ public class ViewActions {
          */
         public void actionPerformed(ActionEvent e) {
             try {
-                System.out.println(target.getZoom());
-                try {
-                System.out.println(target.getZoom());
-                target.setZoom(target.getZoom()  +  10);
-                    target.repaint();
-                    target.getParent().revalidate();
-                //TODO error messages catching
+                // System.out.println(target.getZoom());
+                target.setZoom(target.getZoom() + 10);
+                target.repaint();
+                target.getParent().revalidate();
+                // TODO error messages catching
             } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                        "Warning", JOptionPane.WARNING_MESSAGE);
-            }
-                //TODO error messages catching
-            } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                        "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -182,23 +180,17 @@ public class ViewActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            //TODO error messages catching
+            // TODO error messages catching
             try {
-                //TODO error messages catching
-            try {
-                target.setZoom(target.getZoom()  -  10);
-                    target.repaint();
-                    target.getParent().revalidate();
+                target.setZoom(target.getZoom() - 10);
+                target.repaint();
+                target.getParent().revalidate();
             } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                        "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
 
             }
-            } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                        "Warning", JOptionPane.WARNING_MESSAGE);
 
-            }
         }
 
     }
@@ -247,20 +239,14 @@ public class ViewActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            //TODO error messages catching
-            try {
-                //TODO error messages catching
+            // TODO error messages catching
             try {
                 target.setZoom(100);
-                    target.repaint();
-                    target.getParent().revalidate();
+                target.repaint();
+                target.getParent().revalidate();
             } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                        "Warning", JOptionPane.WARNING_MESSAGE);
-            }
-            } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                        "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
 

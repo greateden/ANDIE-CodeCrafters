@@ -29,6 +29,8 @@ public class EditActions {
     /** A list of actions for the Edit menu. */
     protected ArrayList<Action> actions;
 
+   // public ResourceBundle bundle = Andie.bundle;
+
     /**
      * <p>
      * Create a set of Edit menu actions.
@@ -36,8 +38,10 @@ public class EditActions {
      */
     public EditActions() {
         actions = new ArrayList<Action>();
-        actions.add(new UndoAction(Andie.bundle.getString("Undo"), null, Andie.bundle.getString("Undo"), Integer.valueOf(KeyEvent.VK_Z)));
-        actions.add(new RedoAction(Andie.bundle.getString("Redo"), null, Andie.bundle.getString("Redo"), Integer.valueOf(KeyEvent.VK_Y)));
+        actions.add(new UndoAction(Andie.bundle.getString("Undo"), null, Andie.bundle.getString("Undo"),
+                Integer.valueOf(KeyEvent.VK_Z)));
+        actions.add(new RedoAction(Andie.bundle.getString("Redo"), null, Andie.bundle.getString("Redo"),
+                Integer.valueOf(KeyEvent.VK_Y)));
     }
 
     /**
@@ -49,7 +53,6 @@ public class EditActions {
      */
     public JMenu createMenu() {
         JMenu editMenu = new JMenu(Andie.bundle.getString("Edit"));
-
 
         for (Action action : actions) {
             editMenu.add(new JMenuItem(action));
@@ -100,8 +103,9 @@ public class EditActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof EmptyStackException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything or this is the first step you've done.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("NotOpenedOrFirstStep"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+
                 }
             }
         }
@@ -149,8 +153,8 @@ public class EditActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof EmptyStackException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything or this is the last step you've done.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("NotOpenedOrLastStep"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }

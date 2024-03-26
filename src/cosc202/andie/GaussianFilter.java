@@ -30,6 +30,7 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
     */
     private int radius;
 
+
     /**
      * Constructor that sets the radius of the Gaussian filter.
      * @param radius the radius of the filter

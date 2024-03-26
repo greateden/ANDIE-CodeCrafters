@@ -31,7 +31,7 @@ import java.awt.*;
  */
 public class FileActions {
 
-    ResourceBundle bundle = Andie.bundle;
+    //public ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
@@ -47,16 +47,19 @@ public class FileActions {
     public FileActions() {
 
         actions = new ArrayList<Action>();
-        actions.add(new FileOpenAction(bundle.getString("OpenAction"), null, bundle.getString("OpenDesc"), Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new FileSaveAction(bundle.getString("SaveAction"), null,
-                bundle.getString("SaveDesc"),
+        actions.add(new FileOpenAction(Andie.bundle.getString("OpenAction"), null, Andie.bundle.getString("OpenDesc"),
+                Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new FileSaveAction(Andie.bundle.getString("SaveAction"), null,
+                Andie.bundle.getString("SaveDesc"),
                 Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction(bundle.getString("SaveAsAction"), null, bundle.getString("SaveAsDesc"),
+        actions.add(new FileSaveAsAction(Andie.bundle.getString("SaveAsAction"), null, Andie.bundle.getString("SaveAsDesc"),
                 Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(new FileExportAction(bundle.getString("ExportAction"), null, bundle.getString("ExportDesc"),
+        actions.add(new FileExportAction(Andie.bundle.getString("ExportAction"), null, Andie.bundle.getString("ExportDesc"),
                 Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new FileExitAction(bundle.getString("ExitAction"), null, bundle.getString("ExitDesc"), Integer.valueOf(KeyEvent.VK_Q)));
-        actions.add(new FileChangeLanguageAction(bundle.getString("ChangeLanguage"),null , bundle.getString("ChangeLanguage"), Integer.valueOf(KeyEvent.VK_L)));
+        actions.add(new FileExitAction(Andie.bundle.getString("ExitAction"), null, Andie.bundle.getString("ExitDesc"),
+                Integer.valueOf(KeyEvent.VK_Q)));
+        actions.add(new FileChangeLanguageAction(Andie.bundle.getString("ChangeLanguage"), null,
+                Andie.bundle.getString("ChangeLanguage"), Integer.valueOf(KeyEvent.VK_L)));
     }
 
     /**
@@ -67,7 +70,7 @@ public class FileActions {
      * @return The File menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu(bundle.getString("File"));
+        JMenu fileMenu = new JMenu(Andie.bundle.getString("File"));
 
         for (Action action : actions) {
             fileMenu.add(new JMenuItem(action));
@@ -119,20 +122,22 @@ public class FileActions {
 
             if (isOpened == true && EditableImage.isOpsNotEmptyStatus == true) {
 
-                Object[] options = { "Yes (Y)", "No (N)", "Cancel (C)" };
-
+                Object[] options = { Andie.bundle.getString("Yes"), Andie.bundle.getString("No"), Andie.bundle.getString("Cancel") };
+                // Andie.bundle.getString("")
                 int n = JOptionPane.showOptionDialog(null,
-                        "Do you want to save the file before open another file?",
-                        "Warning",
+                        Andie.bundle.getString("DoYouWantToSave"),
+                        Andie.bundle.getString("Warning"),
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
                         null,
                         options,
                         options[2]);
-                //TODO issues here
+                // TODO issues here
                 if (n == 0) { // yes
-                    if (EditableImage.hasOpsFile == false) actions.get(1).actionPerformed(e);
-                    if (EditableImage.hasOpsFile == true) actions.get(0).actionPerformed(e);
+                    if (EditableImage.hasOpsFile == false)
+                        actions.get(1).actionPerformed(e);
+                    if (EditableImage.hasOpsFile == true)
+                        actions.get(0).actionPerformed(e);
 
                 } else if (n == 1) { // no
                     openFile();
@@ -174,7 +179,8 @@ public class FileActions {
             fileChooser.setFileFilter(filterWBEP);
 
             FileNameExtensionFilter filterAllTypes = new FileNameExtensionFilter(
-                    "All Supported File Types", "jpg", "jpeg", "gif", "tif", "tiff", "png", "bmp", "wbep");
+                    Andie.bundle.getString("AllSupportedFiletypes"), "jpg", "jpeg", "gif", "tif", "tiff", "png", "bmp",
+                    "wbep");
             fileChooser.setFileFilter(filterAllTypes);
 
             int result = fileChooser.showOpenDialog(target);
@@ -194,7 +200,6 @@ public class FileActions {
         }
 
     }
-
 
     /**
      * <p>
@@ -240,14 +245,14 @@ public class FileActions {
                 fileChooser.setAcceptAllFileFilterUsed(false); // Disable the "All files" filter
 
                 // Add file filters for different image formats
-                fileChooser.addChoosableFileFilter(new ImageFileFilter("JPG", "Joint Photographic Experts Group"));
-                fileChooser.addChoosableFileFilter(new ImageFileFilter("TIFF", "Tagged Image File Format"));
-                fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", "Portable Network Graphics"));
-                fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", "Bitmap Image File"));
-                fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("JPG", Andie.bundle.getString("JPG")));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("TIFF", Andie.bundle.getString("TIFF")));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", Andie.bundle.getString("PNG")));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", Andie.bundle.getString("BMP")));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", Andie.bundle.getString("WBEP")));
                 fileChooser
                         .addChoosableFileFilter(
-                                new ImageFileFilter("GIF", bundle.getString("Memetype")));
+                                new ImageFileFilter("GIF", Andie.bundle.getString("Memetype")));
 
                 int result = fileChooser.showSaveDialog(target);
                 if (result == JFileChooser.APPROVE_OPTION) {
@@ -261,8 +266,8 @@ public class FileActions {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, bundle.getString("YouDidNotOpen"),
-                        bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -333,6 +338,7 @@ public class FileActions {
                 // if no .ops file detected, go to save as
                 // to keep the original image.
                 if (EditableImage.hasOpsFile == false) {
+                    // these codes below don't need multi lingual support
                     FileSaveAsAction saveAsAction = new FileSaveAsAction("Save As", null, "Save a copy",
                             Integer.valueOf(KeyEvent.VK_A));
                     saveAsAction.actionPerformed(e);
@@ -344,8 +350,8 @@ public class FileActions {
                     target.getImage().save();
                 }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, bundle.getString("YouDidNotOpen"),
-                        bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -394,14 +400,14 @@ public class FileActions {
                 fileChooser.setAcceptAllFileFilterUsed(false); // Disable the "All files" filter
 
                 // Add file filters for different image formats
-                fileChooser.addChoosableFileFilter(new ImageFileFilter("JPG", "Joint Photographic Experts Group"));
-                fileChooser.addChoosableFileFilter(new ImageFileFilter("TIFF", "Tagged Image File Format"));
-                fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", "Portable Network Graphics"));
-                fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", "Bitmap Image File"));
-                fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", "WebP Image File"));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("JPG", Andie.bundle.getString("JPG")));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("TIFF", Andie.bundle.getString("TIFF")));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("PNG", Andie.bundle.getString("PNG")));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("BMP", Andie.bundle.getString("BMP")));
+                fileChooser.addChoosableFileFilter(new ImageFileFilter("WBEP", Andie.bundle.getString("WBEP")));
                 fileChooser
                         .addChoosableFileFilter(
-                                new ImageFileFilter("GIF", bundle.getString("Memetype")));
+                                new ImageFileFilter("GIF", Andie.bundle.getString("Memetype")));
 
                 int result = fileChooser.showSaveDialog(target);
 
@@ -411,13 +417,13 @@ public class FileActions {
                         target.getImage().saveAs(imageFilepath);
                         // isSaved = true;
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, bundle.getString("MyDearUser"),
-                            bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, Andie.bundle.getString("MyDearUser"),
+                                Andie.bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, bundle.getString("YouDidNotOpen"),
-                        bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -490,7 +496,7 @@ public class FileActions {
 
     }
 
-      /**
+    /**
      * <p>
      * Action to change the language.
      * by Kevin Sathyanath, adapted from Yuxing's Resize Image work.
@@ -500,11 +506,11 @@ public class FileActions {
     public class FileChangeLanguageAction extends ImageAction implements ActionListener {
         int height;
         int width;
-        JLabel widthJLabel, heightLabel, titleLabel,blankLabel;
+        JLabel widthJLabel, heightLabel, titleLabel, blankLabel;
         JTextField widthField, heightField;
         JButton bahasaButton;
         JButton englishButton;
-   
+
         /**
          * <p>
          * Create a Language Change Action.
@@ -534,145 +540,135 @@ public class FileActions {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+            String[] languages = { "English", "Bahasa Indonesia", "繁體中文" };
 
-        String[] languages =  { "English" , "Bahasa Indonesia", "繁體中文"};
-
-        
-            
             JFrame l = new JFrame();
 
-        //Set behaviour of frame
-        l.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        l.setBounds(200,200,300,200);
-        Container c = l.getContentPane();
-        c.setLayout(new FlowLayout());
+            // Set behaviour of frame
+            l.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            l.setBounds(200, 200, 300, 200);
+            Container c = l.getContentPane();
+            c.setLayout(new FlowLayout());
 
-        JButton english = new JButton("English - NZ");
-        JButton bahasa = new JButton("Bahasa Indonesia - ID");
-        JButton traChinese = new JButton("繁體中文 - TW");
+            JButton english = new JButton("English - NZ");
+            JButton bahasa = new JButton("Bahasa Indonesia - ID");
+            JButton traChinese = new JButton("繁體中文 - TW");
 
-        english.setSize(500,30);
-        english.setLocation(100,100);
-        c.add(english);
-        bahasa.setSize(400,30);
-        bahasa.setLocation(100,250);
-        c.add(bahasa);
-        traChinese.setSize(400,30);
-        traChinese.setLocation(100,400);
-        c.add(traChinese);
+            english.setSize(500, 30);
+            english.setLocation(100, 100);
+            c.add(english);
+            bahasa.setSize(400, 30);
+            bahasa.setLocation(100, 250);
+            c.add(bahasa);
+            traChinese.setSize(400, 30);
+            traChinese.setLocation(100, 400);
+            c.add(traChinese);
 
-        //english.setEnabled(false);
+            // english.setEnabled(false);
 
-        english.addActionListener(new ActionListener(){     //Anonymous inner class to show behaviour of english button
+            english.addActionListener(new ActionListener() { // Anonymous inner class to show behaviour of english
+                                                             // button
 
+                @SuppressWarnings("deprecation")
+                public void actionPerformed(ActionEvent e) {
 
-            @SuppressWarnings("deprecation")
-            public void actionPerformed(ActionEvent e){
+                    Preferences p = Preferences.userNodeForPackage(Andie.class);
+                    Locale.setDefault(new Locale("en", "NZ"));
+                    p.put("language", "en");
+                    p.put("country", "NZ");
+                    Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
 
-                Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale( "en", "NZ"));
-                p.put("language", "en");
-                p.put("country", "NZ");
-                Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
-                
-                System.out.println(p.get("language", "id"));
-                Andie.setLanguage();
-                System.out.println(Andie.bundle.getString("EnterFilterRadius"));
+                    System.out.println(p.get("language", "id"));
+                    Andie.setLanguage();
+                    // System.out.println(Andie.Andie.bundle.getString("EnterFilterRadius"));
 
+                }
 
-            }
+            }); // End of anonymous inner class
 
-        });  //End of anonymous inner class
+            bahasa.addActionListener(new ActionListener() {
 
+                @SuppressWarnings("deprecation")
+                public void actionPerformed(ActionEvent e) {
 
+                    Preferences p = Preferences.userNodeForPackage(Andie.class);
+                    Locale.setDefault(new Locale("id", "ID"));
+                    p.put("language", "id");
+                    p.put("country", "ID");
+                    Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
+                    System.out.println(p.get("language", "en"));
+                    Andie.setLanguage();
+                    // System.out.println(Andie.Andie.bundle.getString("EnterFilterRadius"));
 
+                }
 
+            });
 
-        bahasa.addActionListener(new ActionListener(){
+            traChinese.addActionListener(new ActionListener() { // Anonymous inner class to show behaviour of english
+                                                                // button
 
-            @SuppressWarnings("deprecation")
-            public void actionPerformed(ActionEvent e){
+                @SuppressWarnings("deprecation")
+                public void actionPerformed(ActionEvent e) {
 
-                Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale( "id", "ID"));
-                p.put("language","id");
-                p.put("country", "ID");
-                Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
-                System.out.println(p.get("language", "en"));
-                Andie.setLanguage();
-                System.out.println(Andie.bundle.getString("EnterFilterRadius"));
+                    Preferences p = Preferences.userNodeForPackage(Andie.class);
+                    Locale.setDefault(new Locale("zh", "TW"));
+                    p.put("language", "zh");
+                    p.put("country", "TW");
+                    Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
 
+                    System.out.println(p.get("language", "zh"));
+                    Andie.setLanguage();
+                    // System.out.println(Andie.bundle.getString("EnterFilterRadius"));
 
-            }
+                }
 
-        });
+            }); // End of
 
-        traChinese.addActionListener(new ActionListener(){     //Anonymous inner class to show behaviour of english button
-
-
-            @SuppressWarnings("deprecation")
-            public void actionPerformed(ActionEvent e){
-
-                Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale( "zh", "TW"));
-                p.put("language", "zh");
-                p.put("country", "TW");
-                Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
-                
-                System.out.println(p.get("language", "zh"));
-                Andie.setLanguage();
-                System.out.println(Andie.bundle.getString("EnterFilterRadius"));
-
-
-            }
-
-        });  //End of
-
-        l.setVisible(true);
-            /* 
-            if(e.getSource() == englishButton){
-                Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
-            }
-            if(e.getSource() == bahasaButton){
-                Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale(p.get("language", "id"), p.get("country", "ID")));
-            }
-             //Create a panel
-             //createPanel();
-
-            */
+            l.setVisible(true);
+            /*
+             * if(e.getSource() == englishButton){
+             * Preferences p = Preferences.userNodeForPackage(Andie.class);
+             * Locale.setDefault(new Locale(p.get("language", "en"), p.get("country",
+             * "NZ")));
+             * }
+             * if(e.getSource() == bahasaButton){
+             * Preferences p = Preferences.userNodeForPackage(Andie.class);
+             * Locale.setDefault(new Locale(p.get("language", "id"), p.get("country",
+             * "ID")));
+             * }
+             * //Create a panel
+             * //createPanel();
+             * 
+             */
         }
 
-    
+        // protected void createPanel() {
 
-    protected void createPanel(){
-        
-        JFrame l = new JFrame();
+        // JFrame l = new JFrame();
 
-        //Set behaviour of frame
-        l.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        l.setBounds(200,200,500,500);
-        Container c = l.getContentPane();
-        c.setLayout(new FlowLayout());
+        // // Set behaviour of frame
+        // l.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        // l.setBounds(200, 200, 500, 500);
+        // Container c = l.getContentPane();
+        // c.setLayout(new FlowLayout());
 
-        JButton english = new JButton("English - NZ");
-        JButton bahasa = new JButton("Bahasa Indonesia - ID");
+        // JButton english = new JButton("English - NZ");
+        // JButton bahasa = new JButton("Bahasa Indonesia - ID");
 
-        english.setSize(100,30);
-        english.setLocation(100,100);
-        c.add(english);
-        bahasa.setSize(100,30);
-        bahasa.setLocation(100,200);
-        c.add(bahasa);
+        // english.setSize(100, 30);
+        // english.setLocation(100, 100);
+        // c.add(english);
+        // bahasa.setSize(100, 30);
+        // bahasa.setLocation(100, 200);
+        // c.add(bahasa);
 
-        //english.setEnabled(false);
+        // // english.setEnabled(false);
 
-        english.addActionListener(this);
-        bahasa.addActionListener(this);
+        // english.addActionListener(this);
+        // bahasa.addActionListener(this);
 
-        l.setVisible(true);
-        
-    } 
+        // l.setVisible(true);
+
+        // }
     }
 }

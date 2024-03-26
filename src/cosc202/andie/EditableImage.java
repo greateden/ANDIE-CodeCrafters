@@ -62,6 +62,7 @@ class EditableImage {
     //to help determine whether to "save" or "save as"
     public static boolean hasOpsFile;
 
+
     /*
      * A method for determing whether to call "save as" or "save"
      * when user trying to save an image.

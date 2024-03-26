@@ -26,7 +26,7 @@ import javax.swing.*;
  */
 public class FilterActions {
 
-    ResourceBundle bundle = Andie.bundle;
+   // public ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
@@ -38,11 +38,16 @@ public class FilterActions {
      */
     public FilterActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MeanFilterAction(bundle.getString("MeanFilterAction"), null, bundle.getString("MeanFilterDesc"), Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new SoftBlurFilterAction(bundle.getString("SoftBlur"), null, bundle.getString("SoftBlurDesc"), Integer.valueOf(KeyEvent.VK_B)));
-        actions.add(new SharpenFilterAction(bundle.getString("SharpenFilter"), null, bundle.getString("SharpenDesc"), Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new GaussianFilterAction(bundle.getString("GaussianFilter"), null, bundle.getString("GaussianDesc"), Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new MedianFilterAction(bundle.getString("MedianFilter"), null, bundle.getString("MedianDesc"), Integer.valueOf(KeyEvent.VK_PAGE_DOWN)));
+        actions.add(new MeanFilterAction(Andie.bundle.getString("MeanFilterAction"), null, Andie.bundle.getString("MeanFilterDesc"),
+                Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new SoftBlurFilterAction(Andie.bundle.getString("SoftBlur"), null, Andie.bundle.getString("SoftBlurDesc"),
+                Integer.valueOf(KeyEvent.VK_B)));
+        actions.add(new SharpenFilterAction(Andie.bundle.getString("SharpenFilter"), null, Andie.bundle.getString("SharpenDesc"),
+                Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new GaussianFilterAction(Andie.bundle.getString("GaussianFilter"), null, Andie.bundle.getString("GaussianDesc"),
+                Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new MedianFilterAction(Andie.bundle.getString("MedianFilter"), null, Andie.bundle.getString("MedianDesc"),
+                Integer.valueOf(KeyEvent.VK_PAGE_DOWN)));
     }
 
     /**
@@ -56,7 +61,7 @@ public class FilterActions {
         JMenu fileMenu = new JMenu(Andie.bundle.getString("Filter"));
 
         for (Action action : actions) {
-        
+
             fileMenu.add(new JMenuItem(action));
         }
 
@@ -91,16 +96,15 @@ public class FilterActions {
         }
 
         public void actionPerformed(ActionEvent e) {
-            
+
             try {
                 // Determine the radius - ask the user.
                 int radius = 1;
 
-                
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
@@ -125,7 +129,7 @@ public class FilterActions {
                             "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             }
-              
+
         }
     }
 
@@ -172,16 +176,16 @@ public class FilterActions {
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 5, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, bundle.getString("EnterFilterRadius"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-                    // Check the return value from the dialog box.
-                    if (option == JOptionPane.CANCEL_OPTION) {
-                        return;
-                    } else if (option == JOptionPane.OK_OPTION) {
-                        radius = radiusModel.getNumber().intValue();
-                    }
-            // Pop-up dialog box to ask for the radius value.
-            
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+                    radius = radiusModel.getNumber().intValue();
+                }
+                // Pop-up dialog box to ask for the radius value.
 
                 // Create and apply the filter
                 target.getImage().apply(new MedianFilter(radius));
@@ -189,8 +193,8 @@ public class FilterActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -235,12 +239,13 @@ public class FilterActions {
                 // Determine the radius - ask the user.
                 int radius = 1;
 
-            // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
-            JSpinner radiusSpinner = new JSpinner(radiusModel);
-            System.out.println("the language is"+ Andie.bundle.getString("EnterFilterRadius"));
+                // Pop-up dialog box to ask for the radius value.
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
+                JSpinner radiusSpinner = new JSpinner(radiusModel);
+                System.out.println("the language is" + Andie.bundle.getString("EnterFilterRadius"));
 
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, bundle.getString("EnterFilterRadius"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
@@ -261,11 +266,11 @@ public class FilterActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
-                
+
         }
 
     }
@@ -310,8 +315,8 @@ public class FilterActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -357,8 +362,8 @@ public class FilterActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }

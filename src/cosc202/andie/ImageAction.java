@@ -35,6 +35,8 @@ public abstract class ImageAction extends AbstractAction {
      */
     protected static ImagePanel target;
 
+    
+
     /**
      * <p>
      * Constructor for ImageActions.

@@ -9,7 +9,7 @@ public class HelpActions {
     /** A list of actions for the Help menu. */
     protected ArrayList<Action> actions;
 
-    ResourceBundle bundle = Andie.bundle;
+   // public ResourceBundle bundle = Andie.bundle;
 
     /**
      * <p>
@@ -18,7 +18,7 @@ public class HelpActions {
      */
     public HelpActions() {
         actions = new ArrayList<Action>();
-        actions.add(new HelpActionsAboutUs(bundle.getString("AboutUs"), null, bundle.getString("AboutUsMessage"), Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new HelpActionsAboutUs(Andie.bundle.getString("AboutUs"), null, Andie.bundle.getString("AboutUsMessage"), Integer.valueOf(KeyEvent.VK_G)));
     }
 
     /**
@@ -69,7 +69,7 @@ public class HelpActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, bundle.getString("TeamMessage"), bundle.getString("AboutUs"), 1);
+            JOptionPane.showMessageDialog(null, Andie.bundle.getString("TeamMessage"), Andie.bundle.getString("AboutUs"), 1);
         }
     }
 
