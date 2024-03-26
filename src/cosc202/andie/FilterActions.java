@@ -26,8 +26,6 @@ import javax.swing.*;
  */
 public class FilterActions {
 
-    ResourceBundle bundle = Andie.bundle;
-
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
 
@@ -38,11 +36,14 @@ public class FilterActions {
      */
     public FilterActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MeanFilterAction(bundle.getString("MeanFilterAction"), null, bundle.getString("MeanFilterDesc"), Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new SoftBlurFilterAction(bundle.getString("SoftBlur"), null, bundle.getString("SoftBlurDesc"), Integer.valueOf(KeyEvent.VK_B)));
-        actions.add(new SharpenFilterAction(bundle.getString("SharpenFilter"), null, bundle.getString("SharpenDesc"), Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new GaussianFilterAction(bundle.getString("GaussianFilter"), null, bundle.getString("GaussianDesc"), Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new MedianFilterAction(bundle.getString("MedianFilter"), null, bundle.getString("MedianDesc"), Integer.valueOf(KeyEvent.VK_PAGE_DOWN)));
+        actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new SoftBlurFilterAction("Soft blur", null, "Apply a soft blur", Integer.valueOf(KeyEvent.VK_B)));
+        actions.add(new SharpenFilterAction("Sharpen filter", null, "Apply a sharpen filter",
+                Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new GaussianFilterAction("Gaussian filter", null, "Apply a Gaussian filter",
+                Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new MedianFilterAction("Median filter", null, "Apply a median filter",
+                Integer.valueOf(KeyEvent.VK_PAGE_DOWN)));
     }
 
     /**
@@ -53,9 +54,8 @@ public class FilterActions {
      * @return The filter menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu(Andie.bundle.getString("Filter"));
+        JMenu fileMenu = new JMenu("Filter");
 
-        for (Action action : actions) {
         for (Action action : actions) {
             fileMenu.add(new JMenuItem(action));
         }
@@ -81,10 +81,6 @@ public class FilterActions {
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
-         * @param name     The name of the action (ignored if null).
-         * @param icon     An icon to use to represent the action (ignored if null).
-         * @param desc     A brief description of the action (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         MeanFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -94,15 +90,7 @@ public class FilterActions {
             try {
                 // Determine the radius - ask the user.
                 int radius = 1;
-            try {
-                // Determine the radius - ask the user.
-                int radius = 1;
 
-                // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
-                JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
@@ -115,22 +103,7 @@ public class FilterActions {
                 } else if (option == JOptionPane.OK_OPTION) {
                     radius = radiusModel.getNumber().intValue();
                 }
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;
-                } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
-                }
 
-                target.getImage().apply(new MeanFilter(radius));
-                target.repaint();
-                target.getParent().revalidate();
-            } catch (Exception err) {
-                if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
-                }
-            }
                 target.getImage().apply(new MeanFilter(radius));
                 target.repaint();
                 target.getParent().revalidate();
@@ -154,10 +127,6 @@ public class FilterActions {
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
          * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
-         * @param name     The name of the action (ignored if null).
-         * @param icon     An icon to use to represent the action (ignored if null).
-         * @param desc     A brief description of the action (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         MedianFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
@@ -172,8 +141,6 @@ public class FilterActions {
          * This method is called whenever the MedianFilterAction is triggered.
          * It prompts the user for a filter radius, then applys an appropriately sized
          * {@link MeanFilter}.
-         * It prompts the user for a filter radius, then applys an appropriately sized
-         * {@link MeanFilter}.
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -186,16 +153,15 @@ public class FilterActions {
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 5, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, bundle.getString("EnterFilterRadius"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-                    // Check the return value from the dialog box.
-                    if (option == JOptionPane.CANCEL_OPTION) {
-                        return;
-                    } else if (option == JOptionPane.OK_OPTION) {
-                        radius = radiusModel.getNumber().intValue();
-                    }
-            // Pop-up dialog box to ask for the radius value.
-            
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+                    radius = radiusModel.getNumber().intValue();
+                }
 
                 // Create and apply the filter
                 target.getImage().apply(new MedianFilter(radius));
@@ -249,12 +215,11 @@ public class FilterActions {
                 // Determine the radius - ask the user.
                 int radius = 1;
 
-            // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
-            JSpinner radiusSpinner = new JSpinner(radiusModel);
-            System.out.println("the language is"+ Andie.bundle.getString("EnterFilterRadius"));
-
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, bundle.getString("EnterFilterRadius"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                // Pop-up dialog box to ask for the radius value.
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
+                JSpinner radiusSpinner = new JSpinner(radiusModel);
+                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
@@ -262,23 +227,7 @@ public class FilterActions {
                 } else if (option == JOptionPane.OK_OPTION) {
                     radius = radiusModel.getNumber().intValue();
                 }
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;
-                } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
-                }
 
-                // Create and apply the filter
-                target.getImage().apply(new GaussianFilter(radius));
-                target.repaint();
-                target.getParent().revalidate();
-            } catch (Exception err) {
-                if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
-                }
-            }
                 // Create and apply the filter
                 target.getImage().apply(new GaussianFilter(radius));
                 target.repaint();

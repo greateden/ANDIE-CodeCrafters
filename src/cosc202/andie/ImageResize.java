@@ -15,12 +15,10 @@ public ImageResize(){};
     this.height = height;
     this.width = width;
     
-    
   }
 
   @Override
   public BufferedImage apply(BufferedImage input) {
-   
    
 
     int oriWidth = input.getWidth();
