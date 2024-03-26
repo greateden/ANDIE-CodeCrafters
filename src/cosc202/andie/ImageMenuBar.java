@@ -29,6 +29,7 @@ import java.awt.*;
  */
 public class ImageMenuBar {
 
+    private int rotateAttempt=0;
    public ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the Filter menu. */
@@ -209,7 +210,7 @@ public class ImageMenuBar {
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel degModel = new SpinnerNumberModel(1, 1, 360, 1);
                 JSpinner degSpinner = new JSpinner(degModel);
-                int option = JOptionPane.showOptionDialog(null, degSpinner, "Enter rotation theta",
+                int option = JOptionPane.showOptionDialog(null, degSpinner, Andie.bundle.getString("EnterRotationTheta"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
                
                
@@ -219,9 +220,9 @@ public class ImageMenuBar {
                 } else if (option == JOptionPane.OK_OPTION) {
                     deg = degModel.getNumber().intValue();
                 }
-
+                rotateAttempt++;
                 // Create and apply the filter
-                target.getImage().apply(new ImageRotate(deg));
+                target.getImage().apply(new ImageRotate(deg,rotateAttempt));
                 target.repaint();
                 target.getParent().revalidate();
                 
