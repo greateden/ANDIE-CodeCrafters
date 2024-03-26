@@ -24,14 +24,14 @@ import java.awt.*;
  */
 public class ImageRotate implements ImageOperation, java.io.Serializable {
 
-    private int deg;
+    private double deg;
     private int countDegrees=0;
     private int attempted = 0;
     
 
     
 
-    ImageRotate(int deg, int rotateAttempt){
+    ImageRotate(double deg, int rotateAttempt){
         this.deg = deg;
         countDegrees += deg;
         countDegrees = countDegrees%360;
@@ -71,8 +71,8 @@ public class ImageRotate implements ImageOperation, java.io.Serializable {
         
         Graphics2D graphics = transformedImg.createGraphics(); // creates a graphics object to redraw the image
 
-        //graphics.setPaint(new Color(233,233,233));
-        //graphics.fillRect(0,0,transformedImg.getWidth(), transformedImg.getHeight());
+        graphics.setPaint(new Color(233,233,233));
+        graphics.fillRect(0,0,transformedImg.getWidth(), transformedImg.getHeight());
 
         graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION , RenderingHints.VALUE_INTERPOLATION_BILINEAR); // Image was becoming pixalated due to Interpolation so hot fix this makes it blur more then pixalate when the pixels don't fully match
         //if(attempted==1){
@@ -83,6 +83,7 @@ public class ImageRotate implements ImageOperation, java.io.Serializable {
         graphics.rotate(rad, input.getWidth()/2 , input.getHeight()/2);
 
         graphics.drawRenderedImage(input, null); // draws the image onto the canvas
+        System.out.println(transformedImg.getTileGridXOffset()+ ", "+transformedImg.getTileGridYOffset());
         //graphics.translate(-(newWidth - input.getWidth())/2 , -(newHeight - input.getHeight())/2); 
         //System.out.println(transformedImg.getMinX() + "," + transformedImg.getMinY());
 

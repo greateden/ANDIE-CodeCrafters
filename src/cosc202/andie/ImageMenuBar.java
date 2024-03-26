@@ -210,10 +210,10 @@ public class ImageMenuBar {
 
             // Determine the radius - ask the user.
             try {
-                int deg = 1;
-
+                int deg = 0;
+            
                 // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel degModel = new SpinnerNumberModel(1, 1, 360, 1);
+                SpinnerNumberModel degModel = new SpinnerNumberModel(0, null, null, 0.1);
                 JSpinner degSpinner = new JSpinner(degModel);
                 int option = JOptionPane.showOptionDialog(null, degSpinner,
                         Andie.bundle.getString("EnterRotationTheta"),
@@ -225,7 +225,7 @@ public class ImageMenuBar {
                 } else if (option == JOptionPane.OK_OPTION) {
                     deg = degModel.getNumber().intValue();
                 }
-                rotateAttempt++;
+                //rotateAttempt++;
                 // Create and apply the filter
                 target.getImage().apply(new ImageRotate(deg, rotateAttempt));
                 target.repaint();
