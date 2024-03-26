@@ -140,13 +140,13 @@ public class FileActions {
 
                     // create a message box to tell user it's saved successfully
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("ImageSaveSuccess"),
-                        Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
-                    
-                    // then we treat it as saved so that next time we run the code, it will 
+                            Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
+
+                    // then we treat it as saved so that next time we run the code, it will
                     // trigger the "else" statement outside of this loop
                     EditableImage.isOpsNotEmptyStatus = false;
 
-                    //then open the openfile window
+                    // then open the openfile window
                     openFile();
 
                 } else if (n == 1) { // no
@@ -345,23 +345,30 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             try {
-                // if no .ops file detected, go to save as
-                // to keep the original image.
-                if (EditableImage.hasOpsFile == false) {
-                    // these codes below don't need multi lingual support
-                    FileSaveAsAction saveAsAction = new FileSaveAsAction("Save As", null, "Save a copy",
-                            Integer.valueOf(KeyEvent.VK_A));
-                    saveAsAction.actionPerformed(e);
-                    // No need for the command below because otherwise if the user clicked
-                    // the button and closed the new window without saving anything,
-                    // the command below will set the value to true and cause bugs!
-                    // isSaved = true;
-                    // then we must change the status to true
-                    // otherwise it will ask the user to save a copy again
-                    EditableImage.hasOpsFile = true;
-                } else {
-                    target.getImage().save();
-                }
+                // disestablished the codes below as it's a weird design
+                // if (EditableImage.hasOpsFile == false) {
+                // // these codes below don't need multi lingual support
+                // FileSaveAsAction saveAsAction = new FileSaveAsAction("Save As", null, "Save a
+                // copy",
+                // Integer.valueOf(KeyEvent.VK_A));
+                // saveAsAction.actionPerformed(e);
+                // // No need for the command below because otherwise if the user clicked
+                // // the button and closed the new window without saving anything,
+                // // the command below will set the value to true and cause bugs!
+                // // isSaved = true;
+                // // then we must change the status to true
+                // // otherwise it will ask the user to save a copy again
+                // EditableImage.hasOpsFile = true;
+                // } else {
+                target.getImage().save();
+
+                // then we treat it as saved so that next time we run the code, it will
+                // trigger the "else" statement outside of this loop
+                EditableImage.isOpsNotEmptyStatus = false;
+
+                JOptionPane.showMessageDialog(null, Andie.bundle.getString("ImageSaveSuccess"),
+                        Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
+                // }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
@@ -372,7 +379,7 @@ public class FileActions {
 
     /**
      * <p>
-     * Action to save an image to a new file location.
+     * Action to save an image and the ops file to a new file location.
      * </p>
      * 
      * @see EditableImage#saveAs(String)
@@ -428,6 +435,11 @@ public class FileActions {
                     try {
                         String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                         target.getImage().saveAs(imageFilepath);
+
+                        // then we treat it as saved so that next time we run the code, it will
+                        // trigger the "else" statement outside of this loop
+                        EditableImage.isOpsNotEmptyStatus = false;
+
                         // isSaved = true;
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, Andie.bundle.getString("MyDearUser"),
@@ -504,7 +516,44 @@ public class FileActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            System.exit(0);
+            if (isOpened == true && EditableImage.isOpsNotEmptyStatus == true) {
+
+                Object[] options = { Andie.bundle.getString("Yes"), Andie.bundle.getString("No"),
+                        Andie.bundle.getString("Cancel") };
+
+                int n = JOptionPane.showOptionDialog(
+                        null,
+                        Andie.bundle.getString("DoYouWantToSave"),
+                        Andie.bundle.getString("Warning"),
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[2]);
+
+                if (n == 0) { // yes
+                    // if user chose yes and there's no ops file saved
+                    // then call "save"
+                    actions.get(1).actionPerformed(e);
+
+                    // create a message box to tell user it's saved successfully
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("ImageSaveSuccess"),
+                            Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
+
+                    // then we treat it as saved so that next time we run the code, it will
+                    // trigger the "else" statement outside of this loop
+                    EditableImage.isOpsNotEmptyStatus = false;
+
+                    // then close window
+                    System.exit(0);
+
+                } else if (n == 1) { // no
+                    System.exit(0);
+                } else {
+                    // Should change this statement to case control cuz the "else" here is
+                    // useless...
+                }
+            }
         }
 
     }

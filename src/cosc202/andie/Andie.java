@@ -180,18 +180,9 @@ public class Andie {
 
                 // Making preferences and locale
                 Preferences p = Preferences.userNodeForPackage(Andie.class);
-                // Locale.setDefault(new Locale(p.get("language", "id"), p.get("country",
-                // "ID")));
-                // System.out.println(p.get("language", "fail"));
                 Locale.setDefault(new Locale("en","NZ"));
-                //Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
-                //System.out.println(p.get("language", "fail"));
-                // Locale en_NZ = Locale.of("en", "NZ");
-                // Locale.setDefault(en_NZ);
 
                 // Now making the ResourceBundle
-                // ResourceBundle bundle =
-                // ResourceBundle.getBundle("cosc202/andie/MessageBundle");
                 bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
 
                 // Line below is for testing the bundle
