@@ -70,6 +70,10 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      */
     public BufferedImage apply(BufferedImage input) {
         
+        if(radius==0){
+            return input;
+        }
+
         int side = 2*radius+1; //The side of the kernel using the radius. 
         int kernelWidth = side;
         int kernelHeight = side;
