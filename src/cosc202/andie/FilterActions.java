@@ -99,13 +99,13 @@ public class FilterActions {
 
             try {
                 // Determine the radius - ask the user.
-                int radius = 1;
+                int radius = 0;
 
                 // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
                 int option = JOptionPane.showOptionDialog(null, radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);     
 
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
@@ -125,8 +125,8 @@ public class FilterActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
 
@@ -171,10 +171,10 @@ public class FilterActions {
         public void actionPerformed(ActionEvent e) {
             try {
                 // Determine the radius - ask the user.
-                int radius = 1;
+                int radius = 0;
 
                 // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 5, 1);
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
                 int option = JOptionPane.showOptionDialog(null, radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -237,12 +237,12 @@ public class FilterActions {
             try {
 
                 // Determine the radius - ask the user.
-                int radius = 1;
+                int radius = 0;
 
                 // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
-                System.out.println("the language is" + Andie.bundle.getString("EnterFilterRadius"));
+                //System.out.println("the language is" + Andie.bundle.getString("EnterFilterRadius"));
 
                 int option = JOptionPane.showOptionDialog(null, radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
