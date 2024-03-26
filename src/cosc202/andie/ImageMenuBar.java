@@ -35,6 +35,8 @@ public class ImageMenuBar {
     protected ArrayList<Action> actions;
     private JMenu fileMenu;
     private ImageScalingAction scalAct;
+    private JMenu fileMenu;
+    private ImageScalingAction scalAct;
     /**
      * <p>
      * Create a set of Image menu actions.
@@ -229,14 +231,26 @@ public class ImageMenuBar {
             // Determine the radius - ask the user.
             try {
                 int deg = 1;
-            
+            try {
+                int deg = 1;
+
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel degModel = new SpinnerNumberModel(1, 1, 360, 1);
                 JSpinner degSpinner = new JSpinner(degModel);
                 int option = JOptionPane.showOptionDialog(null, degSpinner, "Enter rotation theta",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-               
-               
+                // Pop-up dialog box to ask for the radius value.
+                SpinnerNumberModel degModel = new SpinnerNumberModel(1, 1, 360, 1);
+                JSpinner degSpinner = new JSpinner(degModel);
+                int option = JOptionPane.showOptionDialog(null, degSpinner, "Enter rotation theta",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+                    deg = degModel.getNumber().intValue();
+                }
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
                     return;
@@ -248,14 +262,22 @@ public class ImageMenuBar {
                 target.getImage().apply(new ImageRotate(deg));
                 target.repaint();
                 target.getParent().revalidate();
-                
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
                             "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             }
-                
+                // Create and apply the filter
+                target.getImage().apply(new ImageRotate(deg));
+                target.repaint();
+                target.getParent().revalidate();
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
+                            "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            }
         }
     }
 
@@ -277,7 +299,7 @@ public class ImageMenuBar {
         int height;
         int width;
         JLabel widthJLabel, heightLabel, titleLabel, blankLabel;
-       
+        JLabel widthJLabel, heightLabel, titleLabel, blankLabel;
         JTextField widthField, heightField;
         JButton goButton;
 
@@ -346,7 +368,6 @@ public class ImageMenuBar {
             // target.getParent().revalidate();
         }
 
-       
         protected void createPanel() {
 
             // Write code to create the panel
@@ -358,7 +379,19 @@ public class ImageMenuBar {
 
             JPanel p = new JPanel();
             p.setLayout(new GridLayout(4, 2));
-            
+            ;
+        protected void createPanel() {
+
+            // Write code to create the panel
+            // JPanel panel=new JPanel();
+
+            JDialog dialog = new JDialog(Andie.getFrame(), "Resize", true);
+            dialog.setPreferredSize(new Dimension(500, 400));
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+            JPanel p = new JPanel();
+            p.setLayout(new GridLayout(4, 2));
+            ;
 
         p.setPreferredSize(new Dimension(250, 350));
         titleLabel = new JLabel("Set the size of the new image (Please put in integers)");
@@ -403,16 +436,33 @@ public class ImageMenuBar {
             p.add(widthJLabel);
             p.add(widthField);
             p.add(goButton);
-           
+            // panel.add(frame);
+
+            // add all the lables and buttons to the panel
+            p.add(titleLabel);
+            p.add(blankLabel);
+            p.add(heightLabel);
+            p.add(heightField);
+            p.add(widthJLabel);
+            p.add(widthField);
+            p.add(goButton);
 
             JPanel buttonPanel = new JPanel();
             ButtonListener bl = new ButtonListener();
             buttonPanel.add(goButton);
             goButton.addActionListener(bl);
             p.add(buttonPanel);
-            
+            JPanel buttonPanel = new JPanel();
+            ButtonListener bl = new ButtonListener();
+            buttonPanel.add(goButton);
+            goButton.addActionListener(bl);
+            p.add(buttonPanel);
 
-            
+            // dialog.getContentPane().add(p);
+            dialog.getContentPane().add(p);
+            dialog.pack();
+            dialog.setVisible(true);
+            // frame.getContentPane().add(dialog);
             // dialog.getContentPane().add(p);
             dialog.getContentPane().add(p);
             dialog.pack();
@@ -461,7 +511,31 @@ public class ImageMenuBar {
         }
     }
 
-    
+    public class ImageScalingAction extends ImageAction {
+        // int height;
+        // int width;
+        /**
+         * <p>
+         * Create a Image Scale Action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ImageScalingAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            
+           
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           
+           // createSubMenu();
+            throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        }
+
     public class ImageScalingAction extends ImageAction {
         // int height;
         // int width;
@@ -532,8 +606,53 @@ public class ImageMenuBar {
               
             }
         }
-
+        
       
+        public void createSubMenu() {
+
+            
+            JMenu scaleMenu = new JMenu("Image Scale");
+            JMenuItem scale25 = new JMenuItem("25%");
+            JMenuItem scale50 = new JMenuItem("50%");
+            JMenuItem scale75 = new JMenuItem("75%");
+            JMenuItem scale125 = new JMenuItem("125%");
+            JMenuItem scale150 = new JMenuItem("150%");
+
+            scale25.addActionListener(new ScaleActionListener(0.25));
+            scale50.addActionListener(new ScaleActionListener(0.5));
+            scale75.addActionListener(new ScaleActionListener(0.75));
+            scale125.addActionListener(new ScaleActionListener(1.25));
+            scale150.addActionListener(new ScaleActionListener(1.5));
+
+            scaleMenu.add(scale25);
+            scaleMenu.add(scale50);
+            scaleMenu.add(scale75);
+            scaleMenu.add(scale125);
+            scaleMenu.add(scale150);
+
+            fileMenu.add(scaleMenu);
+
+            
+        }
+
+        public class ScaleActionListener implements ActionListener {
+            private double scalePercentage;
+    
+            public ScaleActionListener(double scalePercentage) {
+                this.scalePercentage = scalePercentage;
+            }
+           
+            public void actionPerformed(ActionEvent e) {
+
+                target.getImage().apply(new ImageScaling(scalePercentage));
+                target.repaint();
+                target.getParent().revalidate();
+
+              
+            }
+        }
+
+        
+
     }
 }
-        
