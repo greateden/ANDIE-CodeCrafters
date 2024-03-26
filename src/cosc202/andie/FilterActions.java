@@ -3,6 +3,7 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * <p>
@@ -101,10 +102,17 @@ public class FilterActions {
                 // Determine the radius - ask the user.
                 int radius = 0;
 
+                JPanel panel = new JPanel();
+                panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+                JLabel info = new JLabel();
+                info.setText("Please enter a positive integer.");
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
+                panel.add(info);
+                panel.add(radiusSpinner);
+
+                int option = JOptionPane.showOptionDialog(null, panel, Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);     
 
                 // Check the return value from the dialog box.
