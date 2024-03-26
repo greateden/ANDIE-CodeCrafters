@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  * <p>
  * Actions provided by the File menu.
@@ -27,7 +28,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @version 1.0
  */
 public class FileActions {
-
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
     protected boolean isOpened = false;
@@ -38,9 +38,9 @@ public class FileActions {
      * Create a set of File menu actions.
      * </p>
      */
-    
+
     public FileActions() {
-        
+
         actions = new ArrayList<Action>();
         actions.add(new FileOpenAction("Open       (O)", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new FileSaveAction("Save         (S)", null,
@@ -123,9 +123,10 @@ public class FileActions {
                         null,
                         options,
                         options[2]);
-
+                //TODO issues here
                 if (n == 0) { // yes
-                    actions.get(1).actionPerformed(e);
+                    if (EditableImage.hasOpsFile == false) actions.get(1).actionPerformed(e);
+                    if (EditableImage.hasOpsFile == true) actions.get(0).actionPerformed(e);
 
                 } else if (n == 1) { // no
                     openFile();
@@ -177,8 +178,6 @@ public class FileActions {
                     isOpened = true;
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     target.getImage().open(imageFilepath);
-                    // debugging
-                    // System.out.println("approve " + isOpened);
                 } catch (Exception ex) {
                     System.exit(1);
                 }
