@@ -29,7 +29,7 @@ public class EditActions {
     /** A list of actions for the Edit menu. */
     protected ArrayList<Action> actions;
 
-   // public ResourceBundle bundle = Andie.bundle;
+    public ResourceBundle bundle = Andie.bundle;
 
     /**
      * <p>

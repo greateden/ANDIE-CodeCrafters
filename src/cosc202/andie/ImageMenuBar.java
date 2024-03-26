@@ -29,7 +29,7 @@ import java.awt.*;
  */
 public class ImageMenuBar {
 
-   // public ResourceBundle bundle = Andie.bundle;
+   public ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;

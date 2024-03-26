@@ -28,7 +28,7 @@ import javax.swing.*;
  */
 public class ViewActions {
 
-  //  public ResourceBundle bundle = Andie.bundle;
+    public ResourceBundle bundle = Andie.bundle;
 
     /**
      * A list of actions for the View menu.

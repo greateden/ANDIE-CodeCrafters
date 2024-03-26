@@ -31,7 +31,7 @@ import java.awt.*;
  */
 public class FileActions {
 
-    //public ResourceBundle bundle = Andie.bundle;
+    public ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;

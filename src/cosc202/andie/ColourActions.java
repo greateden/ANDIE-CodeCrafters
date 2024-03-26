@@ -33,7 +33,7 @@ public class ColourActions {
     /** A list of actions for the Colour menu. */
     protected ArrayList<Action> actions;
 
-    //public ResourceBundle bundle = Andie.bundle;
+    public ResourceBundle bundle = Andie.bundle;
 
     /**
      * <p>

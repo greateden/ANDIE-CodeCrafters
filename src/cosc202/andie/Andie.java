@@ -97,6 +97,13 @@ public class Andie {
         // Add in menus for various types of action the user may perform.
         JMenuBar newMenuBar = new JMenuBar();
 
+        fileActions = new FileActions();
+        editActions = new EditActions();
+        viewActions = new ViewActions();
+        filterActions = new FilterActions();
+        imageMenuBar = new ImageMenuBar();
+        colourActions = new ColourActions();
+        helpActions = new HelpActions();
         // File menus are pretty standard, so things that usually go in File menus go
         // here.
         newMenuBar.add(fileActions.createMenu());
@@ -176,7 +183,8 @@ public class Andie {
                 // Locale.setDefault(new Locale(p.get("language", "id"), p.get("country",
                 // "ID")));
                 // System.out.println(p.get("language", "fail"));
-                Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
+                Locale.setDefault(new Locale("en","NZ"));
+                //Locale.setDefault(new Locale(p.get("language", "en"), p.get("country", "NZ")));
                 //System.out.println(p.get("language", "fail"));
                 // Locale en_NZ = Locale.of("en", "NZ");
                 // Locale.setDefault(en_NZ);
