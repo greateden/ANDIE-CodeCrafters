@@ -56,7 +56,7 @@ public class FilterActions {
         JMenu fileMenu = new JMenu(Andie.bundle.getString("Filter"));
 
         for (Action action : actions) {
-        for (Action action : actions) {
+        
             fileMenu.add(new JMenuItem(action));
         }
 
@@ -91,18 +91,12 @@ public class FilterActions {
         }
 
         public void actionPerformed(ActionEvent e) {
-            try {
-                // Determine the radius - ask the user.
-                int radius = 1;
+            
             try {
                 // Determine the radius - ask the user.
                 int radius = 1;
 
-                // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
-                JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
@@ -131,15 +125,7 @@ public class FilterActions {
                             "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             }
-                target.getImage().apply(new MeanFilter(radius));
-                target.repaint();
-                target.getParent().revalidate();
-            } catch (Exception err) {
-                if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
-                }
-            }
+              
         }
     }
 
@@ -279,16 +265,7 @@ public class FilterActions {
                             "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             }
-                // Create and apply the filter
-                target.getImage().apply(new GaussianFilter(radius));
-                target.repaint();
-                target.getParent().revalidate();
-            } catch (Exception err) {
-                if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
-                }
-            }
+                
         }
 
     }

@@ -13,10 +13,7 @@ import java.awt.*;
  * <p>
  * The Colour menu contains actions that affect the colour of each pixel
  * directly
- * The Colour menu contains actions that affect the colour of each pixel
- * directly
  * without reference to the rest of the image.
- * Eden has added the RGBSwapping function, now we have two functions
  * Eden has added the RGBSwapping function, now we have two functions
  * include greyscale as well, please MERGE WITH CARE.
  * </p>
@@ -37,7 +34,6 @@ public class ColourActions {
     protected ArrayList<Action> actions;
 
     ResourceBundle bundle = Andie.bundle;
-
     /**
      * <p>
      * Create a set of Colour menu actions.
@@ -45,12 +41,15 @@ public class ColourActions {
      */
     public ColourActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ConvertToGreyAction(bundle.getString("convertToGreyAction"), null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new ImageInvertAction(bundle.getString("invertColour"), null, bundle.getString("ImageInvertDesc"), Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ConvertToGreyAction(bundle.getString("convertToGreyAction"), null, "Convert to greyscale",
+                Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ImageInvertAction("Invert Colour", null, "Invert colours of image",
+                Integer.valueOf(KeyEvent.VK_G)));
         // I am using key C as the hotkey
         // addeed RGBSwapping function's button
-        actions.add(new RGBSwappingAction(bundle.getString("RGBSwappingAction"), null, bundle.getString("RGBSwapDesc"),
+        actions.add(new RGBSwappingAction("Colour Channel Cycling", null, "Swap the colour channels around",
                 Integer.valueOf(KeyEvent.VK_C)));
+                
     }
 
     /**
@@ -62,10 +61,6 @@ public class ColourActions {
      */
     public JMenu createMenu() {
         JMenu fileMenu = new JMenu(Andie.bundle.getString("Colour"));
-
-        for (Action action : actions) {
-            fileMenu.add(new JMenuItem(action));
-        }
 
         return fileMenu;
     }
@@ -116,21 +111,10 @@ public class ColourActions {
                             "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             }
-            try {
-                target.getImage().apply(new ConvertToGrey());
-                target.repaint();
-                target.getParent().revalidate();
-            } catch (Exception err) {
-                if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
-                }
-            }
         }
 
     }
 
-    // Same as above, but edited to work for imageInvert().
     // Same as above, but edited to work for imageInvert().
     public class ImageInvertAction extends ImageAction {
 
@@ -139,10 +123,6 @@ public class ColourActions {
          * Create a new imageInvert action.
          * </p>
          * 
-         * @param name     The name of the action (ignored if null).
-         * @param icon     An icon to use to represent the action (ignored if null).
-         * @param desc     A brief description of the action (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -165,16 +145,6 @@ public class ColourActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            try {
-                target.getImage().apply(new ImageInvert());
-                target.repaint();
-                target.getParent().revalidate();
-            } catch (Exception err) {
-                if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
-                            "Warning", JOptionPane.WARNING_MESSAGE);
-                }
-            }
             try {
                 target.getImage().apply(new ImageInvert());
                 target.repaint();
@@ -253,30 +223,9 @@ public class ColourActions {
                 group2.add(g2);
                 group2.add(g3);
 
-            JRadioButton b1 = new JRadioButton("R");
-            JRadioButton b2 = new JRadioButton("G");
-            JRadioButton b3 = new JRadioButton("B");
-
-            try {
-               
-                // Create the dialog panel
-                JPanel panel = new JPanel(new GridLayout(3, 3));
-
-                
-
-                ButtonGroup group1 = new ButtonGroup();
-                group1.add(r1);
-                group1.add(r2);
-                group1.add(r3);
-
-                
-
-                ButtonGroup group2 = new ButtonGroup();
-                group2.add(g1);
-                group2.add(g2);
-                group2.add(g3);
-
-                
+                JRadioButton b1 = new JRadioButton("R");
+                JRadioButton b2 = new JRadioButton("G");
+                JRadioButton b3 = new JRadioButton("B");
 
                 ButtonGroup group3 = new ButtonGroup();
                 group3.add(b1);
@@ -293,23 +242,10 @@ public class ColourActions {
                 panel.add(g3);
                 panel.add(b3);
 
-            // Show the option dialog
-            int option = JOptionPane.showOptionDialog(null, panel, bundle.getString("ColourSelection"), JOptionPane.OK_CANCEL_OPTION,
-                    JOptionPane.PLAIN_MESSAGE, null, null, null);
+                // Show the option dialog
+                int option = JOptionPane.showOptionDialog(null, panel, "Color Selection", JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE, null, null, null);
 
-                // If cancel or close the tab, do nothing
-                // If click ok, run the function but with input testify.
-                if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
-                    // Do nothing, but we keep this statement for possible future function expands.
-                } else if (option == JOptionPane.OK_OPTION) {
-                    // Get selected values of R, G, and B
-                    if (r1.isSelected()) {
-                        R = 1;
-                    } else if (r2.isSelected()) {
-                        R = 2;
-                    } else if (r3.isSelected()) {
-                        R = 3;
-                    }
                 // If cancel or close the tab, do nothing
                 // If click ok, run the function but with input testify.
                 if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
@@ -377,41 +313,7 @@ public class ColourActions {
                     JOptionPane.showMessageDialog(null, "With all due respect, you didn't open anything.",
                             "Warning", JOptionPane.WARNING_MESSAGE);
                 }
-
-                    if (b1.isSelected()) {
-                        B = 1;
-                    } else if (b2.isSelected()) {
-                        B = 2;
-                    } else if (b3.isSelected()) {
-                        B = 3;
-                    }
-
-                    // Fun fact: put the code below outside of the if statement to trick the
-                    // users!!!
-                    // Especially useful on 1st Apr
-
-                //If user gave half an input, will say we don't understand what you're tryna do
-                if (!(R == 0 && G == 0 && B == 0) && (R == B || B == G || R == B || R == 0 || G == 0 || B == 0)) {
-                    JOptionPane.showMessageDialog(null, bundle.getString("CannotProcess"), bundle.getString("Warning"),
-                            JOptionPane.WARNING_MESSAGE);
-                    actionPerformed(e);
-                //If user gave full input but with the same RGB order, will give them a friendly notice.
-                } else if (!(R == 0 && G == 0 && B == 0) && (R == 1 && G == 2 && B == 3)){
-                    JOptionPane.showMessageDialog(null, bundle.getString("WithRespect"), bundle.getString("Warning"),
-                            JOptionPane.WARNING_MESSAGE);
-                //Will educate the user if they didn't give any inputs and still wanna hit the OK button
-                } else if (R == 0 && G == 0 && B == 0) {
-                    JOptionPane.showMessageDialog(null, bundle.getString("PleaseChoose"), bundle.getString("Warning"),
-                            JOptionPane.WARNING_MESSAGE);
-                    actionPerformed(e);
-                //If a legal input (i.e., passed all the ifs above), will apply the filter.
-                } else {
-                    // Apply the filter
-                    target.getImage().apply(new RGBSwapping(R, G, B));
-                    target.repaint();
-                    target.getParent().revalidate();
-                }
-            }            
+            }
         }
     }
 }
