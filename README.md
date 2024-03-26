@@ -1,14 +1,21 @@
 ## Contribution
 `Eden`
 * Image export
+* Save - adding logical conditions
+* Save as - adding logical conditions
+* Opening a file - adding logical conditions
+* Exit - adding logical conditions
 * Colour Channel Cycling
-* Error Handling
-* 
+* Error Handling (yes with funny messages)
+* Adding Traditional Chinese (Taiwan) language support
+* Creating the Gantt Diagram in Readme.md
 
 `Kevin`
 * Multilingual support
 * Image flip
 * Median filter
+* Image rotation - polishing
+
 
 `Yuxing`
 * Image resise
@@ -18,6 +25,7 @@
 * Sharpen filter
 * Soft blur filter
 * Black image border issue fix
+* Creating Readme.md
 
 `Angus`
 * Guassian blur filter
@@ -42,19 +50,17 @@
 %% Gantt Diagram for our project
         gantt
         dateFormat  DD-MM-YYYY
-        section Designing
-            something                      :done,    des1, 07-03-2024,08-03-2024
-            something                      :active,  des2, 09-03-2024, 3d
-            something                     :         des3, after des2, 5d
-            something                     :         des4, after des3, 5d
+
         section Developing
-            something                      :crit, done, 06-03-2024,24h
-            something                             :crit, done, after des2, 2d
-            something                                 :crit, active, 3d
-            something                              :crit, 5d
-            something                                   :2d
-        section Testing
-            something                              :active, a1, after des3, 3d
-            something                               :after a1  , 20h
-            something                               : 48h
+            Colour Channel Cycling             :done, des1, 08-03-2024, 3d
+            Image Opening                      :done,  des2, 14-03-2024, 19-03-2024
+            File Saving                     :done,  des2, 14-03-2024, 19-03-2024
+            File Save As                      :done,  des2, 14-03-2024, 19-03-2024
+            File Export                    :done,  des2, 17-03-2024, 19-03-2024
+
+
+        section Debugging
+            Image Opening                      :done , 22-03-2024, 23-03-2024
+            Image Opening                      :done , 27-03-2024, 28-03-2024
+
 ```

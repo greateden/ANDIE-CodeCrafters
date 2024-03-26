@@ -652,6 +652,7 @@ public class FileActions {
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
                     System.out.println(p.get("language", "id"));
                     Andie.setLanguage();
+                    l.dispose();
                 }
             });
 
@@ -665,6 +666,7 @@ public class FileActions {
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
                     System.out.println(p.get("language", "en"));
                     Andie.setLanguage();
+                    l.dispose();
                 }
             });
 
@@ -681,6 +683,7 @@ public class FileActions {
                     System.out.println(p.get("language", "zh"));
                     Andie.setLanguage();
                     // System.out.println(Andie.bundle.getString("EnterFilterRadius"));
+                    l.dispose();
 
                 }
 
