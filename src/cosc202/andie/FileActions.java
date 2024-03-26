@@ -52,10 +52,12 @@ public class FileActions {
         actions.add(new FileSaveAction(Andie.bundle.getString("SaveAction"), null,
                 Andie.bundle.getString("SaveDesc"),
                 Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction(Andie.bundle.getString("SaveAsAction"), null, Andie.bundle.getString("SaveAsDesc"),
-                Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(new FileExportAction(Andie.bundle.getString("ExportAction"), null, Andie.bundle.getString("ExportDesc"),
-                Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(
+                new FileSaveAsAction(Andie.bundle.getString("SaveAsAction"), null, Andie.bundle.getString("SaveAsDesc"),
+                        Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(
+                new FileExportAction(Andie.bundle.getString("ExportAction"), null, Andie.bundle.getString("ExportDesc"),
+                        Integer.valueOf(KeyEvent.VK_E)));
         actions.add(new FileExitAction(Andie.bundle.getString("ExitAction"), null, Andie.bundle.getString("ExitDesc"),
                 Integer.valueOf(KeyEvent.VK_Q)));
         actions.add(new FileChangeLanguageAction(Andie.bundle.getString("ChangeLanguage"), null,
@@ -116,15 +118,13 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
 
-            // dead bug showing here
-            // do not create a new instance cuz otherwise the stack will defo be empty!!!
-            // EditableImage ei = new EditableImage();
-
             if (isOpened == true && EditableImage.isOpsNotEmptyStatus == true) {
 
-                Object[] options = { Andie.bundle.getString("Yes"), Andie.bundle.getString("No"), Andie.bundle.getString("Cancel") };
-                // Andie.bundle.getString("")
-                int n = JOptionPane.showOptionDialog(null,
+                Object[] options = { Andie.bundle.getString("Yes"), Andie.bundle.getString("No"),
+                        Andie.bundle.getString("Cancel") };
+
+                int n = JOptionPane.showOptionDialog(
+                        null,
                         Andie.bundle.getString("DoYouWantToSave"),
                         Andie.bundle.getString("Warning"),
                         JOptionPane.YES_NO_CANCEL_OPTION,
@@ -132,12 +132,22 @@ public class FileActions {
                         null,
                         options,
                         options[2]);
-                // TODO issues here
+
                 if (n == 0) { // yes
-                    if (EditableImage.hasOpsFile == false)
-                        actions.get(1).actionPerformed(e);
-                    if (EditableImage.hasOpsFile == true)
-                        actions.get(0).actionPerformed(e);
+                    // if user chose yes and there's no ops file saved
+                    // then call "save"
+                    actions.get(1).actionPerformed(e);
+
+                    // create a message box to tell user it's saved successfully
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("ImageSaveSuccess"),
+                        Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
+                    
+                    // then we treat it as saved so that next time we run the code, it will 
+                    // trigger the "else" statement outside of this loop
+                    EditableImage.isOpsNotEmptyStatus = false;
+
+                    //then open the openfile window
+                    openFile();
 
                 } else if (n == 1) { // no
                     openFile();
@@ -346,6 +356,9 @@ public class FileActions {
                     // the button and closed the new window without saving anything,
                     // the command below will set the value to true and cause bugs!
                     // isSaved = true;
+                    // then we must change the status to true
+                    // otherwise it will ask the user to save a copy again
+                    EditableImage.hasOpsFile = true;
                 } else {
                     target.getImage().save();
                 }
@@ -564,33 +577,22 @@ public class FileActions {
             traChinese.setLocation(100, 400);
             c.add(traChinese);
 
-            // english.setEnabled(false);
-
-            english.addActionListener(new ActionListener() { // Anonymous inner class to show behaviour of english
-                                                             // button
-
+            english.addActionListener(new ActionListener() {
                 @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
-
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
                     Locale.setDefault(new Locale("en", "NZ"));
                     p.put("language", "en");
                     p.put("country", "NZ");
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
-
                     System.out.println(p.get("language", "id"));
                     Andie.setLanguage();
-                    // System.out.println(Andie.Andie.bundle.getString("EnterFilterRadius"));
-
                 }
-
-            }); // End of anonymous inner class
+            });
 
             bahasa.addActionListener(new ActionListener() {
-
                 @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
-
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
                     Locale.setDefault(new Locale("id", "ID"));
                     p.put("language", "id");
@@ -598,15 +600,10 @@ public class FileActions {
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
                     System.out.println(p.get("language", "en"));
                     Andie.setLanguage();
-                    // System.out.println(Andie.Andie.bundle.getString("EnterFilterRadius"));
-
                 }
-
             });
 
-            traChinese.addActionListener(new ActionListener() { // Anonymous inner class to show behaviour of english
-                                                                // button
-
+            traChinese.addActionListener(new ActionListener() {
                 @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
 
@@ -622,53 +619,8 @@ public class FileActions {
 
                 }
 
-            }); // End of
-
+            });
             l.setVisible(true);
-            /*
-             * if(e.getSource() == englishButton){
-             * Preferences p = Preferences.userNodeForPackage(Andie.class);
-             * Locale.setDefault(new Locale(p.get("language", "en"), p.get("country",
-             * "NZ")));
-             * }
-             * if(e.getSource() == bahasaButton){
-             * Preferences p = Preferences.userNodeForPackage(Andie.class);
-             * Locale.setDefault(new Locale(p.get("language", "id"), p.get("country",
-             * "ID")));
-             * }
-             * //Create a panel
-             * //createPanel();
-             * 
-             */
         }
-
-        // protected void createPanel() {
-
-        // JFrame l = new JFrame();
-
-        // // Set behaviour of frame
-        // l.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        // l.setBounds(200, 200, 500, 500);
-        // Container c = l.getContentPane();
-        // c.setLayout(new FlowLayout());
-
-        // JButton english = new JButton("English - NZ");
-        // JButton bahasa = new JButton("Bahasa Indonesia - ID");
-
-        // english.setSize(100, 30);
-        // english.setLocation(100, 100);
-        // c.add(english);
-        // bahasa.setSize(100, 30);
-        // bahasa.setLocation(100, 200);
-        // c.add(bahasa);
-
-        // // english.setEnabled(false);
-
-        // english.addActionListener(this);
-        // bahasa.addActionListener(this);
-
-        // l.setVisible(true);
-
-        // }
     }
 }

@@ -113,7 +113,7 @@ public class ColourActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("WithRespect"),
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -157,7 +157,7 @@ public class ColourActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("WithRespect"),
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }

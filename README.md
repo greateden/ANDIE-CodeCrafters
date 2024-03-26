@@ -1,7 +1,9 @@
 ## Contribution
 `Eden`
 * Image export
-* Colour channel cycling
+* Colour Channel Cycling
+* Error Handling
+* 
 
 `Kevin`
 * Multilingual support
@@ -34,3 +36,25 @@
 ## Significant Refactoring
 
 
+## Gantt Diagram for Our Project
+
+```mermaid
+%% Gantt Diagram for our project
+        gantt
+        dateFormat  DD-MM-YYYY
+        section Designing
+            something                      :done,    des1, 07-03-2024,08-03-2024
+            something                      :active,  des2, 09-03-2024, 3d
+            something                     :         des3, after des2, 5d
+            something                     :         des4, after des3, 5d
+        section Developing
+            something                      :crit, done, 06-03-2024,24h
+            something                             :crit, done, after des2, 2d
+            something                                 :crit, active, 3d
+            something                              :crit, 5d
+            something                                   :2d
+        section Testing
+            something                              :active, a1, after des3, 3d
+            something                               :after a1  , 20h
+            something                               : 48h
+```

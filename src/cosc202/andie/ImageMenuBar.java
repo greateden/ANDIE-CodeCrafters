@@ -8,7 +8,6 @@ import javax.swing.*;
 
 import java.awt.*;
 
-
 /**
  * <p>
  * Actions provided by the Image menu.
@@ -29,13 +28,14 @@ import java.awt.*;
  */
 public class ImageMenuBar {
 
-    private int rotateAttempt=0;
+    private int rotateAttempt = 0;
     public ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
     private JMenu fileMenu;
     private ImageScalingAction scalAct;
+
     /**
      * <p>
      * Create a set of Image menu actions.
@@ -43,11 +43,16 @@ public class ImageMenuBar {
      */
     public ImageMenuBar() {
         actions = new ArrayList<Action>();
-        actions.add(new ImageMenuBarFlipHorizontal(Andie.bundle.getString("FlipHorizontal"), null, Andie.bundle.getString("FHDesc"), Integer.valueOf(KeyEvent.VK_H)));
-        actions.add(new ImageMenuBarFlipVertical(Andie.bundle.getString("FlipVertical"), null, Andie.bundle.getString("FVDesc"), Integer.valueOf(KeyEvent.VK_V)));
-        actions.add(new RotateImageAction(Andie.bundle.getString("RotateImageAction"), null, Andie.bundle.getString("RIADesc"), Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new ImageResizeAction(Andie.bundle.getString("ImageResizeAction"), null, Andie.bundle.getString("ImageResizeAction"), Integer.valueOf(KeyEvent.VK_J)));
-        scalAct= new ImageScalingAction(Andie.bundle.getString("Scaling"),null,Andie.bundle.getString("ReScaling"),null);
+        actions.add(new ImageMenuBarFlipHorizontal(Andie.bundle.getString("FlipHorizontal"), null,
+                Andie.bundle.getString("FHDesc"), Integer.valueOf(KeyEvent.VK_H)));
+        actions.add(new ImageMenuBarFlipVertical(Andie.bundle.getString("FlipVertical"), null,
+                Andie.bundle.getString("FVDesc"), Integer.valueOf(KeyEvent.VK_V)));
+        actions.add(new RotateImageAction(Andie.bundle.getString("RotateImageAction"), null,
+                Andie.bundle.getString("RIADesc"), Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new ImageResizeAction(Andie.bundle.getString("ImageResizeAction"), null,
+                Andie.bundle.getString("ImageResizeAction"), Integer.valueOf(KeyEvent.VK_J)));
+        scalAct = new ImageScalingAction(Andie.bundle.getString("Scaling"), null, Andie.bundle.getString("ReScaling"),
+                null);
         actions.add(scalAct);
     }
 
@@ -63,12 +68,12 @@ public class ImageMenuBar {
 
         for (Action action : actions) {
             if (action != scalAct) {
-                fileMenu.add(new JMenuItem(action));     
+                fileMenu.add(new JMenuItem(action));
             }
-            
+
         }
 
-        //JMenuItem scaleMenu = fileMenu.getItem(4);
+        // JMenuItem scaleMenu = fileMenu.getItem(4);
         scalAct.createSubMenu();
 
         return fileMenu;
@@ -112,7 +117,7 @@ public class ImageMenuBar {
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
-                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -155,7 +160,7 @@ public class ImageMenuBar {
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
-                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -163,7 +168,7 @@ public class ImageMenuBar {
 
     /**
      * Action class code layout created by Steven Mills
-    /**
+     * /**
      * Action class code layout created by Steven Mills
      */
     public class RotateImageAction extends ImageAction {
@@ -210,10 +215,10 @@ public class ImageMenuBar {
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel degModel = new SpinnerNumberModel(0, null, null, 0.1);
                 JSpinner degSpinner = new JSpinner(degModel);
-                int option = JOptionPane.showOptionDialog(null, degSpinner, Andie.bundle.getString("EnterRotationTheta"),
+                int option = JOptionPane.showOptionDialog(null, degSpinner,
+                        Andie.bundle.getString("EnterRotationTheta"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-               
-               
+
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
                     return;
@@ -222,23 +227,23 @@ public class ImageMenuBar {
                 }
                 //rotateAttempt++;
                 // Create and apply the filter
-                target.getImage().apply(new ImageRotate(deg,rotateAttempt));
+                target.getImage().apply(new ImageRotate(deg, rotateAttempt));
                 target.repaint();
                 target.getParent().revalidate();
-                
+
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
-                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
-                
+
         }
     }
 
     /**
-
-    /**
+     * 
+     * /**
      * <p>
      * Action to resieze an image.
      * 
@@ -250,14 +255,12 @@ public class ImageMenuBar {
      */
     public class ImageResizeAction extends ImageAction {
 
-
         int height;
         int width;
         JLabel widthJLabel, heightLabel, titleLabel, blankLabel;
-       
+
         JTextField widthField, heightField;
         JButton goButton;
-
 
         /**
          * <p>
@@ -294,13 +297,12 @@ public class ImageMenuBar {
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
-                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
 
             }
         }
 
-       
         protected void createPanel() {
 
             // Write code to create the panel
@@ -312,13 +314,11 @@ public class ImageMenuBar {
 
             JPanel p = new JPanel();
             p.setLayout(new GridLayout(4, 2));
-            
 
-        p.setPreferredSize(new Dimension(250, 350));
-        titleLabel = new JLabel(Andie.bundle.getString("ReScalingInstruction"));
-        titleLabel.setPreferredSize(new Dimension(200, 50));
-        blankLabel = new JLabel("                       ");
-
+            p.setPreferredSize(new Dimension(250, 350));
+            titleLabel = new JLabel(Andie.bundle.getString("ReScalingInstruction"));
+            titleLabel.setPreferredSize(new Dimension(200, 50));
+            blankLabel = new JLabel("                       ");
 
             heightLabel = new JLabel(Andie.bundle.getString("Height"));
             heightLabel.setPreferredSize(new Dimension(100, 50));
@@ -345,16 +345,13 @@ public class ImageMenuBar {
             p.add(widthJLabel);
             p.add(widthField);
             p.add(goButton);
-           
 
             JPanel buttonPanel = new JPanel();
             ButtonListener bl = new ButtonListener();
             buttonPanel.add(goButton);
             goButton.addActionListener(bl);
             p.add(buttonPanel);
-            
 
-            
             // dialog.getContentPane().add(p);
             dialog.getContentPane().add(p);
             dialog.pack();
@@ -378,32 +375,31 @@ public class ImageMenuBar {
                     System.out.println(e);
                     if (e instanceof NumberFormatException) {
                         JOptionPane.showMessageDialog(null,
-                        Andie.bundle.getString("PosInt"),
-                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                                Andie.bundle.getString("PosInt"),
+                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
                     } else if (e instanceof java.lang.NegativeArraySizeException) {
                         JOptionPane.showMessageDialog(null,
-                        Andie.bundle.getString("SmallNum"),
-                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                                Andie.bundle.getString("SmallNum"),
+                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
                     } else if (e instanceof java.lang.IllegalArgumentException) {
                         JOptionPane.showMessageDialog(null,
-                        Andie.bundle.getString("PosOrSmallInt"),
-                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                                Andie.bundle.getString("PosOrSmallInt"),
+                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
                     } else if (e instanceof NullPointerException) {
                         JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
-                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                                Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                     } else {
                         // show message dialog and print the e into the box, saying that's an unexpected
                         // error.
                         JOptionPane.showMessageDialog(null,
-                        Andie.bundle.getString("BooBoo"),
-                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                                Andie.bundle.getString("BooBoo"),
+                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
         }
     }
 
-    
     public class ImageScalingAction extends ImageAction {
         // int height;
         // int width;
@@ -420,24 +416,20 @@ public class ImageMenuBar {
          */
         ImageScalingAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
-            
-           
+
         }
 
-        //We must have this class but it won't do anything.
+        // We must have this class but it won't do anything.
         @Override
         public void actionPerformed(ActionEvent e) {
-           
-           // createSubMenu();
-           
+
+            // createSubMenu();
+
             throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
         }
-    
-        
-      
+
         public void createSubMenu() {
 
-            
             JMenu scaleMenu = new JMenu(Andie.bundle.getString("Scaling"));
             JMenuItem scale25 = new JMenuItem("25%");
             JMenuItem scale50 = new JMenuItem("50%");
@@ -459,27 +451,29 @@ public class ImageMenuBar {
 
             fileMenu.add(scaleMenu);
 
-            
         }
 
         public class ScaleActionListener implements ActionListener {
             private double scalePercentage;
-    
+
             public ScaleActionListener(double scalePercentage) {
                 this.scalePercentage = scalePercentage;
             }
-           
-            public void actionPerformed(ActionEvent e) {
-                
-                target.getImage().apply(new ImageScaling(scalePercentage));
-                target.repaint();
-                target.getParent().revalidate();
 
-              
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    target.getImage().apply(new ImageScaling(scalePercentage));
+                    target.repaint();
+                    target.getParent().revalidate();
+                } catch (Exception err) {
+                    if (err instanceof NullPointerException) {
+                        JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                                Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+
             }
         }
 
-      
     }
 }
-        
