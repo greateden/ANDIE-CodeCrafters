@@ -36,6 +36,7 @@ public class ImageMenuBar {
     private JMenu fileMenu;
     private ImageScalingAction scalAct;
     private RotateImageStrictAction rotAct;
+    protected JDialog dialog;
 
     /**
      * <p>
@@ -308,7 +309,7 @@ public class ImageMenuBar {
             // Write code to create the panel
             // JPanel panel=new JPanel();
 
-            JDialog dialog = new JDialog(Andie.getFrame(), Andie.bundle.getString("Resize"), true);
+            dialog = new JDialog(Andie.getFrame(), Andie.bundle.getString("Resize"), true);
             dialog.setPreferredSize(new Dimension(500, 400));
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
@@ -371,6 +372,7 @@ public class ImageMenuBar {
                     target.getImage().apply(new ImageResize(height, width));
                     target.repaint();
                     target.getParent().revalidate();
+                    dialog.dispose();
                 } catch (Exception e) {
                     System.out.println(e);
                     if (e instanceof NumberFormatException) {

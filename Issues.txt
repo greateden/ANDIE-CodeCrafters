@@ -2,7 +2,6 @@
 
 LANGUAGE
 - When switching languages, swing goes weird and when it reloads it resizes back to original window size
-- The mean filter pop-up asks “Please enter a positive value” and is not translated
 
 NOT URGENT
 - Gaussian and median filter’s popup's for value input dont explain why they need a value
