@@ -429,7 +429,7 @@ public class ImageMenuBar {
 
             // createSubMenu();
 
-            throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+            throw new UnsupportedOperationException(Andie.bundle.getString("Unimplemented"));
         }
 
         public void createSubMenu() {
