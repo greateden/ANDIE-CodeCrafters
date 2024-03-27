@@ -12,11 +12,15 @@
 * Created the icon
 
 `Kevin`
-* Multilingual support
-* Image flip
+* Enabled Multilingual support 
+* Image flip (Horizontal and Vertical)
 * Median filter
 * Image rotation - polishing
 * Image invert (Worked with Yuxing)
+* Added Bahasa Indonesia as language option
+* Added a Help option and an About Us.
+* Testing and debugging
+  
 
 
 `Yuxing`
@@ -69,24 +73,35 @@ Running the program
 
 ## Significant Refactoring
 
+None done yet. 
 
 ## Gantt Diagram for Our Project (still under construction)
 
 ```mermaid
+
 %% Gantt Diagram for our project
+%%{init: {'theme':'forest'}}%%
         gantt
+        title CodeCrafters work on ANDIE
         dateFormat  DD-MM-YYYY
+        Start of project: milestone, m1,05-03-2024, 
+        First deliverable: milestone, m2, 28-03-2024,
 
         section Developing
-            Colour Channel Cycling             :done, des1, 08-03-2024, 3d
-            Image Opening                      :done,  des2, 14-03-2024, 19-03-2024
-            File Saving                     :done,  des2, 14-03-2024, 19-03-2024
-            File Save As                      :done,  des2, 14-03-2024, 19-03-2024
-            File Export                    :done,  des2, 17-03-2024, 19-03-2024
+            Colour Channel Cycling              :done, des1, 08-03-2024, 3d
+            Image Opening                       :done,  des2, 14-03-2024, 19-03-2024
+            File Saving                         :done,  des2, 14-03-2024, 19-03-2024
+            File Save As                        :done,  des2, 14-03-2024, 19-03-2024
+            File Export                         :done,  des2, 17-03-2024, 19-03-2024
+            Multilingual support                :active, des2, 14-03-2024, 27-03-2024
+            Help Action                         :done, des1, 06-03-2024, 07-03-2024
+            Image flip                          :done, des1, 16-03-2024, 17-03-2024
+            Median filter                       :done, des2, 13-03-2024, 15-03-2024
 
 
         section Debugging
             Image Opening                      :done , 22-03-2024, 23-03-2024
             Image Opening                      :done , 27-03-2024, 28-03-2024
+
 
 ```
