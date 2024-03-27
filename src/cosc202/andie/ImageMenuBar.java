@@ -538,9 +538,9 @@ public class ImageMenuBar {
         JMenuItem rotMenu270 = new JMenuItem("270°");
       
 
-        rotMenu90.addActionListener(new ScaleActionListener(.25));
-        rotMenu180.addActionListener(new ScaleActionListener(.5));
-        rotMenu270.addActionListener(new ScaleActionListener(.75));
+        rotMenu90.addActionListener(new ScaleActionListener(90));
+        rotMenu180.addActionListener(new ScaleActionListener(180));
+        rotMenu270.addActionListener(new ScaleActionListener(270));
         
 
         rotMenu.add(rotMenu90);
@@ -561,7 +561,7 @@ public class ImageMenuBar {
 
         public void actionPerformed(ActionEvent e) {
             try {
-                target.getImage().apply(new ImageRotate(scalePercentage*36000, 2));
+                target.getImage().apply(new ImageRotate(scalePercentage));
                 target.repaint();
                 target.getParent().revalidate();
 
