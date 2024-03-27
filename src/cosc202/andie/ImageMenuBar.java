@@ -35,6 +35,7 @@ public class ImageMenuBar {
     protected ArrayList<Action> actions;
     private JMenu fileMenu;
     private ImageScalingAction scalAct;
+    private RotateImageStrictAction rotAct;
 
     /**
      * <p>
@@ -54,6 +55,8 @@ public class ImageMenuBar {
         scalAct = new ImageScalingAction(Andie.bundle.getString("Scaling"), null, Andie.bundle.getString("ReScaling"),
                 null);
         actions.add(scalAct);
+        rotAct  = new RotateImageStrictAction("Rotate by", null, "Rotating by multiples of right angles", null);
+        actions.add(rotAct); 
     }
 
     /**
@@ -475,5 +478,105 @@ public class ImageMenuBar {
             }
         }
 
+    }  //End of Image Scaling Action
+
+    /**
+     * Action class code layout created by Steven Mills
+     * /**
+     * Action class code layout created by Steven Mills
+     */
+    public class RotateImageStrictAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new Gaussian-filter action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        RotateImageStrictAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the convert-to-grey action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the GaussianFilterAction is triggered.
+         * It prompts the user for a filter radius, then applys an appropriately sized
+         * {@link GaussianFilter}.
+         * It prompts the user for a filter radius, then applys an appropriately sized
+         * {@link GaussianFilter}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+    // We must have this class but it won't do anything.
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        // createSubMenu();
+
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
+
+    public void createSubMenu() {
+
+        JMenu scaleMenu = new JMenu(Andie.bundle.getString("Scaling"));
+        JMenuItem scale25 = new JMenuItem("25%");
+        JMenuItem scale50 = new JMenuItem("50%");
+        JMenuItem scale75 = new JMenuItem("75%");
+        JMenuItem scale125 = new JMenuItem("125%");
+        JMenuItem scale150 = new JMenuItem("150%");
+
+        scale25.addActionListener(new ScaleActionListener(0.25));
+        scale50.addActionListener(new ScaleActionListener(0.5));
+        scale75.addActionListener(new ScaleActionListener(0.75));
+        scale125.addActionListener(new ScaleActionListener(1.25));
+        scale150.addActionListener(new ScaleActionListener(1.5));
+
+        scaleMenu.add(scale25);
+        scaleMenu.add(scale50);
+        scaleMenu.add(scale75);
+        scaleMenu.add(scale125);
+        scaleMenu.add(scale150);
+
+        fileMenu.add(scaleMenu);
+
+    }
+
+    public class ScaleActionListener implements ActionListener {
+        private double scalePercentage;
+
+        public ScaleActionListener(double scalePercentage) {
+            this.scalePercentage = scalePercentage;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            try {
+                target.getImage().apply(new ImageScaling(scalePercentage));
+                target.repaint();
+                target.getParent().revalidate();
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                }
+            }
+
+        }
+    }
+
+
+
+}
 }
