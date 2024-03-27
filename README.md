@@ -9,6 +9,7 @@
 * Error Handling (yes with funny messages)
 * Adding Traditional Chinese (Taiwan) language support
 * Creating the Gantt Diagram in Readme.md
+* Created the icon
 
 `Kevin`
 * Multilingual support
@@ -36,6 +37,7 @@
 
 
 ## Testing
+We tested our code mainly via brute force. We went through and thought of all the senarios that could occur when a user would use the program and serched for errors. We also checked for silent errors by using try catch loops and having the program print out a message to the terminal anytime an error was caught.
 
 ## Known Issues
 - When user is prompted to enter a value for an action, if they exit out of the pop-up, the action will still be performed with the default value.
@@ -44,6 +46,7 @@
 - If an image's ops file is deleted after actions are performed, when the user exits they will not be prompted to save
 - Rotating images by arbitrary angles is an experimental feature and is needing refinement
 - UI is not as harmonious as we would like it to be
+
 ## User Guide
 
 ## Significant Refactoring
