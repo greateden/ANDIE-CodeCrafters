@@ -32,6 +32,7 @@
 `Angus`
 * Guassian blur filter
 * Image rotation
+* Testing
 
 
 ## Testing

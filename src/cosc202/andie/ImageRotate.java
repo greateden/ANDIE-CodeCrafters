@@ -7,26 +7,27 @@ import java.awt.*;
 
 /**
  * <p>
- * ImageOperation to invert an image's colours.
+ * Image Rotation to rotate the images ortintation
  * </p>
  * 
  * <p>
- * The images produced by this operation are still technically colour images,
- * in that they have red, green, and blue values, but each pixel has the inverse of its value.
+ *  Image rotation transforms the image ortination.
+ * it does this by taking the input angle (int deg) and then converts this to radians to work out the new image width and height
+ * it then rotates and draws it using Java 2D graphics and then renders it. 
+ * finally it returns the new buffered image with the roation applied. 
+ * 
  * </p>
  * 
  * <p>
  * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
  * </p>
  * 
- * @author Steven Mills
+ * @author Angus Lyall
  * @version 1.0
  */
 public class ImageRotate implements ImageOperation, java.io.Serializable {
 
     private double deg;
-    private int countDegrees=0;
-    private int attempted = 0;
     
 
     
