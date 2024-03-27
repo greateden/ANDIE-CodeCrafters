@@ -83,7 +83,7 @@ public class ImageRotate implements ImageOperation, java.io.Serializable {
         graphics.rotate(rad, input.getWidth()/2 , input.getHeight()/2);
 
         graphics.drawRenderedImage(input, null); // draws the image onto the canvas
-        System.out.println(transformedImg.getTileGridXOffset()+ ", "+transformedImg.getTileGridYOffset());
+        //System.out.println(transformedImg.getTileGridXOffset()+ ", "+transformedImg.getTileGridYOffset());
         //graphics.translate(-(newWidth - input.getWidth())/2 , -(newHeight - input.getHeight())/2); 
         //System.out.println(transformedImg.getMinX() + "," + transformedImg.getMinY());
 
