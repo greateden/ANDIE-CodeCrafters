@@ -148,7 +148,7 @@ public class ImageMenuBar {
 
         /**
          * <p>
-         * Callback for when Flip vertical is pressed..
+         * Callback for when Flip vertical is pressed.
          * </p>
          * 
          * <p>
@@ -180,7 +180,7 @@ public class ImageMenuBar {
 
         /**
          * <p>
-         * Create a new Gaussian-filter action.
+         * Create a new Rotate Image action.
          * </p>
          * 
          * @param name     The name of the action (ignored if null).
@@ -198,15 +198,11 @@ public class ImageMenuBar {
 
         /**
          * <p>
-         * Callback for when the convert-to-grey action is triggered.
+         * Callback for when the Rotate Image Action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the GaussianFilterAction is triggered.
-         * It prompts the user for a filter radius, then applys an appropriately sized
-         * {@link GaussianFilter}.
-         * It prompts the user for a filter radius, then applys an appropriately sized
-         * {@link GaussianFilter}.
+         * This method is called whenever the Rotate Image is triggered.
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -250,7 +246,7 @@ public class ImageMenuBar {
      * 
      * /**
      * <p>
-     * Action to resieze an image.
+     * Action to resize an image.
      * 
      * 
      * @made by Yuxing Zhang
@@ -492,7 +488,7 @@ public class ImageMenuBar {
 
         /**
          * <p>
-         * Create a new Gaussian-filter action.
+         * Create a new Rotate Image Strict Action action.
          * </p>
          * 
          * @param name     The name of the action (ignored if null).
@@ -514,11 +510,7 @@ public class ImageMenuBar {
          * </p>
          * 
          * <p>
-         * This method is called whenever the GaussianFilterAction is triggered.
-         * It prompts the user for a filter radius, then applys an appropriately sized
-         * {@link GaussianFilter}.
-         * It prompts the user for a filter radius, then applys an appropriately sized
-         * {@link GaussianFilter}.
+         * This method is called whenever the Rotate Image Strict Action is triggered.
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -535,9 +527,9 @@ public class ImageMenuBar {
     public void createSubMenu() {
 
         JMenu rotMenu = new JMenu(Andie.bundle.getString("RotateBy"));
-        JMenuItem rotMenu90 = new JMenuItem("90°");
+        JMenuItem rotMenu90 = new JMenuItem("90° right");
         JMenuItem rotMenu180 = new JMenuItem("180°");
-        JMenuItem rotMenu270 = new JMenuItem("270°");
+        JMenuItem rotMenu270 = new JMenuItem("90° left");
       
 
         rotMenu90.addActionListener(new ScaleActionListener(90));

@@ -105,7 +105,7 @@ public class FilterActions {
                 JPanel panel = new JPanel();
                 panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
                 JLabel info = new JLabel();
-                info.setText("Please enter a positive integer.");
+                info.setText(Andie.bundle.getString("PleaseEnter"));
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
