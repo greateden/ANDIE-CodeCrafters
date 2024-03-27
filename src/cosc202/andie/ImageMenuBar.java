@@ -231,7 +231,7 @@ public class ImageMenuBar {
                 }
                 //rotateAttempt++;
                 // Create and apply the filter
-                target.getImage().apply(new ImageRotate(deg, rotateAttempt));
+                target.getImage().apply(new ImageRotate(deg));
                 target.repaint();
                 target.getParent().revalidate();
 
