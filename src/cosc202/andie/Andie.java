@@ -138,24 +138,12 @@ public class Andie {
         return frame;
     }
 
+    /**
+     * Yes it's calling createMenuBar(), we'rejust trying to make it with more sense.
+     * Makes more sense than using a carrier pigeon for teammate communication.
+     */
     public static void setLanguage() {
-        /*
-         * frame.repaint();
-         * imagePanel.repaint();
-         * menuBar.repaint();
-         */
-        /*
-         * frame.dispose();
-         * try{
-         * createAndShowGUI();
-         * }
-         * catch(Exception e){
-         * System.out.println(e);
-         * }
-         */
-
         createMenuBar();
-
     }
 
     /**
