@@ -5,7 +5,6 @@ MESSAGES TO USER
 LANGUAGE
 - When switching language, it will let you open a new file even if you have edited changes. Even if you edit while in the new language. It also doesn't recognise you have an image open and won't let you export
 - When switching languages, swing goes weird and when it reloads it resizes back to original window size
-- Rotate by option needs to be supported for diff languages
 - The mean filter pop-up asks “Please enter a positive value” and is not translated
 
 NOT URGENT
