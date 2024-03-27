@@ -36,6 +36,7 @@
 * Guassian blur filter
 * Image rotation
 * Testing
+* User instuctions read me
 
 
 ## Testing
@@ -50,6 +51,21 @@ We tested our code mainly via brute force. We went through and thought of all th
 - UI is not as harmonious as we would like it to be
 
 ## User Guide
+
+Prerequisites
+- Java Development Kit (JDK): You'll need a recent version of the JDK installed on your system. Download and install it from the official Oracle website: https://www.oracle.com/nz/java/technologies/downloads/. Verify the installation by opening a terminal and running java -version.
+
+- Gradle: Version 8.6
+
+Installation
+- Clone or Download the Project: Obtain the project files using your preferred method (Git clone or direct download).
+
+Running the program
+- Open Terminal and navigate to project directory
+- Run
+`gradle build` 
+- Run `gradle run`
+- to open files go to file > open
 
 ## Significant Refactoring
 
