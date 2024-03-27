@@ -83,10 +83,16 @@ Running the program
             File Saving                     :done,  des2, 14-03-2024, 19-03-2024
             File Save As                      :done,  des2, 14-03-2024, 19-03-2024
             File Export                    :done,  des2, 17-03-2024, 19-03-2024
+            Sharpen Filter                 :done, des2, 10-03-2024, 11-03-2024
+            Soft Blur Filter               :done, des2, 11-03-2024, 12-03-2024
+            Filter Border Fix              :done, des2, 13-03-2024, 18-03-2024
+            README                         :done, des2, 26-03-2024, 28-03-2024
+
 
 
         section Debugging
             Image Opening                      :done , 22-03-2024, 23-03-2024
             Image Opening                      :done , 27-03-2024, 28-03-2024
+            General Testing                    :done, 27-03-2024, 28-03-2024
 
 ```
