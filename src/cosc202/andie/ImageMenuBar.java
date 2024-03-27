@@ -70,14 +70,15 @@ public class ImageMenuBar {
         fileMenu = new JMenu(Andie.bundle.getString("Image"));
 
         for (Action action : actions) {
-            if (action != scalAct) {
+            if (action != scalAct && action != rotAct) {
                 fileMenu.add(new JMenuItem(action));
             }
-
+            
         }
 
         // JMenuItem scaleMenu = fileMenu.getItem(4);
         scalAct.createSubMenu();
+        rotAct.createSubMenu();
 
         return fileMenu;
     }
@@ -531,26 +532,23 @@ public class ImageMenuBar {
 
     public void createSubMenu() {
 
-        JMenu scaleMenu = new JMenu(Andie.bundle.getString("Scaling"));
-        JMenuItem scale25 = new JMenuItem("25%");
-        JMenuItem scale50 = new JMenuItem("50%");
-        JMenuItem scale75 = new JMenuItem("75%");
-        JMenuItem scale125 = new JMenuItem("125%");
-        JMenuItem scale150 = new JMenuItem("150%");
+        JMenu rotMenu = new JMenu("Rotate by");
+        JMenuItem rotMenu90 = new JMenuItem("90°");
+        JMenuItem rotMenu180 = new JMenuItem("180°");
+        JMenuItem rotMenu270 = new JMenuItem("270°");
+      
 
-        scale25.addActionListener(new ScaleActionListener(0.25));
-        scale50.addActionListener(new ScaleActionListener(0.5));
-        scale75.addActionListener(new ScaleActionListener(0.75));
-        scale125.addActionListener(new ScaleActionListener(1.25));
-        scale150.addActionListener(new ScaleActionListener(1.5));
+        rotMenu90.addActionListener(new ScaleActionListener(90));
+        rotMenu180.addActionListener(new ScaleActionListener(180));
+        rotMenu270.addActionListener(new ScaleActionListener(270));
+        
 
-        scaleMenu.add(scale25);
-        scaleMenu.add(scale50);
-        scaleMenu.add(scale75);
-        scaleMenu.add(scale125);
-        scaleMenu.add(scale150);
+        rotMenu.add(rotMenu90);
+        rotMenu.add(rotMenu180);
+        rotMenu.add(rotMenu270);
+      
 
-        fileMenu.add(scaleMenu);
+        fileMenu.add(rotMenu);
 
     }
 
@@ -563,9 +561,10 @@ public class ImageMenuBar {
 
         public void actionPerformed(ActionEvent e) {
             try {
-                target.getImage().apply(new ImageScaling(scalePercentage));
+                target.getImage().apply(new ImageRotate(scalePercentage));
                 target.repaint();
                 target.getParent().revalidate();
+
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),

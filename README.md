@@ -26,6 +26,7 @@
 * Soft blur filter
 * Black image border issue fix
 * Creating Readme.md
+* Testing
 
 `Angus`
 * Guassian blur filter
