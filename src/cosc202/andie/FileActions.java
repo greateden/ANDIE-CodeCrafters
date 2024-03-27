@@ -138,10 +138,6 @@ public class FileActions {
                     // then call "save"
                     actions.get(1).actionPerformed(e);
 
-                    // create a message box to tell user it's saved successfully
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("ImageSaveSuccess"),
-                            Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
-
                     // then we treat it as saved so that next time we run the code, it will
                     // trigger the "else" statement outside of this loop
                     EditableImage.isOpsNotEmptyStatus = false;
@@ -282,9 +278,16 @@ public class FileActions {
                         if (!selectedFilePath.toLowerCase().endsWith(selectedExtension.toLowerCase())) {
                             selectedFilePath += "." + selectedExtension.toLowerCase();
                         }
-                        //end of AI codes
+                        // end of AI codes
+
                         String format = ((ImageFileFilter) selectedFilter).getExtension();
+
                         ImageIO.write(target.getImage().getCurrentImage(), format, new File(selectedFilePath));
+
+                        // create a message box to tell user it's saved successfully
+                        //JOptionPane.showMessageDialog(null, Andie.bundle.getString("ImageExportSaveSuccess"),
+                        //        Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
+
                     } catch (Exception err) {
                         err.printStackTrace();
                     }
@@ -462,13 +465,17 @@ public class FileActions {
                         if (!selectedFilePath.toLowerCase().endsWith(selectedExtension.toLowerCase())) {
                             selectedFilePath += "." + selectedExtension.toLowerCase();
                         }
-                        //end of AI codes
+                        // end of AI codes
 
                         target.getImage().saveAs(selectedFilePath);
 
                         // then we treat it as saved so that next time we run the code, it will
                         // trigger the "else" statement outside of this loop
                         EditableImage.isOpsNotEmptyStatus = false;
+
+                        // create a message box to tell user it's saved successfully
+                        JOptionPane.showMessageDialog(null, Andie.bundle.getString("ImageSaveSuccess"),
+                                Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
 
                         // isSaved = true;
                     } catch (Exception ex) {
