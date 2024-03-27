@@ -16,11 +16,13 @@
 * Image flip
 * Median filter
 * Image rotation - polishing
+* Image invert (Worked with Yuxing)
 
 
 `Yuxing`
-* Image resise
+* Image resize
 * Image invert
+* Image scaling
 
 `Emma`
 * Sharpen filter
