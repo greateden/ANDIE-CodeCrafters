@@ -28,11 +28,13 @@
 * Soft blur filter
 * Black image border issue fix
 * Creating Readme.md
-* Testing
+* Testing whole project during runtime for bugs
+* Created Issues.txt
 
 `Angus`
 * Guassian blur filter
 * Image rotation
+* Testing
 
 
 ## Testing
