@@ -561,9 +561,10 @@ public class ImageMenuBar {
 
         public void actionPerformed(ActionEvent e) {
             try {
-                target.getImage().apply(new ImageScaling(scalePercentage));
+                target.getImage().apply(new ImageRotate(scalePercentage*36000, 2));
                 target.repaint();
                 target.getParent().revalidate();
+
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
