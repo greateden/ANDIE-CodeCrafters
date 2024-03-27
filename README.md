@@ -54,7 +54,7 @@ We tested our code mainly via brute force. We went through and thought of all th
 ## Significant Refactoring
 
 
-## Gantt Diagram for Our Project
+## Gantt Diagram for Our Project (still under construction)
 
 ```mermaid
 %% Gantt Diagram for our project
