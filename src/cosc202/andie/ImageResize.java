@@ -3,6 +3,8 @@ package cosc202.andie;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+/* A class that does image resize. Made by Yuxing Zhang */
+
 public class ImageResize implements ImageOperation, java.io.Serializable {
 
   private int width;

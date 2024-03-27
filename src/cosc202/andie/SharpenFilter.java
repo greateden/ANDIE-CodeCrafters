@@ -27,7 +27,7 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable{
 
     /**
      * <p>
-     * Applys sharpen filter to an image
+     * Applies sharpen filter to an image
      * </p>
      * 
      * <p>

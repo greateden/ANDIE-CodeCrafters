@@ -7,14 +7,14 @@ import java.awt.*;
 
 /**
  * <p>
- * Image Rotation to rotate the images ortintation
+ * Image Rotation to rotate the images orientation
  * </p>
  * 
  * <p>
- *  Image rotation transforms the image ortination.
- * it does this by taking the input angle (int deg) and then converts this to radians to work out the new image width and height
- * it then rotates and draws it using Java 2D graphics and then renders it. 
- * finally it returns the new buffered image with the roation applied. 
+ * Image rotation transforms the image orientation.
+ * It does this by taking the input angle (int deg) and then converts this to radians to work out the new image width and height
+ * It then rotates and draws it using Java 2D graphics and then renders it. 
+ * Finally it returns the new buffered image with the roation applied. 
  * 
  * </p>
  * 
@@ -37,22 +37,22 @@ public class ImageRotate implements ImageOperation, java.io.Serializable {
     }
     /**
      * <p>
-     * Create a new ImageInvert operation.
+     * Create a new ImageRotate operation.
      * </p>
      */
     ImageRotate() {}
 
     /**
      * <p>
-     * Apply image invert conversion to an image.
+     * Apply image rotate conversion to an image.
      * </p>
      * 
      * <p>
      * 
      * </p>
      * 
-     * @param input The image to be inverted.
-     * @return The resulting inverted image.
+     * @param input The image to be rotated.
+     * @return The resulting rotated image.
      */
     public BufferedImage apply(BufferedImage input) {
        

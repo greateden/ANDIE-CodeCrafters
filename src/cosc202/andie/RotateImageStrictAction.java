@@ -7,12 +7,11 @@ import java.awt.*;
 
 /**
  * <p>
- * ImageOperation to invert an image's colours.
+ * ImageOperation to rotate an image by 4 common angles.
  * </p>
  * 
  * <p>
- * The images produced by this operation are still technically colour images,
- * in that they have red, green, and blue values, but each pixel has the inverse of its value.
+ * Rotates the image. Not rocket science. But it took ages to get it to work anyway.
  * </p>
  * 
  * <p>
@@ -49,8 +48,8 @@ public class RotateImageStrictAction implements ImageOperation, java.io.Serializ
      * 
      * </p>
      * 
-     * @param input The image to be inverted.
-     * @return The resulting inverted image.
+     * @param input The image to be rotated.
+     * @return The resulting roated image.
      */
     public BufferedImage apply(BufferedImage input) {
        
