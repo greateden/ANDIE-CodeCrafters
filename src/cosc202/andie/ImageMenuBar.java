@@ -353,13 +353,21 @@ public class ImageMenuBar {
             JPanel buttonPanel = new JPanel();
             ButtonListener bl = new ButtonListener();
             buttonPanel.add(goButton);
-            goButton.addActionListener(bl);
+          
+                goButton.addActionListener(bl);
+               
+            
             p.add(buttonPanel);
 
             // dialog.getContentPane().add(p);
             dialog.getContentPane().add(p);
             dialog.pack();
             dialog.setVisible(true);
+            
+        //     goButton.addActionListener(e -> {
+        //     dialog.dispose();
+        // });
+            //goButton.addActionListener(e -> dispose());
             // frame.getContentPane().add(dialog);
 
         }
