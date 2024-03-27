@@ -527,12 +527,12 @@ public class ImageMenuBar {
 
         // createSubMenu();
 
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        throw new UnsupportedOperationException(Andie.bundle.getString("Unimplemented"));
     }
 
     public void createSubMenu() {
 
-        JMenu rotMenu = new JMenu("Rotate by");
+        JMenu rotMenu = new JMenu(Andie.bundle.getString("RotateBy"));
         JMenuItem rotMenu90 = new JMenuItem("90°");
         JMenuItem rotMenu180 = new JMenuItem("180°");
         JMenuItem rotMenu270 = new JMenuItem("270°");
