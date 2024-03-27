@@ -78,6 +78,8 @@ Running the program
         dateFormat  DD-MM-YYYY
 
         section Developing
+            Gaussian Filter               :done, 09-03-2024, 
+            Image Rotation                :done, 16-03-2024, 
             Colour Channel Cycling             :done, des1, 08-03-2024, 3d
             Image Opening                      :done,  des2, 14-03-2024, 19-03-2024
             File Saving                     :done,  des2, 14-03-2024, 19-03-2024
