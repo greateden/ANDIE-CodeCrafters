@@ -1,9 +1,6 @@
-MESSAGES TO USER
-- When you have done many operations the error message for an empty undo stack and redo stack needs to be changed so that the message asks you can’t go back anymore
-- When exiting the prompt asks “Do you want to save before opening another file”, we are not opening anything. We are quitting.
+
 
 LANGUAGE
-- When switching language, it will let you open a new file even if you have edited changes. Even if you edit while in the new language. It also doesn't recognise you have an image open and won't let you export
 - When switching languages, swing goes weird and when it reloads it resizes back to original window size
 - The mean filter pop-up asks “Please enter a positive value” and is not translated
 

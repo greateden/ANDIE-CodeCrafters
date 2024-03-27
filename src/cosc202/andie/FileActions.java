@@ -38,6 +38,15 @@ public class FileActions {
     protected boolean isOpened = false;
     // protected boolean isSaved = false;
 
+    public boolean isOpenedGetter(){
+        return isOpened;
+    }
+
+    public boolean isOpenedSetter(boolean isOpened){
+        this.isOpened = isOpened;
+        return isOpened;
+    }
+
     /**
      * <p>
      * Create a set of File menu actions.

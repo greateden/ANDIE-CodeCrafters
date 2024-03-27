@@ -4,8 +4,6 @@ import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 
 import javax.swing.*;
 import javax.imageio.*;
@@ -96,7 +94,7 @@ public class Andie {
     private static void createMenuBar() {
         // Add in menus for various types of action the user may perform.
         JMenuBar newMenuBar = new JMenuBar();
-
+    
         fileActions = new FileActions();
         editActions = new EditActions();
         viewActions = new ViewActions();
@@ -143,7 +141,9 @@ public class Andie {
      * Makes more sense than using a carrier pigeon for teammate communication.
      */
     public static void setLanguage() {
+        boolean prevIsOpenedStatus = fileActions.isOpenedGetter();
         createMenuBar();
+        fileActions.isOpenedSetter(prevIsOpenedStatus);
     }
 
     /**
