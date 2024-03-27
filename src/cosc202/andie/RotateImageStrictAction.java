@@ -25,17 +25,13 @@ import java.awt.*;
 public class RotateImageStrictAction implements ImageOperation, java.io.Serializable {
 
     private double deg;
-    private int countDegrees=0;
-    private int attempted = 0;
+  
     
 
     
 
-    RotateImageStrictAction(double deg, int rotateAttempt){
+    RotateImageStrictAction(double deg){
         this.deg = deg;
-        countDegrees += deg;
-        countDegrees = countDegrees%360;
-        this.attempted = rotateAttempt;
     }
     /**
      * <p>
