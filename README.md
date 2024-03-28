@@ -79,7 +79,7 @@ None done yet.
 
 ```mermaid
 
-%% Gantt Diagram for our project
+%% CodeCrafters Gantt Chart for our work on ANDIE
 %%{init: {'theme':'forest'}}%%
         gantt
         title CodeCrafters work on ANDIE
@@ -110,7 +110,7 @@ None done yet.
             Image Opening                      :done , 22-03-2024, 23-03-2024
             Image Opening                      :done , 27-03-2024, 28-03-2024
             General Testing                    :done, 27-03-2024, 28-03-2024
-            
+
 
 
 ```
