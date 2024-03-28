@@ -109,7 +109,6 @@ None done yet.
             Image Rotation                :done, 16-03-2024, 17-03-2024
             Sharpen Filter                 :done, des2, 10-03-2024, 11-03-2024
             Soft Blur Filter               :done, des2, 11-03-2024, 12-03-2024
-            Filter Border Fix              :done, des2, 13-03-2024, 18-03-2024
             README                         :done, des2, 26-03-2024, 28-03-2024
 
 
@@ -126,6 +125,7 @@ None done yet.
             Handling Merge Conflict             :done, 12-03-2024, 13-03-2024
             Handling Merge Conflict             :done, 15-03-2024, 16-03-2024
             Handling Merge Conflict             :done, 26-03-2024, 27-03-2024
+            Filter Border Fix                   :done, 13-03-2024, 18-03-2024
 
 
 
