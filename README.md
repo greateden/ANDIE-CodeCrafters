@@ -83,7 +83,7 @@ Running the program
 
 None done yet. 
 
-## Gantt Diagram for Our Project (still under construction)
+## Gantt Diagram for Our Project
 
 ```mermaid
 
