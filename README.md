@@ -118,11 +118,14 @@ None done yet.
             Image Opening                      :done , 22-03-2024, 23-03-2024
             Image Opening                      :done , 27-03-2024, 28-03-2024
             General Testing                    :done, 27-03-2024, 28-03-2024
-            Handling Merge Conflict             :done, 26-03-2024, 27-03-2024
             File Export                         :done, 27-03-2024, 28-03-2024
             File Saving                         :done, 27-03-2024, 28-03-2024
             File Save As                        :done, 22-03-2024, 27-03-2024
             Multilingual support                :done, 26-03-2024, 27-03-2024
+            Handling Merge Conflict             :done, 10-03-2024, 11-03-2024
+            Handling Merge Conflict             :done, 12-03-2024, 13-03-2024
+            Handling Merge Conflict             :done, 15-03-2024, 16-03-2024
+            Handling Merge Conflict             :done, 26-03-2024, 27-03-2024
 
 
 
