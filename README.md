@@ -109,7 +109,7 @@ None done yet.
             Image flip                          :done, des1, 16-03-2024, 17-03-2024
             Median filter                       :done, des2, 13-03-2024, 15-03-2024
             Gaussian Filter               :done, 08-03-2024, 09-03-2024
-            Image Rotation                :done, 16-03-2024, 16-03-2024
+            Image Rotation                :done, 16-03-2024, 17-03-2024
             Sharpen Filter                 :done, des2, 10-03-2024, 11-03-2024
             Soft Blur Filter               :done, des2, 11-03-2024, 12-03-2024
             Filter Border Fix              :done, des2, 13-03-2024, 18-03-2024
