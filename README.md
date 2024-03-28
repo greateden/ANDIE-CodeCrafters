@@ -12,14 +12,13 @@ Made by the CodeCrafters Team
 ## Contribution
 `Eden`
 * Image export
-* Save - adding logical conditions
-* Save as - adding logical conditions
-* Opening a file - adding logical conditions
-* Exit - adding logical conditions
+* Improved Save function
+* Improved Save as function
+* Improved File Opening function
+* Improved File Exit function
 * Colour Channel Cycling
 * Error Handling (yes with funny messages)
 * Adding Traditional Chinese (Taiwan) language support
-* Creating the Gantt Diagram in Readme.md
 * Created the icon
 
 `Kevin`
@@ -31,8 +30,6 @@ Made by the CodeCrafters Team
 * Added Bahasa Indonesia as language option
 * Added a Help option and an About Us.
 * Testing and debugging
-  
-
 
 `Yuxing`
 * Image resize
@@ -90,10 +87,10 @@ None done yet.
 
 ```mermaid
 
-%% CodeCrafters Gantt Chart for our work on ANDIE
+%% CodeCrafters' Gantt Chart for our work on ANDIE
 %%{init: {'theme':'forest'}}%%
         gantt
-        title CodeCrafters work on ANDIE
+        title CodeCrafters' work on ANDIE
         dateFormat  DD-MM-YYYY
         Start of project: milestone, m1,05-03-2024, 
         First deliverable: milestone, m2, 28-03-2024,
@@ -121,6 +118,11 @@ None done yet.
             Image Opening                      :done , 22-03-2024, 23-03-2024
             Image Opening                      :done , 27-03-2024, 28-03-2024
             General Testing                    :done, 27-03-2024, 28-03-2024
+            Handling Merge Conflict             :done, 26-03-2024, 27-03-2024
+            File Export                         :done, 27-03-2024, 28-03-2024
+            File Saving                         :done, 27-03-2024, 28-03-2024
+            File Save As                        :done, 22-03-2024, 27-03-2024
+            Multilingual support                :done, 26-03-2024, 27-03-2024
 
 
 
