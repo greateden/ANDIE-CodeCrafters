@@ -1,3 +1,7 @@
+<div align="center">
+<img src = src/icon.png>
+</div>
+
 ## Contribution
 `Eden`
 * Image export
