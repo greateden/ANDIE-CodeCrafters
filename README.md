@@ -1,5 +1,12 @@
 <div align="center">
 <img src = src/icon.png>
+<h2>
+ ANDIE - A Non-Destructive Image Editor
+
+Made by the CodeCrafters Team
+</h2>
+
+
 </div>
 
 ## Contribution
