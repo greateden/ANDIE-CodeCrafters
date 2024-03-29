@@ -148,8 +148,9 @@ public class RandomScattering2 implements ImageOperation, java.io.Serializable {
                     //System.out.println("chosenNum: "+ chosenNum + "\ni: " + i + "\nj: " + j + "\na1: " + a1);
 
                     output.setRGB(j,i, pixel[chosenNum]);  
-                    publish(j);         
                     }
+                    publish(i);         
+
                 }// End of for loop
     
             return output;
