@@ -118,7 +118,13 @@ public class RandomScattering2 implements ImageOperation, java.io.Serializable {
 
         f.setContentPane(c);
         //f.setVisible(true);
-
+        /* The code below for JProgressBar was refactored from code made by Copilot. It 
+         * isn't a blind copy. I got it to make a program that finds prime numbers
+         * using a progress bar and adapted the code for this method and class.
+         * 
+         * I need to ask whether having the 2 return statements for BUffered Image makes sense.
+         * It works, but it's good to know for sure. Testing is also required. 
+         */
         JDialog progressDialog = new JDialog(f, "progress", true);
         //JProgressBar progressBar = new JProgressBar(0,100);
         JProgressBar progressBar = new JProgressBar(0,input.getHeight());
@@ -171,9 +177,10 @@ public class RandomScattering2 implements ImageOperation, java.io.Serializable {
     worker.execute();
     progressDialog.add(progressBar);
     progressDialog.pack();
-    progressDialog.setLocationRelativeTo(f);
+    progressDialog.setLocationRelativeTo(Andie.frame);
+    //progressDialog.setLocationByPlatform(true);
     progressDialog.setVisible(true);
 
-    return output;
+    return output;  //Is this necessary? The code can't compile without it. Ask demonstrators.
     }
 }
