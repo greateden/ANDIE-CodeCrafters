@@ -5,6 +5,11 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+
+/* This class is an attempt to get a progress bar working in ANDIE. It is a duplicate of 
+ * RandomScattering. 
+ */
 
 /**
  * <p>
@@ -23,7 +28,7 @@ import java.awt.FlowLayout;
  * @author Kevin Steve Sathyanath
  * @version 1.0
  */
-public class RandomScattering implements ImageOperation, java.io.Serializable {
+public class RandomScattering2 implements ImageOperation, java.io.Serializable {
     
     /**
      * The size of the radius to choose a pixel for replacement. 
@@ -43,7 +48,7 @@ public class RandomScattering implements ImageOperation, java.io.Serializable {
      * 
      * @param radius The radius of the matrix to apply the effect.
      */
-    RandomScattering(int radius) {
+    RandomScattering2(int radius) {
         this.radius = radius;    
     }
 
@@ -58,7 +63,7 @@ public class RandomScattering implements ImageOperation, java.io.Serializable {
      * 
      * @see MedianFilter(int). This code is refactored from ym code for the Median filter, which operates on a similar logic. 
      */
-    RandomScattering() {
+    RandomScattering2() {
         this(1);
     }
 
@@ -99,34 +104,75 @@ public class RandomScattering implements ImageOperation, java.io.Serializable {
         //Random generator
         Random r = new Random();
 
+        //JProgressBar progressBar;
+        //progressBar = new JProgressBar(0,input.getHeight());
+        //progressBar.setValue(0);
+        //progressBar.setStringPainted(true);
 
+        JFrame f = new JFrame("Progress bar");
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        f.setSize(200,150);
+        JPanel c = new JPanel();
+        c.setLayout(new BorderLayout());
+        //c.add(progressBar);
+
+        f.setContentPane(c);
+        //f.setVisible(true);
+
+        JDialog progressDialog = new JDialog(f, "progress", true);
+        //JProgressBar progressBar = new JProgressBar(0,100);
+        JProgressBar progressBar = new JProgressBar(0,input.getHeight());
+
+        progressBar.setValue(progressBar.getMinimum());
+        progressBar.setStringPainted(true);
         //int r,g,b;
-        for(int i=0; i<input.getHeight(); i++){
-            for(int j=0; j<input.getWidth(); j++){
-                int a1 = 0; //Counter to help fit a square matrix into a 1-D array.
-                for(int k=i-side/2; k<i+side/2; k++){
-                    for(int l=j-side/2; l<j+side/2; l++){
-                        if(k >0 && k < input.getHeight() && l >0 && l < input.getWidth()){
+        SwingWorker<BufferedImage, Integer> worker = new SwingWorker<BufferedImage, Integer>(){
+            @Override
+            protected BufferedImage doInBackground() throws Exception{
+                for(int i=0; i<input.getHeight(); i++){
+                    for(int j=0; j<input.getWidth(); j++){
+                        int a1 = 0; //Counter to help fit a square matrix into a 1-D array.
+                        for(int k=i-side/2; k<i+side/2; k++){
+                            for(int l=j-side/2; l<j+side/2; l++){
+                                if(k >0 && k < input.getHeight() && l >0 && l < input.getWidth()){
                             
-                            pixel[a1] = input.getRGB(l,k);
-                            
-
-                            //Incrementing the counter.
-                            a1++;
+                                pixel[a1] = input.getRGB(l,k);
+                                //Incrementing the counter.
+                                a1++;
+                            }
                         }
                     }
-                }
 
-                //Apply the filter now.
-                int chosenNum = r.nextInt(a1);
-                //System.out.println("chosenNum: "+ chosenNum + "\ni: " + i + "\nj: " + j + "\na1: " + a1);
-         
-             }
-        }
+                    //Apply the filter now.
+                    int chosenNum = r.nextInt(a1);
+                    //System.out.println("chosenNum: "+ chosenNum + "\ni: " + i + "\nj: " + j + "\na1: " + a1);
+
+                    output.setRGB(j,i, pixel[chosenNum]);  
+                    publish(j);         
+                    }
+                }// End of for loop
     
-        
+            return output;
+
+            }// End of doInBackground()
+
+        @Override
+        protected void process(java.util.List<Integer> chunks){
+            progressBar.setValue(chunks.get(chunks.size()-1));
+        }
+
+        @Override
+        protected void done(){
+            progressDialog.dispose();
+        }   
+
+    };
+    worker.execute();
+    progressDialog.add(progressBar);
+    progressDialog.pack();
+    progressDialog.setLocationRelativeTo(f);
+    progressDialog.setVisible(true);
+
     return output;
-
     }
-
 }

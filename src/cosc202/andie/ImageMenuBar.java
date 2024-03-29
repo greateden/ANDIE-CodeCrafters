@@ -2,6 +2,8 @@ package cosc202.andie;
 
 import java.util.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+
 import javax.swing.*;
 
 //import cosc202.andie.ResizePannel;
@@ -626,7 +628,7 @@ public class RandomScatteringAction extends ImageAction {
                 
 
                 // Create and apply the filter
-                target.getImage().apply(new RandomScattering(radius));
+                target.getImage().apply(new RandomScattering2(radius));
                 target.repaint();
                 target.getParent().revalidate();
             } catch (Exception err) {
