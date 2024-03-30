@@ -2,9 +2,7 @@ package cosc202.andie;
 
 import java.awt.image.*;
 import java.util.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 
 /* This class is an attempt to get a progress bar working in ANDIE. It is a duplicate of 
