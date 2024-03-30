@@ -69,7 +69,7 @@ public class HelpActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, Andie.bundle.getString("TeamMessage"), Andie.bundle.getString("AboutUs"), 1);
+            JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("TeamMessage"), Andie.bundle.getString("AboutUs"), 1);
         }
     }
 

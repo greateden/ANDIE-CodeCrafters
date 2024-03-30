@@ -129,7 +129,7 @@ public class ViewActions {
                 target.getParent().revalidate();
                 // TODO error messages catching
             } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
@@ -186,7 +186,7 @@ public class ViewActions {
                 target.repaint();
                 target.getParent().revalidate();
             } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
 
             }
@@ -245,7 +245,7 @@ public class ViewActions {
                 target.repaint();
                 target.getParent().revalidate();
             } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }

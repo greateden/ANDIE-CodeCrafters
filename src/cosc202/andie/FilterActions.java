@@ -112,7 +112,7 @@ public class FilterActions {
                 panel.add(info);
                 panel.add(radiusSpinner);
 
-                int option = JOptionPane.showOptionDialog(null, panel, Andie.bundle.getString("EnterFilterRadius"),
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), panel, Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);     
 
                 // Check the return value from the dialog box.
@@ -133,7 +133,7 @@ public class FilterActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -184,7 +184,7 @@ public class FilterActions {
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(Andie.frame, radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
@@ -201,7 +201,7 @@ public class FilterActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -252,7 +252,7 @@ public class FilterActions {
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
                 //System.out.println("the language is" + Andie.bundle.getString("EnterFilterRadius"));
 
-                int option = JOptionPane.showOptionDialog(null, radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
@@ -274,7 +274,7 @@ public class FilterActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -323,7 +323,7 @@ public class FilterActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -370,7 +370,7 @@ public class FilterActions {
                 target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }

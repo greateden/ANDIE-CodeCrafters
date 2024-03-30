@@ -28,7 +28,7 @@ import javax.imageio.*;
  * @version 1.0
  */
 public class Andie {
-    public static JFrame frame;  //Is it ok making this public? Asks dems. Does not seem to be a security issue. Helps with locating all other frames in the app
+    private static JFrame frame;  
     private static ImagePanel imagePanel;
     public static ResourceBundle bundle;
     public static JMenuBar menuBar;

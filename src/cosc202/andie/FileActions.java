@@ -133,7 +133,7 @@ public class FileActions {
                         Andie.bundle.getString("Cancel") };
 
                 int n = JOptionPane.showOptionDialog(
-                        null,
+                        Andie.getFrame(),
                         Andie.bundle.getString("DoYouWantToSave"),
                         Andie.bundle.getString("Warning"),
                         JOptionPane.YES_NO_CANCEL_OPTION,
@@ -302,7 +302,7 @@ public class FileActions {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
@@ -392,11 +392,11 @@ public class FileActions {
                 // trigger the "else" statement outside of this loop
                 EditableImage.isOpsNotEmptyStatus = false;
 
-                JOptionPane.showMessageDialog(null, Andie.bundle.getString("ImageSaveSuccess"),
+                JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("ImageSaveSuccess"),
                         Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
                 // }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
@@ -483,17 +483,17 @@ public class FileActions {
                         EditableImage.isOpsNotEmptyStatus = false;
 
                         // create a message box to tell user it's saved successfully
-                        JOptionPane.showMessageDialog(null, Andie.bundle.getString("ImageSaveSuccess"),
+                        JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("ImageSaveSuccess"),
                                 Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
 
                         // isSaved = true;
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, Andie.bundle.getString("MyDearUser"),
+                        JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("MyDearUser"),
                                 Andie.bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
@@ -568,7 +568,7 @@ public class FileActions {
                         Andie.bundle.getString("Cancel") };
 
                 int n = JOptionPane.showOptionDialog(
-                        null,
+                        Andie.getFrame(),
                         Andie.bundle.getString("DoYouWantToSaveBeforeExit"),
                         Andie.bundle.getString("Warning"),
                         JOptionPane.YES_NO_CANCEL_OPTION,
@@ -583,7 +583,7 @@ public class FileActions {
                     actions.get(1).actionPerformed(e);
 
                     // create a message box to tell user it's saved successfully
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("ImageSaveSuccess"),
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("ImageSaveSuccess"),
                             Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
 
                     // then we treat it as saved so that next time we run the code, it will

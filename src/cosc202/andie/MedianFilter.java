@@ -175,7 +175,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
     worker.execute();
     progressDialog.add(progressBar);
     progressDialog.pack();
-    progressDialog.setLocationRelativeTo(Andie.frame);
+    progressDialog.setLocationRelativeTo(Andie.getFrame());
     //progressDialog.setLocationByPlatform(true);
     progressDialog.setVisible(true);
 
