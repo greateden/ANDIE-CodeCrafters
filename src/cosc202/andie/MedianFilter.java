@@ -98,6 +98,8 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
 
         progressBar.setValue(progressBar.getMinimum());
         progressBar.setStringPainted(true);
+        Timer t = new Timer();
+        t.start();
         //Ask dems about variables accessed in inner class needing to be declared final
         SwingWorker<BufferedImage, Integer> worker = new SwingWorker<BufferedImage, Integer>(){
             @Override
@@ -178,6 +180,9 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
     progressDialog.setLocationRelativeTo(Andie.getFrame());
     //progressDialog.setLocationByPlatform(true);
     progressDialog.setVisible(true);
+
+    t.stop();
+    System.out.println(t.getTimeInMs());
 
     return output;  //Is this necessary? The code can't compile without it. Ask demonstrators.
     }
