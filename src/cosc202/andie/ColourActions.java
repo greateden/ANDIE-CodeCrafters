@@ -4,6 +4,10 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.BorderLayout;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.image.BufferedImage;
 
 /**
  * <p>
@@ -316,12 +320,45 @@ public class ColourActions {
                 }
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                     Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 } else {
                     System.out.println(err);
                 }
             }
         }
-    }
+    } // End of ConvertToGrey()
+
+    /**A method to create an appropriate GUI for the brightness and contrast
+     * adjustment. It accepts input and then calls the method from the
+     * BrightnessAndContrast class.
+     * 
+     * @see BrghtnessAndContrast
+     * @author Kevin Steve Sathyanath
+     * @date 31/03/2024
+     **/
+    public class BCAdjustmentAction extends ImageAction implements ChangeListener{
+        private JSlider slider;
+        /**
+         * <p>
+         * Create a new BCAdjustment action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        BCAdjustmentAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+        public void ActionPerformed(ActionEvent e){
+            try{
+                slider = new JSlider(0,100);
+                slider.addChangeListener(this);
+            }
+        }
+       
+
+    }// End of BCAdjustmentAction class
 }
