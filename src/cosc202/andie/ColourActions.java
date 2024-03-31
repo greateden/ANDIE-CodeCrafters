@@ -329,37 +329,50 @@ public class ColourActions {
         }
     } // End of ConvertToGrey()
 
-    // /**A method to create an appropriate GUI for the brightness and contrast
-    //  * adjustment. It accepts input and then calls the method from the
-    //  * BrightnessAndContrast class.
-    //  * 
-    //  * @see BrghtnessAndContrast
-    //  * @author Kevin Steve Sathyanath
-    //  * @date 31/03/2024
-    //  **/
-    // public class BCAdjustmentAction extends ImageAction implements ChangeListener{
-    //     private JSlider slider;
-    //     /**
-    //      * <p>
-    //      * Create a new BCAdjustment action.
-    //      * </p>
-    //      * 
-    //      * @param name     The name of the action (ignored if null).
-    //      * @param icon     An icon to use to represent the action (ignored if null).
-    //      * @param desc     A brief description of the action (ignored if null).
-    //      * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
-    //      */
-    //     BCAdjustmentAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-    //         super(name, icon, desc, mnemonic);
-    //     }
-    //     public void ActionPerformed(ActionEvent e){
-    //         try{
-    //             slider = new JSlider(0,100);
-    //             slider.addChangeListener(this);
-    //         }
-    //     }
+    /**A method to create an appropriate GUI for the brightness and contrast
+     * adjustment. It accepts input and then calls the method from the
+     * BrightnessAndContrast class.
+     * 
+     * @see BrightnessAndContrast
+     * @author Kevin Steve Sathyanath
+     * @date 31/03/2024
+     **/
+    public class BCAdjustmentAction extends ImageAction implements ChangeListener{
+        private JSlider bSlider;
+        private JSlider cSlider;
+        /**
+         * <p>
+         * Create a new BCAdjustment action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        BCAdjustmentAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        public void ActionPerformed(ActionEvent e){
+            try{
+                bSlider = new JSlider(-50,50);
+                bSlider.addChangeListener(this);
+                cSlider = new JSlider(-50,50);
+                cSlider.addChangeListener(this);
+
+                JFrame f = new JFrame();
+                f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                f.setLayout(new BorderLayout());
+                f.pack();
+                f.setVisible(true);
+
+
+
+            }
+        }
        
 
-    // }// End of BCAdjustmentAction class
+    }// End of BCAdjustmentAction class
     
 }
