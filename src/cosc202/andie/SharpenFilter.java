@@ -44,11 +44,11 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable{
         //Applying as a convolution
         ConvolveOp convOp = new ConvolveOp(kernel);
 
-        FilterBorder test = new FilterBorder(input, 1);
+        //Create an instance of the class that creates image with border
+        FilterBorder borderedImage = new FilterBorder(input, 1);
         
-
         //Applies convolution to bordered image
-        BufferedImage output = convOp.filter(test.applyBorder(), null);
+        BufferedImage output = convOp.filter(borderedImage.applyBorder(), null);
 
         //Crops image back to original size
         output = output.getSubimage(1, 1, input.getWidth(), input.getHeight());
