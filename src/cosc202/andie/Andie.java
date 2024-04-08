@@ -4,7 +4,6 @@ import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
-
 import javax.swing.*;
 import javax.imageio.*;
 
