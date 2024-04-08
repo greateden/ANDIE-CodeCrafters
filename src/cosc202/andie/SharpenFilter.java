@@ -48,15 +48,31 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable{
         //Creates image one pixel bigger then original image
         int borderWidth = input.getWidth() + 2;
         int borderHeight = input.getHeight() + 2;
-        BufferedImage borderImage = new BufferedImage(borderWidth, borderHeight, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = borderImage.createGraphics();
+        BufferedImage borderImage = new BufferedImage(borderWidth, borderHeight, input.getType());
 
-        //fills image with transparent pixels
-        g2.setColor(new Color(0,0,0,0)); 
-        g2.fillRect(0, 0, borderWidth, borderHeight);
+        //copies current image to middle of the new image
+        for(int y=0; y< input.getHeight(); y++){
+            for(int x=0; x<input.getWidth(); x++){
+                borderImage.setRGB(x+1, y+1, input.getRGB(x, y));
+            }
+        }
 
-        //Adding original image to the middle
-        g2.drawImage(input,1,1, null);
+        //fills edges with same values as original outter edge pixels
+        for(int y=0; y<input.getHeight(); y++){
+            borderImage.setRGB(0, y+1, input.getRGB(0, y)); //left side
+            borderImage.setRGB(borderWidth-1, y+1, input.getRGB(input.getWidth()-1, y)); //right side
+        }
+        for(int x=0; x<input.getWidth(); x++){
+            borderImage.setRGB(x+1, 0, input.getRGB(x, 0)); //Top side
+            borderImage.setRGB(x+1, borderHeight-1, input.getRGB(x, input.getHeight()-1)); //Bottom side
+        }
+
+        //Deal with the corner pieces
+        borderImage.setRGB(0, 0, input.getRGB(0, 0)); // top left corner
+        borderImage.setRGB(borderWidth-1, 0, input.getRGB(input.getWidth()-1, 0)); // top right corner
+        borderImage.setRGB(0, borderHeight-1, input.getRGB(0, input.getHeight()-1)); // bottom left corner
+        borderImage.setRGB(borderWidth-1, borderHeight-1, input.getRGB(input.getWidth()-1, input.getHeight()-1)); // bottom right corner
+      
 
         //Applies convolution to bordered image
         BufferedImage output = convOp.filter(borderImage, null);
