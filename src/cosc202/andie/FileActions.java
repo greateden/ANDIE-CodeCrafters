@@ -649,6 +649,7 @@ public class FileActions {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            Andie.exitFullScreen();
 
             String[] languages = { "English", "Bahasa Indonesia", "繁體中文" };
 
@@ -677,6 +678,7 @@ public class FileActions {
             english.addActionListener(new ActionListener() {
                 @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
+                    Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
                     Locale.setDefault(new Locale("en", "NZ"));
                     p.put("language", "en");
@@ -684,28 +686,34 @@ public class FileActions {
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
                     System.out.println(p.get("language", "id"));
                     Andie.setLanguage();
+                    //l.setExtendedState(JFrame.NORMAL);
                     l.dispose();
+                    //l.setExtendedState(JFrame.NORMAL);
                 }
             });
 
             bahasa.addActionListener(new ActionListener() {
                 @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
+                    Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
                     Locale.setDefault(new Locale("id", "ID"));
                     p.put("language", "id");
                     p.put("country", "ID");
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
                     System.out.println(p.get("language", "en"));
+                    Andie.getStatus();
                     Andie.setLanguage();
+                    //l.setExtendedState(JFrame.NORMAL);
                     l.dispose();
+                    //l.setExtendedState(JFrame.NORMAL);
                 }
             });
 
             traChinese.addActionListener(new ActionListener() {
                 @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
-
+                    Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
                     Locale.setDefault(new Locale("zh", "TW"));
                     p.put("language", "zh");
@@ -715,7 +723,9 @@ public class FileActions {
                     System.out.println(p.get("language", "zh"));
                     Andie.setLanguage();
                     // System.out.println(Andie.bundle.getString("EnterFilterRadius"));
+                    //l.setExtendedState(JFrame.NORMAL);
                     l.dispose();
+                    
 
                 }
 

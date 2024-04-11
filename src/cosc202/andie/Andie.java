@@ -90,6 +90,14 @@ public class Andie {
 
     }
 
+    public static void exitFullScreen() {
+        frame.setExtendedState(JFrame.NORMAL);
+    }
+
+    public static void getStatus(){
+        System.out.println(frame.getExtendedState());
+    }
+
     private static void createMenuBar() {
         // Add in menus for various types of action the user may perform.
         JMenuBar newMenuBar = new JMenuBar();

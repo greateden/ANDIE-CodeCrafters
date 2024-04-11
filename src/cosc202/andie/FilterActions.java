@@ -182,7 +182,7 @@ public class FilterActions {
                 int radius = 0;
 
                 // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 100, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
                 int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
