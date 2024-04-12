@@ -251,9 +251,8 @@ public class ImageMenuBar {
      * Action to resize an image.
      * 
      * 
-     * @made by Yuxing Zhang
-     *       </p>
-     *       </p>
+     * made by Yuxing Zhang
+     *     
      * 
      */
     public class ImageResizeAction extends ImageAction {

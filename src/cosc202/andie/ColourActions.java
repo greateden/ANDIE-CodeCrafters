@@ -25,8 +25,8 @@ import java.awt.*;
  * 
  * @author Steven Mills
  * @version 1.0
- * @modified_by The Greatest Eden
- * @modified_date 10 Mar 2024
+ * modified_by The Greatest Eden
+ * modified_date 10 Mar 2024
  */
 public class ColourActions {
 
