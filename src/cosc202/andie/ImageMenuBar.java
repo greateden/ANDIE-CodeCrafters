@@ -600,8 +600,6 @@ public class RandomScatteringAction extends ImageAction {
          * This method is called whenever the RandomScatteringAction is triggered.
          * It prompts the user for a filter radius, then applys an appropriately sized
          * {@link RandomScattering}.
-         * It prompts the user for a filter radius, then applys an appropriately sized
-         * {@link RandomSCattering}.
          * </p>
          * 
          * @param e The event triggering this callback.
