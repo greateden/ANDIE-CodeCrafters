@@ -20,6 +20,7 @@ Made by the CodeCrafters Team
 * Error Handling (yes with funny messages)
 * Adding Traditional Chinese (Taiwan) language support
 * Created the icon
+* Implemented multithreading for median filter
 
 `Kevin`
 * Enabled Multilingual support 
@@ -30,6 +31,8 @@ Made by the CodeCrafters Team
 * Added Bahasa Indonesia as language option
 * Added a Help option and an About Us.
 * Testing and debugging
+* Added progress bar to median filter
+* Random Scattering
 
 `Yuxing`
 * Image resize
@@ -110,6 +113,9 @@ None done yet.
             Sharpen Filter                 :done, des2, 10-03-2024, 11-03-2024
             Soft Blur Filter               :done, des2, 11-03-2024, 12-03-2024
             README                         :done, des2, 26-03-2024, 28-03-2024
+            Multithreading                :active, des2, 30-03-2024, 31-03-2024
+            Progress Bar                   :active, des2, 30-03-2024, 01-04-2024
+
 
 
 
