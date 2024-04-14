@@ -121,7 +121,14 @@ public class ColourActions {
 
     }
 
-    // Same as above, but edited to work for imageInvert().
+
+    /**
+     * <p>
+     * Action to invert an image.
+     * 
+     * Same as the above class, but edited to work for imageInvert().
+     * </p>
+     */
     public class ImageInvertAction extends ImageAction {
 
         /**

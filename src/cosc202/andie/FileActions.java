@@ -38,11 +38,22 @@ public class FileActions {
     protected boolean isOpened = false;
     // protected boolean isSaved = false;
 
-    public boolean isOpenedGetter(){
+    /**
+     * To get the state of the isOpened variable
+     * 
+     * @return isOpened the state of the isOpened variable
+     */
+    public boolean isOpenedGetter() {
         return isOpened;
     }
 
-    public boolean isOpenedSetter(boolean isOpened){
+    /**
+     * To set the state of the isOpened variable
+     * 
+     * @param isOpened the state of the isOpened variable
+     * @return isOpened the state of the isOpened variable
+     */
+    public boolean isOpenedSetter(boolean isOpened) {
         this.isOpened = isOpened;
         return isOpened;
     }
@@ -165,6 +176,9 @@ public class FileActions {
             }
         }
 
+        /**
+         * Method that opens a file
+         */
         public void openFile() {
             JFileChooser fileChooser = new JFileChooser();
 
@@ -294,8 +308,9 @@ public class FileActions {
                         ImageIO.write(target.getImage().getCurrentImage(), format, new File(selectedFilePath));
 
                         // create a message box to tell user it's saved successfully
-                        //JOptionPane.showMessageDialog(null, Andie.bundle.getString("ImageExportSaveSuccess"),
-                        //        Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
+                        // JOptionPane.showMessageDialog(null,
+                        // Andie.bundle.getString("ImageExportSaveSuccess"),
+                        // Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
 
                     } catch (Exception err) {
                         err.printStackTrace();
@@ -307,15 +322,36 @@ public class FileActions {
             }
         }
 
+        /**
+         * <p>
+         * A file filter for image files.
+         * </p>
+         */
         private class ImageFileFilter extends FileFilter {
             private String extension;
             private String description;
 
+            /**
+             * <p>
+             * Create a new image file filter.
+             * </p>
+             * 
+             * @param extension   The extension of the image format.
+             * @param description A description of the image format.
+             */
             public ImageFileFilter(String extension, String description) {
                 this.extension = extension.toLowerCase();
                 this.description = description;
             }
 
+            /**
+             * <p>
+             * Check whether a file is accepted by this filter.
+             * </p>
+             * 
+             * @param f The file to check.
+             * @return True if the file is accepted, false otherwise.
+             */
             public boolean accept(File f) {
                 if (f.isDirectory()) {
                     return true;
@@ -324,10 +360,24 @@ public class FileActions {
                 return name.endsWith("." + extension);
             }
 
+            /**
+             * <p>
+             * Get a description of this file filter.
+             * </p>
+             * 
+             * @return A description of this file filter.
+             */
             public String getDescription() {
                 return description + String.format(" (*.%s)", extension);
             }
 
+            /**
+             * <p>
+             * Get the extension of this file filter.
+             * </p>
+             * 
+             * @return The extension of this file filter.
+             */
             public String getExtension() {
                 return extension;
             }
@@ -498,15 +548,34 @@ public class FileActions {
             }
         }
 
+        /**
+         * <p>
+         * A file filter for image files.
+         * </p>
+         */
         private class ImageFileFilter extends FileFilter {
             private String extension;
             private String description;
 
+            /**
+             * Constructor of ImageFileFilter
+             * 
+             * @param extension   the extension
+             * @param description the description of the file filter
+             */
             public ImageFileFilter(String extension, String description) {
                 this.extension = extension.toLowerCase();
                 this.description = description;
             }
 
+            /**
+             * <p>
+             * Check whether a file is accepted by this filter.
+             * </p>
+             * 
+             * @param f The file to check.
+             * @return True if the file is accepted, false otherwise.
+             */
             public boolean accept(File f) {
                 if (f.isDirectory()) {
                     return true;
@@ -515,10 +584,20 @@ public class FileActions {
                 return name.endsWith("." + extension);
             }
 
+            /**
+             * Gets the description of this file filter.
+             * 
+             * @return The description of the file filter.
+             */
             public String getDescription() {
                 return description + String.format(" (*.%s)", extension);
             }
 
+            /**
+             * Gets the extension associated with this file filter.
+             * 
+             * @return The extension of the file filter.
+             */
             public String getExtension() {
                 return extension;
             }
@@ -686,9 +765,9 @@ public class FileActions {
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
                     System.out.println(p.get("language", "id"));
                     Andie.setLanguage();
-                    //l.setExtendedState(JFrame.NORMAL);
+                    // l.setExtendedState(JFrame.NORMAL);
                     l.dispose();
-                    //l.setExtendedState(JFrame.NORMAL);
+                    // l.setExtendedState(JFrame.NORMAL);
                 }
             });
 
@@ -704,9 +783,9 @@ public class FileActions {
                     System.out.println(p.get("language", "en"));
                     Andie.getStatus();
                     Andie.setLanguage();
-                    //l.setExtendedState(JFrame.NORMAL);
+                    // l.setExtendedState(JFrame.NORMAL);
                     l.dispose();
-                    //l.setExtendedState(JFrame.NORMAL);
+                    // l.setExtendedState(JFrame.NORMAL);
                 }
             });
 
@@ -723,9 +802,8 @@ public class FileActions {
                     System.out.println(p.get("language", "zh"));
                     Andie.setLanguage();
                     // System.out.println(Andie.bundle.getString("EnterFilterRadius"));
-                    //l.setExtendedState(JFrame.NORMAL);
+                    // l.setExtendedState(JFrame.NORMAL);
                     l.dispose();
-                    
 
                 }
 

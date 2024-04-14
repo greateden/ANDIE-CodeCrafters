@@ -90,14 +90,29 @@ public class Andie {
 
     }
 
+    /**
+     * <p>
+     * Exits full screen mode.
+     * </p>
+     */
     public static void exitFullScreen() {
         frame.setExtendedState(JFrame.NORMAL);
     }
 
+    /**
+     * <p>
+     * Gets the status of the frame.
+     * </p>
+     */
     public static void getStatus(){
         System.out.println(frame.getExtendedState());
     }
 
+    /**
+     * <p>
+     * Creates the menu bar for the GUI.
+     * </p>
+     */
     private static void createMenuBar() {
         // Add in menus for various types of action the user may perform.
         JMenuBar newMenuBar = new JMenuBar();
@@ -139,6 +154,13 @@ public class Andie {
         frame.setVisible(true);
     }
 
+    /**
+     * <p>
+     * Gets the frame.
+     * </p>
+     * 
+     * @return The frame.
+     */
     public static JFrame getFrame() {
         return frame;
     }

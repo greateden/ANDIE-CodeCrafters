@@ -96,6 +96,19 @@ public class FilterActions {
             super(name, icon, desc, mnemonic);
         }
 
+        /**
+         * <p>
+         * Callback for when the mean filter action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the MeanFilterAction is triggered.
+         * It prompts the user for a radius, then applies a mean filter of that
+         * radius to the image.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e) {
 
             try {
@@ -141,6 +154,13 @@ public class FilterActions {
         }
     }
 
+    /**
+     * <p>
+     * Action to change an image with a median filter.
+     * </p>
+     * 
+     * @see MedianFilter
+     */
     public class MedianFilterAction extends ImageAction {
 
         /**
