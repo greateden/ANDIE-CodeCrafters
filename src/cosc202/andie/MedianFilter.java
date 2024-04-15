@@ -17,7 +17,7 @@ import java.awt.BorderLayout;
  * </p>
  * 
  * <p>
- * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
+ * <a href="https://creativecommons.org/lißnses/by-nc-sa/4.0/">CC BY-NC-SA
  * 4.0</a>
  * </p>
  * 
@@ -33,7 +33,8 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      */
     private int radius;
 
-    private final int NUM_THREADS = 8;
+    // Number of threads to use
+    private final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
 
     /**
      * <p>
@@ -76,6 +77,8 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * @return The resulting (blurred)) image.
      */
     public BufferedImage apply(BufferedImage input) {
+
+        System.out.println(NUM_THREADS);
 
         if (radius == 0) {
             return input;
