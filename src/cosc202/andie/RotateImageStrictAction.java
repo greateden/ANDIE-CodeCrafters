@@ -28,7 +28,10 @@ public class RotateImageStrictAction implements ImageOperation, java.io.Serializ
     
 
     
-
+/**
+ * Créer un nouveau Rotate Image operation avec la degré
+ * @param deg the input degree
+ */
     RotateImageStrictAction(double deg){
         this.deg = (int)deg;
     }

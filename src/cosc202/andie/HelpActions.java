@@ -4,12 +4,15 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * HelpActions class manages a set of actions for the Help menu.
+ */
 public class HelpActions {
-    
+
     /** A list of actions for the Help menu. */
     protected ArrayList<Action> actions;
 
-   public ResourceBundle bundle = Andie.bundle;
+    public ResourceBundle bundle = Andie.bundle;
 
     /**
      * <p>
@@ -18,7 +21,8 @@ public class HelpActions {
      */
     public HelpActions() {
         actions = new ArrayList<Action>();
-        actions.add(new HelpActionsAboutUs(Andie.bundle.getString("AboutUs"), null, Andie.bundle.getString("AboutUsMessage"), Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new HelpActionsAboutUs(Andie.bundle.getString("AboutUs"), null,
+                Andie.bundle.getString("AboutUsMessage"), Integer.valueOf(KeyEvent.VK_G)));
     }
 
     /**
@@ -31,7 +35,7 @@ public class HelpActions {
     public JMenu createMenu() {
         JMenu fileMenu = new JMenu(Andie.bundle.getString("Help"));
 
-        for(Action action: actions) {
+        for (Action action : actions) {
             fileMenu.add(new JMenuItem(action));
         }
 
@@ -45,10 +49,10 @@ public class HelpActions {
          * Create a new about-us action.
          * </p>
          * 
-         * @param name The name of the action (ignored if null).
-         * @param icon An icon to use to represent the action (ignored if null).
-         * @param desc A brief description of the action  (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut  (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
          */
         HelpActionsAboutUs(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon);
@@ -56,7 +60,7 @@ public class HelpActions {
             putValue(MNEMONIC_KEY, mnemonic);
         }
 
-         /**
+        /**
          * <p>
          * Callback for when the about-us action is triggered.
          * </p>
@@ -69,10 +73,9 @@ public class HelpActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("TeamMessage"), Andie.bundle.getString("AboutUs"), 1);
+            JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("TeamMessage"),
+                    Andie.bundle.getString("AboutUs"), 1);
         }
     }
 
 }
-
-

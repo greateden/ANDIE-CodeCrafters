@@ -96,6 +96,19 @@ public class FilterActions {
             super(name, icon, desc, mnemonic);
         }
 
+        /**
+         * <p>
+         * Callback for when the mean filter action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the MeanFilterAction is triggered.
+         * It prompts the user for a radius, then applies a mean filter of that
+         * radius to the image.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e) {
 
             try {
@@ -141,6 +154,13 @@ public class FilterActions {
         }
     }
 
+    /**
+     * <p>
+     * Action to change an image with a median filter.
+     * </p>
+     * 
+     * @see MedianFilter
+     */
     public class MedianFilterAction extends ImageAction {
 
         /**
@@ -182,7 +202,7 @@ public class FilterActions {
                 int radius = 0;
 
                 // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 100, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
                 int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
