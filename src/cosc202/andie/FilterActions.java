@@ -49,7 +49,7 @@ public class FilterActions {
                 Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new MedianFilterAction(Andie.bundle.getString("MedianFilter"), null, Andie.bundle.getString("MedianDesc"),
                 Integer.valueOf(KeyEvent.VK_PAGE_DOWN)));
-        actions.add(new EmbossFilterAction(Andie.bundle.getString("Emboss"), null, Andie.bundle.getString("Emboss"),
+        actions.add(new EmbossFilterAction(Andie.bundle.getString("EmbossFilter"), null, Andie.bundle.getString("EmbossDesc"),
             Integer.valueOf(KeyEvent.VK_PAGE_DOWN)));
     }
 
