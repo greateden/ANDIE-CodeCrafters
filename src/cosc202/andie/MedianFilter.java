@@ -146,8 +146,8 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
 
                                 for (int j = 0; j < input.getWidth(); j++) {
                                     int a1 = 0; // Counter to help fit a square kernel into a 1-D array.
-                                    for (int k = i - side / 2; k < i + side / 2; k++) {
-                                        for (int l = j - side / 2; l < j + side / 2; l++) {
+                                    for (int k = i - side / 2; k <= i + side / 2; k++) {
+                                        for (int l = j - side / 2; l <= j + side / 2; l++) {
                                             if (k >= 0 && k < input.getHeight() && l >= 0 && l < input.getWidth()) {
                                                 // Taken from MeanFilter.
                                                 argb = input.getRGB(l, k);
@@ -174,11 +174,16 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                                     Arrays.sort(bMedian);
                                     Arrays.sort(aMedian);
 
-                                    // Find the middle? Must be the radius probably.
-                                    int nr = rMedian[radius];
-                                    int ng = gMedian[radius];
-                                    int nb = bMedian[radius];
-                                    int na = aMedian[radius];
+                                    // Find the middle? Must be the radius probably. Use for watercolour filter.
+                                    // int nr = rMedian[radius];
+                                    // int ng = gMedian[radius];
+                                    // int nb = bMedian[radius];
+                                    // int na = aMedian[radius];
+
+                                    int nr = rMedian[rMedian.length/2];
+                                    int ng = gMedian[gMedian.length/2];
+                                    int nb = bMedian[bMedian.length/2];
+                                    int na = aMedian[aMedian.length/2];
 
                                     // Apply the filter now.
                                     argb = (na << 24) | (nr << 16) | (ng << 8) | nb;
