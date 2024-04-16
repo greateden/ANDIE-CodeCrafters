@@ -1,3 +1,5 @@
+
+[![pipeline status](https://altitude.otago.ac.nz/cosc202-c/andie/badges/main/pipeline.svg)](https://altitude.otago.ac.nz/cosc202-c/andie/-/commits/main)
 <div align="center">
 <img src = src/icon.png>
 <h2>
