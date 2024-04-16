@@ -49,6 +49,8 @@ public class FilterActions {
                 Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new MedianFilterAction(Andie.bundle.getString("MedianFilter"), null, Andie.bundle.getString("MedianDesc"),
                 Integer.valueOf(KeyEvent.VK_PAGE_DOWN)));
+        actions.add(new EmbossFilterAction(Andie.bundle.getString("Emboss"), null, Andie.bundle.getString("Emboss"),
+            Integer.valueOf(KeyEvent.VK_PAGE_DOWN)));
     }
 
     /**
@@ -290,6 +292,77 @@ public class FilterActions {
 
                 // Create and apply the filter
                 target.getImage().apply(new GaussianFilter(radius));
+                target.repaint();
+                target.getParent().revalidate();
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                }
+            }
+
+        }
+
+    }
+
+    public class EmbossFilterAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new Gaussian-filter action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        EmbossFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the convert-to-grey action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the GaussianFilterAction is triggered.
+         * It prompts the user for a filter radius, then applys an appropriately sized
+         * {@link GaussianFilter}.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            try {
+
+                // Determine the radius - ask the user.
+                int radius = 0;
+
+                // Pop-up dialog box to ask for the radius value.
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
+                JSpinner radiusSpinner = new JSpinner(radiusModel);
+                //System.out.println("the language is" + Andie.bundle.getString("EnterFilterRadius"));
+
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+                    radius = radiusModel.getNumber().intValue();
+                }
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+                    radius = radiusModel.getNumber().intValue();
+                }
+
+                // Create and apply the filter
+                target.getImage().apply(new EmbossFilter(radius));
                 target.repaint();
                 target.getParent().revalidate();
             } catch (Exception err) {
