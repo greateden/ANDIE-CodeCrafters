@@ -5,6 +5,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 import javax.swing.*;
+
+import cosc202.MouseSelection;
+
 import javax.imageio.*;
 
 /**
@@ -76,6 +79,7 @@ public class Andie {
         // The main content area is an ImagePanel
         imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
+        imagePanel.addMouseListener(new MouseSelection(imagePanel));
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
         fileActions = new FileActions();
