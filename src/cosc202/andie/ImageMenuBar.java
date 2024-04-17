@@ -618,7 +618,7 @@ public class ImageMenuBar {
             /**
              * Constructs a ScaleActionListener with the specified rotation angle.
              * 
-             * @param rotationAngle The angle by which to rotate the image.
+             * 
              */
             public ScaleActionListener(double scalePercentage) {
                 this.scalePercentage = scalePercentage;
