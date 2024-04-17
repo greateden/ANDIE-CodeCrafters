@@ -25,6 +25,7 @@ before_script:
 
 stages:          # List of stages for jobs, and their order of execution
   - build
+  - build-javadoc
   - test
 
 
@@ -37,6 +38,14 @@ build:
     paths:
       - build
       - .gradle
+
+build-javadoc:
+    stage: createdocs
+    script:
+      - javadoc -d docs src/cosc202/andie/*.java
+    artifacts:
+      paths:
+      - docs
 
 
 unit-test-job:   # This job runs in the test stage.
