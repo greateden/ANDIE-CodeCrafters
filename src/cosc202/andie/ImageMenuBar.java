@@ -54,12 +54,13 @@ public class ImageMenuBar {
                 Andie.bundle.getString("RIADesc"), Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new ImageResizeAction(Andie.bundle.getString("ImageResizeAction"), null,
                 Andie.bundle.getString("ImageResizeAction"), Integer.valueOf(KeyEvent.VK_J)));
-        actions.add(new RandomScatteringAction(Andie.bundle.getString("RandomScattering"), null, Andie.bundle.getString("RandomScattering"), Integer.valueOf(KeyEvent.VK_R)));
+        actions.add(new RandomScatteringAction(Andie.bundle.getString("RandomScattering"), null,
+                Andie.bundle.getString("RandomScattering"), Integer.valueOf(KeyEvent.VK_R)));
         scalAct = new ImageScalingAction(Andie.bundle.getString("Scaling"), null, Andie.bundle.getString("ReScaling"),
                 null);
         actions.add(scalAct);
-        rotAct  = new RotateImageStrictAction("Rotate by", null, "Rotating by multiples of right angles", null);
-        actions.add(rotAct); 
+        rotAct = new RotateImageStrictAction("Rotate by", null, "Rotating by multiples of right angles", null);
+        actions.add(rotAct);
     }
 
     /**
@@ -76,7 +77,7 @@ public class ImageMenuBar {
             if (action != scalAct && action != rotAct) {
                 fileMenu.add(new JMenuItem(action));
             }
-            
+
         }
 
         // JMenuItem scaleMenu = fileMenu.getItem(4);
@@ -86,6 +87,11 @@ public class ImageMenuBar {
         return fileMenu;
     }
 
+    /**
+     * ImageMenuBarFlipHorizontal extends ImageAction and represents an action for
+     * flipping the image horizontally.
+     * This action is triggered by user interaction in the graphical user interface.
+     */
     public class ImageMenuBarFlipHorizontal extends ImageAction {
 
         /**
@@ -130,6 +136,11 @@ public class ImageMenuBar {
         }
     }
 
+    /**
+     * ImageMenuBarFlipVertical extends ImageAction and represents an action for
+     * flipping the image vertically.
+     * This action is triggered by user interaction in the graphical user interface.
+     */
     public class ImageMenuBarFlipVertical extends ImageAction {
 
         /**
@@ -214,7 +225,7 @@ public class ImageMenuBar {
             // Determine the radius - ask the user.
             try {
                 int deg = 0;
-            
+
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel degModel = new SpinnerNumberModel(0, null, null, 0.1);
                 JSpinner degSpinner = new JSpinner(degModel);
@@ -228,7 +239,7 @@ public class ImageMenuBar {
                 } else if (option == JOptionPane.OK_OPTION) {
                     deg = degModel.getNumber().intValue();
                 }
-                //rotateAttempt++;
+                // rotateAttempt++;
                 // Create and apply the filter
                 target.getImage().apply(new ImageRotate(deg));
                 target.repaint();
@@ -251,9 +262,8 @@ public class ImageMenuBar {
      * Action to resize an image.
      * 
      * 
-     * @made by Yuxing Zhang
-     *       </p>
-     *       </p>
+     * made by Yuxing Zhang
+     * 
      * 
      */
     public class ImageResizeAction extends ImageAction {
@@ -306,6 +316,11 @@ public class ImageMenuBar {
             }
         }
 
+        /**
+         * Creates and displays a panel for resizing images.
+         * This method constructs a dialog window containing input fields for width and
+         * height, as well as a button to initiate the resizing process.
+         */
         protected void createPanel() {
 
             // Write code to create the panel
@@ -363,7 +378,25 @@ public class ImageMenuBar {
 
         }
 
+        /**
+         * ButtonListener class implements the ActionListener interface and handles
+         * button click events.
+         * This class defines the actionPerformed method to respond to button clicks,
+         * specifically for the "Go" button
+         * in the image resizing panel.
+         */
         public class ButtonListener implements ActionListener {
+            /**
+             * Responds to button click events.
+             * 
+             * This method is called when a button is clicked. It retrieves the source of
+             * the action, parses the input fields for height and width, initiates the
+             * resizing process,
+             * and updates the target component accordingly. It also handles various
+             * exceptions that may occur during the resizing process.
+             * 
+             * @param ae The action event triggered by the button click.
+             */
             public void actionPerformed(ActionEvent ae) {
                 JButton source = (JButton) ae.getSource();
                 try {
@@ -404,6 +437,12 @@ public class ImageMenuBar {
         }
     }
 
+    /**
+     * ImageScalingAction extends ImageAction and represents an action for scaling
+     * images.
+     * This action is responsible for creating a submenu with options for scaling
+     * images by different percentages.
+     */
     public class ImageScalingAction extends ImageAction {
         // int height;
         // int width;
@@ -432,6 +471,9 @@ public class ImageMenuBar {
             throw new UnsupportedOperationException(Andie.bundle.getString("Unimplemented"));
         }
 
+        /**
+         * Creates a submenu with options for scaling images by different percentages.
+         */
         public void createSubMenu() {
 
             JMenu scaleMenu = new JMenu(Andie.bundle.getString("Scaling"));
@@ -457,13 +499,32 @@ public class ImageMenuBar {
 
         }
 
+        /**
+         * ActionListener for scaling images by a specified percentage.
+         */
         public class ScaleActionListener implements ActionListener {
+            /** The percentage by which to scale the image. */
             private double scalePercentage;
 
+            /**
+             * Constructs a ScaleActionListener with the specified scaling percentage.
+             * 
+             * @param scalePercentage The percentage by which to scale the image.
+             */
             public ScaleActionListener(double scalePercentage) {
                 this.scalePercentage = scalePercentage;
             }
 
+            /**
+             * Responds to action events triggered by scaling options.
+             * 
+             * This method is called when a scaling option is selected from the submenu.
+             * It scales the image by the specified percentage, repaints the target
+             * component,
+             * and revalidates its parent container.
+             * 
+             * @param e The action event triggered by the scaling option.
+             */
             public void actionPerformed(ActionEvent e) {
                 try {
                     target.getImage().apply(new ImageScaling(scalePercentage));
@@ -479,7 +540,7 @@ public class ImageMenuBar {
             }
         }
 
-    }  //End of Image Scaling Action
+    } // End of Image Scaling Action
 
     /**
      * Action class code layout created by Steven Mills
@@ -517,79 +578,102 @@ public class ImageMenuBar {
          * 
          * @param e The event triggering this callback.
          */
-    // We must have this class but it won't do anything.
-    @Override
-    public void actionPerformed(ActionEvent e) {
+        // We must have this class but it won't do anything.
+        @Override
+        public void actionPerformed(ActionEvent e) {
 
-        // createSubMenu();
+            // createSubMenu();
 
-        throw new UnsupportedOperationException(Andie.bundle.getString("Unimplemented"));
-    }
-
-    public void createSubMenu() {
-
-        JMenu rotMenu = new JMenu(Andie.bundle.getString("RotateBy"));
-        JMenuItem rotMenu90 = new JMenuItem("90° right");
-        JMenuItem rotMenu180 = new JMenuItem("180°");
-        JMenuItem rotMenu270 = new JMenuItem("90° left");
-      
-
-        rotMenu90.addActionListener(new ScaleActionListener(90));
-        rotMenu180.addActionListener(new ScaleActionListener(180));
-        rotMenu270.addActionListener(new ScaleActionListener(270));
-        
-
-        rotMenu.add(rotMenu90);
-        rotMenu.add(rotMenu180);
-        rotMenu.add(rotMenu270);
-      
-
-        fileMenu.add(rotMenu);
-
-    }
-
-    public class ScaleActionListener implements ActionListener {
-        private double scalePercentage;
-
-        public ScaleActionListener(double scalePercentage) {
-            this.scalePercentage = scalePercentage;
+            throw new UnsupportedOperationException(Andie.bundle.getString("Unimplemented"));
         }
 
-        public void actionPerformed(ActionEvent e) {
-            try {
-                target.getImage().apply(new ImageRotate(scalePercentage));
-                target.repaint();
-                target.getParent().revalidate();
+        /**
+         * Creates a submenu with options for rotating images by specified angles.
+         */
+        public void createSubMenu() {
 
-            } catch (Exception err) {
-                if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
-                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
-                }
+            JMenu rotMenu = new JMenu(Andie.bundle.getString("RotateBy"));
+            JMenuItem rotMenu90 = new JMenuItem("90° right");
+            JMenuItem rotMenu180 = new JMenuItem("180°");
+            JMenuItem rotMenu270 = new JMenuItem("90° left");
+
+            rotMenu90.addActionListener(new ScaleActionListener(90));
+            rotMenu180.addActionListener(new ScaleActionListener(180));
+            rotMenu270.addActionListener(new ScaleActionListener(270));
+
+            rotMenu.add(rotMenu90);
+            rotMenu.add(rotMenu180);
+            rotMenu.add(rotMenu270);
+
+            fileMenu.add(rotMenu);
+
+        }
+
+        /**
+         * ActionListener for rotating images by specified angles.
+         */
+        public class ScaleActionListener implements ActionListener {
+            private double scalePercentage;
+
+            /**
+             * Constructs a ScaleActionListener with the specified rotation angle.
+             * 
+             * 
+             */
+            public ScaleActionListener(double scalePercentage) {
+                this.scalePercentage = scalePercentage;
             }
 
+            /**
+             * Responds to action events triggered by scaling options.
+             * 
+             * This method is called when a rotation option is selected from the submenu.
+             * It rotates the image by the specified angle, repaints the target component,
+             * and revalidates its parent container.
+             * 
+             * @param e The action event triggered by the rotation option.
+             */
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    target.getImage().apply(new ImageRotate(scalePercentage));
+                    target.repaint();
+                    target.getParent().revalidate();
+
+                } catch (Exception err) {
+                    if (err instanceof NullPointerException) {
+                        JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
+                                Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+
+            }
         }
     }
-}
-
-public class RandomScatteringAction extends ImageAction {
 
     /**
-    * <p>
-    * Create a new Random Scattering action.
-    * </p>
-    * 
-    * @param name     The name of the action (ignored if null).
-    * @param icon     An icon to use to represent the action (ignored if null).
-    * @param desc     A brief description of the action (ignored if null).
-    * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
-    * @param name     The name of the action (ignored if null).
-    * @param icon     An icon to use to represent the action (ignored if null).
-    * @param desc     A brief description of the action (ignored if null).
-    * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
-    */
-    RandomScatteringAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-        super(name, icon, desc, mnemonic);
+     * RandomScatteringAction extends ImageAction and represents an action for
+     * applying random scattering effect to an image.
+     * This action prompts the user for a filter radius and applies a
+     * RandomScattering filter accordingly.
+     */
+    public class RandomScatteringAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new Random Scattering action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        RandomScatteringAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
         }
 
         /**
@@ -601,8 +685,6 @@ public class RandomScatteringAction extends ImageAction {
          * This method is called whenever the RandomScatteringAction is triggered.
          * It prompts the user for a filter radius, then applys an appropriately sized
          * {@link RandomScattering}.
-         * It prompts the user for a filter radius, then applys an appropriately sized
-         * {@link RandomSCattering}.
          * </p>
          * 
          * @param e The event triggering this callback.
@@ -615,7 +697,8 @@ public class RandomScatteringAction extends ImageAction {
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, null, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner,
+                        Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
@@ -625,7 +708,6 @@ public class RandomScatteringAction extends ImageAction {
                     radius = radiusModel.getNumber().intValue();
                     System.out.println(radius);
                 }
-                
 
                 // Create and apply the filter
                 target.getImage().apply(new RandomScattering2(radius));
@@ -642,4 +724,3 @@ public class RandomScatteringAction extends ImageAction {
     }
 
 }
-

@@ -25,8 +25,8 @@ import java.awt.*;
  * 
  * @author Steven Mills
  * @version 1.0
- * @modified_by The Greatest Eden
- * @modified_date 10 Mar 2024
+ * modified_by The Greatest Eden
+ * modified_date 10 Mar 2024
  */
 public class ColourActions {
 
@@ -121,7 +121,14 @@ public class ColourActions {
 
     }
 
-    // Same as above, but edited to work for imageInvert().
+
+    /**
+     * <p>
+     * Action to invert an image.
+     * 
+     * Same as the above class, but edited to work for imageInvert().
+     * </p>
+     */
     public class ImageInvertAction extends ImageAction {
 
         /**

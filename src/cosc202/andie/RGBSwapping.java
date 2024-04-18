@@ -9,7 +9,7 @@ import java.awt.image.*;
  * 
  * @author The Greatest Eden
  * @version 1.0
- * @date 10 Mar 2024
+ * date 10 Mar 2024
  */
 
 public class RGBSwapping implements ImageOperation, java.io.Serializable{
