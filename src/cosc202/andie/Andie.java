@@ -6,8 +6,6 @@ import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 import javax.swing.*;
 
-import cosc202.MouseSelection;
-
 import javax.imageio.*;
 
 /**
