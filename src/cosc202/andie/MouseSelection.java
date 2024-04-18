@@ -1,9 +1,8 @@
-package cosc202;
+package cosc202.andie;
 
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
-import cosc202.andie.ImagePanel;
 
 /**
  * <p>
