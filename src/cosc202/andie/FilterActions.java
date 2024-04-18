@@ -283,12 +283,6 @@ public class FilterActions {
                 } else if (option == JOptionPane.OK_OPTION) {
                     radius = radiusModel.getNumber().intValue();
                 }
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;
-                } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
-                }
 
                 // Create and apply the filter
                 target.getImage().apply(new GaussianFilter(radius));
@@ -344,12 +338,6 @@ public class FilterActions {
                 int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;
-                } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
-                }
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
                     return;
