@@ -4,6 +4,9 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * <p>
@@ -50,6 +53,7 @@ public class ColourActions {
         // addeed RGBSwapping function's button
         actions.add(new RGBSwappingAction(Andie.bundle.getString("RGBSwappingAction"), null, Andie.bundle.getString("RGBSwapDesc"),
                 Integer.valueOf(KeyEvent.VK_C)));
+        actions.add(new brightnessAndContrastAction("Brightness and Contrast", null, "Change the Brightness and Contrast of the loaded image.", Integer.valueOf(KeyEvent.VK_B)));
 
     } 
 
@@ -323,5 +327,110 @@ public class ColourActions {
                 }
             }
         }
+    }// End of RGBSwapping()
+
+    /**A class to implement the GUI for B&C manipulation.
+     * @author Kevin Steve Sathyanath
+     * @date 19/04/2024
+     */
+    public class brightnessAndContrastAction extends ImageAction{
+
+        int brightnessFactor = 0;
+        int contrastFactor = 0;
+
+        /**
+         * <p>
+         * Create a new brightnessAndContrast action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        brightnessAndContrastAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the brightnessAndContrast action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever brightnessAndContrast is triggered.
+         * It changes the image's brightness and contrast depending on user input.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        JSlider brightnessSlider;
+        JSlider contrastSlider;
+        public void actionPerformed(ActionEvent e){
+            try{
+                JPanel p = new JPanel(new GridLayout(2,2));
+                brightnessSlider = new JSlider(-100,100);
+                contrastSlider = new JSlider(-100,100);
+
+                brightnessSlider.addChangeListener(new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent bright){
+                    brightnessFactor = (int) (1+(brightnessSlider.getValue()));
+                    }
+                });
+                contrastSlider.addChangeListener(new ChangeListener(){
+                    @Override
+                    public void stateChanged(ChangeEvent contrast){
+                    contrastFactor = (int) (1+(contrastSlider.getValue()));
+                    }
+                });
+                
+                //BufferedImage temp = target.getCurrentImage();
+
+                p.add(new Label("Brightness: "));
+                p.add(new Label("Contrast: "));
+                
+                p.add(brightnessSlider);
+                p.add(contrastSlider);
+
+                int option = JOptionPane.showOptionDialog(null, p, "Set Brightness And Contrast",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+               
+
+                if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
+                } else if (option == JOptionPane.OK_OPTION) {
+
+                    target.getImage().apply(new BrightnessAndContrast(-40,70));
+                    target.repaint();
+                    target.getParent().revalidate();
+
+                //JDialog dialog = optionPane.createDialog(Andie.getFrame(), "Image Adjustments");
+                //dialog.pack();
+
+                }
+            } //End of try
+        
+
+            catch(Exception err){
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    System.out.println(err);
+                }
+            } //End of catch
+
+         
+            }//End of actonperformed()
+
+            // @Override
+            // public void stateChanged(ChangeEvent h) {
+            // brightnessFactor = (int) (1+(brightnessSlider.getValue()));
+            // contrastFactor = (int) (1+(contrastSlider.getValue()));
+
+        }
     }
-}
+
+

@@ -54,7 +54,7 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
         }
 
 
-        return input;
+        return output;
     }//End of apply().
 
     /**A function to apply the equation given in the lab book.
