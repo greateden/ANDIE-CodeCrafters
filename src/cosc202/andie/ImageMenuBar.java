@@ -20,6 +20,8 @@ import java.awt.*;
  * This includes image rotation and flipping.
  * </p>
  * 
+ * Should be called as ImageActions, however there is one already...
+ * 
  * <p>
  * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
  * 4.0</a>
@@ -46,20 +48,34 @@ public class ImageMenuBar {
      */
     public ImageMenuBar() {
         actions = new ArrayList<Action>();
-        actions.add(new ImageMenuBarFlipHorizontal(Andie.bundle.getString("FlipHorizontal"), null,
-                Andie.bundle.getString("FHDesc"), Integer.valueOf(KeyEvent.VK_H)));
-        actions.add(new ImageMenuBarFlipVertical(Andie.bundle.getString("FlipVertical"), null,
-                Andie.bundle.getString("FVDesc"), Integer.valueOf(KeyEvent.VK_V)));
-        actions.add(new RotateImageAction(Andie.bundle.getString("RotateImageAction"), null,
-                Andie.bundle.getString("RIADesc"), Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new ImageResizeAction(Andie.bundle.getString("ImageResizeAction"), null,
-                Andie.bundle.getString("ImageResizeAction"), Integer.valueOf(KeyEvent.VK_J)));
-        actions.add(new RandomScatteringAction(Andie.bundle.getString("RandomScattering"), null,
-                Andie.bundle.getString("RandomScattering"), Integer.valueOf(KeyEvent.VK_R)));
+
+        Action horizontal = new ImageMenuBarFlipHorizontal(Andie.bundle.getString("FlipHorizontal"), null,
+                Andie.bundle.getString("FHDesc"), Integer.valueOf(KeyEvent.VK_H));
+        actions.add(horizontal);
+
+        Action vertical = new ImageMenuBarFlipVertical(Andie.bundle.getString("FlipVertical"), null,
+                Andie.bundle.getString("FVDesc"), Integer.valueOf(KeyEvent.VK_V));
+        actions.add(vertical);
+
+        Action rotate = new RotateImageAction(Andie.bundle.getString("RotateImageAction"), null,
+                Andie.bundle.getString("RIADesc"), Integer.valueOf(KeyEvent.VK_R));
+        actions.add(rotate);
+
+        Action resize = new ImageResizeAction(Andie.bundle.getString("ImageResizeAction"), null,
+                Andie.bundle.getString("ImageResizeAction"), Integer.valueOf(KeyEvent.VK_E));
+        actions.add(resize);
+        CreateHotKey.createHotkey(resize, KeyEvent.VK_I, InputEvent.META_DOWN_MASK | InputEvent.ALT_DOWN_MASK, "resize");
+
+
+        Action scattering = new RandomScatteringAction(Andie.bundle.getString("RandomScattering"), null,
+                Andie.bundle.getString("RandomScattering"), Integer.valueOf(KeyEvent.VK_A));
+        actions.add(scattering);
+
         scalAct = new ImageScalingAction(Andie.bundle.getString("Scaling"), null, Andie.bundle.getString("ReScaling"),
-                null);
+        Integer.valueOf(KeyEvent.VK_S));
         actions.add(scalAct);
-        rotAct = new RotateImageStrictAction("Rotate by", null, "Rotating by multiples of right angles", null);
+
+        rotAct = new RotateImageStrictAction("Rotate by", null, "Rotating by multiples of right angles", Integer.valueOf(KeyEvent.VK_O));
         actions.add(rotAct);
     }
 
@@ -478,10 +494,20 @@ public class ImageMenuBar {
 
             JMenu scaleMenu = new JMenu(Andie.bundle.getString("Scaling"));
             JMenuItem scale25 = new JMenuItem("25%");
+            CreateHotKey.createHotkey(scale25, KeyEvent.VK_1, 0, "scale25");
+
             JMenuItem scale50 = new JMenuItem("50%");
+            CreateHotKey.createHotkey(scale50, KeyEvent.VK_2, 0, "scale50");
+
             JMenuItem scale75 = new JMenuItem("75%");
+            CreateHotKey.createHotkey(scale75, KeyEvent.VK_3, 0, "scale75");
+
             JMenuItem scale125 = new JMenuItem("125%");
+            CreateHotKey.createHotkey(scale125, KeyEvent.VK_4, 0, "scale125");
+
             JMenuItem scale150 = new JMenuItem("150%");
+            CreateHotKey.createHotkey(scale150, KeyEvent.VK_5, 0, "scale150");
+
 
             scale25.addActionListener(new ScaleActionListener(0.25));
             scale50.addActionListener(new ScaleActionListener(0.5));
@@ -593,9 +619,16 @@ public class ImageMenuBar {
         public void createSubMenu() {
 
             JMenu rotMenu = new JMenu(Andie.bundle.getString("RotateBy"));
+
             JMenuItem rotMenu90 = new JMenuItem("90° right");
+            CreateHotKey.createHotkey(rotMenu90, KeyEvent.VK_1, 0, "rotMenu90");
+
             JMenuItem rotMenu180 = new JMenuItem("180°");
+            CreateHotKey.createHotkey(rotMenu180, KeyEvent.VK_2, 0, "rotMenu180");
+
             JMenuItem rotMenu270 = new JMenuItem("90° left");
+            CreateHotKey.createHotkey(rotMenu270, KeyEvent.VK_3, 0, "rotMenu270");
+
 
             rotMenu90.addActionListener(new ScaleActionListener(90));
             rotMenu180.addActionListener(new ScaleActionListener(180));

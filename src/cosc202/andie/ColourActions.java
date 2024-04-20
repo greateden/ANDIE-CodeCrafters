@@ -25,8 +25,8 @@ import java.awt.*;
  * 
  * @author Steven Mills
  * @version 1.0
- * modified_by The Greatest Eden
- * modified_date 10 Mar 2024
+ *          modified_by The Greatest Eden
+ *          modified_date 10 Mar 2024
  */
 public class ColourActions {
 
@@ -42,16 +42,23 @@ public class ColourActions {
      */
     public ColourActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ConvertToGreyAction(Andie.bundle.getString("convertToGreyAction"), null,
-                Andie.bundle.getString("GreyscaleDesc"), Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new ImageInvertAction(Andie.bundle.getString("invertColour"), null, Andie.bundle.getString("ImageInvertDesc"),
-                Integer.valueOf(KeyEvent.VK_G)));
-        // I am using key C as the hotkey
-        // addeed RGBSwapping function's button
-        actions.add(new RGBSwappingAction(Andie.bundle.getString("RGBSwappingAction"), null, Andie.bundle.getString("RGBSwapDesc"),
-                Integer.valueOf(KeyEvent.VK_C)));
 
-    } 
+        Action grey = new ConvertToGreyAction(Andie.bundle.getString("convertToGreyAction"), null,
+                Andie.bundle.getString("GreyscaleDesc"), Integer.valueOf(KeyEvent.VK_G));
+        actions.add(grey);
+
+        Action invert = new ImageInvertAction(Andie.bundle.getString("invertColour"), null,
+                Andie.bundle.getString("ImageInvertDesc"),
+                Integer.valueOf(KeyEvent.VK_I));
+        actions.add(invert);
+        CreateHotKey.createHotkey(invert, KeyEvent.VK_I, InputEvent.META_DOWN_MASK, "invert");
+
+        Action rgbSwap = new RGBSwappingAction(Andie.bundle.getString("RGBSwappingAction"), null,
+                Andie.bundle.getString("RGBSwapDesc"),
+                Integer.valueOf(KeyEvent.VK_C));
+        actions.add(rgbSwap);
+
+    }
 
     /**
      * <p>
@@ -64,7 +71,7 @@ public class ColourActions {
         JMenu fileMenu = new JMenu(Andie.bundle.getString("Colour"));
 
         for (Action action : actions) {
-        
+
             fileMenu.add(new JMenuItem(action));
         }
 
@@ -120,7 +127,6 @@ public class ColourActions {
         }
 
     }
-
 
     /**
      * <p>
@@ -324,7 +330,7 @@ public class ColourActions {
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
-                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 } else {
                     System.out.println(err);
                 }

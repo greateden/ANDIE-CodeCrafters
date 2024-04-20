@@ -42,21 +42,25 @@ public class ViewActions {
      */
     public ViewActions() {
         actions = new ArrayList<Action>();
-        /*
-         * actions.add(new ZoomInAction("Zoom in", null, "Zoom in",
-         * Integer.valueOf(KeyEvent.VK_PLUS)));
-         * actions.add(new ZoomOutAction("Zoom out", null, "Zoom out",
-         * Integer.valueOf(KeyEvent.VK_MINUS)));
-         * actions.add(new ZoomFullAction("Zoom full", null, "Zoom full",
-         * Integer.valueOf(KeyEvent.VK_1)));
-         */
 
-        actions.add(new ZoomInAction(Andie.bundle.getString("ZoomInAction"), null, Andie.bundle.getString("ZoomInAction"),
-                Integer.valueOf(KeyEvent.VK_PLUS)));
-        actions.add(new ZoomOutAction(Andie.bundle.getString("ZoomOutAction"), null, Andie.bundle.getString("ZoomOutAction"),
-                Integer.valueOf(KeyEvent.VK_MINUS)));
-        actions.add(new ZoomFullAction(Andie.bundle.getString("ZoomFullAction"), null, Andie.bundle.getString("ZoomFullAction"),
-                Integer.valueOf(KeyEvent.VK_1)));
+        Action zoomIn = new ZoomInAction(Andie.bundle.getString("ZoomInAction"), null,
+                Andie.bundle.getString("ZoomInAction"),
+                Integer.valueOf(KeyEvent.VK_I));
+        actions.add(zoomIn);
+        CreateHotKey.createHotkey(zoomIn, KeyEvent.VK_EQUALS, InputEvent.META_DOWN_MASK, "zoomIn");
+
+        Action zoomOut = new ZoomOutAction(Andie.bundle.getString("ZoomOutAction"), null,
+                Andie.bundle.getString("ZoomOutAction"),
+                Integer.valueOf(KeyEvent.VK_O));
+        actions.add(zoomOut);
+        CreateHotKey.createHotkey(zoomOut, KeyEvent.VK_MINUS, InputEvent.META_DOWN_MASK, "zoomOut");
+
+        Action zoomFull = new ZoomFullAction(Andie.bundle.getString("ZoomFullAction"), null,
+                Andie.bundle.getString("ZoomFullAction"),
+                Integer.valueOf(KeyEvent.VK_F));
+        actions.add(zoomFull);
+        CreateHotKey.createHotkey(zoomFull, KeyEvent.VK_1, InputEvent.META_DOWN_MASK, "zoomFull");
+        CreateHotKey.createHotkey(zoomFull, KeyEvent.VK_0, InputEvent.META_DOWN_MASK, "zoomFull");
 
     }
 

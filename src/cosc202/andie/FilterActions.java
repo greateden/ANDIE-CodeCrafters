@@ -27,7 +27,7 @@ import java.awt.*;
  */
 public class FilterActions {
 
-   public ResourceBundle bundle = Andie.bundle;
+    public ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
@@ -39,18 +39,36 @@ public class FilterActions {
      */
     public FilterActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MeanFilterAction(Andie.bundle.getString("MeanFilterAction"), null, Andie.bundle.getString("MeanFilterDesc"),
-                Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new SoftBlurFilterAction(Andie.bundle.getString("SoftBlur"), null, Andie.bundle.getString("SoftBlurDesc"),
-                Integer.valueOf(KeyEvent.VK_B)));
-        actions.add(new SharpenFilterAction(Andie.bundle.getString("SharpenFilter"), null, Andie.bundle.getString("SharpenDesc"),
-                Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new GaussianFilterAction(Andie.bundle.getString("GaussianFilter"), null, Andie.bundle.getString("GaussianDesc"),
-                Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new MedianFilterAction(Andie.bundle.getString("MedianFilter"), null, Andie.bundle.getString("MedianDesc"),
-                Integer.valueOf(KeyEvent.VK_PAGE_DOWN)));
-        actions.add(new EmbossFilterAction(Andie.bundle.getString("EmbossFilter"), null, Andie.bundle.getString("EmbossDesc"),
-            Integer.valueOf(KeyEvent.VK_PAGE_DOWN)));
+
+        Action mean = new MeanFilterAction(Andie.bundle.getString("MeanFilterAction"), null,
+                Andie.bundle.getString("MeanFilterDesc"),
+                Integer.valueOf(KeyEvent.VK_M));
+        actions.add(mean);
+
+        Action soft = new SoftBlurFilterAction(Andie.bundle.getString("SoftBlur"), null,
+                Andie.bundle.getString("SoftBlurDesc"),
+                Integer.valueOf(KeyEvent.VK_S));
+        actions.add(soft);
+
+        Action sharpen = new SharpenFilterAction(Andie.bundle.getString("SharpenFilter"), null,
+                Andie.bundle.getString("SharpenDesc"),
+                Integer.valueOf(KeyEvent.VK_H));
+        actions.add(sharpen);
+
+        Action gaussian = new GaussianFilterAction(Andie.bundle.getString("GaussianFilter"), null,
+                Andie.bundle.getString("GaussianDesc"),
+                Integer.valueOf(KeyEvent.VK_G));
+        actions.add(gaussian);
+
+        Action median = new MedianFilterAction(Andie.bundle.getString("MedianFilter"), null,
+                Andie.bundle.getString("MedianDesc"),
+                Integer.valueOf(KeyEvent.VK_D));
+        actions.add(median);
+
+        Action emboss = new EmbossFilterAction(Andie.bundle.getString("EmbossFilter"), null,
+                Andie.bundle.getString("EmbossDesc"),
+                Integer.valueOf(KeyEvent.VK_E));
+        actions.add(emboss);
     }
 
     /**
@@ -127,8 +145,9 @@ public class FilterActions {
                 panel.add(info);
                 panel.add(radiusSpinner);
 
-                int option = JOptionPane.showOptionDialog(Andie.getFrame(), panel, Andie.bundle.getString("EnterFilterRadius"),
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);     
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), panel,
+                        Andie.bundle.getString("EnterFilterRadius"),
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
@@ -206,7 +225,8 @@ public class FilterActions {
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 100, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner,
+                        Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
@@ -272,9 +292,11 @@ public class FilterActions {
                 // Pop-up dialog box to ask for the radius value.
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
-                //System.out.println("the language is" + Andie.bundle.getString("EnterFilterRadius"));
+                // System.out.println("the language is" +
+                // Andie.bundle.getString("EnterFilterRadius"));
 
-                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner,
+                        Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
@@ -335,7 +357,8 @@ public class FilterActions {
                 SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
                 JSpinner radiusSpinner = new JSpinner(radiusModel);
 
-                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner,
+                        Andie.bundle.getString("EnterFilterRadius"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
