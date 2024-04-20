@@ -333,7 +333,7 @@ public class ColourActions {
      * @author Kevin Steve Sathyanath
      * @date 19/04/2024
      */
-    public class brightnessAndContrastAction extends ImageAction{
+    public class brightnessAndContrastAction extends ImageAction implements ChangeListener{
 
         int brightnessFactor = 0;
         int contrastFactor = 0;
@@ -366,24 +366,51 @@ public class ColourActions {
          */
         JSlider brightnessSlider;
         JSlider contrastSlider;
+        
         public void actionPerformed(ActionEvent e){
             try{
                 JPanel p = new JPanel(new GridLayout(2,2));
                 brightnessSlider = new JSlider(-100,100);
                 contrastSlider = new JSlider(-100,100);
 
-                brightnessSlider.addChangeListener(new ChangeListener() {
+                contrastSlider.setMajorTickSpacing(50);
+                contrastSlider.setPaintTicks(true);
+                contrastSlider.setPaintLabels(true);
+                contrastSlider.setValue(0);
+
+                brightnessSlider.setMajorTickSpacing(50);
+                brightnessSlider.setPaintTicks(true);
+                brightnessSlider.setPaintLabels(true);
+                brightnessSlider.setValue(0);
+
+                ChangeListener sliderChangeListener = new ChangeListener() {
                     @Override
-                    public void stateChanged(ChangeEvent bright){
-                    brightnessFactor = (int) (1+(brightnessSlider.getValue()));
+                    public void stateChanged(ChangeEvent e) {
+                        // Handle slider value changes here
+                        brightnessFactor = brightnessSlider.getValue();
+                        contrastFactor = contrastSlider.getValue();
+
+                        target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor));
+                        target.repaint();
+                        target.getParent().revalidate();
                     }
-                });
-                contrastSlider.addChangeListener(new ChangeListener(){
-                    @Override
-                    public void stateChanged(ChangeEvent contrast){
-                    contrastFactor = (int) (1+(contrastSlider.getValue()));
-                    }
-                });
+                };
+
+                brightnessSlider.addChangeListener(sliderChangeListener);
+                contrastSlider.addChangeListener(sliderChangeListener);
+
+                // brightnessSlider.addChangeListener(new ChangeListener() {
+                //     @Override
+                //     public void stateChanged(ChangeEvent bright){
+                //     brightnessFactor = (int) (1+(brightnessSlider.getValue()));
+                //     }
+                // });
+                // contrastSlider.addChangeListener(new ChangeListener(){
+                //     @Override
+                //     public void stateChanged(ChangeEvent contrast){
+                //     contrastFactor = (int) (1+(contrastSlider.getValue()));
+                //     }
+                // });
                 
                 //BufferedImage temp = target.getCurrentImage();
 
@@ -400,7 +427,11 @@ public class ColourActions {
                
 
                 if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
-                } else if (option == JOptionPane.OK_OPTION) {
+                    target.getImage();
+                    target.repaint();
+                    target.getParent().revalidate();
+                } 
+                else if (option == JOptionPane.OK_OPTION) {
 
                     target.getImage().apply(new BrightnessAndContrast(-40,70));
                     target.repaint();
@@ -424,6 +455,17 @@ public class ColourActions {
 
          
             }//End of actonperformed()
+
+            @Override
+                    public void stateChanged(ChangeEvent e) {
+                        // Handle slider value changes here
+                        brightnessFactor = brightnessSlider.getValue();
+                        contrastFactor = contrastSlider.getValue();
+
+                        target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor));
+                        target.repaint();
+                        target.getParent().revalidate();
+                    }
 
             // @Override
             // public void stateChanged(ChangeEvent h) {
