@@ -124,7 +124,7 @@ We tested our code mainly via brute force. We went through and thought of all th
 |        | **H**otkey Instructions    | Alt + Shift + Ctrl + K | ⌥ ⇧ ⌘ K | H - H             | F1                             |
 ## Significant Refactoring
 
-None done yet. 
+* Multithreading has been implimented 
 
 ## Gantt Diagram for Our Project
 
