@@ -47,6 +47,8 @@ Made by the CodeCrafters Team
 * Creating Readme.md
 * Testing whole project during runtime for bugs
 * Created Issues.txt
+* Encapsulation of code to pad border of images - FilterBorder.java
+* Extended filters
 
 `Angus`
 * Guassian blur filter
@@ -153,6 +155,9 @@ None done yet.
             README                         :done, des2, 26-03-2024, 28-03-2024
             Multithreading                :active, des2, 30-03-2024, 31-03-2024
             Progress Bar                   :active, des2, 30-03-2024, 01-04-2024
+            Extended Filters (Convolution filters) :done, des2, 09-04-2024, 18-04-2024 
+            Extended Filters (Median Filter) :done, des2, 19-04-2024, 23-04-2024
+            Selection Tool                 :active, des2, 17-03-2024, 23-04-2024 <!--Not the correct end date-->
 
 
 
