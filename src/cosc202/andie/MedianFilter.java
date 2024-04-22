@@ -84,12 +84,16 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
             return input;
         }
 
+        // Apply border padding
+        FilterBorder filterBorder = new FilterBorder(input, radius);
+        BufferedImage paddedInput = filterBorder.applyBorder();
+
         int side = 2 * radius + 1; // The side of the kernel using the radius.
         int kernelWidth = side;
         int kernelHeight = side;
 
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null),
-                input.isAlphaPremultiplied(), null);
+        BufferedImage output = new BufferedImage(paddedInput.getColorModel(), paddedInput.copyData(null),
+                paddedInput.isAlphaPremultiplied(), null);
 
         JFrame f = new JFrame("Progress bar");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -120,8 +124,8 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                         @Override
                         public void run() {
                             // Calculate number of rows each thread will process
-                            int rowsPerThread = input.getHeight() / NUM_THREADS;
-                            int remainingRows = input.getHeight() % NUM_THREADS;
+                            int rowsPerThread = paddedInput.getHeight() / NUM_THREADS;
+                            int remainingRows = paddedInput.getHeight() % NUM_THREADS;
 
                             // Arrays to hold the argb elements in a kernel; size determined by given
                             // radius.
@@ -144,13 +148,13 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
 
                             for (int i = startRow; i < endRow; i++) {
 
-                                for (int j = 0; j < input.getWidth(); j++) {
+                                for (int j = 0; j < paddedInput.getWidth(); j++) {
                                     int a1 = 0; // Counter to help fit a square kernel into a 1-D array.
                                     for (int k = i - side / 2; k <= i + side / 2; k++) {
                                         for (int l = j - side / 2; l <= j + side / 2; l++) {
-                                            if (k >= 0 && k < input.getHeight() && l >= 0 && l < input.getWidth()) {
+                                            if (k >= 0 && k < paddedInput.getHeight() && l >= 0 && l < paddedInput.getWidth()) {
                                                 // Taken from MeanFilter.
-                                                argb = input.getRGB(l, k);
+                                                argb = paddedInput.getRGB(l, k);
                                                 int a = (argb & 0xFF000000) >> 24;
                                                 int r = (argb & 0x00FF0000) >> 16;
                                                 int g = (argb & 0x0000FF00) >> 8;
@@ -231,7 +235,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         progressDialog.setLocationRelativeTo(Andie.getFrame());
         // progressDialog.setLocationByPlatform(true);
         progressDialog.setVisible(true);
-        return output;
+        return output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
 
     }
 }
