@@ -67,21 +67,40 @@ public class FileActions {
     public FileActions() {
 
         actions = new ArrayList<Action>();
-        actions.add(new FileOpenAction(Andie.bundle.getString("OpenAction"), null, Andie.bundle.getString("OpenDesc"),
-                Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new FileSaveAction(Andie.bundle.getString("SaveAction"), null,
-                Andie.bundle.getString("SaveDesc"),
-                Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(
-                new FileSaveAsAction(Andie.bundle.getString("SaveAsAction"), null, Andie.bundle.getString("SaveAsDesc"),
-                        Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(
-                new FileExportAction(Andie.bundle.getString("ExportAction"), null, Andie.bundle.getString("ExportDesc"),
-                        Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new FileExitAction(Andie.bundle.getString("ExitAction"), null, Andie.bundle.getString("ExitDesc"),
-                Integer.valueOf(KeyEvent.VK_Q)));
-        actions.add(new FileChangeLanguageAction(Andie.bundle.getString("ChangeLanguage"), null,
-                Andie.bundle.getString("ChangeLanguage"), Integer.valueOf(KeyEvent.VK_L)));
+
+        Action fileOpen = new FileOpenAction(Andie.bundle.getString("OpenAction"), null,
+                Andie.bundle.getString("OpenDesc"),
+                Integer.valueOf(KeyEvent.VK_O));
+        actions.add(fileOpen);
+        CreateHotKey.createHotkey(fileOpen, KeyEvent.VK_O, InputEvent.META_DOWN_MASK, "fileOpen");
+
+        Action fileSave = new FileSaveAction(Andie.bundle.getString("SaveAction"), null,
+                Andie.bundle.getString("SaveDesc"), Integer.valueOf(KeyEvent.VK_S));
+        actions.add(fileSave);
+        CreateHotKey.createHotkey(fileSave, KeyEvent.VK_S, InputEvent.META_DOWN_MASK, "fileSave");
+
+        Action fileSaveAs = new FileSaveAsAction(Andie.bundle.getString("SaveAsAction"), null,
+                Andie.bundle.getString("SaveAsDesc"),
+                Integer.valueOf(KeyEvent.VK_A));
+        actions.add(fileSaveAs);
+        CreateHotKey.createHotkey(fileSaveAs, KeyEvent.VK_S, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "fileSaveAs");
+
+        Action fileExport = new FileExportAction(Andie.bundle.getString("ExportAction"), null,
+                Andie.bundle.getString("ExportDesc"),
+                Integer.valueOf(KeyEvent.VK_E));
+        actions.add(fileExport);
+        CreateHotKey.createHotkey(fileExport, KeyEvent.VK_E, InputEvent.META_DOWN_MASK, "fileExport");
+
+        Action fileChangeLangue = new FileChangeLanguageAction(Andie.bundle.getString("ChangeLanguage"), null,
+                Andie.bundle.getString("ChangeLanguage"), Integer.valueOf(KeyEvent.VK_L));
+        actions.add(fileChangeLangue);
+        CreateHotKey.createHotkey(fileChangeLangue,0, 0, "fileChangeLangue");
+
+        Action fileExit = new FileExitAction(Andie.bundle.getString("ExitAction"), null,
+                Andie.bundle.getString("ExitDesc"),
+                Integer.valueOf(KeyEvent.VK_Q));
+        actions.add(fileExit);
+        CreateHotKey.createHotkey(fileExit, KeyEvent.VK_Q, InputEvent.META_DOWN_MASK, "fileExit");
     }
 
     /**

@@ -55,11 +55,17 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
         float[] embossMatrix = { // a hardcoded embossing matrix 
             -1.0f, 0.0f, 0.0f,
             0.0f,  0.0f, 0.0f,
-             0.0f,  0.0f, 1.0f
+            0.0f,  0.0f, 1.0f
         };
         Kernel embossKernel = new Kernel(3, 3, embossMatrix); // creates a 3x3 kernal with hard coded matrix
-        ConvolveOp embossOp = new ConvolveOp(embossKernel); // Creates a convolve opterator with the emboss kernerl
-        embossOp.filter(input, embossedImage); // applys the kerneral to the input image and saves it to embossImage
+        ConvolveOp convOp = new ConvolveOp(embossKernel); // Creates a convolution operation that applies the emboss kernal
+
+        //Create an instance of the class that creates image with border
+        FilterBorder borderedImage = new FilterBorder(input, radius);
+        //Applies convolution to bordered image
+        BufferedImage output = convOp.filter(borderedImage.applyBorder(), null);
+        //Crops image back to original size
+        embossedImage = output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
 
         for (int y = 0; y < input.getHeight(); y++) { // Loops though by height then width
             for (int x = 0; x < input.getWidth(); x++) {

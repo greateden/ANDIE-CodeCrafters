@@ -48,6 +48,9 @@ public abstract class ImageAction extends AbstractAction {
      * via {@link setTarget}.
      * </p>
      * 
+     * We can actually reconstruct this constructor, further details see
+     * comments in CreateHotKey.java. Cheers, Eden
+     * 
      * @param name The name of the action (ignored if null).
      * @param icon An icon to use to represent the action (ignored if null).
      * @param desc A brief description of the action  (ignored if null).

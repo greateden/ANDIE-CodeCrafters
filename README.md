@@ -21,6 +21,7 @@ Made by the CodeCrafters Team
 * Adding Traditional Chinese (Taiwan) language support
 * Created the icon
 * Implemented multithreading for median filter
+* Added two types of keyboard hotkeys and their instructions
 
 `Kevin`
 * Enabled Multilingual support 
@@ -67,21 +68,58 @@ We tested our code mainly via brute force. We went through and thought of all th
 
 ## User Guide
 
-Prerequisites
+⚠️Prerequisites⚠️
 - Java Development Kit (JDK): You'll need a recent version of the JDK installed on your system. Download and install it from the official Oracle website: https://www.oracle.com/nz/java/technologies/downloads/. Verify the installation by opening a terminal and running java -version.
 
 - Gradle: Version 8.6
 
-Installation
+🔧Installation🔧
 - Clone or Download the Project: Obtain the project files using your preferred method (Git clone or direct download).
 
-Running the program
+🏃Running the program🏃
 - Open Terminal and navigate to project directory
-- Run
-`gradle build` 
+- Run `gradle build` 
 - Run `gradle run`
-- to open files go to file > open
+- To open files, go to file > open
 
+<span style="color:red;font-weight:700;font-size:16px">
+   🔥Hot
+</span>keys🔥
+
+<!--https://helpx.adobe.com/tw/photoshop/using/default-keyboard-shortcuts.html-->
+
+
+| Menus  | <span style="color:red;font-weight:700;font-size:16px">Actions</span>                | Windows                | macOS   | Windows & macOS   | Alternative                    |
+|--------|------------------------|------------------------|---------|-------------------|--------------------------------|
+| **F**ile   | **O**pen File              | Ctrl + O               | ⌘ O     | F - O             |                                |
+|        | **S**ave File              | Ctrl + S               | ⌘ S     | F - S             |                                |
+|        | Save **A**s                | Ctrl + Shift + S       | ⇧⌘ S    | F - A             |                                |
+|        | **E**xport                 | Ctrl + E               | ⌘ E     | F - E             |                                |
+|        | Exit (**Q**)                   | Ctrl + Q               | ⌘ Q     | F - Q             | Alt + F4 (Windows)             |
+|        | **S**et Language               |                        |         | F - L             |                                |
+| **E**dit   | **U**ndo                   | Ctrl + Z               | ⌘ Z     | E - U             |                                |
+|        | **R**edo                   | Ctrl + Y               | ⌘ Y     | E - R             | Ctrl/Cmd + Shift + Y (Win/Mac) |
+| **V**iew   | Zoom **i**n                | Ctrl + "+"             | ⌘ +     | V - I             |                                |
+|        | Zoom **o**ut               | Ctrl + "-"             | ⌘ -     | V - O             |                                |
+|        | Zoom **f**ull              | Ctrl + 0               | ⌘ 0     | V - F             | Ctrl/Cmd + 1 (Win/Mac)         |
+| Fi**l**ter | **M**ean Filter            |                        |         | L - M             |                                |
+|        | **S**oft Blur              |                        |         | L - S             |                                |
+|        | S**h**arpen Filter         |                        |         | L - H             |                                |
+|        | **G**aussian Filter        |                        |         | L - G             |                                |
+|        | Me**d**ian Filter          |                        |         | L - D             |                                |
+|        | **E**mboss Filter          |                        |         | L - E             |                                |
+| **C**olour | **G**reyscale              |                        |         | C - G             |                                |
+|        | **I**nvert Colour          | Ctrl + I               | ⌘ I     | C - I             |                                |
+|        | **C**olour Channel Cycling |                        |         | C - C             |                                |
+| **I**mage  | Flip **H**orizontal        |                        |         | I - H             |                                |
+|        | Flip **V**ertical          |                        |         | I - V             |                                |
+|        | **R**otate Image           |                        |         | I - R             |                                |
+|        | Image R**e**size           | Ctrl + Alt + I         | ⌥ ⇧ ⌘ I | I - E             |                                |
+|        | R**a**ndom Scattering      |                        |         | I - A             |                                |
+|        | Image **S**caling          |                        |         | I - S - 1/2/3/4/5 |                                |
+|        | R**o**tate By              |                        |         | I - O - 1/2/3     |                                |
+| **H**elp   | **A**bout us               |                        |         | H - A             |                                |
+|        | **H**otkey Instructions    | Alt + Shift + Ctrl + K | ⌥ ⇧ ⌘ K | H - H             | F1                             |
 ## Significant Refactoring
 
 None done yet. 

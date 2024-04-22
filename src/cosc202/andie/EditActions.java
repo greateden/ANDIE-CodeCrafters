@@ -38,10 +38,17 @@ public class EditActions {
      */
     public EditActions() {
         actions = new ArrayList<Action>();
-        actions.add(new UndoAction(Andie.bundle.getString("Undo"), null, Andie.bundle.getString("Undo"),
-                Integer.valueOf(KeyEvent.VK_Z)));
-        actions.add(new RedoAction(Andie.bundle.getString("Redo"), null, Andie.bundle.getString("Redo"),
-                Integer.valueOf(KeyEvent.VK_Y)));
+        
+        Action undo = new UndoAction(Andie.bundle.getString("Undo"), null, Andie.bundle.getString("Undo"),
+        Integer.valueOf(KeyEvent.VK_U));
+        actions.add(undo);
+        CreateHotKey.createHotkey(undo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK, "Undo");
+        
+        Action redo = new RedoAction(Andie.bundle.getString("Redo"), null, Andie.bundle.getString("Redo"),
+        Integer.valueOf(KeyEvent.VK_R));
+        actions.add(redo);
+        CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "Redo");
+        CreateHotKey.createHotkey(redo, KeyEvent.VK_Y, InputEvent.META_DOWN_MASK, "Redo");
     }
 
     /**
