@@ -82,7 +82,9 @@ public class MouseSelection implements MouseListener{
      * Not needed for this implimentation 
      */
     @Override
-    public void mouseClicked(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {
+        clearSelection();
+    }
 
     /**
      * Not needed for this implimentation 
