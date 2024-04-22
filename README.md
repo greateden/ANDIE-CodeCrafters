@@ -157,7 +157,7 @@ None done yet.
             Progress Bar                   :active, des2, 30-03-2024, 01-04-2024
             Extended Filters (Convolution filters) :done, des2, 09-04-2024, 18-04-2024 
             Extended Filters (Median Filter) :done, des2, 19-04-2024, 23-04-2024
-            Selection Tool                 :active, des2, 17-03-2024, 23-04-2024 <!--Not the correct end date-->
+            Selection Tool                 :active, des2, 17-03-2024, 23-04-2024
 
 
 
