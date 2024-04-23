@@ -2,8 +2,15 @@ package cosc202.andie;
 
 import java.util.*;
 import java.io.*;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.*;
 import javax.imageio.*;
+import java.awt.image.BufferedImage;
+import javax.swing.*;
+
+import cosc202.andie.ImageMenuBar.ImageResizeAction.ButtonListener;
 
 /**
  * <p>
@@ -59,9 +66,13 @@ class EditableImage {
     // the user may open a new file which has been edited before.
     public static boolean isOpsNotEmptyStatus;
 
-    //to help determine whether to "save" or "save as"
+    // to help determine whether to "save" or "save as"
     public static boolean hasOpsFile;
 
+    // a stack for saving all the ops done after click 'macro'
+    public static Stack<ImageOperation> macroStack=new Stack<ImageOperation>();
+   //a boolean variable for macro to manage the start and stop
+    public static boolean recordingStart;
 
     /*
      * A method for determing whether to call "save as" or "save"
@@ -72,7 +83,7 @@ class EditableImage {
 
     // public boolean isOpsNotEmpty() {
 
-    //     return !ops.empty();
+    // return !ops.empty();
     // }
 
     /**
@@ -80,7 +91,8 @@ class EditableImage {
      * Create a new EditableImage.
      * </p>
      * 
-     * <p>ƒ
+     * <p>
+     * ƒ
      * A new EditableImage has no image (it is a null reference), and an empty stack
      * of operations.
      * </p>
@@ -270,12 +282,15 @@ class EditableImage {
         // made a new change to the file or not; this will not look into the stack as
         // the user may open a new file which has been edited before.
         isOpsNotEmptyStatus = true;
-
+        if (recordingStart == true) {
+            macroStack.add(op);
+        }
         current = op.apply(current);
         ops.add(op);
-        //System.out.println();
+        // System.out.println();
 
     }
+
     /**
      * <p>
      * Undo the last {@link ImageOperation} applied to the image.
@@ -328,4 +343,5 @@ class EditableImage {
         }
     }
 
+   
 }

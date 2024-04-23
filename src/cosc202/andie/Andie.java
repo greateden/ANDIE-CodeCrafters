@@ -27,7 +27,7 @@ import javax.imageio.*;
  * @version 1.0
  */
 public class Andie {
-    private static JFrame frame;  
+    private static JFrame frame;
     private static ImagePanel imagePanel;
     public static ResourceBundle bundle;
     public static JMenuBar menuBar;
@@ -39,6 +39,7 @@ public class Andie {
     private static ImageMenuBar imageMenuBar;
     private static ColourActions colourActions;
     private static HelpActions helpActions;
+    private static MacroActions macroActions;
 
     /**
      * <p>
@@ -62,6 +63,7 @@ public class Andie {
      * @see ViewActions
      * @see FilterActions
      * @see ColourActions
+     * @see MacroActions
      * 
      * @throws Exception if something goes wrong.
      */
@@ -104,7 +106,7 @@ public class Andie {
      * Gets the status of the frame.
      * </p>
      */
-    public static void getStatus(){
+    public static void getStatus() {
         System.out.println(frame.getExtendedState());
     }
 
@@ -116,7 +118,7 @@ public class Andie {
     private static void createMenuBar() {
         // Add in menus for various types of action the user may perform.
         JMenuBar newMenuBar = new JMenuBar();
-    
+
         fileActions = new FileActions();
         editActions = new EditActions();
         viewActions = new ViewActions();
@@ -124,6 +126,7 @@ public class Andie {
         imageMenuBar = new ImageMenuBar();
         colourActions = new ColourActions();
         helpActions = new HelpActions();
+        macroActions = new MacroActions();
         // File menus are pretty standard, so things that usually go in File menus go
         // here.
         newMenuBar.add(fileActions.createMenu());
@@ -148,6 +151,9 @@ public class Andie {
         // Provides an about page and link to online docs
         newMenuBar.add(helpActions.createMenu());
 
+        // actions that apply a macro funtion of the operations
+        newMenuBar.add(macroActions.createMenu());
+
         frame.setJMenuBar(newMenuBar);
         frame.repaint();
         frame.pack();
@@ -166,7 +172,8 @@ public class Andie {
     }
 
     /**
-     * Yes it's calling createMenuBar(), we'rejust trying to make it with more sense.
+     * Yes it's calling createMenuBar(), we'rejust trying to make it with more
+     * sense.
      * Makes more sense than using a carrier pigeon for teammate communication.
      */
     public static void setLanguage() {
@@ -197,7 +204,7 @@ public class Andie {
 
                 // Making preferences and locale
                 Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale("en","NZ"));
+                Locale.setDefault(new Locale("en", "NZ"));
 
                 // Now making the ResourceBundle
                 bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");

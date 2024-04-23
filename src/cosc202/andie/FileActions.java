@@ -35,7 +35,7 @@ public class FileActions {
 
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
-    protected boolean isOpened = false;
+    protected static boolean isOpened = false;
     // protected boolean isSaved = false;
 
     /**
@@ -489,6 +489,7 @@ public class FileActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+
             JFileChooser fileChooser = new JFileChooser();
 
             if (isOpened == true) {
