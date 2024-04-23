@@ -5,5 +5,4 @@ LANGUAGE
 
 NOT URGENT
 - Gaussian and median filter’s popup's for value input dont explain why they need a value
-- Colour cycling pop-up could use a line of instruction to make it more straightforward to the user
 - Improve popups, to make them all match and feel integrated

@@ -222,7 +222,24 @@ public class ColourActions {
                 int B = 0;
 
                 // Create the dialog panel
-                JPanel panel = new JPanel(new GridLayout(3, 3));
+                JPanel panel = new JPanel(new GridLayout(5, 3));
+
+                JLabel l1 = new JLabel(Andie.bundle.getString("RGBSwappingInstruction"));
+                JLabel l2 = new JLabel();
+                JLabel l3 = new JLabel();
+
+                panel.add(l1);
+                panel.add(l2);
+                panel.add(l3);
+
+                JLabel l4 = new JLabel(Andie.bundle.getString("FirstChannel"));
+                JLabel l5 = new JLabel(Andie.bundle.getString("SecondChannel"));
+                JLabel l6 = new JLabel(Andie.bundle.getString("ThirdChannel"));
+
+                panel.add(l4);
+                panel.add(l5);
+                panel.add(l6);
+
 
                 JRadioButton r1 = new JRadioButton("R");
                 JRadioButton r2 = new JRadioButton("G");
