@@ -94,6 +94,24 @@ class EditableImage {
         opsFilename = null;
     }
 
+    /**A method to make a copy of the EditableImage object. Mainly used in testing for now. Don't know if I'l commit to it.
+     * @author Kevin Steve Sathyanath
+     * @return a copy of the Editable image.
+     */
+    public EditableImage makeCopy(){
+
+        EditableImage copy = new EditableImage();
+        copy.original = deepCopy(this.original);
+        copy.current = deepCopy(this.current);
+        copy.ops = this.ops;
+        copy.redoOps = this.redoOps;
+        copy.imageFilename = this.imageFilename;
+        copy.opsFilename = this.opsFilename;
+
+        return copy;
+
+    }
+
     /**
      * <p>
      * Check if there is an image loaded.

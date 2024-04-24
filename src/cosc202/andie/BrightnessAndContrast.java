@@ -29,8 +29,8 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
      */
     public BufferedImage apply(BufferedImage input){
 
-        BufferedImage output = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_INT_ARGB); //makes output. useful since we can apply multiple transforms to the unedited input image.
-
+        BufferedImage output = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_INT_ARGB); 
+        
         int nr,ng,nb; //New values after applying the equation.
         int argb; //Resolved value of the pixel
         int a,r,g,b; //Broken down values or each pixel
@@ -66,7 +66,7 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
     public int equation(int v){
 
         int vOut = 0;
-        vOut = (int)((1 + (c/100))*(v-127.5)+(127.5)*(1+(b/100))); //Explicity typecasting since pixel value cannot be a float.
+        vOut = (int)((1 + (c/100.0))*(v-127.5)+(127.5)*(1+(b/100.0))); //Explicity typecasting since pixel value cannot be a float.
         if(vOut>MAX) {vOut = MAX;}
         if(vOut<MIN) {vOut = MIN;}
         return vOut;

@@ -383,6 +383,12 @@ public class ColourActions {
                 brightnessSlider.setPaintLabels(true);
                 brightnessSlider.setValue(0);
 
+                /*Test code */
+                EditableImage copy = target.getImage().makeCopy(); 
+                ImagePanel working = new ImagePanel(copy);
+                ImagePanel original = getTarget();
+                /*Test code END */
+
                 ChangeListener sliderChangeListener = new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
@@ -390,9 +396,20 @@ public class ColourActions {
                         brightnessFactor = brightnessSlider.getValue();
                         contrastFactor = contrastSlider.getValue();
 
-                        target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor));
-                        target.repaint();
-                        target.getParent().revalidate();
+                        //Setting a new target for the ImageActon
+                        setTarget(working);
+
+
+                        target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor)); 
+                        target.repaint(); 
+                        target.getParent().revalidate(); 
+
+                        
+
+
+
+                        //copy = target.getImage(); //Testing line
+                        //copy.undo();
                     }
                 };
 
@@ -432,10 +449,11 @@ public class ColourActions {
                     target.getParent().revalidate();
                 } 
                 else if (option == JOptionPane.OK_OPTION) {
-
-                    target.getImage().apply(new BrightnessAndContrast(-40,70));
-                    target.repaint();
+                    System.out.println(brightnessFactor + " " + contrastFactor);
+                    target.getImage().apply(new BrightnessAndContrast(brightnessFactor, contrastFactor));
                     target.getParent().revalidate();
+                    target.repaint();
+                   
 
                 //JDialog dialog = optionPane.createDialog(Andie.getFrame(), "Image Adjustments");
                 //dialog.pack();
@@ -458,13 +476,18 @@ public class ColourActions {
 
             @Override
                     public void stateChanged(ChangeEvent e) {
-                        // Handle slider value changes here
-                        brightnessFactor = brightnessSlider.getValue();
-                        contrastFactor = contrastSlider.getValue();
+                        // // Handle slider value changes here
+                        // brightnessFactor = brightnessSlider.getValue();
+                        // contrastFactor = contrastSlider.getValue();
 
-                        target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor));
-                        target.repaint();
-                        target.getParent().revalidate();
+                        // EditableImage copy = target.getImage().makeCopy(); //Testing line
+
+                        // copy.apply(new BrightnessAndContrast(-50,-50)); //Testing
+                        // target.repaint(); //Testing 
+                        // //target.getParent().revalidate(); //Testing
+
+                        // //copy = target.getImage(); //Testing line
+                        // copy.undo();
                     }
 
             // @Override

@@ -1,4 +1,4 @@
-       package cosc202.andie;
+package cosc202.andie;
 
 import java.awt.*;
 import javax.swing.*;
@@ -50,6 +50,15 @@ public class ImagePanel extends JPanel {
      */
     public ImagePanel() {
         image = new EditableImage();
+        scale = 1.0;
+    }
+
+    /**A replacement constructor to be used in displaying a new imagepanel. We can se tthis as a new target in imageAction. TESTING
+     * @author Kevin Steve Sathyanath
+     * @date 23/04/2024
+     */
+    public ImagePanel(EditableImage working){
+        image = working;
         scale = 1.0;
     }
 
