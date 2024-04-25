@@ -23,7 +23,6 @@ public class PrintImage implements Printable {
 
     /**
      * Constructor
-     * @param imageToPrint The image to print
      * @param fitWholePage Whether to fit the whole page or not
      */
     public PrintImage(boolean fitWholePage) {
@@ -72,7 +71,7 @@ public class PrintImage implements Printable {
      * Prints the image.
      */
     public void printImage() {
-        
+
         PrinterJob job = PrinterJob.getPrinterJob();
         job.setPrintable(this);
 
