@@ -22,6 +22,7 @@ Made by the CodeCrafters Team
 * Created the icon
 * Implemented multithreading for median filter
 * Added two types of keyboard hotkeys and their instructions
+* Print Image
 
 `Kevin`
 * Enabled Multilingual support 
@@ -160,6 +161,7 @@ We tested our code mainly via brute force. We went through and thought of all th
             Extended Filters (Median Filter) :done, des2, 19-04-2024, 23-04-2024
             Selection Tool                 :active, des2, 16-03-2024, 18-03-2024
             Selection Tool                 :active, des2, 23-04-2024, 30-04-2024
+            Print Image                    :done, des2, 23-04-2024, 25-04-2024
 
 
 
