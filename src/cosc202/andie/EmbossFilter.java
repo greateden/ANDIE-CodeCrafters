@@ -57,16 +57,20 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
 
         Kernel embossKernel = new Kernel(3, 3, embossMatrix); // creates a 3x3 kernal with hard coded matrix
         ConvolveOp convOp = new ConvolveOp(embossKernel); // Creates a convolution operation that applies the emboss kernal
+        
+        // Had an issue with the image RGB values so setting it all to the same type and redrawing the image
+        BufferedImage AdjustedInput = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_INT_RGB);
+        AdjustedInput.getGraphics().drawImage(input, 0, 0, null);
 
         //Create an instance of the class that creates image with border
-        FilterBorder borderedImage = new FilterBorder(input, 2);
+        FilterBorder borderedImage = new FilterBorder(AdjustedInput, 2);
         //Applies convolution to bordered image
         BufferedImage output = convOp.filter(borderedImage.applyBorder(), null);
         //Crops image back to original size
-        embossedImage = output.getSubimage(2, 2, input.getWidth(), input.getHeight());
+        embossedImage = output.getSubimage(2, 2, AdjustedInput.getWidth(), AdjustedInput.getHeight());
 
-        for (int y = 0; y < input.getHeight(); y++) { // Loops though by height then width
-            for (int x = 0; x < input.getWidth(); x++) {
+        for (int y = 0; y < AdjustedInput.getHeight(); y++) { // Loops though by height then width
+            for (int x = 0; x < AdjustedInput.getWidth(); x++) {
                 int rgb = embossedImage.getRGB(x, y); // gets the rgb values of the filtered image
                 int gray = (rgb >> 16) & 0xFF;  // the values for gray
                 int adjustedValue = gray  + 127; // sets the middle point from lab book (127 or 128) and adds the grey value
