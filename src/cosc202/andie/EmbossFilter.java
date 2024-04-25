@@ -3,6 +3,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 
+import javax.sound.midi.SysexMessage;
+
 
 /**
  * <p>
@@ -25,22 +27,25 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
     /**
     * The radius of the Emboss filter. This currently is not implmented but will allow for a larger emboss matrix
     */
+    private int direction;
     private int radius;
 
     /**
      * Constructor that sets the radius of the Emboss filter.
-     * @param radius the radius of the filter
+     * @param direction the radius of the filter
     */
 
-    EmbossFilter(int radius){
-        this.radius = radius;
+    EmbossFilter(int direction){
+        this.direction = direction;
+        this.radius = 1;
     }
     
     /**
     * Default constructor that creates a Emboss Filter with a radius of 2.
     */
     EmbossFilter() {
-        this(2);
+        this.direction = 0;
+        this.radius = 1;
     }
 
     /**
@@ -51,21 +56,17 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
     */
     public BufferedImage apply(BufferedImage input) {
         BufferedImage embossedImage = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_INT_RGB); // creates a new image 
-        int size = (2*radius+1) * (2*radius+1); // not implmented but to set matrix size
-        float[] embossMatrix = { // a hardcoded embossing matrix 
-            -1.0f, 0.0f, 0.0f,
-            0.0f,  0.0f, 0.0f,
-            0.0f,  0.0f, 1.0f
-        };
+        float[] embossMatrix = createMatrix(radius,direction );
+
         Kernel embossKernel = new Kernel(3, 3, embossMatrix); // creates a 3x3 kernal with hard coded matrix
         ConvolveOp convOp = new ConvolveOp(embossKernel); // Creates a convolution operation that applies the emboss kernal
 
         //Create an instance of the class that creates image with border
-        FilterBorder borderedImage = new FilterBorder(input, radius);
+        FilterBorder borderedImage = new FilterBorder(input, 2);
         //Applies convolution to bordered image
         BufferedImage output = convOp.filter(borderedImage.applyBorder(), null);
         //Crops image back to original size
-        embossedImage = output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
+        embossedImage = output.getSubimage(2, 2, input.getWidth(), input.getHeight());
 
         for (int y = 0; y < input.getHeight(); y++) { // Loops though by height then width
             for (int x = 0; x < input.getWidth(); x++) {
@@ -79,6 +80,68 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
         }
 
         return embossedImage; // returns the embossed and color adjusted image
+    }
+
+
+     /**
+     * Create a matrix for the emboss kernal
+     * This method works by treating the float array as a grid similar but the opposite to the Gaussian
+     * It uses trigonometry to work out the grid coords of a line at a set angle
+     * There is a loop which follows the line and sets the array coords worked out with (x * size + y) to 1.0f 
+     * until it then reaches the center point called maxSize (I reused maxSize since its the same as center value)
+     * It then changes the matrixValue from 1.0f to -1.0f this gives the diffrent colors for the lines
+     * @param size the grid size based on radius of the filter
+     * @param direction the angle for the emboss
+     * @return a float[] array used by the emboss kernal
+    */
+    public static float[] createMatrix(int size , int direction){
+        float[] returnMatrix = new float[(2*size+1) * (2*size+1)]; // initalises matrix for returning
+        size = (2*size + 1);
+        float matrixValue = 1.0f; // sets the matrix value to 1.0f used for the kernal later on
+        int maxSize = (size/2); // the size is divied by two and since its an int it floor rounds
+        double angleRads = Math.toRadians(direction); // converts the degrees to rads 
+        int dx,dy = 0; // initialise dx and dy since its used in the switch so It becomes local if I dont do it here
+        switch (direction){
+            case 0: // if the angle is equal to 0,90,180 or 270 its gotta be treated specially sinces its along the axis lines so switch is like if elseif but looks cool
+                dx = 1;
+                dy = 0;
+                break;
+            case 90:
+                dx = 0;
+                dy = 1;
+                break;
+            case 180:
+                dx = -1;
+                dy = 0;
+                break; 
+            case 270:
+                dx = 0;
+                dy = -1;
+                break;
+            default:
+                dy = (int) Math.round(Math.sin(angleRads) * maxSize); // this uses math I didn't think I would again outside of highschool
+                dx = (int) Math.round(Math.cos(angleRads) * maxSize); // basiclly this represents the gradient of the curve in our case line 
+
+        }
+
+        for(int i = -maxSize; i <= maxSize; i++){ // loop from -maxSize to maxSize adding i + 1 each time
+            System.out.println(String.format("%s i", i));
+            int x = maxSize + i * dx; // this works out the x pos based on the gradient
+            int y = maxSize + i * dy; // sames as above but for y pos
+            if (0 <= x && x < size && 0 <= y && y < size) { // this just checks that its inside the grid or values will keep going
+                if(x == maxSize && y == maxSize){ // this checks if it is the center point
+                    matrixValue = -1.0f; // once it hits the center the emboss needs to be negative
+                }else{
+                    returnMatrix[x * size + y] = matrixValue; // sets the index from the coords we worked out to the matrixvalue which is -1 or +1 
+                }
+                System.out.println(String.format("(%s %s)", x,y));
+             
+      
+                // the reason its negivtive or plus one is to give the contrast for the lines to sink or pop out.
+                // The equation for the grid convertion for both guassaian and this was from https://www.youtube.com/watch?v=I2_xT1joq2U
+            }
+        }
+        return returnMatrix; // returns the completed matrix.
     }
 
 }

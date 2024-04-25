@@ -351,25 +351,25 @@ public class FilterActions {
             try {
 
                 // Determine the radius - ask the user.
-                int radius = 0;
+                int angle = 0;
 
                 // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
-                JSpinner radiusSpinner = new JSpinner(radiusModel);
+                SpinnerNumberModel angleModel = new SpinnerNumberModel(0, 0, 360, 1);
+                JSpinner angleSpinner = new JSpinner(angleModel);
 
-                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner,
-                        Andie.bundle.getString("EnterFilterRadius"),
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), angleSpinner,
+                        Andie.bundle.getString("EnterEmbossDirection"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
                     return;
                 } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
+                    angle = angleModel.getNumber().intValue();
                 }
 
                 // Create and apply the filter
-                target.getImage().apply(new EmbossFilter(radius));
+                target.getImage().apply(new EmbossFilter(angle));
                 target.repaint();
                 target.getParent().revalidate();
             } catch (Exception err) {
