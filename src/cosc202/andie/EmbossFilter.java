@@ -3,9 +3,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 
-import javax.sound.midi.SysexMessage;
-
-
 /**
  * <p>
  * This class implements the ImageOperation interface and applies Image embossing to a BufferedImage.
@@ -125,7 +122,6 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
         }
 
         for(int i = -maxSize; i <= maxSize; i++){ // loop from -maxSize to maxSize adding i + 1 each time
-            System.out.println(String.format("%s i", i));
             int x = maxSize + i * dx; // this works out the x pos based on the gradient
             int y = maxSize + i * dy; // sames as above but for y pos
             if (0 <= x && x < size && 0 <= y && y < size) { // this just checks that its inside the grid or values will keep going
@@ -134,9 +130,6 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
                 }else{
                     returnMatrix[x * size + y] = matrixValue; // sets the index from the coords we worked out to the matrixvalue which is -1 or +1 
                 }
-                System.out.println(String.format("(%s %s)", x,y));
-             
-      
                 // the reason its negivtive or plus one is to give the contrast for the lines to sink or pop out.
                 // The equation for the grid convertion for both guassaian and this was from https://www.youtube.com/watch?v=I2_xT1joq2U
             }
