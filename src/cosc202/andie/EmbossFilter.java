@@ -127,9 +127,10 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
             if (0 <= x && x < size && 0 <= y && y < size) { // this just checks that its inside the grid or values will keep going
                 if(x == maxSize && y == maxSize){ // this checks if it is the center point
                     matrixValue = -1.0f; // once it hits the center the emboss needs to be negative
-                }else{
-                    returnMatrix[x * size + y] = matrixValue; // sets the index from the coords we worked out to the matrixvalue which is -1 or +1 
+                    continue;
                 }
+                returnMatrix[x * size + y] = matrixValue; // sets the index from the coords we worked out to the matrixvalue which is -1 or +1 
+                
                 // the reason its negivtive or plus one is to give the contrast for the lines to sink or pop out.
                 // The equation for the grid convertion for both guassaian and this was from https://www.youtube.com/watch?v=I2_xT1joq2U
             }
