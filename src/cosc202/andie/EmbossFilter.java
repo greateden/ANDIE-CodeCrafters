@@ -29,7 +29,8 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
 
     /**
      * Constructor that sets the radius of the Emboss filter.
-     * @param direction the radius of the filter
+     * @param direction the direction the emboss is applied in
+     * @param radius the radius of the filter
     */
 
     EmbossFilter(int direction, int radius){
@@ -38,7 +39,7 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
     }
     
     /**
-    * Default constructor that creates a Emboss Filter with a radius of 2.
+    * Default constructor that creates a Emboss Filter with a radius of 1 and a direction of 0
     */
     EmbossFilter() {
         this.direction = 0;
@@ -53,7 +54,7 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
     */
     public BufferedImage apply(BufferedImage input) {
         BufferedImage embossedImage = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_INT_RGB); // creates a new image 
-        float[] embossMatrix = createMatrix(radius,direction );
+        float[] embossMatrix = createMatrix(radius,direction ); // Gets a matrix based on direction and radius to use in the emboss kernal
 
         Kernel embossKernel = new Kernel(3, 3, embossMatrix); // creates a 3x3 kernal with hard coded matrix
         ConvolveOp convOp = new ConvolveOp(embossKernel); // Creates a convolution operation that applies the emboss kernal
