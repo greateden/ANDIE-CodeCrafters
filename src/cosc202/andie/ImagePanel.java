@@ -130,6 +130,8 @@ public class ImagePanel extends JPanel {
         }
     }
 
+    //ADD SETPREFERREDSIZE().
+
     /**
      * <p>
      * (Re)draw the component in the GUI.

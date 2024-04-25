@@ -333,7 +333,7 @@ public class ColourActions {
      * @author Kevin Steve Sathyanath
      * @date 19/04/2024
      */
-    public class brightnessAndContrastAction extends ImageAction implements ChangeListener{
+    public class brightnessAndContrastAction extends ImageAction{
 
         int brightnessFactor = 0;
         int contrastFactor = 0;
@@ -369,6 +369,10 @@ public class ColourActions {
         
         public void actionPerformed(ActionEvent e){
             try{
+                final EditableImage preview = target.getImage().makeCopy();
+                ImagePanel show = new ImagePanel(preview);
+                //show.setpreferredSize
+
                 JPanel p = new JPanel(new GridLayout(2,2));
                 brightnessSlider = new JSlider(-100,100);
                 contrastSlider = new JSlider(-100,100);
@@ -384,28 +388,29 @@ public class ColourActions {
                 brightnessSlider.setValue(0);
 
                 /*Test code */
-                EditableImage copy = target.getImage().makeCopy(); 
-                ImagePanel working = new ImagePanel(copy);
-                ImagePanel original = getTarget();
+                //EditableImage copy = target.getImage().makeCopy(); 
+                //ImagePanel working = new ImagePanel(copy);
+                //ImagePanel original = getTarget();
                 /*Test code END */
 
                 ChangeListener sliderChangeListener = new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
+                        
+                        final EditableImage temp = target.getImage();  //TEST CODE
+                        
                         // Handle slider value changes here
+                        
                         brightnessFactor = brightnessSlider.getValue();
                         contrastFactor = contrastSlider.getValue();
 
                         //Setting a new target for the ImageActon
-                        setTarget(working);
+                        //setTarget(working);
 
 
-                        target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor)); 
+                        temp.apply(new BrightnessAndContrast(brightnessFactor,contrastFactor)); 
                         target.repaint(); 
                         target.getParent().revalidate(); 
-
-                        
-
 
 
                         //copy = target.getImage(); //Testing line
@@ -416,26 +421,13 @@ public class ColourActions {
                 brightnessSlider.addChangeListener(sliderChangeListener);
                 contrastSlider.addChangeListener(sliderChangeListener);
 
-                // brightnessSlider.addChangeListener(new ChangeListener() {
-                //     @Override
-                //     public void stateChanged(ChangeEvent bright){
-                //     brightnessFactor = (int) (1+(brightnessSlider.getValue()));
-                //     }
-                // });
-                // contrastSlider.addChangeListener(new ChangeListener(){
-                //     @Override
-                //     public void stateChanged(ChangeEvent contrast){
-                //     contrastFactor = (int) (1+(contrastSlider.getValue()));
-                //     }
-                // });
-                
-                //BufferedImage temp = target.getCurrentImage();
 
                 p.add(new Label("Brightness: "));
                 p.add(new Label("Contrast: "));
                 
                 p.add(brightnessSlider);
                 p.add(contrastSlider);
+                p.add(show);
 
                 int option = JOptionPane.showOptionDialog(null, p, "Set Brightness And Contrast",
                         JOptionPane.OK_CANCEL_OPTION,
@@ -472,30 +464,8 @@ public class ColourActions {
             } //End of catch
 
          
-            }//End of actonperformed()
-
-            @Override
-                    public void stateChanged(ChangeEvent e) {
-                        // // Handle slider value changes here
-                        // brightnessFactor = brightnessSlider.getValue();
-                        // contrastFactor = contrastSlider.getValue();
-
-                        // EditableImage copy = target.getImage().makeCopy(); //Testing line
-
-                        // copy.apply(new BrightnessAndContrast(-50,-50)); //Testing
-                        // target.repaint(); //Testing 
-                        // //target.getParent().revalidate(); //Testing
-
-                        // //copy = target.getImage(); //Testing line
-                        // copy.undo();
-                    }
-
-            // @Override
-            // public void stateChanged(ChangeEvent h) {
-            // brightnessFactor = (int) (1+(brightnessSlider.getValue()));
-            // contrastFactor = (int) (1+(contrastSlider.getValue()));
-
-        }
-    }
+            } //End of actionPerformed()
+        }//End of B&C()
+    }//End of class
 
 
