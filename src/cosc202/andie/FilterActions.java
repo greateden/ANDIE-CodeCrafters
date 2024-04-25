@@ -352,12 +352,21 @@ public class FilterActions {
 
                 // Determine the radius - ask the user.
                 int angle = 0;
-
-                // Pop-up dialog box to ask for the radius value.
+                int radius =0;
                 SpinnerNumberModel angleModel = new SpinnerNumberModel(0, 0, 360, 1);
-                JSpinner angleSpinner = new JSpinner(angleModel);
-
-                int option = JOptionPane.showOptionDialog(Andie.getFrame(), angleSpinner,
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
+                JPanel panel = new JPanel(new GridLayout(4, 1));
+                JLabel l1 = new JLabel(Andie.bundle.getString("EnterEmbossDirection"));
+                JSpinner s1 = new JSpinner(angleModel);
+                JSpinner s2 = new JSpinner(radiusModel);
+          
+                JLabel l2 = new JLabel(Andie.bundle.getString("EnterFilterRadius"));
+                panel.add(l1);
+                panel.add(s1);
+                panel.add(l2);
+                panel.add(s2);
+                
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), panel,
                         Andie.bundle.getString("EnterEmbossDirection"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
@@ -366,10 +375,11 @@ public class FilterActions {
                     return;
                 } else if (option == JOptionPane.OK_OPTION) {
                     angle = angleModel.getNumber().intValue();
+                    radius = radiusModel.getNumber().intValue();
                 }
 
                 // Create and apply the filter
-                target.getImage().apply(new EmbossFilter(angle));
+                target.getImage().apply(new EmbossFilter(angle, radius));
                 target.repaint();
                 target.getParent().revalidate();
             } catch (Exception err) {

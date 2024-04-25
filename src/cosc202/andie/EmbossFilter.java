@@ -32,9 +32,9 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
      * @param direction the radius of the filter
     */
 
-    EmbossFilter(int direction){
+    EmbossFilter(int direction, int radius){
         this.direction = direction;
-        this.radius = 1;
+        this.radius = radius;
     }
     
     /**
@@ -143,3 +143,7 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
     }
 
 }
+
+
+
+
