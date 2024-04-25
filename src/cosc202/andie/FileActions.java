@@ -9,15 +9,8 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.Graphics;
-import java.awt.print.*;
-import java.awt.image.BufferedImage;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 
 /**
  * <p>
@@ -340,7 +333,8 @@ public class FileActions {
 
                         String format = ((ImageFileFilter) selectedFilter).getExtension();
 
-                        ImageIO.write(target.getImage().getCurrentImage(), format, new File(selectedFilePath));
+                        target.getImage();
+                        ImageIO.write(EditableImage.getCurrentImage(), format, new File(selectedFilePath));
 
                         // create a message box to tell user it's saved successfully
                         // JOptionPane.showMessageDialog(null,
@@ -643,13 +637,8 @@ public class FileActions {
     /**
      * A class that represents the action of printing an image.
      */
-    // TODO Implement 2 types of hotkey
-    // TODO Fix the unexpected behaviour that it's actually printing white pages
-    // TODO Update Hotkey instructions in both About and Readme.md
-    // TODO Add error handling to the print() method
-    public class FilePrintAction extends AbstractAction implements Printable {
-
-        private BufferedImage imageToPrint = EditableImage.getCurrentImage();
+    public class FilePrintAction extends AbstractAction {
+        //private BufferedImage imageToPrint;
 
         /**
          * <p>
@@ -669,49 +658,6 @@ public class FileActions {
 
         /**
          * <p>
-         * Callback for when the file print action is triggered.
-         * </p>
-         * 
-         * This part of the code is from Perplexity
-         * (https://www.perplexity.ai/search/if-I-have-C1ciqa8pQ0aJ4vP5C1Mz6g)
-         * 
-         * @param g
-         * @param pf
-         * @param pageIndex
-         * @return
-         * @throws PrinterException
-         */
-        @Override
-        public int print(Graphics g, PageFormat pf, int pageIndex) throws PrinterException {
-            if (pageIndex > 0) {
-                return NO_SUCH_PAGE;
-            }
-
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.translate(pf.getImageableX(), pf.getImageableY());
-
-            // Draw the image onto the Graphics object
-            g2d.drawImage(imageToPrint, 0, 0, imageToPrint.getWidth(), imageToPrint.getHeight(), null);
-
-            return PAGE_EXISTS;
-        }
-
-        public void printImage() {
-            PrinterJob job = PrinterJob.getPrinterJob();
-            job.setPrintable(this);
-
-            if (job.printDialog()) {
-                try {
-                    job.print();
-                } catch (PrinterException ex) {
-                    System.out.println("Error printing: " + ex.getMessage());
-                }
-                // Handle printing exception
-            }
-        }
-
-        /**
-         * <p>
          * Callback for when the image-print action is triggered.
          * </p>
          * 
@@ -724,13 +670,56 @@ public class FileActions {
          */
         public void actionPerformed(ActionEvent e) {
             if (isOpened == true) {
-                printImage();
+
+                boolean b1Choose = false;
+                boolean b2Choose = false;
+
+                JPanel panel = new JPanel(new GridLayout(2, 2));
+
+                JLabel l1 = new JLabel(Andie.bundle.getString("PrintMethodInstruction"));
+                panel.add(l1);
+                JLabel l2 = new JLabel();
+                panel.add(l2);
+
+                ButtonGroup group = new ButtonGroup();
+                JRadioButton b1 = new JRadioButton("100%");
+                JRadioButton b2 = new JRadioButton(Andie.bundle.getString("FitImage"));
+                group.add(b1);
+                group.add(b2);
+                panel.add(b1);
+                panel.add(b2);
+
+                // Show the option dialog
+                int option = JOptionPane.showOptionDialog(null, panel, Andie.bundle.getString("PrintMethod"),
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+                if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
+                    // Do nothing, but we keep this statement for possible future function expands.
+                } else if (option == JOptionPane.OK_OPTION) {
+                    if (b1.isSelected()) {
+                        b1Choose = true;
+                    } else if (b2.isSelected()) {
+                        b2Choose = true;
+                    }
+
+                    if (!b1Choose && !b2Choose) {
+                        JOptionPane.showMessageDialog(null, Andie.bundle.getString("PleaseChoose"),
+                                Andie.bundle.getString("Warning"),
+                                JOptionPane.WARNING_MESSAGE);
+                        actionPerformed(e);
+                        // Will educate the user if they didn't give any inputs and still wanna hit the
+                        // OK button
+                    } else {
+                        PrintImage p = new PrintImage (b2Choose);
+                        p.printImage();
+                    }
+                }
             } else {
                 JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }// end of actionPerformed
-
     }
 
     /**
@@ -820,7 +809,7 @@ public class FileActions {
      * </p>
      * 
      */
-    public class FileChangeLanguageAction extends ImageAction implements ActionListener {
+    public class FileChangeLanguageAction extends ImageAction {
         int height;
         int width;
         JLabel widthJLabel, heightLabel, titleLabel, blankLabel;
@@ -858,8 +847,6 @@ public class FileActions {
         public void actionPerformed(ActionEvent e) {
             Andie.exitFullScreen();
 
-            String[] languages = { "English", "Bahasa Indonesia", "繁體中文" };
-
             JFrame l = new JFrame();
 
             // Set behaviour of frame
@@ -883,7 +870,6 @@ public class FileActions {
             c.add(traChinese);
 
             english.addActionListener(new ActionListener() {
-                @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
                     Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
@@ -900,7 +886,6 @@ public class FileActions {
             });
 
             bahasa.addActionListener(new ActionListener() {
-                @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
                     Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
@@ -918,7 +903,6 @@ public class FileActions {
             });
 
             traChinese.addActionListener(new ActionListener() {
-                @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
                     Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);

@@ -352,6 +352,6 @@ public class ColourActions {
                     System.out.println(err);
                 }
             }
-        }
+        }// end of actionPerformed
     }
 }

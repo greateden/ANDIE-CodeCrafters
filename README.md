@@ -97,6 +97,7 @@ We tested our code mainly via brute force. We went through and thought of all th
 |        | **S**ave File              | Ctrl + S               | ⌘ S     | F - S             |                                |
 |        | Save **A**s                | Ctrl + Shift + S       | ⇧⌘ S    | F - A             |                                |
 |        | **E**xport                 | Ctrl + E               | ⌘ E     | F - E             |                                |
+|        | **P**rint                   | Ctrl + P               | ⌘ P     | F - P             |                                   |
 |        | Exit (**Q**)                   | Ctrl + Q               | ⌘ Q     | F - Q             | Alt + F4 (Windows)             |
 |        | **S**et Language               |                        |         | F - L             |                                |
 | **E**dit   | **U**ndo                   | Ctrl + Z               | ⌘ Z     | E - U             |                                |
