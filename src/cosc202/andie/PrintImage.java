@@ -75,7 +75,21 @@ public class PrintImage implements Printable {
         PrinterJob job = PrinterJob.getPrinterJob();
         job.setPrintable(this);
 
-        job.printDialog();//why????? I have totally no idea about why we need this
+        /*
+         * define dme = David Eyers
+         * 
+         * Note:
+         * Obviously, the printDialog() method is used to show the print dialog.
+         * BUTT!
+         * I have no idea about why I need to call this method twice.
+         * According to the distinguished professor dme, 
+         * he said it is due to asynchronies for time (instead of space).
+         * The first time when it is being called, probably due to other parts are not
+         * fully loaded, so it would always return false. So, I need to call it twice.
+         * If I delete this code, the program will not work.
+         */
+        job.printDialog();
+
         if (job.printDialog()) {
             try {
                 job.print();
