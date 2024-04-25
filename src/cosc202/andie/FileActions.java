@@ -9,6 +9,15 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.Graphics;
+import java.awt.print.*;
+import java.awt.image.BufferedImage;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  * <p>
@@ -83,7 +92,8 @@ public class FileActions {
                 Andie.bundle.getString("SaveAsDesc"),
                 Integer.valueOf(KeyEvent.VK_A));
         actions.add(fileSaveAs);
-        CreateHotKey.createHotkey(fileSaveAs, KeyEvent.VK_S, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "fileSaveAs");
+        CreateHotKey.createHotkey(fileSaveAs, KeyEvent.VK_S, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK,
+                "fileSaveAs");
 
         Action fileExport = new FileExportAction(Andie.bundle.getString("ExportAction"), null,
                 Andie.bundle.getString("ExportDesc"),
@@ -91,10 +101,16 @@ public class FileActions {
         actions.add(fileExport);
         CreateHotKey.createHotkey(fileExport, KeyEvent.VK_E, InputEvent.META_DOWN_MASK, "fileExport");
 
+        Action filePrint = new FilePrintAction(Andie.bundle.getString("PrintAction"), null,
+                Andie.bundle.getString("PrintDesc"),
+                Integer.valueOf(KeyEvent.VK_P));
+        actions.add(filePrint);
+        CreateHotKey.createHotkey(filePrint, KeyEvent.VK_P, InputEvent.META_DOWN_MASK, "filePrint");
+
         Action fileChangeLangue = new FileChangeLanguageAction(Andie.bundle.getString("ChangeLanguage"), null,
                 Andie.bundle.getString("ChangeLanguage"), Integer.valueOf(KeyEvent.VK_L));
         actions.add(fileChangeLangue);
-        CreateHotKey.createHotkey(fileChangeLangue,0, 0, "fileChangeLangue");
+        CreateHotKey.createHotkey(fileChangeLangue, 0, 0, "fileChangeLangue");
 
         Action fileExit = new FileExitAction(Andie.bundle.getString("ExitAction"), null,
                 Andie.bundle.getString("ExitDesc"),
@@ -625,6 +641,99 @@ public class FileActions {
     }
 
     /**
+     * A class that represents the action of printing an image.
+     */
+    // TODO Implement 2 types of hotkey
+    // TODO Fix the unexpected behaviour that it's actually printing white pages
+    // TODO Update Hotkey instructions in both About and Readme.md
+    // TODO Add error handling to the print() method
+    public class FilePrintAction extends AbstractAction implements Printable {
+
+        private BufferedImage imageToPrint = EditableImage.getCurrentImage();
+
+        /**
+         * <p>
+         * Create a new image-print action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        FilePrintAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon);
+            putValue(SHORT_DESCRIPTION, desc);
+            putValue(MNEMONIC_KEY, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the file print action is triggered.
+         * </p>
+         * 
+         * This part of the code is from Perplexity
+         * (https://www.perplexity.ai/search/if-I-have-C1ciqa8pQ0aJ4vP5C1Mz6g)
+         * 
+         * @param g
+         * @param pf
+         * @param pageIndex
+         * @return
+         * @throws PrinterException
+         */
+        @Override
+        public int print(Graphics g, PageFormat pf, int pageIndex) throws PrinterException {
+            if (pageIndex > 0) {
+                return NO_SUCH_PAGE;
+            }
+
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.translate(pf.getImageableX(), pf.getImageableY());
+
+            // Draw the image onto the Graphics object
+            g2d.drawImage(imageToPrint, 0, 0, imageToPrint.getWidth(), imageToPrint.getHeight(), null);
+
+            return PAGE_EXISTS;
+        }
+
+        public void printImage() {
+            PrinterJob job = PrinterJob.getPrinterJob();
+            job.setPrintable(this);
+
+            if (job.printDialog()) {
+                try {
+                    job.print();
+                } catch (PrinterException ex) {
+                    System.out.println("Error printing: " + ex.getMessage());
+                }
+                // Handle printing exception
+            }
+        }
+
+        /**
+         * <p>
+         * Callback for when the image-print action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the image-print is triggered.
+         * It call the system printing API to print the image.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            if (isOpened == true) {
+                printImage();
+            } else {
+                JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
+                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+            }
+        }// end of actionPerformed
+
+    }
+
+    /**
      * <p>
      * Action to quit the ANDIE application.
      * </p>
@@ -700,7 +809,7 @@ public class FileActions {
             } else {
                 System.exit(0);
             }
-        }
+        }// end of actionPerformed
 
     }
 
