@@ -58,7 +58,7 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
         Kernel embossKernel = new Kernel(3, 3, embossMatrix); // creates a 3x3 kernal with hard coded matrix
         ConvolveOp convOp = new ConvolveOp(embossKernel); // Creates a convolution operation that applies the emboss kernal
         
-        // Had an issue with the image RGB values so setting it all to the same type and redrawing the image
+        // Had an issue with the image RGB values being diffrent depending on the image so setting it all to the same type by redrawing the image
         BufferedImage AdjustedInput = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_INT_RGB);
         AdjustedInput.getGraphics().drawImage(input, 0, 0, null);
 
