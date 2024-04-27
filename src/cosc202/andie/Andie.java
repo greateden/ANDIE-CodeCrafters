@@ -71,10 +71,14 @@ public class Andie {
     private static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
         frame = new JFrame("ANDIE: CodeCrafters");
-        // JFrame.setDefaultLookAndFeelDecorated(true);
+
+
         Image image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
         frame.setIconImage(image);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(true);
+        frame.setPreferredSize(new Dimension(800,600));
+
 
         // The main content area is an ImagePanel
         imagePanel = new ImagePanel();
@@ -131,6 +135,7 @@ public class Andie {
         frame.setJMenuBar(newMenuBar);
         frame.repaint();
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 

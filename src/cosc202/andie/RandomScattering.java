@@ -2,9 +2,7 @@ package cosc202.andie;
 
 import java.awt.image.*;
 import java.util.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.awt.FlowLayout;
+
 
 /**
  * <p>
@@ -83,10 +81,6 @@ public class RandomScattering implements ImageOperation, java.io.Serializable {
         
         int[] pixel = new int[side*side];
 
-        int nr,ng,nb,na; //NEW rgba value taken from the sorted array for applying the median filter. 
-
-        int argb; //argb values for transformation.
-        
         //Makes a copy of input to apply the Random Scattering effect to. 
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
         
@@ -118,8 +112,7 @@ public class RandomScattering implements ImageOperation, java.io.Serializable {
                 }
 
                 //Apply the filter now.
-                int chosenNum = r.nextInt(a1);
-                //System.out.println("chosenNum: "+ chosenNum + "\ni: " + i + "\nj: " + j + "\na1: " + a1);
+                
          
              }
         }
