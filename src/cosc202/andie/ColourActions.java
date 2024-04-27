@@ -392,11 +392,7 @@ public class ColourActions {
                 brightnessSlider.setPaintLabels(true);
                 brightnessSlider.setValue(0);
 
-                /*Test code */
-                //EditableImage copy = target.getImage().makeCopy(); 
-                //ImagePanel working = new ImagePanel(copy);
-                //ImagePanel original = getTarget();
-                /*Test code END */
+
 
                 ChangeListener sliderChangeListener = new ChangeListener() {
                     @Override
@@ -461,7 +457,7 @@ public class ColourActions {
                     
                 } 
                 else if (option == JOptionPane.OK_OPTION) {
-                    System.out.println(brightnessFactor + " " + contrastFactor);
+                    //System.out.println(brightnessFactor + " " + contrastFactor);
                     setTarget(Andie.getPanel());
                     target.getImage().apply(new BrightnessAndContrast(brightnessFactor, contrastFactor));
                     target.getParent().revalidate();

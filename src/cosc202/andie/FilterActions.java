@@ -3,6 +3,9 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.*;
 
 /**
@@ -160,7 +163,7 @@ public class FilterActions {
         MedianFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
-
+        JSlider medianSlider;
         /**
          * <p>
          * Callback for when the convert-to-grey action is triggered.
@@ -181,28 +184,67 @@ public class FilterActions {
                 // Determine the radius - ask the user.
                 int radius = 0;
 
+                final EditableImage preview = target.getImage().makeCopy();
+                final ImagePanel show = new ImagePanel(preview);
+                PreviewPanel show2 = new PreviewPanel(preview);
+
+                medianSlider = new JSlider(JSlider.VERTICAL, 0,10,0);
+                medianSlider.setMajorTickSpacing(1);
+                medianSlider.setPaintTicks(true);
+                medianSlider.setPaintLabels(true);
+                medianSlider.setSnapToTicks(true);
+                medianSlider.setValue(0);
+
+                ChangeListener sliderChangeListener = new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+    
+                        int rad = medianSlider.getValue();
+
+                        //Setting a new target for the ImageActon
+                        setTarget(show);
+                        target.getImage().reset();
+                        target.getImage().apply(new MedianFilter(rad)); 
+                        target.repaint(); 
+                        target.getParent().revalidate(); 
+                        
+                    }
+                };
+
+                medianSlider.addChangeListener(sliderChangeListener);
+
                 // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
-                JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(Andie.frame, radiusSpinner, Andie.bundle.getString("EnterFilterRadius"),
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                //SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
+                //JSpinner radiusSpinner = new JSpinner(radiusModel);
+
+                JPanel menu = new JPanel(new FlowLayout());
+                //GridBagConstraints a = new GridBagConstraints();
+                menu.add(show);
+                menu.add(medianSlider);
+
+
+                int option = JOptionPane.showOptionDialog(Andie.frame, menu, Andie.bundle.getString("EnterFilterRadius"),
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
-                    return;
+                    
                 } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
+                    radius = medianSlider.getValue();
+                    setTarget(Andie.getPanel());
+                    target.getImage().apply(new MedianFilter(radius));
+                    target.repaint();
+                    target.getParent().revalidate();
                 }
-                // Pop-up dialog box to ask for the radius value.
-
-                // Create and apply the filter
-                target.getImage().apply(new MedianFilter(radius));
-                target.repaint();
-                target.getParent().revalidate();
+                
+                
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                }
+                else{
+                    System.out.println(err);
                 }
             }
         }
