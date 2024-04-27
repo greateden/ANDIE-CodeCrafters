@@ -59,7 +59,7 @@ public class ImagePanel extends JPanel {
      */
     public ImagePanel(EditableImage working){
         image = working;
-        scale = 1.0;
+        scale = 0.2;
     }
 
     /**
@@ -131,6 +131,8 @@ public class ImagePanel extends JPanel {
     }
 
     //ADD SETPREFERREDSIZE().
+
+    
 
     /**
      * <p>

@@ -370,12 +370,17 @@ public class ColourActions {
         public void actionPerformed(ActionEvent e){
             try{
                 final EditableImage preview = target.getImage().makeCopy();
-                ImagePanel show = new ImagePanel(preview);
+                final ImagePanel show = new ImagePanel(preview);
                 //show.setpreferredSize
 
-                JPanel p = new JPanel(new GridLayout(2,2));
+                JPanel sliderPane = new JPanel(new GridLayout(1,2, 17, 0));
+                JPanel labelPane = new JPanel(new GridLayout(1,2,167,0));
                 brightnessSlider = new JSlider(-100,100);
                 contrastSlider = new JSlider(-100,100);
+                JLabel brightnessSliderLabel = new JLabel("Brightness", JLabel.CENTER);
+                brightnessSliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                JLabel contrastSliderLabel = new JLabel("Contrast", JLabel.CENTER);
+                contrastSliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
                 contrastSlider.setMajorTickSpacing(50);
                 contrastSlider.setPaintTicks(true);
@@ -396,25 +401,17 @@ public class ColourActions {
                 ChangeListener sliderChangeListener = new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
-                        
-                        final EditableImage temp = target.getImage();  //TEST CODE
-                        
-                        // Handle slider value changes here
-                        
+    
                         brightnessFactor = brightnessSlider.getValue();
                         contrastFactor = contrastSlider.getValue();
 
                         //Setting a new target for the ImageActon
-                        //setTarget(working);
-
-
-                        temp.apply(new BrightnessAndContrast(brightnessFactor,contrastFactor)); 
+                        setTarget(show);
+                        target.getImage().reset();
+                        target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor)); 
                         target.repaint(); 
                         target.getParent().revalidate(); 
-
-
-                        //copy = target.getImage(); //Testing line
-                        //copy.undo();
+                        
                     }
                 };
 
@@ -422,34 +419,53 @@ public class ColourActions {
                 contrastSlider.addChangeListener(sliderChangeListener);
 
 
-                p.add(new Label("Brightness: "));
-                p.add(new Label("Contrast: "));
+                labelPane.add(brightnessSliderLabel);
+                labelPane.add(contrastSliderLabel);
                 
-                p.add(brightnessSlider);
-                p.add(contrastSlider);
-                p.add(show);
+                sliderPane.add(brightnessSlider);
+                sliderPane.add(contrastSlider);
+                //p.add(show);
 
-                int option = JOptionPane.showOptionDialog(null, p, "Set Brightness And Contrast",
+                JPanel menu = new JPanel(new GridBagLayout());
+                GridBagConstraints a = new GridBagConstraints();
+                Insets i = new Insets(20,0,0,0);
+
+                //a.fill = GridBagConstraints.BOTH;
+                a.gridx = 0;
+                a.gridy = 0;
+                a.gridwidth = 2;
+                a.anchor = GridBagConstraints.PAGE_START;
+                menu.add(show, a);
+
+                a.fill = GridBagConstraints.VERTICAL;
+                a.gridx = 0;
+                a.gridy = 1;
+                a.weighty = 1.0;
+                a.insets = i;
+                menu.add(sliderPane, a);
+
+                a.gridx = 0;
+                a.gridy = 2;
+                a.weighty = 0.7;
+                a.ipady = 1;
+                i.set(10,0,0,0);
+                menu.add(labelPane, a);
+
+                int option = JOptionPane.showOptionDialog(null, menu, "Set Brightness And Contrast",
                         JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.PLAIN_MESSAGE, null, null, null);
 
                
 
                 if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
-                    target.getImage();
-                    target.repaint();
-                    target.getParent().revalidate();
+                    
                 } 
                 else if (option == JOptionPane.OK_OPTION) {
                     System.out.println(brightnessFactor + " " + contrastFactor);
+                    setTarget(Andie.getPanel());
                     target.getImage().apply(new BrightnessAndContrast(brightnessFactor, contrastFactor));
                     target.getParent().revalidate();
                     target.repaint();
-                   
-
-                //JDialog dialog = optionPane.createDialog(Andie.getFrame(), "Image Adjustments");
-                //dialog.pack();
-
                 }
             } //End of try
         

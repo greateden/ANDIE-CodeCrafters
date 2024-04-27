@@ -100,8 +100,8 @@ class EditableImage {
      */
     public EditableImage makeCopy(){
 
-        EditableImage copy = new EditableImage();
-        copy.original = deepCopy(this.original);
+        final EditableImage copy = new EditableImage();
+        copy.original = deepCopy(this.current);
         copy.current = deepCopy(this.current);
         copy.ops = this.ops;
         copy.redoOps = this.redoOps;
@@ -344,6 +344,14 @@ class EditableImage {
         for (ImageOperation op : ops) {
             current = op.apply(current);
         }
+    }
+
+    /**A method to, well, 'reset' the EditableImage to the original. Only of use in a preview image before applying some effect. Hopefully.
+     * @author Kevin Steve Sathyanath
+     * @date 27/04/2024
+     */
+    public void reset(){
+        current = deepCopy(original);
     }
 
 }

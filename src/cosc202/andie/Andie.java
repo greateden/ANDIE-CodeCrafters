@@ -8,6 +8,8 @@ import java.util.prefs.Preferences;
 import javax.swing.*;
 import javax.imageio.*;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+
 /**
  * <p>
  * Main class for A Non-Destructive Image Editor (ANDIE).
@@ -177,6 +179,17 @@ public class Andie {
                 // System.out.println(bundle.getString("convertToGreyAction"));
 
                 try {
+                    FlatMacDarkLaf.setup();
+                    try {
+                        UIManager.setLookAndFeel( new FlatMacDarkLaf() );
+                    } catch( Exception ex ) {
+                        System.err.println( "Failed to initialize LaF" );
+                    }
+                    //Keeping in case we need to revert. Also change dependency in Gradle file.
+                    // try{
+                    //     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    // }
+                    // catch(Exception ignored){}
                     createAndShowGUI();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -184,5 +197,14 @@ public class Andie {
                 }
             }
         });
+    }
+
+    /**An accessor for the imagePanel that is used in the preview panels for Brightness and Contrast, among others.
+     * @author Kevin Steve Sathyanath
+     * @return the ImagePanel in question
+     * @date 27/04/2024
+     */
+    public static ImagePanel getPanel(){
+        return imagePanel;
     }
 }
