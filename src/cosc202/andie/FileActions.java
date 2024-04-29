@@ -3,6 +3,7 @@ package cosc202.andie;
 import java.util.*;
 import java.util.prefs.Preferences;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -218,12 +219,23 @@ public class FileActions {
                 try {
                     isOpened = true;
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+
+                    //Finding image dimensions in order to be able to bound selection box
+                    // Read the image file
+                    BufferedImage image = ImageIO.read(new File(imageFilepath));
+                    // Get the dimensions of the image
+                    int width = image.getWidth();
+                    int height = image.getHeight();
+
                     target.getImage().open(imageFilepath);
+
+                    //Adding mouse lisener to target panel
+                    target.addMouseListener(new MouseSelection(target,width,height));
                 } catch (Exception ex) {
                     System.exit(1);
                 }
             }
-
+            
             target.repaint();
             target.getParent().revalidate();
         }

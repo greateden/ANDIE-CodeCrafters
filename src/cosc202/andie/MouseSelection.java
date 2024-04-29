@@ -2,6 +2,7 @@ package cosc202.andie;
 
 import java.awt.*;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.awt.event.MouseEvent;
 
 /**
@@ -24,13 +25,17 @@ public class MouseSelection implements MouseListener{
     private Point start;
     private Point end;
     private ImagePanel imagePanel;
+    private int imageWidth;
+    private int imageHeight;
 
     /**
      * Initilises MouseSelection
      * @param imagePanel The image panel that the selction is drawn on
      */
-    public MouseSelection(ImagePanel imagePanel) {
+    public MouseSelection(ImagePanel imagePanel,int imageWidth, int imageHeight) {
         this.imagePanel = imagePanel;
+        this.imageWidth = imageWidth;
+        this.imageHeight = imageWidth;
         this.imagePanel.addMouseListener(this);
     }
 
@@ -60,9 +65,9 @@ public class MouseSelection implements MouseListener{
         //Finds starting y and x values of selction
         int x = Math.min(start.x, end.x);
         int y = Math.min(start.y, end.y);
-        //finds width and height of selction
-        int width = Math.abs(start.x - end.x);
-        int height = Math.abs(start.y - end.y);
+        //finds width and height of selction, bounded by the image dimensions
+        int width = Math.min(imageWidth - x, Math.abs(start.x - end.x));
+        int height = Math.min(imageHeight - y, Math.abs(start.y - end.y));
 
         //Draws the selction box on panel
         Graphics g = imagePanel.getGraphics();

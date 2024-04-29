@@ -77,7 +77,6 @@ public class Andie {
         // The main content area is an ImagePanel
         imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
-        imagePanel.addMouseListener(new MouseSelection(imagePanel));
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
         fileActions = new FileActions();
