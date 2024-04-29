@@ -101,7 +101,7 @@ public class MacroActions {
                     }
                 }
             } else {
-                System.out.println("Exception");
+                //System.out.println("Exception");
                 JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
@@ -131,6 +131,7 @@ public class MacroActions {
         }
 
         public void actionPerformed(ActionEvent e) {
+          if(EditableImage.recordingStart == true||EditableImage.macroStack.empty()==true){
             try {
                 // make a JOption to let user choose if they needs to
                 // yes: save the oerations or
@@ -222,7 +223,13 @@ public class MacroActions {
                 }
             }
 
+        }else{
+            JOptionPane.showMessageDialog(null,"Not Able to Stop without Start Macro First, and Do Some Operations",
+            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+
         }
+
+    } 
     }
 
     public class ApplyPrevMacroAction extends ImageAction {
@@ -232,7 +239,10 @@ public class MacroActions {
         }
 
         public void actionPerformed(ActionEvent e) {
-            try {
+            if(FileActions.isOpened == true){
+
+        try{
+            
                 // System.out.println("Select ops file");
                 JFileChooser fileChooser = new JFileChooser();
 
@@ -271,10 +281,15 @@ public class MacroActions {
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
 
                 }
-
             }
-        }
+        
+    }else{
+         //System.out.println("Exception");
+         JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
+         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
 
     }
 
+    }
+    }
 }
