@@ -35,7 +35,7 @@ public class MouseSelection implements MouseListener{
     public MouseSelection(ImagePanel imagePanel,int imageWidth, int imageHeight) {
         this.imagePanel = imagePanel;
         this.imageWidth = imageWidth;
-        this.imageHeight = imageWidth;
+        this.imageHeight = imageHeight;
         this.imagePanel.addMouseListener(this);
     }
 
