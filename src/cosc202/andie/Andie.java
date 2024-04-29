@@ -28,7 +28,7 @@ import javax.imageio.ImageIO;
  * @version 1.0
  */
 public class Andie {
-    private static JFrame frame;
+    public static JFrame frame;
     private static ImagePanel imagePanel;
     public static ResourceBundle bundle;
     public static JMenuBar menuBar;
