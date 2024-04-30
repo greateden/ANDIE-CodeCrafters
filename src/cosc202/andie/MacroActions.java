@@ -73,10 +73,6 @@ public class MacroActions {
      * Create a macro start recording action.
      * </p>
      * 
-     * @param name     The name of the action (ignored if null).
-     * @param icon     An icon to use to represent the action (ignored if null).
-     * @param desc     A brief description of the action (ignored if null).
-     * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
      */
     public class StartAction extends ImageAction {
 
@@ -118,10 +114,6 @@ public class MacroActions {
      * This class peforms a stop action of the macro action
      * and save the operations to a new file
      * 
-     * @param name     The name of the action (ignored if null).
-     * @param icon     An icon to use to represent the action (ignored if null).
-     * @param desc     A brief description of the action (ignored if null).
-     * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
      */
     public class StopAction extends ImageAction {
 
