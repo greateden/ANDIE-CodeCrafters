@@ -9,7 +9,7 @@ import java.util.List;
  * 
  * @author Michael Albert
  */
-public class Timer {
+public class Timer1 {
 
   private static final long MILLION = 1000000;
   private long startTime = -1;
@@ -19,7 +19,7 @@ public class Timer {
   /**
    * Constructs a timer (no initialisation required)
    */
-  public Timer() {
+  public Timer1() {
   }
 
   /**
