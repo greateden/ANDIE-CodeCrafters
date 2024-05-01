@@ -69,6 +69,9 @@ public class FilterActions {
                 Andie.bundle.getString("EmbossDesc"),
                 Integer.valueOf(KeyEvent.VK_E));
         actions.add(emboss);
+
+        Action sobel = new SobelFilterAction("Sobel Filter", null, "Applys a sobel filter vertically or horizionally", null);
+        actions.add(sobel);
     }
 
     /**
@@ -320,6 +323,48 @@ public class FilterActions {
         }
 
     }
+    public class SobelFilterAction extends ImageAction{
+        SobelFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic){
+            super(name,icon,desc,mnemonic);
+        }
+        
+
+        public void actionPerformed(ActionEvent e){
+            try{
+                JPanel panel = new JPanel(new GridLayout(3, 1));
+                JLabel l1 = new JLabel("Please Select Sobel Direction");
+                panel.add(l1);
+                JRadioButton r1 = new JRadioButton("Horizontal");
+                JRadioButton r2 = new JRadioButton("Vertical");
+                ButtonGroup g1 = new ButtonGroup();
+                g1.add(r1);
+                g1.add(r2);
+
+                panel.add(r1);
+                panel.add(r2);
+
+                int option = JOptionPane.showOptionDialog(null, panel, "Select Sobel Direction", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,null,null);
+                if (option == JOptionPane.OK_OPTION){
+                    boolean Direction = false;
+                    if (r1.isSelected()){
+                        Direction = true;
+                    }
+                    target.getImage().apply(new SobelFilter(Direction));
+                    target.repaint();
+                    target.getParent().revalidate();
+
+                    
+                } 
+
+            }
+            catch (Exception err){
+                if (err instanceof NullPointerException){
+                    JOptionPane.showMessageDialog(Andie.getFrame(),Andie.bundle.getString("YouDidNotOpen"), Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+    }
+
 
     public class EmbossFilterAction extends ImageAction {
 
@@ -392,6 +437,11 @@ public class FilterActions {
         }
 
     }
+
+
+    
+
+
 
     /**
      * <p>
