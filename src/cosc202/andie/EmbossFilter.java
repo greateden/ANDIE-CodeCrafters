@@ -56,7 +56,7 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
         BufferedImage embossedImage = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_INT_RGB); // creates a new image 
         float[] embossMatrix = createMatrix(radius,direction ); // Gets a matrix based on direction and radius to use in the emboss kernal
 
-        Kernel embossKernel = new Kernel(3, 3, embossMatrix); // creates a 3x3 kernal with hard coded matrix
+        Kernel embossKernel = new Kernel((2*radius +1), (2*radius +1 ), embossMatrix); // creates a 3x3 kernal with hard coded matrix
         ConvolveOp convOp = new ConvolveOp(embossKernel); // Creates a convolution operation that applies the emboss kernal
         
         // Had an issue with the image RGB values being diffrent depending on the image so setting it all to the same type by redrawing the image
@@ -64,7 +64,7 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
         AdjustedInput.getGraphics().drawImage(input, 0, 0, null);
 
         //Create an instance of the class that creates image with border
-        FilterBorder borderedImage = new FilterBorder(AdjustedInput, 2);
+        FilterBorder borderedImage = new FilterBorder(AdjustedInput, radius);
         //Applies convolution to bordered image
         BufferedImage output = convOp.filter(borderedImage.applyBorder(), null);
         //Crops image back to original size
