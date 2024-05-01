@@ -3,7 +3,6 @@ package cosc202.andie;
 import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.prefs.Preferences;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
@@ -219,10 +218,7 @@ public class Andie {
     public static void main(String[] args) throws Exception {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
-            @SuppressWarnings("deprecation")
             public void run() {
-                // Making preferences and locale
-                Preferences p = Preferences.userNodeForPackage(Andie.class);
                 Locale.setDefault(new Locale("en", "NZ"));
 
                 // Now making the ResourceBundle

@@ -63,8 +63,6 @@ public class RotateImageStrictAction implements ImageOperation, java.io.Serializ
 
        
 
-        int radius = (int)Math.floor((Math.sqrt(Math.pow(input.getWidth(),2)+Math.pow(input.getHeight(),2)))/2);    //Calculate the radius of the bounding circle on which the rectangle is inscribed using Pythagoras.
-        
         BufferedImage transformedImg = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB); // creates a new image with a new w,h to adjust for transfomration
         
         Graphics2D graphics = transformedImg.createGraphics(); // creates a graphics object to redraw the image

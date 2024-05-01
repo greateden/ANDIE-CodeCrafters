@@ -56,7 +56,7 @@ public class FileActions {
      * @return isOpened the state of the isOpened variable
      */
     public boolean isOpenedSetter(boolean isOpened) {
-        this.isOpened = isOpened;
+        FileActions.isOpened = isOpened;
         return isOpened;
     }
 

@@ -86,9 +86,6 @@ public class RandomScattering2 implements ImageOperation, java.io.Serializable {
         
         int[] pixel = new int[side*side];
 
-        int nr,ng,nb,na; //NEW rgba value taken from the sorted array for applying the median filter. 
-
-        int argb; //argb values for transformation.
         
         //Makes a copy of input to apply the Random Scattering effect to. 
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);

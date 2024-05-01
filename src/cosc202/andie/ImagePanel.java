@@ -114,8 +114,8 @@ public class ImagePanel extends JPanel {
     @Override
     public Dimension getPreferredSize() {
         if (image.hasImage()) {
-            return new Dimension((int) Math.round(image.getCurrentImage().getWidth()*scale), 
-                                 (int) Math.round(image.getCurrentImage().getHeight()*scale));
+            return new Dimension((int) Math.round(EditableImage.getCurrentImage().getWidth()*scale), 
+                                 (int) Math.round(EditableImage.getCurrentImage().getHeight()*scale));
         } else {
             return new Dimension(450, 450);
         }
@@ -134,7 +134,7 @@ public class ImagePanel extends JPanel {
         if (image.hasImage()) {
             Graphics2D g2  = (Graphics2D) g.create();
             g2.scale(scale, scale);
-            g2.drawImage(image.getCurrentImage(), null, 0, 0);
+            g2.drawImage(EditableImage.getCurrentImage(), null, 0, 0);
             g2.dispose();
         }
     }

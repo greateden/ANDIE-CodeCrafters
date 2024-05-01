@@ -1,10 +1,6 @@
 package cosc202.andie;
 
 import java.awt.image.*;
-import java.util.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.awt.FlowLayout;
 
 /**
  * <p>
@@ -83,10 +79,6 @@ public class RandomScattering implements ImageOperation, java.io.Serializable {
         
         int[] pixel = new int[side*side];
 
-        int nr,ng,nb,na; //NEW rgba value taken from the sorted array for applying the median filter. 
-
-        int argb; //argb values for transformation.
-        
         //Makes a copy of input to apply the Random Scattering effect to. 
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
         
@@ -95,10 +87,6 @@ public class RandomScattering implements ImageOperation, java.io.Serializable {
          * inevitably have a smaller neighbourhood to work with. Is this a problem? Unlike the median filter, the lab book doesn't explicitly mention that we can ignore the boundary condition.
          * I won't be accounting for this in the beginning simply because I don't think the impact will be noticeable. If it turns out it is, I will account for the boundary condition.  
          */
-
-        //Random generator
-        Random r = new Random();
-
 
         //int r,g,b;
         for(int i=0; i<input.getHeight(); i++){
@@ -116,10 +104,6 @@ public class RandomScattering implements ImageOperation, java.io.Serializable {
                         }
                     }
                 }
-
-                //Apply the filter now.
-                int chosenNum = r.nextInt(a1);
-                //System.out.println("chosenNum: "+ chosenNum + "\ni: " + i + "\nj: " + j + "\na1: " + a1);
          
              }
         }

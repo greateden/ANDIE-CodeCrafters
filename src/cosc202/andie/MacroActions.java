@@ -1,14 +1,10 @@
 package cosc202.andie;
 
 import java.util.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.tree.DefaultTreeCellEditor.EditorContainer;
 import java.io.*;
-import java.awt.image.*;
-import javax.imageio.*;
 
 
 /**
@@ -248,17 +244,20 @@ public class MacroActions {
 
                     // try{
                     FileInputStream fileinput = new FileInputStream(opsFilepath);
-                    ObjectInputStream obInput = new ObjectInputStream(fileinput);
-
-                    Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) obInput.readObject();
-                    
-                    
-                    for (int i = 0; i < opsFromFile.size(); i++) {
-                        target.getImage().apply(opsFromFile.get(i));
-                        target.repaint();
-                        target.getParent().revalidate();
+                    try (ObjectInputStream obInput = new ObjectInputStream(fileinput)) {
+                        @SuppressWarnings("unchecked")
+                        Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) obInput.readObject();
+                        
+                        
+                        for (int i = 0; i < opsFromFile.size(); i++) {
+                            target.getImage().apply(opsFromFile.get(i));
+                            target.repaint();
+                            target.getParent().revalidate();
+                        }
+                        // }catch(){
                     }
-                    // }catch(){
+
+                    
 
                     // }
 
