@@ -97,6 +97,8 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
      * @return a float[] array used by the emboss kernal
     */
     public static float[] createMatrix(int size , int direction){
+        //ref for array largert then 3x3: https://stackoverflow.com/questions/61297368/what-is-the-5x5-equivalent-of-the-3x3-emboss-kernel
+        // and https://en.wikipedia.org/wiki/Image_embossing (example of 5x5 kernals)
         float[] returnMatrix = new float[(2*size+1) * (2*size+1)]; // initalises matrix for returning
         size = (2*size + 1);
         float matrixValue = 1.0f; // sets the matrix value to 1.0f used for the kernal later on
