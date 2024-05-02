@@ -12,19 +12,19 @@ import java.awt.*;
  * <p>
  * Actions provided by the Image menu.
  * </p>
- * 
+ *
  * <p>
  * The Image menu contains actions that alter the image in some fashion.
  * This includes image rotation and flipping.
  * </p>
- * 
+ *
  * Should be called as ImageActions, however there is one already...
- * 
+ *
  * <p>
  * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
  * 4.0</a>
  * </p>
- * 
+ *
  * @author CodeCrafters
  * @version 1.0
  */
@@ -81,7 +81,7 @@ public class ImageMenuBar {
      * <p>
      * Create a menu containing the list of Image actions.
      * </p>
-     * 
+     *
      * @return The Image menu UI element.
      */
     public JMenu createMenu() {
@@ -112,7 +112,7 @@ public class ImageMenuBar {
          * <p>
          * Create a new Flip Horizontal action
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -128,12 +128,12 @@ public class ImageMenuBar {
          * <p>
          * Callback for when the about-us action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the about-us-action is triggered.
          * It prints a message in a dialog box.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -161,7 +161,7 @@ public class ImageMenuBar {
          * <p>
          * Create a new Flip Vertical action
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -177,11 +177,11 @@ public class ImageMenuBar {
          * <p>
          * Callback for when Flip vertical is pressed.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the Flip Vertical method is called.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -209,7 +209,7 @@ public class ImageMenuBar {
          * <p>
          * Create a new Rotate Image action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -227,11 +227,11 @@ public class ImageMenuBar {
          * <p>
          * Callback for when the Rotate Image Action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the Rotate Image is triggered.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -270,15 +270,15 @@ public class ImageMenuBar {
     }
 
     /**
-     * 
+     *
      * /**
      * <p>
      * Action to resize an image.
-     * 
-     * 
+     *
+     *
      * made by Yuxing Zhang
-     * 
-     * 
+     *
+     *
      */
     public class ImageResizeAction extends ImageAction {
 
@@ -293,7 +293,7 @@ public class ImageMenuBar {
          * <p>
          * Create a Image Resize Action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -307,12 +307,12 @@ public class ImageMenuBar {
          * <p>
          * Callback for when the Image Resize action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the Image Resize Action is triggered.
          * It resizes the image.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
 
@@ -402,13 +402,13 @@ public class ImageMenuBar {
         public class ButtonListener implements ActionListener {
             /**
              * Responds to button click events.
-             * 
+             *
              * This method is called when a button is clicked. It retrieves the source of
              * the action, parses the input fields for height and width, initiates the
              * resizing process,
              * and updates the target component accordingly. It also handles various
              * exceptions that may occur during the resizing process.
-             * 
+             *
              * @param ae The action event triggered by the button click.
              */
             public void actionPerformed(ActionEvent ae) {
@@ -463,9 +463,9 @@ public class ImageMenuBar {
         /**
          * <p>
          * Create a Image Scale Action.
-         * 
+         *
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -532,7 +532,7 @@ public class ImageMenuBar {
 
             /**
              * Constructs a ScaleActionListener with the specified scaling percentage.
-             * 
+             *
              * @param scalePercentage The percentage by which to scale the image.
              */
             public ScaleActionListener(double scalePercentage) {
@@ -541,12 +541,12 @@ public class ImageMenuBar {
 
             /**
              * Responds to action events triggered by scaling options.
-             * 
+             *
              * This method is called when a scaling option is selected from the submenu.
              * It scales the image by the specified percentage, repaints the target
              * component,
              * and revalidates its parent container.
-             * 
+             *
              * @param e The action event triggered by the scaling option.
              */
             public void actionPerformed(ActionEvent e) {
@@ -577,7 +577,7 @@ public class ImageMenuBar {
          * <p>
          * Create a new Rotate Image Strict Action action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -595,11 +595,11 @@ public class ImageMenuBar {
          * <p>
          * Callback for when the convert-to-grey action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the Rotate Image Strict Action is triggered.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         // We must have this class but it won't do anything.
@@ -648,8 +648,8 @@ public class ImageMenuBar {
 
             /**
              * Constructs a ScaleActionListener with the specified rotation angle.
-             * 
-             * 
+             *
+             *
              */
             public ScaleActionListener(double scalePercentage) {
                 this.scalePercentage = scalePercentage;
@@ -657,11 +657,11 @@ public class ImageMenuBar {
 
             /**
              * Responds to action events triggered by scaling options.
-             * 
+             *
              * This method is called when a rotation option is selected from the submenu.
              * It rotates the image by the specified angle, repaints the target component,
              * and revalidates its parent container.
-             * 
+             *
              * @param e The action event triggered by the rotation option.
              */
             public void actionPerformed(ActionEvent e) {
@@ -693,7 +693,7 @@ public class ImageMenuBar {
          * <p>
          * Create a new Random Scattering action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -711,13 +711,13 @@ public class ImageMenuBar {
          * <p>
          * Callback for when the Random Scattering action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the RandomScatteringAction is triggered.
          * It prompts the user for a filter radius, then applys an appropriately sized
          * {@link RandomScattering}.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {

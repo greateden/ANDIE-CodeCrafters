@@ -9,7 +9,7 @@ import java.awt.*;
  * <p>
  * Actions provided by the Colour menu.
  * </p>
- * 
+ *
  * <p>
  * The Colour menu contains actions that affect the colour of each pixel
  * directly
@@ -17,12 +17,12 @@ import java.awt.*;
  * Eden has added the RGBSwapping function, now we have two functions
  * include greyscale as well, please MERGE WITH CARE.
  * </p>
- * 
+ *
  * <p>
  * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
  * 4.0</a>
  * </p>
- * 
+ *
  * @author Steven Mills
  * @version 1.0
  *          modified_by The Greatest Eden
@@ -64,7 +64,7 @@ public class ColourActions {
      * <p>
      * Create a menu containing the list of Colour actions.
      * </p>
-     * 
+     *
      * @return The colour menu UI element.
      */
     public JMenu createMenu() {
@@ -82,7 +82,7 @@ public class ColourActions {
      * <p>
      * Action to convert an image to greyscale.
      * </p>
-     * 
+     *
      * @see ConvertToGrey
      */
     public class ConvertToGreyAction extends ImageAction {
@@ -91,7 +91,7 @@ public class ColourActions {
          * <p>
          * Create a new convert-to-grey action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -105,12 +105,12 @@ public class ColourActions {
          * <p>
          * Callback for when the convert-to-grey action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the ConvertToGreyAction is triggered.
          * It changes the image to greyscale.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -131,7 +131,7 @@ public class ColourActions {
     /**
      * <p>
      * Action to invert an image.
-     * 
+     *
      * Same as the above class, but edited to work for imageInvert().
      * </p>
      */
@@ -141,7 +141,7 @@ public class ColourActions {
          * <p>
          * Create a new imageInvert action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -155,12 +155,12 @@ public class ColourActions {
          * <p>
          * Callback for when the invert image command is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the Image Invert is triggered.
          * It changes the image.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -182,7 +182,7 @@ public class ColourActions {
      * <p>
      * Action to change an image's colour channel's order based on the user's taste.
      * </p>
-     * 
+     *
      * @see ConvertToGrey
      * @author The Greatest Eden
      */
@@ -192,7 +192,7 @@ public class ColourActions {
          * <p>
          * Create a new RGBSwapping action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -206,12 +206,12 @@ public class ColourActions {
          * <p>
          * Callback for when the RGBSwapping action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the RGBSwapping is triggered.
          * It changes the image's colour channel's order based on the user's taste.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {

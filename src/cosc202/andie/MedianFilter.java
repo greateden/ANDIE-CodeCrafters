@@ -9,18 +9,18 @@ import java.awt.BorderLayout;
  * <p>
  * ImageOperation to apply a Median filter.
  * </p>
- * 
+ *
  * <p>
  * The median filter takes all of the pixel values in a local neighbourhood and
  * sorts them. The new pixel value is the middle value
  * from the sorted list.
  * </p>
- * 
+ *
  * <p>
  * <a href="https://creativecommons.org/lißnses/by-nc-sa/4.0/">CC BY-NC-SA
  * 4.0</a>
  * </p>
- * 
+ *
  * @see java.awt.image.ConvolveOp
  * @author Kevin Steve Sathyanath
  * @version 1.0
@@ -40,13 +40,13 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * <p>
      * Construct a median filter with the given size.
      * </p>
-     * 
+     *
      * <p>
      * The size of the filter is the 'radius'.
      * A size of 1 is a 3x3 filter, 2 is 5x5, and so on.
      * Larger filters give a stronger blurring effect.
      * </p>
-     * 
+     *
      * @param radius The radius of the newly constructed MedianFilter.
      */
     MedianFilter(int radius) {
@@ -61,7 +61,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * <p>
      * By default, a Median filter has radius 1.
      * </p>
-     * 
+     *
      * @see MedianFilter(int)
      */
     MedianFilter() {
@@ -72,7 +72,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * <p>
      * Apply a Median filter to an image.
      * </p>
-     * 
+     *
      * @param input The image to apply the Median filter to.
      * @return The resulting (blurred)) image.
      */
@@ -199,7 +199,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                                 }
                                //publish(i);
                             }
-                            
+
                         }
 
                     });// end of threads

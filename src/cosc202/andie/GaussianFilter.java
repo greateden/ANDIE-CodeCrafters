@@ -7,14 +7,14 @@ import java.awt.image.*;
  * <p>
  * This class implements the ImageOperation interface and applies a Gaussian blur filter to a BufferedImage.
  * </p>
- * 
+ *
  * <p>
- *   A Gaussian blur filter applies a Gaussian distribution to soften and blur an image. It achieves this by 
- *   replacing each pixel with a weighted average of itself and its surrounding pixels, with the weights based on a 
+ *   A Gaussian blur filter applies a Gaussian distribution to soften and blur an image. It achieves this by
+ *   replacing each pixel with a weighted average of itself and its surrounding pixels, with the weights based on a
  *   Gaussian function that is normally distributed. This distribution gives more weight to pixels closer to the center, resulting in a smooth blur.
  * </p>
- * 
- * 
+ *
+ *
  * @see java.awt.image.ConvolveOp
  * @see ImageOperation
  * @see BufferedImage
@@ -45,7 +45,7 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
     }
     /**
      * Applies the Gaussian blur filter to a BufferedImage.
-     * 
+     *
      * @param input the BufferedImage to apply the filter to
      * @return a new BufferedImage with the applied Gaussian blur
     */
@@ -82,7 +82,7 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
 
     /**
      * Calculates the value at a specific position in the Gaussian filter mask.
-     * 
+     *
      * @param x the x coordinate in the mask
      * @param y the y coordinate in the mask
      * @param sd the standard deviation of the Gaussian distribution (controls the blur strength)
@@ -98,7 +98,7 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
     }
 
     /**
-     * Calculates the relative position (x, y) 
+     * Calculates the relative position (x, y)
      * basicilly converts the index of an array to grid coords centered around the middle of the grid / array
      * @param num the one-dimensional index in the filter array
      * @param height the height of the Gaussian filter mask
@@ -117,4 +117,3 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
 
 
 
-    

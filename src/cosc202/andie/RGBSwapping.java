@@ -6,7 +6,7 @@ import java.awt.image.*;
  * This class is designed for swapping the RGB channels' position
  * based on the user's taste.
  * It's quite easy to understand, changed the code based on the greyscale class.
- * 
+ *
  * @author The Greatest Eden
  * @version 1.0
  * date 10 Mar 2024
@@ -40,7 +40,7 @@ public class RGBSwapping implements ImageOperation, java.io.Serializable{
      * @return The resulting RGBSwapped image.
      */
     public BufferedImage apply(BufferedImage input) {
-  
+
         for (int y = 0; y < input.getHeight(); ++y) {
             for (int x = 0; x < input.getWidth(); ++x) {
                 int argb = input.getRGB(x, y);
@@ -67,5 +67,5 @@ public class RGBSwapping implements ImageOperation, java.io.Serializable{
         }
         return input;
     }
-    
+
 }

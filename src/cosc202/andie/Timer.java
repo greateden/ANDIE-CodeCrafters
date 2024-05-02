@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A simple wall-clock timer designed for collecting data on experiments in
  * COSC201
- * 
+ *
  * @author Michael Albert
  */
 public class Timer {
@@ -25,7 +25,7 @@ public class Timer {
   /**
    * Start the timer. Note that this throws a runtime exception if the timer
    * is already running.
-   * 
+   *
    */
   public void start() {
     if (running) {
@@ -40,7 +40,7 @@ public class Timer {
    * Stop the timer. The time taken is returned and also added to the internal
    * list of times. Note that this throws a runtime exception if the timer is
    * not running.
-   * 
+   *
    * @return The time taken (in nanoseconds) since the last start().
    */
   public long stop() {
@@ -55,7 +55,7 @@ public class Timer {
 
   /**
    * Return the time taken for the last run of this timer.
-   * 
+   *
    * @return Time (in nanoseconds) for the last run of this timer.
    */
   public long getTime() {
@@ -67,7 +67,7 @@ public class Timer {
 
   /**
    * Return the times recorded for all runs of this timer.
-   * 
+   *
    * @return A list view of the times recorded by this timer.
    */
   public List<Long> getTimes() {
@@ -76,7 +76,7 @@ public class Timer {
 
   /**
    * Compute and return the total time recorded for all runs of this timer.
-   * 
+   *
    * @return The total time recorded by this time (in nanoseconds).
    */
   public long getTotalTime() {
@@ -88,7 +88,7 @@ public class Timer {
 
   /**
    * Reset the timer. That is, stop it and clear the list of times recorded.
-   * 
+   *
    */
   public void reset() {
     times.clear();
@@ -97,7 +97,7 @@ public class Timer {
 
   /**
    * Return the time taken for the last run of this timer in milliseconds.
-   * 
+   *
    * @return Time (in milliseconds) for the last run of this timer.
    */
   public long getTimeInMs() {

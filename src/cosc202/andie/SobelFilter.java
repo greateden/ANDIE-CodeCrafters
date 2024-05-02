@@ -7,14 +7,14 @@ import java.awt.image.*;
  * <p>
  * This class implements the ImageOperation interface and applies a Sobel filter to a BufferedImage.
  * </p>
- * 
+ *
  * <p>
  *   A Sobel filter is apllied by creating a kernal with one side being positive and the other being negitive
  *   The kernal is made up of the values 0.5, 1, 0.5 whichs gives the pressed in effect and the other side having the contrast of the pulled out effect
 
  * </p>
- * 
- * 
+ *
+ *
  * @see java.awt.image.ConvolveOp
  * @see ImageOperation
  * @see BufferedImage
@@ -24,7 +24,7 @@ import java.awt.image.*;
 
 public class SobelFilter implements ImageOperation, java.io.Serializable {
     /**
-     * The Direction of the sobel filter. 
+     * The Direction of the sobel filter.
     */
     private boolean dir;
 
@@ -45,7 +45,7 @@ public class SobelFilter implements ImageOperation, java.io.Serializable {
     }
     /**
      * Applies the sobel filter to Buffered Image
-     * 
+     *
      * @param input the BufferedImage to apply the filter to
      * @return a new BufferedImage with the applied sobel filter
     */
@@ -54,7 +54,7 @@ public class SobelFilter implements ImageOperation, java.io.Serializable {
         float[] sobelMatrix = createMatrix(); // Gets a matrix based on direction and radius to use in the sobel kernal
         Kernel sobelKernel = new Kernel(3, 3, sobelMatrix); // creates a 3x3 kernal with hard coded matrix
         ConvolveOp convOp = new ConvolveOp(sobelKernel); // Creates a convolution operation that applies the sobel kernal
-        
+
         // Had an issue with the image RGB values being diffrent depending on the image so setting it all to the same type by redrawing the image
         BufferedImage AdjustedInput = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_INT_RGB);
         AdjustedInput.getGraphics().drawImage(input, 0, 0, null);
@@ -77,7 +77,7 @@ public class SobelFilter implements ImageOperation, java.io.Serializable {
             }
         }
 
-        return sobelImage; // returns the sobel and color adjusted image    
+        return sobelImage; // returns the sobel and color adjusted image
     }
 
     public float[] createMatrix(){
@@ -96,11 +96,10 @@ public class SobelFilter implements ImageOperation, java.io.Serializable {
             };
             return SobelMatrix;
         }
-    
+
     }
 }
 
 
 
 
-    

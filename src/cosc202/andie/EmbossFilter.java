@@ -7,12 +7,12 @@ import java.awt.image.Kernel;
  * <p>
  * This class implements the ImageOperation interface and applies Image embossing to a BufferedImage.
  * </p>
- * 
+ *
  * <p>
  *      Image embossing is when an images pixel is replaced with a light or dark color depening on the boundries of an input image
  * </p>
- * 
- * 
+ *
+ *
  * @see java.awt.image.ConvolveOp
  * @see ImageOperation
  * @see BufferedImage
@@ -37,7 +37,7 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
         this.direction = direction;
         this.radius = radius;
     }
-    
+
     /**
     * Default constructor that creates a Emboss Filter with a radius of 1 and a direction of 0
     */
@@ -48,17 +48,17 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
 
     /**
      * Applies the Emboss filter to a BufferedImage.
-     * 
+     *
      * @param input the BufferedImage to apply the filter to
      * @return a new BufferedImage with the applied Emboss filter and adjusted rgb values
     */
     public BufferedImage apply(BufferedImage input) {
-        BufferedImage embossedImage = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_INT_RGB); // creates a new image 
+        BufferedImage embossedImage = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_INT_RGB); // creates a new image
         float[] embossMatrix = createMatrix(radius,direction ); // Gets a matrix based on direction and radius to use in the emboss kernal
 
         Kernel embossKernel = new Kernel((2*radius +1), (2*radius +1 ), embossMatrix); // creates a 3x3 kernal with hard coded matrix
         ConvolveOp convOp = new ConvolveOp(embossKernel); // Creates a convolution operation that applies the emboss kernal
-        
+
         // Had an issue with the image RGB values being diffrent depending on the image so setting it all to the same type by redrawing the image
         BufferedImage AdjustedInput = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_INT_RGB);
         AdjustedInput.getGraphics().drawImage(input, 0, 0, null);
@@ -89,7 +89,7 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
      * Create a matrix for the emboss kernal
      * This method works by treating the float array as a grid similar but the opposite to the Gaussian
      * It uses trigonometry to work out the grid coords of a line at a set angle
-     * There is a loop which follows the line and sets the array coords worked out with (x * size + y) to 1.0f 
+     * There is a loop which follows the line and sets the array coords worked out with (x * size + y) to 1.0f
      * until it then reaches the center point called maxSize (I reused maxSize since its the same as center value)
      * It then changes the matrixValue from 1.0f to -1.0f this gives the diffrent colors for the lines
      * @param size the grid size based on radius of the filter
@@ -103,7 +103,7 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
         size = (2*size + 1);
         float matrixValue = 1.0f; // sets the matrix value to 1.0f used for the kernal later on
         int maxSize = (size/2); // the size is divied by two and since its an int it floor rounds
-        double angleRads = Math.toRadians(direction); // converts the degrees to rads 
+        double angleRads = Math.toRadians(direction); // converts the degrees to rads
         int dx,dy = 0; // initialise dx and dy since its used in the switch so It becomes local if I dont do it here
         switch (direction){
             case 0: // if the angle is equal to 0,90,180 or 270 its gotta be treated specially sinces its along the axis lines so switch is like if elseif but looks cool
@@ -117,14 +117,14 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
             case 180:
                 dx = -1;
                 dy = 0;
-                break; 
+                break;
             case 270:
                 dx = 0;
                 dy = -1;
                 break;
             default:
                 dy = (int) Math.round(Math.sin(angleRads) * maxSize); // this uses math I didn't think I would again outside of highschool
-                dx = (int) Math.round(Math.cos(angleRads) * maxSize); // basiclly this represents the gradient of the curve in our case line 
+                dx = (int) Math.round(Math.cos(angleRads) * maxSize); // basiclly this represents the gradient of the curve in our case line
 
         }
 
@@ -136,8 +136,8 @@ public class EmbossFilter implements ImageOperation, java.io.Serializable{
                     matrixValue = -1.0f; // once it hits the center the emboss needs to be negative
                     continue;
                 }
-                returnMatrix[x * size + y] = matrixValue; // sets the index from the coords we worked out to the matrixvalue which is -1 or +1 
-                
+                returnMatrix[x * size + y] = matrixValue; // sets the index from the coords we worked out to the matrixvalue which is -1 or +1
+
                 // the reason its negivtive or plus one is to give the contrast for the lines to sink or pop out.
                 // The equation for the grid convertion for both guassaian and this was from https://www.youtube.com/watch?v=I2_xT1joq2U
             }
