@@ -5,7 +5,7 @@ import java.awt.image.*;
 /**
  * ImageFlipHorizontal implements ImageOperation interface and provides
  * functionality to flip an image horizontally.
- * 
+ *
  * The flip operation flips the image along a horizontal axis, specifically the
  * halfway point of the image.
  */
@@ -22,12 +22,12 @@ public class ImageFlipHorizontal implements ImageOperation, java.io.Serializable
      * <p>
      * Apply horizontal flip to an image.
      * </p>
-     * 
+     *
      * <p>
      * Flips the image along a vertical axis along the halfway point of
      * the image.
      * </p>
-     * 
+     *
      * @param input The image to be flipped
      * @return The resulting greyscale image.
      */

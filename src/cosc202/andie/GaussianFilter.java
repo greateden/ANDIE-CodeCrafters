@@ -1,7 +1,5 @@
 package cosc202.andie;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.image.*;
 
 
@@ -9,14 +7,14 @@ import java.awt.image.*;
  * <p>
  * This class implements the ImageOperation interface and applies a Gaussian blur filter to a BufferedImage.
  * </p>
- * 
+ *
  * <p>
- *   A Gaussian blur filter applies a Gaussian distribution to soften and blur an image. It achieves this by 
- *   replacing each pixel with a weighted average of itself and its surrounding pixels, with the weights based on a 
+ *   A Gaussian blur filter applies a Gaussian distribution to soften and blur an image. It achieves this by
+ *   replacing each pixel with a weighted average of itself and its surrounding pixels, with the weights based on a
  *   Gaussian function that is normally distributed. This distribution gives more weight to pixels closer to the center, resulting in a smooth blur.
  * </p>
- * 
- * 
+ *
+ *
  * @see java.awt.image.ConvolveOp
  * @see ImageOperation
  * @see BufferedImage
@@ -47,7 +45,7 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
     }
     /**
      * Applies the Gaussian blur filter to a BufferedImage.
-     * 
+     *
      * @param input the BufferedImage to apply the filter to
      * @return a new BufferedImage with the applied Gaussian blur
     */
@@ -70,32 +68,21 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
         Kernel kernel = new Kernel(2*radius+1, 2*radius+1, array);
         ConvolveOp convOp = new ConvolveOp(kernel);
 
-        //Makes a transpearent border to stop convolution from being applied to non-existant pixels
-        //Creates image one pixel bigger then original image
-        int borderWidth = input.getWidth() + 2;
-        int borderHeight = input.getHeight() + 2;
-        BufferedImage borderImage = new BufferedImage(borderWidth, borderHeight, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = borderImage.createGraphics();
-
-        //fills image with transparent pixels
-        g2.setColor(new Color(0,0,0,0)); 
-        g2.fillRect(0, 0, borderWidth, borderHeight);
-
-        //Adding original image to the middle
-        g2.drawImage(input,1,1, null);
+        //Create an instance of the class that creates image with border
+        FilterBorder borderedImage = new FilterBorder(input, radius);
 
         //Applies convolution to bordered image
-        BufferedImage output = convOp.filter(borderImage, null);
+        BufferedImage output = convOp.filter(borderedImage.applyBorder(), null);
 
         //Crops image back to original size
-        output = output.getSubimage(1, 1, input.getWidth(), input.getHeight());
+        output = output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
 
         return output;
     }
 
     /**
      * Calculates the value at a specific position in the Gaussian filter mask.
-     * 
+     *
      * @param x the x coordinate in the mask
      * @param y the y coordinate in the mask
      * @param sd the standard deviation of the Gaussian distribution (controls the blur strength)
@@ -111,7 +98,7 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
     }
 
     /**
-     * Calculates the relative position (x, y) 
+     * Calculates the relative position (x, y)
      * basicilly converts the index of an array to grid coords centered around the middle of the grid / array
      * @param num the one-dimensional index in the filter array
      * @param height the height of the Gaussian filter mask
@@ -130,4 +117,3 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
 
 
 
-    

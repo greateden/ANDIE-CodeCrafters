@@ -10,6 +10,8 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * <p>
@@ -36,7 +38,7 @@ public class FileActions {
 
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
-    protected boolean isOpened = false;
+    protected static boolean isOpened = false;
     // protected boolean isSaved = false;
 
     /**
@@ -55,7 +57,7 @@ public class FileActions {
      * @return isOpened the state of the isOpened variable
      */
     public boolean isOpenedSetter(boolean isOpened) {
-        this.isOpened = isOpened;
+        FileActions.isOpened = isOpened;
         return isOpened;
     }
 
@@ -68,21 +70,47 @@ public class FileActions {
     public FileActions() {
 
         actions = new ArrayList<Action>();
-        actions.add(new FileOpenAction(Andie.bundle.getString("OpenAction"), null, Andie.bundle.getString("OpenDesc"),
-                Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new FileSaveAction(Andie.bundle.getString("SaveAction"), null,
-                Andie.bundle.getString("SaveDesc"),
-                Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(
-                new FileSaveAsAction(Andie.bundle.getString("SaveAsAction"), null, Andie.bundle.getString("SaveAsDesc"),
-                        Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(
-                new FileExportAction(Andie.bundle.getString("ExportAction"), null, Andie.bundle.getString("ExportDesc"),
-                        Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new FileExitAction(Andie.bundle.getString("ExitAction"), null, Andie.bundle.getString("ExitDesc"),
-                Integer.valueOf(KeyEvent.VK_Q)));
-        actions.add(new FileChangeLanguageAction(Andie.bundle.getString("ChangeLanguage"), null,
-                Andie.bundle.getString("ChangeLanguage"), Integer.valueOf(KeyEvent.VK_L)));
+
+        Action fileOpen = new FileOpenAction(Andie.bundle.getString("OpenAction"), null,
+                Andie.bundle.getString("OpenDesc"),
+                Integer.valueOf(KeyEvent.VK_O));
+        actions.add(fileOpen);
+        CreateHotKey.createHotkey(fileOpen, KeyEvent.VK_O, InputEvent.META_DOWN_MASK, "fileOpen");
+
+        Action fileSave = new FileSaveAction(Andie.bundle.getString("SaveAction"), null,
+                Andie.bundle.getString("SaveDesc"), Integer.valueOf(KeyEvent.VK_S));
+        actions.add(fileSave);
+        CreateHotKey.createHotkey(fileSave, KeyEvent.VK_S, InputEvent.META_DOWN_MASK, "fileSave");
+
+        Action fileSaveAs = new FileSaveAsAction(Andie.bundle.getString("SaveAsAction"), null,
+                Andie.bundle.getString("SaveAsDesc"),
+                Integer.valueOf(KeyEvent.VK_A));
+        actions.add(fileSaveAs);
+        CreateHotKey.createHotkey(fileSaveAs, KeyEvent.VK_S, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK,
+                "fileSaveAs");
+
+        Action fileExport = new FileExportAction(Andie.bundle.getString("ExportAction"), null,
+                Andie.bundle.getString("ExportDesc"),
+                Integer.valueOf(KeyEvent.VK_E));
+        actions.add(fileExport);
+        CreateHotKey.createHotkey(fileExport, KeyEvent.VK_E, InputEvent.META_DOWN_MASK, "fileExport");
+
+        Action filePrint = new FilePrintAction(Andie.bundle.getString("PrintAction"), null,
+                Andie.bundle.getString("PrintDesc"),
+                Integer.valueOf(KeyEvent.VK_P));
+        actions.add(filePrint);
+        CreateHotKey.createHotkey(filePrint, KeyEvent.VK_P, InputEvent.META_DOWN_MASK, "filePrint");
+
+        Action fileChangeLangue = new FileChangeLanguageAction(Andie.bundle.getString("ChangeLanguage"), null,
+                Andie.bundle.getString("ChangeLanguage"), Integer.valueOf(KeyEvent.VK_L));
+        actions.add(fileChangeLangue);
+        CreateHotKey.createHotkey(fileChangeLangue, 0, 0, "fileChangeLangue");
+
+        Action fileExit = new FileExitAction(Andie.bundle.getString("ExitAction"), null,
+                Andie.bundle.getString("ExitDesc"),
+                Integer.valueOf(KeyEvent.VK_Q));
+        actions.add(fileExit);
+        CreateHotKey.createHotkey(fileExit, KeyEvent.VK_Q, InputEvent.META_DOWN_MASK, "fileExit");
     }
 
     /**
@@ -323,7 +351,8 @@ public class FileActions {
 
                         String format = ((ImageFileFilter) selectedFilter).getExtension();
 
-                        ImageIO.write(target.getImage().getCurrentImage(), format, new File(selectedFilePath));
+                        target.getImage();
+                        ImageIO.write(EditableImage.getCurrentImage(), format, new File(selectedFilePath));
 
                         // create a message box to tell user it's saved successfully
                         // JOptionPane.showMessageDialog(null,
@@ -507,6 +536,7 @@ public class FileActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+
             JFileChooser fileChooser = new JFileChooser();
 
             if (isOpened == true) {
@@ -624,6 +654,94 @@ public class FileActions {
     }
 
     /**
+     * A class that represents the action of printing an image.
+     */
+    public class FilePrintAction extends AbstractAction {
+        //private BufferedImage imageToPrint;
+
+        /**
+         * <p>
+         * Create a new image-print action.
+         * </p>
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        FilePrintAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon);
+            putValue(SHORT_DESCRIPTION, desc);
+            putValue(MNEMONIC_KEY, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the image-print action is triggered.
+         * </p>
+         *
+         * <p>
+         * This method is called whenever the image-print is triggered.
+         * It call the system printing API to print the image.
+         * </p>
+         *
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            if (isOpened == true) {
+
+                boolean b1Choose = false;
+                boolean b2Choose = false;
+
+                JPanel panel = new JPanel(new GridLayout(2, 2));
+
+                JLabel l1 = new JLabel(Andie.bundle.getString("PrintMethodInstruction"));
+                panel.add(l1);
+                JLabel l2 = new JLabel();
+                panel.add(l2);
+
+                ButtonGroup group = new ButtonGroup();
+                JRadioButton b1 = new JRadioButton("100%");
+                JRadioButton b2 = new JRadioButton(Andie.bundle.getString("FitImage"));
+                group.add(b1);
+                group.add(b2);
+                panel.add(b1);
+                panel.add(b2);
+
+                // Show the option dialog
+                int option = JOptionPane.showOptionDialog(null, panel, Andie.bundle.getString("PrintMethod"),
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+                if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
+                    // Do nothing, but we keep this statement for possible future function expands.
+                } else if (option == JOptionPane.OK_OPTION) {
+                    if (b1.isSelected()) {
+                        b1Choose = true;
+                    } else if (b2.isSelected()) {
+                        b2Choose = true;
+                    }
+
+                    if (!b1Choose && !b2Choose) {
+                        JOptionPane.showMessageDialog(null, Andie.bundle.getString("PleaseChoose"),
+                                Andie.bundle.getString("Warning"),
+                                JOptionPane.WARNING_MESSAGE);
+                        actionPerformed(e);
+                        // Will educate the user if they didn't give any inputs and still wanna hit the
+                        // OK button
+                    } else {
+                        PrintImage p = new PrintImage (b2Choose);
+                        p.printImage();
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
+                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+            }
+        }// end of actionPerformed
+    }
+
+    /**
      * <p>
      * Action to quit the ANDIE application.
      * </p>
@@ -699,7 +817,7 @@ public class FileActions {
             } else {
                 System.exit(0);
             }
-        }
+        }// end of actionPerformed
 
     }
 
@@ -710,7 +828,7 @@ public class FileActions {
      * </p>
      *
      */
-    public class FileChangeLanguageAction extends ImageAction implements ActionListener {
+    public class FileChangeLanguageAction extends ImageAction {
         int height;
         int width;
         JLabel widthJLabel, heightLabel, titleLabel, blankLabel;
@@ -748,8 +866,6 @@ public class FileActions {
         public void actionPerformed(ActionEvent e) {
             Andie.exitFullScreen();
 
-            String[] languages = { "English", "Bahasa Indonesia", "繁體中文" };
-
             JFrame l = new JFrame();
 
             // Set behaviour of frame
@@ -773,7 +889,6 @@ public class FileActions {
             c.add(traChinese);
 
             english.addActionListener(new ActionListener() {
-                @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
                     Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
@@ -790,7 +905,6 @@ public class FileActions {
             });
 
             bahasa.addActionListener(new ActionListener() {
-                @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
                     Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
@@ -808,7 +922,6 @@ public class FileActions {
             });
             //test?
             traChinese.addActionListener(new ActionListener() {
-                @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
                     Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);

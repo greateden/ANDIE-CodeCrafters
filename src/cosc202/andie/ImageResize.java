@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 /**
- *  A class that does image resize. Made by Yuxing Zhang 
+ *  A class that does image resize. Made by Yuxing Zhang
  */
 
 public class ImageResize implements ImageOperation, java.io.Serializable {
@@ -31,7 +31,7 @@ public class ImageResize implements ImageOperation, java.io.Serializable {
 
   /**
    *  Apply a resize to the given image.
-   * 
+   *
    *  @param input The image to resize.
    *  @return The resulting image.
    */

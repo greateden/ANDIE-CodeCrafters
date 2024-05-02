@@ -1,4 +1,3 @@
-
 package cosc202.andie;
 
 import java.awt.Image;
@@ -17,7 +16,7 @@ public class ImageScaling implements ImageOperation, java.io.Serializable {
    * <p>
    * Constructs a new ImageScaling object.
    * </p>
-   * 
+   *
    * @param scalePercentage The percentage to scale the image by.
    */
   public ImageScaling(double scalePercentage) {
@@ -30,7 +29,7 @@ public class ImageScaling implements ImageOperation, java.io.Serializable {
    * <p>
    * Scales the image by the given percentage.
    * </p>
-   * 
+   *
    * @param input The image to scale.
    * @return The scaled image.
    */

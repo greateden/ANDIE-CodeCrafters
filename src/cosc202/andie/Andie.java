@@ -3,32 +3,31 @@ package cosc202.andie;
 import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.prefs.Preferences;
 import javax.swing.*;
-
-import javax.imageio.*;
+import java.awt.event.*;
+import javax.imageio.ImageIO;
 
 /**
  * <p>
  * Main class for A Non-Destructive Image Editor (ANDIE).
  * </p>
- * 
+ *
  * <p>
  * This class is the entry point for the program.
  * It creates a Graphical User Interface (GUI) that provides access to various
  * image editing and processing operations.
  * </p>
- * 
+ *
  * <p>
  * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
  * 4.0</a>
  * </p>
- * 
+ *
  * @author Steven Mills
  * @version 1.0
  */
 public class Andie {
-    private static JFrame frame;  
+    public static JFrame frame;
     private static ImagePanel imagePanel;
     public static ResourceBundle bundle;
     public static JMenuBar menuBar;
@@ -40,12 +39,13 @@ public class Andie {
     private static ImageMenuBar imageMenuBar;
     private static ColourActions colourActions;
     private static HelpActions helpActions;
+    private static MacroActions macroActions;
 
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
      * </p>
-     * 
+     *
      * <p>
      * This method sets up an interface consisting of an active image (an
      * {@code ImagePanel})
@@ -54,7 +54,7 @@ public class Andie {
      * These operations are implemented {@link ImageOperation}s and triggered via
      * {@code ImageAction}s grouped by their general purpose into menus.
      * </p>
-     * 
+     *
      * @see ImagePanel
      * @see ImageAction
      * @see ImageOperation
@@ -63,7 +63,8 @@ public class Andie {
      * @see ViewActions
      * @see FilterActions
      * @see ColourActions
-     * 
+     * @see MacroActions
+     *
      * @throws Exception if something goes wrong.
      */
     private static void createAndShowGUI() throws Exception {
@@ -105,19 +106,19 @@ public class Andie {
      * Gets the status of the frame.
      * </p>
      */
-    public static void getStatus(){
+    public static void getStatus() {
         System.out.println(frame.getExtendedState());
     }
 
     /**
      * <p>
-     * Creates the menu bar for the GUI.
+     * Creates the menu bar for the GUI with a whole hellofa bunch of menus inside.
      * </p>
      */
     private static void createMenuBar() {
         // Add in menus for various types of action the user may perform.
         JMenuBar newMenuBar = new JMenuBar();
-    
+
         fileActions = new FileActions();
         editActions = new EditActions();
         viewActions = new ViewActions();
@@ -125,41 +126,64 @@ public class Andie {
         imageMenuBar = new ImageMenuBar();
         colourActions = new ColourActions();
         helpActions = new HelpActions();
+        macroActions = new MacroActions();
         // File menus are pretty standard, so things that usually go in File menus go
         // here.
-        newMenuBar.add(fileActions.createMenu());
+
+        JMenu fileMenu = fileActions.createMenu();
+        newMenuBar.add(fileMenu);
 
         // Likewise Edit menus are very common, so should be clear what might go here.
-        newMenuBar.add(editActions.createMenu());
+        JMenu editMenu = editActions.createMenu();
+        newMenuBar.add(editMenu);
 
         // View actions control how the image is displayed, but do not alter its actual
         // content
-        newMenuBar.add(viewActions.createMenu());
+        JMenu viewMenu = viewActions.createMenu();
+        newMenuBar.add(viewMenu);
 
         // Filters apply a per-pixel operation to the image, generally based on a local
         // window
-        newMenuBar.add(filterActions.createMenu());
+        JMenu filterMenu = filterActions.createMenu();
+        newMenuBar.add(filterMenu);
 
         // Actions that affect the representation of colour in the image
-        newMenuBar.add(colourActions.createMenu());
+        JMenu colourMenu = colourActions.createMenu();
+        newMenuBar.add(colourMenu);
 
         // Actions that alter the image such as image flip/rotate
-        newMenuBar.add(imageMenuBar.createMenu());
+        JMenu imageMenu = imageMenuBar.createMenu();
+        newMenuBar.add(imageMenu);
 
         // Provides an about page and link to online docs
-        newMenuBar.add(helpActions.createMenu());
+        JMenu helpMenu = helpActions.createMenu();
+        newMenuBar.add(helpMenu);
+
+        // actions that apply a macro funtion of the operations
+        newMenuBar.add(macroActions.createMenu());
 
         frame.setJMenuBar(newMenuBar);
+
+        CreateHotKey.createHotkey(fileMenu, KeyEvent.VK_F,0,"filemenu");
+        CreateHotKey.createHotkey(editMenu, KeyEvent.VK_E, 0, "editmenu");
+        CreateHotKey.createHotkey(viewMenu, KeyEvent.VK_V, 0, "viewmenu");
+        CreateHotKey.createHotkey(filterMenu, KeyEvent.VK_L, 0, "filtermenu");
+        CreateHotKey.createHotkey(colourMenu, KeyEvent.VK_C, 0, "colourmenu");
+        CreateHotKey.createHotkey(imageMenu, KeyEvent.VK_I, 0, "imagemenu");
+        CreateHotKey.createHotkey(helpMenu, KeyEvent.VK_H, 0, "helpmenu");
+
         frame.repaint();
         frame.pack();
         frame.setVisible(true);
     }
 
+
+
     /**
      * <p>
      * Gets the frame.
      * </p>
-     * 
+     *
      * @return The frame.
      */
     public static JFrame getFrame() {
@@ -167,7 +191,8 @@ public class Andie {
     }
 
     /**
-     * Yes it's calling createMenuBar(), we'rejust trying to make it with more sense.
+     * Yes it's calling createMenuBar(), we'rejust trying to make it with more
+     * sense.
      * Makes more sense than using a carrier pigeon for teammate communication.
      */
     public static void setLanguage() {
@@ -180,12 +205,12 @@ public class Andie {
      * <p>
      * Main entry point to the ANDIE program.
      * </p>
-     * 
+     *
      * <p>
      * Creates and launches the main GUI in a separate thread.
      * As a result, this is essentially a wrapper around {@code createAndShowGUI()}.
      * </p>
-     * 
+     *
      * @param args Command line arguments, not currently used
      * @throws Exception If something goes awry
      * @see #createAndShowGUI()
@@ -193,12 +218,9 @@ public class Andie {
     public static void main(String[] args) throws Exception {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
-            @SuppressWarnings("deprecation")
             public void run() {
 
-                // Making preferences and locale
-                Preferences p = Preferences.userNodeForPackage(Andie.class);
-                Locale.setDefault(new Locale("en","NZ"));
+                Locale.setDefault(new Locale("en", "NZ"));
 
                 // Now making the ResourceBundle
                 bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");

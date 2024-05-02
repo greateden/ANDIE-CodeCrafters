@@ -4,12 +4,13 @@ import java.util.*;
 import java.io.*;
 import java.awt.image.*;
 import javax.imageio.*;
+import java.awt.image.BufferedImage;
 
 /**
  * <p>
  * An image with a set of operations applied to it.
  * </p>
- * 
+ *
  * <p>
  * The EditableImage represents an image with a series of operations applied to
  * it.
@@ -19,7 +20,7 @@ import javax.imageio.*;
  * This is what is meant by "A Non-Destructive Image Editor" - you can always
  * undo back to the original image.
  * </p>
- * 
+ *
  * <p>
  * Internally the EditableImage has two {@link BufferedImage}s - the original
  * image
@@ -28,12 +29,12 @@ import javax.imageio.*;
  * {@link Stack}
  * being used to allow undone operations to be redone.
  * </p>
- * 
+ *
  * <p>
  * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
  * 4.0</a>
  * </p>
- * 
+ *
  * @author Steven Mills
  * @version 1.0
  */
@@ -44,7 +45,7 @@ class EditableImage {
     /**
      * The current image, the result of applying {@link ops} to {@link original}.
      */
-    private BufferedImage current;
+    private static BufferedImage current;
     /** The sequence of operations currently applied to the image. */
     private Stack<ImageOperation> ops;
     /** A memory of 'undone' operations to support 'redo'. */
@@ -59,28 +60,33 @@ class EditableImage {
     // the user may open a new file which has been edited before.
     public static boolean isOpsNotEmptyStatus;
 
-    //to help determine whether to "save" or "save as"
+    // to help determine whether to "save" or "save as"
     public static boolean hasOpsFile;
 
+    // a stack for saving all the ops done after click 'macro'
+    public static Stack<ImageOperation> macroStack=new Stack<ImageOperation>();
+   //a boolean variable for macro to manage the start and stop
+    public static boolean recordingStart;
 
     /*
      * A method for determing whether to call "save as" or "save"
      * when user trying to save an image.
-     * 
+     *
      * @see FileActions
      */
 
     // public boolean isOpsNotEmpty() {
 
-    //     return !ops.empty();
+    // return !ops.empty();
     // }
 
     /**
      * <p>
      * Create a new EditableImage.
      * </p>
-     * 
-     * <p>ƒ
+     *
+     * <p>
+     * ƒ
      * A new EditableImage has no image (it is a null reference), and an empty stack
      * of operations.
      * </p>
@@ -98,7 +104,7 @@ class EditableImage {
      * <p>
      * Check if there is an image loaded.
      * </p>
-     * 
+     *
      * @return True if there is an image, false otherwise.
      */
     public boolean hasImage() {
@@ -109,7 +115,7 @@ class EditableImage {
      * <p>
      * Make a 'deep' copy of a BufferedImage.
      * </p>
-     * 
+     *
      * <p>
      * Object instances in Java are accessed via references, which means that
      * assignment does
@@ -120,7 +126,7 @@ class EditableImage {
      * the
      * {@code clone()} method is not accessible.
      * </p>
-     * 
+     *
      * <p>
      * This method makes a cloned copy of a BufferedImage.
      * This requires knowledge of some details about the internals of the
@@ -128,7 +134,7 @@ class EditableImage {
      * but essentially comes down to making a new BufferedImage made up of copies of
      * the internal parts of the input.
      * </p>
-     * 
+     *
      * <p>
      * This code is taken from StackOverflow:
      * <a href=
@@ -138,12 +144,12 @@ class EditableImage {
      * "https://stackoverflow.com/questions/3514158/how-do-you-clone-a-bufferedimage">https://stackoverflow.com/questions/3514158/how-do-you-clone-a-bufferedimage</a>.
      * Code by Klark used under the CC BY-SA 2.5 license.
      * </p>
-     * 
+     *
      * <p>
      * This method (only) is released under
      * <a href="https://creativecommons.org/licenses/by-sa/2.5/">CC BY-SA 2.5</a>
      * </p>
-     * 
+     *
      * @param bi The BufferedImage to copy.
      * @return A deep copy of the input.
      */
@@ -158,7 +164,7 @@ class EditableImage {
      * <p>
      * Open an image from a file.
      * </p>
-     * 
+     *
      * <p>
      * Opens an image from the specified file.
      * Also tries to open a set of operations from the file with <code>.ops</code>
@@ -167,7 +173,7 @@ class EditableImage {
      * to
      * read the operations from <code>some/path/to/image.png.ops</code>.
      * </p>
-     * 
+     *
      * @param filePath The file to open the image from.
      * @throws Exception If something goes wrong.
      */
@@ -209,7 +215,7 @@ class EditableImage {
      * <p>
      * Save an image to file.
      * </p>
-     * 
+     *
      * <p>
      * Saves an image to the file it was opened from, or the most recent file saved
      * as.
@@ -218,7 +224,7 @@ class EditableImage {
      * save
      * the current operations to <code>some/path/to/image.png.ops</code>.
      * </p>
-     * 
+     *
      * @throws Exception If something goes wrong.
      */
     public void save() throws Exception {
@@ -240,7 +246,7 @@ class EditableImage {
      * <p>
      * Save an image to a specified file.
      * </p>
-     * 
+     *
      * <p>
      * Saves an image to the file provided as a parameter.
      * Also saves a set of operations from the file with <code>.ops</code> added.
@@ -248,7 +254,7 @@ class EditableImage {
      * save
      * the current operations to <code>some/path/to/image.png.ops</code>.
      * </p>
-     * 
+     *
      * @param imageFilename The file location to save the image to.
      * @throws Exception If something goes wrong.
      */
@@ -262,7 +268,7 @@ class EditableImage {
      * <p>
      * Apply an {@link ImageOperation} to this image.
      * </p>
-     * 
+     *
      * @param op The operation to apply.
      */
     public void apply(ImageOperation op) {
@@ -270,12 +276,15 @@ class EditableImage {
         // made a new change to the file or not; this will not look into the stack as
         // the user may open a new file which has been edited before.
         isOpsNotEmptyStatus = true;
-
+        if (recordingStart == true) {
+            macroStack.add(op);
+        }
         current = op.apply(current);
         ops.add(op);
-        //System.out.println();
+        // System.out.println();
 
     }
+
     /**
      * <p>
      * Undo the last {@link ImageOperation} applied to the image.
@@ -299,11 +308,11 @@ class EditableImage {
      * <p>
      * Get the current image after the operations have been applied.
      * </p>
-     * 
+     *
      * @return The result of applying all of the current operations to the
      *         {@link original} image.
      */
-    public BufferedImage getCurrentImage() {
+    public static BufferedImage getCurrentImage() {
         return current;
     }
 
@@ -311,7 +320,7 @@ class EditableImage {
      * <p>
      * Reapply the current list of operations to the original.
      * </p>
-     * 
+     *
      * <p>
      * While the latest version of the image is stored in {@link current}, this
      * method makes a fresh copy of the original and applies the operations to it in
@@ -327,5 +336,6 @@ class EditableImage {
             current = op.apply(current);
         }
     }
+
 
 }
