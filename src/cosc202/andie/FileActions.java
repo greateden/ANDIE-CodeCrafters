@@ -15,18 +15,18 @@ import java.awt.*;
  * <p>
  * Actions provided by the File menu.
  * </p>
- * 
+ *
  * <p>
  * The File menu is very common across applications,
  * and there are several items that the user will expect to find here.
  * Opening and saving files is an obvious one, but also exiting the program.
  * </p>
- * 
+ *
  * <p>
  * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
  * 4.0</a>
  * </p>
- * 
+ *
  * @author Steven Mills
  * @version 1.0
  */
@@ -41,7 +41,7 @@ public class FileActions {
 
     /**
      * To get the state of the isOpened variable
-     * 
+     *
      * @return isOpened the state of the isOpened variable
      */
     public boolean isOpenedGetter() {
@@ -50,7 +50,7 @@ public class FileActions {
 
     /**
      * To set the state of the isOpened variable
-     * 
+     *
      * @param isOpened the state of the isOpened variable
      * @return isOpened the state of the isOpened variable
      */
@@ -89,7 +89,7 @@ public class FileActions {
      * <p>
      * Create a menu containing the list of File actions.
      * </p>
-     * 
+     *
      * @return The File menu UI element.
      */
     public JMenu createMenu() {
@@ -106,7 +106,7 @@ public class FileActions {
      * <p>
      * Action to open an image from file.
      * </p>
-     * 
+     *
      * @see EditableImage#open(String)
      */
     public class FileOpenAction extends ImageAction {
@@ -115,7 +115,7 @@ public class FileActions {
          * <p>
          * Create a new file-open action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -129,12 +129,12 @@ public class FileActions {
          * <p>
          * Callback for when the file-open action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the FileOpenAction is triggered.
          * It prompts the user to select a file and opens it as an image.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -241,7 +241,7 @@ public class FileActions {
                     System.exit(1);
                 }
             }
-            
+
             target.repaint();
             target.getParent().revalidate();
         }
@@ -253,7 +253,7 @@ public class FileActions {
      * Action to save an image without saving the .ops file.
      * i.e., to actually make changes to the image.
      * </p>
-     * 
+     *
      * @see EditableImage#open(String)
      */
     public class FileExportAction extends ImageAction {
@@ -261,7 +261,7 @@ public class FileActions {
          * <p>
          * Create a new file-open action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -275,13 +275,13 @@ public class FileActions {
          * <p>
          * Callback for when the file export action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the FileExportAction is triggered.
          * It prompts the user to select a format they wants to export and export
          * to an image without .ops file.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -353,7 +353,7 @@ public class FileActions {
              * <p>
              * Create a new image file filter.
              * </p>
-             * 
+             *
              * @param extension   The extension of the image format.
              * @param description A description of the image format.
              */
@@ -366,7 +366,7 @@ public class FileActions {
              * <p>
              * Check whether a file is accepted by this filter.
              * </p>
-             * 
+             *
              * @param f The file to check.
              * @return True if the file is accepted, false otherwise.
              */
@@ -382,7 +382,7 @@ public class FileActions {
              * <p>
              * Get a description of this file filter.
              * </p>
-             * 
+             *
              * @return A description of this file filter.
              */
             public String getDescription() {
@@ -393,7 +393,7 @@ public class FileActions {
              * <p>
              * Get the extension of this file filter.
              * </p>
-             * 
+             *
              * @return The extension of this file filter.
              */
             public String getExtension() {
@@ -406,7 +406,7 @@ public class FileActions {
      * <p>
      * Action to save an image to its current file location.
      * </p>
-     * 
+     *
      * @see EditableImage#save()
      */
     public class FileSaveAction extends ImageAction {
@@ -415,7 +415,7 @@ public class FileActions {
          * <p>
          * Create a new file-save action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -429,12 +429,12 @@ public class FileActions {
          * <p>
          * Callback for when the file-save action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the FileSaveAction is triggered.
          * It saves the image to its original filepath.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -475,7 +475,7 @@ public class FileActions {
      * <p>
      * Action to save an image and the ops file to a new file location.
      * </p>
-     * 
+     *
      * @see EditableImage#saveAs(String)
      */
     public class FileSaveAsAction extends ImageAction {
@@ -484,7 +484,7 @@ public class FileActions {
          * <p>
          * Create a new file-save-as action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -498,12 +498,12 @@ public class FileActions {
          * <p>
          * Callback for when the file-save-as action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the FileSaveAsAction is triggered.
          * It prompts the user to select a file and saves the image to it.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -577,7 +577,7 @@ public class FileActions {
 
             /**
              * Constructor of ImageFileFilter
-             * 
+             *
              * @param extension   the extension
              * @param description the description of the file filter
              */
@@ -590,7 +590,7 @@ public class FileActions {
              * <p>
              * Check whether a file is accepted by this filter.
              * </p>
-             * 
+             *
              * @param f The file to check.
              * @return True if the file is accepted, false otherwise.
              */
@@ -604,7 +604,7 @@ public class FileActions {
 
             /**
              * Gets the description of this file filter.
-             * 
+             *
              * @return The description of the file filter.
              */
             public String getDescription() {
@@ -613,7 +613,7 @@ public class FileActions {
 
             /**
              * Gets the extension associated with this file filter.
-             * 
+             *
              * @return The extension of the file filter.
              */
             public String getExtension() {
@@ -634,7 +634,7 @@ public class FileActions {
          * <p>
          * Create a new file-exit action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -650,12 +650,12 @@ public class FileActions {
          * <p>
          * Callback for when the file-exit action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the FileExitAction is triggered.
          * It quits the program.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -708,7 +708,7 @@ public class FileActions {
      * Action to change the language.
      * by Kevin Sathyanath, adapted from Yuxing's Resize Image work.
      * </p>
-     * 
+     *
      */
     public class FileChangeLanguageAction extends ImageAction implements ActionListener {
         int height;
@@ -722,7 +722,7 @@ public class FileActions {
          * <p>
          * Create a Language Change Action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -736,11 +736,11 @@ public class FileActions {
          * <p>
          * Callback for when the Change Language action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the Change Language Action is triggered.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
 
@@ -806,7 +806,7 @@ public class FileActions {
                     // l.setExtendedState(JFrame.NORMAL);
                 }
             });
-
+            //test?
             traChinese.addActionListener(new ActionListener() {
                 @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
