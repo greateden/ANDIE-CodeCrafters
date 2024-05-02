@@ -220,7 +220,7 @@ public class Andie {
 
             public void run() {
 
-                Locale.setDefault(Locale.of("en", "NZ"));
+                Locale.setDefault(new Locale("en", "NZ"));
 
                 // Now making the ResourceBundle
                 bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");

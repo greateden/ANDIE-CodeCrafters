@@ -874,8 +874,7 @@ public class FileActions {
                 public void actionPerformed(ActionEvent e) {
                     Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
-
-                    Locale.setDefault(Locale.of("en", "NZ"));
+                    Locale.setDefault(new Locale("en", "NZ"));
                     p.put("language", "en");
                     p.put("country", "NZ");
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
@@ -891,7 +890,7 @@ public class FileActions {
                 public void actionPerformed(ActionEvent e) {
                     Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
-                    Locale.setDefault(Locale.of("id", "ID"));
+                    Locale.setDefault(new Locale("id", "ID"));
                     p.put("language", "id");
                     p.put("country", "ID");
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
@@ -908,8 +907,7 @@ public class FileActions {
                 public void actionPerformed(ActionEvent e) {
                     Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);
-
-                    Locale.setDefault(Locale.of("zh", "TW"));
+                    Locale.setDefault(new Locale("zh", "TW"));
                     p.put("language", "zh");
                     p.put("country", "TW");
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
