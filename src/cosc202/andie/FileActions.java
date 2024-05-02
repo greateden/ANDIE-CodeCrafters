@@ -181,6 +181,12 @@ public class FileActions {
          * Method that opens a file
          */
         public void openFile() {
+
+            //Removes any previous mouse listener instances
+            for (MouseListener listener : target.getMouseListeners()) {
+                target.removeMouseListener(listener);
+            }
+
             JFileChooser fileChooser = new JFileChooser();
 
             // Cannot resolve .dYSM files
