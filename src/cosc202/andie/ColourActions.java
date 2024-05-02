@@ -37,6 +37,9 @@ public class ColourActions {
     protected ArrayList<Action> actions;
 
     public ResourceBundle bundle = Andie.bundle;
+    public BufferedImage previewImage;
+    public ImageIcon previewIcon;
+    public JPanel previewPanel;
 
     /**
      * <p>
@@ -371,14 +374,17 @@ public class ColourActions {
         
         public void actionPerformed(ActionEvent e){
             try{
-                final BufferedImage prev = target.getImage().getCurrentImage();
-                BufferedImage curr = target.getImage().getCurrentImage();
+                BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
+
                 final EditableImage preview = target.getImage().makeCopy();
                 final ImagePanel show = new ImagePanel(preview);
-                JPanel previewPanel = new JPanel();
+
+                previewPanel = new JPanel();
                 previewPanel.setPreferredSize(new Dimension(500,300));
-                JLabel pic = new JLabel(new ImageIcon(curr));
-                previewPanel.add(pic);
+                //updatePreviewImage(prev);
+                
+
+                
 
                 JPanel sliderPane = new JPanel(new GridLayout(1,2, 17, 0));
                 JPanel labelPane = new JPanel(new GridLayout(1,2,167,0));
@@ -409,15 +415,15 @@ public class ColourActions {
                         contrastFactor = contrastSlider.getValue();
 
                         //Setting a new target for the ImageActon
-                        //setTarget(show);
-                        //target.getImage().reset();
-                        //target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor)); 
+                        // setTarget(show);
+                        // target.getImage().reset();
+                        // target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor)); 
                         //target.getImage().repaint();
-                        //target.getParent().revalidate(); 
-                        curr = BrightnessAndContrast.applyToPreview(prev, brightnessFactor, contrastFactor);
-                        //prev = BrightnessAndContrast.applyToPreview(prev, brightnessFactor, contrastFactor);
-                        previewPanel.repaint(); 
-                        previewPanel.revalidate(); 
+                        // target.getParent().revalidate(); 
+                        //curr = BrightnessAndContrast.applyToPreview(prev, brightnessFactor, contrastFactor);
+                        BufferedImage curr = BrightnessAndContrast.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), brightnessFactor, contrastFactor);
+                        updatePreviewImage(curr);
+                        
                         
                     }
                 };
@@ -460,7 +466,7 @@ public class ColourActions {
 
                 int option = JOptionPane.showOptionDialog(null, menu, "Set Brightness And Contrast",
                         JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.PLAIN_MESSAGE, null, null, null);
+                        JOptionPane.PLAIN_MESSAGE, null, null, null);  //Added ImageIcon here
 
                
 
@@ -489,6 +495,16 @@ public class ColourActions {
          
             } //End of actionPerformed()
         }//End of B&C()
+
+
+        public void updatePreviewImage(BufferedImage i){
+            JLabel pic = new JLabel(new ImageIcon(i));
+            previewIcon = new ImageIcon(i);
+            previewPanel.add(pic);
+            previewPanel.repaint(); 
+            previewPanel.revalidate(); 
+        }
+
     }//End of class
 
 

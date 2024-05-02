@@ -165,7 +165,7 @@ class EditableImage {
      * @param bi The BufferedImage to copy.
      * @return A deep copy of the input.
      */
-    private static BufferedImage deepCopy(BufferedImage bi) {
+    public static BufferedImage deepCopy(BufferedImage bi) {
         ColorModel cm = bi.getColorModel();
         boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
         WritableRaster raster = bi.copyData(null);
