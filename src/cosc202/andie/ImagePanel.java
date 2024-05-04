@@ -177,41 +177,43 @@ public class ImagePanel extends JPanel {
      */
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        super.paintComponent(g); // Call the superclass method to ensure proper painting behavior.
 
-        if (image.hasImage()) {
-            Graphics2D g2 = (Graphics2D) g.create();
-            g2.scale(scale, scale);
-            g2.drawImage(EditableImage.getCurrentImage(), null, 0, 0);
-            g2.dispose();
+        if (image.hasImage()) { // Check if there is an image to display.
+            Graphics2D g2 = (Graphics2D) g.create(); // Create a new Graphics2D object for transformations.
+            g2.scale(scale, scale); // Scale the graphics context.
+            g2.drawImage(EditableImage.getCurrentImage(), null, 0, 0); // Draw the current image at (0, 0).
+            g2.dispose(); // Dispose of the Graphics2D object to release resources.
         }
 
-        if (isSelecting || selectionRect != null) {
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setColor(Color.BLACK);
+        if (isSelecting || selectionRect != null) { // Check if there is a selection or a selection rectangle is present.
+            Graphics2D g2d = (Graphics2D) g; // Cast the graphics context to Graphics2D for additional drawing capabilities.
+            g2d.setColor(Color.BLACK); // Set the drawing color to black.
 
-            if (selectionRect != null) {
+            if (selectionRect != null) { // Check if a selection rectangle exists.
                 // Draw the selection rectangle
-                g2d.setStroke(new BasicStroke(2));
-                g2d.drawRect(selectionRect.x, selectionRect.y, selectionRect.width, selectionRect.height);
+                g2d.setStroke(new BasicStroke(2)); // Set the stroke width for drawing the rectangle.
+                g2d.drawRect(selectionRect.x, selectionRect.y, selectionRect.width, selectionRect.height); // Draw the selection rectangle.
 
                 // Draw alternating black and white segments on the border
-                for (int i = 0; i < selectionRect.width; i++) {
-                    if (((i + rotationAngle) / 8) % 2 == 0) {
-                        g2d.setColor(Color.WHITE);
+                for (int i = 0; i < selectionRect.width; i++) { // Iterate over the width of the selection rectangle.
+                    if (((i + rotationAngle) / 8) % 2 == 0) { // Determine the color of the segment based on rotation angle.
+                        g2d.setColor(Color.WHITE); // Set the color to white for even segments.
                     } else {
-                        g2d.setColor(Color.BLACK);
+                        g2d.setColor(Color.BLACK); // Set the color to black for odd segments.
                     }
+                    // Draw horizontal segments on the border.
                     g2d.drawLine(selectionRect.x + i, selectionRect.y, selectionRect.x + i, selectionRect.y + 1);
                     g2d.drawLine(selectionRect.x + i, selectionRect.y + selectionRect.height - 1,
                             selectionRect.x + i, selectionRect.y + selectionRect.height);
                 }
-                for (int i = 0; i < selectionRect.height; i++) {
-                    if (((i + rotationAngle) / 8) % 2 == 0) {
-                        g2d.setColor(Color.WHITE);
+                for (int i = 0; i < selectionRect.height; i++) { // Iterate over the height of the selection rectangle.
+                    if (((i + rotationAngle) / 8) % 2 == 0) { // Determine the color of the segment based on rotation angle.
+                        g2d.setColor(Color.WHITE); // Set the color to white for even segments.
                     } else {
-                        g2d.setColor(Color.BLACK);
+                        g2d.setColor(Color.BLACK); // Set the color to black for odd segments.
                     }
+                    // Draw vertical segments on the border.
                     g2d.drawLine(selectionRect.x, selectionRect.y + i, selectionRect.x + 1, selectionRect.y + i);
                     g2d.drawLine(selectionRect.x + selectionRect.width - 1, selectionRect.y + i,
                             selectionRect.x + selectionRect.width, selectionRect.y + i);
