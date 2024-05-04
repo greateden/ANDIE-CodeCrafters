@@ -9,12 +9,14 @@ import javax.swing.*;
  * </p>
  *
  * <p>
- * This class extends {@link JPanel} to allow for rendering of an image, as well as zooming
+ * This class extends {@link JPanel} to allow for rendering of an image, as well
+ * as zooming
  * in and out.
  * </p>
  *
  * <p>
- * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+ * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
+ * 4.0</a>
  * </p>
  *
  * @author Steven Mills
@@ -32,7 +34,6 @@ public class ImagePanel extends JPanel {
     private int rotationAngle = 0;
     private Point startPoint;
     private Point endPoint;
-
 
     public void setSelectionRect(Rectangle selectionRect) {
         this.selectionRect = selectionRect;
@@ -54,15 +55,16 @@ public class ImagePanel extends JPanel {
         this.rotationAngle = rotationAngle;
     }
 
-
     /**
      * <p>
      * The zoom-level of the current view.
-     * A scale of 1.0 represents actual size; 0.5 is zoomed out to half size; 1.5 is zoomed in to one-and-a-half size; and so forth.
+     * A scale of 1.0 represents actual size; 0.5 is zoomed out to half size; 1.5 is
+     * zoomed in to one-and-a-half size; and so forth.
      * </p>
      *
      * <p>
-     * Note that the scale is internally represented as a multiplier, but externally as a percentage.
+     * Note that the scale is internally represented as a multiplier, but externally
+     * as a percentage.
      * </p>
      */
     private double scale;
@@ -100,18 +102,25 @@ public class ImagePanel extends JPanel {
         return image;
     }
 
+    public boolean imageHasImage(){
+        return image.hasImage();
+    }
+
+
     /**
      * <p>
      * Get the current zoom level as a percentage.
      * </p>
      *
      * <p>
-     * The percentage zoom is used for the external interface, where 100% is the original size, 50% is half-size, etc.
+     * The percentage zoom is used for the external interface, where 100% is the
+     * original size, 50% is half-size, etc.
      * </p>
+     *
      * @return The current zoom level as a percentage.
      */
     public double getZoom() {
-        return 100*scale;
+        return 100 * scale;
     }
 
     /**
@@ -120,9 +129,11 @@ public class ImagePanel extends JPanel {
      * </p>
      *
      * <p>
-     * The percentage zoom is used for the external interface, where 100% is the original size, 50% is half-size, etc.
+     * The percentage zoom is used for the external interface, where 100% is the
+     * original size, 50% is half-size, etc.
      * The zoom level is restricted to the range [50, 200].
      * </p>
+     *
      * @param zoomPercent The new zoom level as a percentage.
      */
     public void setZoom(double zoomPercent) {
@@ -135,14 +146,14 @@ public class ImagePanel extends JPanel {
         scale = zoomPercent / 100;
     }
 
-
     /**
      * <p>
      * Gets the preferred size of this component for UI layout.
      * </p>
      *
      * <p>
-     * The preferred size is the size of the image (scaled by zoom level), or a default size if no image is present.
+     * The preferred size is the size of the image (scaled by zoom level), or a
+     * default size if no image is present.
      * </p>
      *
      * @return The preferred size of this component.
@@ -150,8 +161,8 @@ public class ImagePanel extends JPanel {
     @Override
     public Dimension getPreferredSize() {
         if (image.hasImage()) {
-            return new Dimension((int) Math.round(EditableImage.getCurrentImage().getWidth()*scale),
-                                 (int) Math.round(EditableImage.getCurrentImage().getHeight()*scale));
+            return new Dimension((int) Math.round(EditableImage.getCurrentImage().getWidth() * scale),
+                    (int) Math.round(EditableImage.getCurrentImage().getHeight() * scale));
         } else {
             return new Dimension(450, 450);
         }
@@ -167,45 +178,44 @@ public class ImagePanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         if (image.hasImage()) {
-            Graphics2D g2  = (Graphics2D) g.create();
+            Graphics2D g2 = (Graphics2D) g.create();
             g2.scale(scale, scale);
             g2.drawImage(EditableImage.getCurrentImage(), null, 0, 0);
             g2.dispose();
         }
+
         if (isSelecting || selectionRect != null) {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setColor(Color.BLACK);
 
-            int x1 = Math.min(startPoint.x, endPoint.x);
-            int y1 = Math.min(startPoint.y, endPoint.y);
-            int x2 = Math.max(startPoint.x, endPoint.x);
-            int y2 = Math.max(startPoint.y, endPoint.y);
-            int width = Math.abs(x2 - x1);
-            int height = Math.abs(y2 - y1);
+            if (selectionRect != null) {
+                // Draw the selection rectangle
+                g2d.setStroke(new BasicStroke(2));
+                g2d.drawRect(selectionRect.x, selectionRect.y, selectionRect.width, selectionRect.height);
 
-            // Draw the outer border
-            g2d.setStroke(new BasicStroke(2));
-            g2d.drawRect(x1, y1, width, height);
-
-            // Draw alternating black and white segments on the border
-            for (int i = 0; i < width; i++) {
-                if (((i + rotationAngle) / 8) % 2 == 0) {
-                    g2d.setColor(Color.WHITE);
-                } else {
-                    g2d.setColor(Color.BLACK);
+                // Draw alternating black and white segments on the border
+                for (int i = 0; i < selectionRect.width; i++) {
+                    if (((i + rotationAngle) / 8) % 2 == 0) {
+                        g2d.setColor(Color.WHITE);
+                    } else {
+                        g2d.setColor(Color.BLACK);
+                    }
+                    g2d.drawLine(selectionRect.x + i, selectionRect.y, selectionRect.x + i, selectionRect.y + 1);
+                    g2d.drawLine(selectionRect.x + i, selectionRect.y + selectionRect.height - 1,
+                            selectionRect.x + i, selectionRect.y + selectionRect.height);
                 }
-                g2d.drawLine(x1 + i, y1, x1 + i, y1 + 1);
-                g2d.drawLine(x1 + i, y1 + height - 1, x1 + i, y1 + height);
-            }
-            for (int i = 0; i < height; i++) {
-                if (((i + rotationAngle) / 8) % 2 == 0) {
-                    g2d.setColor(Color.WHITE);
-                } else {
-                    g2d.setColor(Color.BLACK);
+                for (int i = 0; i < selectionRect.height; i++) {
+                    if (((i + rotationAngle) / 8) % 2 == 0) {
+                        g2d.setColor(Color.WHITE);
+                    } else {
+                        g2d.setColor(Color.BLACK);
+                    }
+                    g2d.drawLine(selectionRect.x, selectionRect.y + i, selectionRect.x + 1, selectionRect.y + i);
+                    g2d.drawLine(selectionRect.x + selectionRect.width - 1, selectionRect.y + i,
+                            selectionRect.x + selectionRect.width, selectionRect.y + i);
                 }
-                g2d.drawLine(x1, y1 + i, x1 + 1, y1 + i);
-                g2d.drawLine(x1 + width - 1, y1 + i, x1 + width, y1 + i);
             }
         }
     }

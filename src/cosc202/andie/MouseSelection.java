@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.awt.event.*;
 import javax.swing.*;
 
+
 /**
  * <p>
  * MouseSelection to apply a selection box to the image panel
@@ -18,7 +19,7 @@ import javax.swing.*;
  *
  * @see java.awt.event.MouseListener
  * @author Emma
- * @version 1.0
+ * @version 2.0
  */
 public class MouseSelection implements MouseListener, MouseMotionListener{
 
@@ -35,10 +36,10 @@ public class MouseSelection implements MouseListener, MouseMotionListener{
      * Initilises MouseSelection
      * @param imagePanel The image panel that the selction is drawn on
      */
-    public MouseSelection(ImagePanel imagePanel,int imageWidth, int imageHeight) {
+    public MouseSelection(ImagePanel imagePanel) {
         this.imagePanel = imagePanel;
-        this.imageWidth = imageWidth;
-        this.imageHeight = imageHeight;
+        this.imageWidth = imagePanel.getImage().getCurrentImage().getWidth();
+        this.imageHeight = imagePanel.getImage().getCurrentImage().getHeight();
         this.imagePanel.addMouseListener(this);
         this.imagePanel.addMouseMotionListener(this);
     }
@@ -58,6 +59,8 @@ public class MouseSelection implements MouseListener, MouseMotionListener{
         imagePanel.setRotationAngle(rotationAngle);
         //clearSelection();
         imagePanel.repaint();
+        this.imageWidth = imagePanel.getImage().getCurrentImage().getWidth();
+        this.imageHeight = imagePanel.getImage().getCurrentImage().getHeight();
     }
 
     /**
@@ -67,12 +70,19 @@ public class MouseSelection implements MouseListener, MouseMotionListener{
     public void mouseReleased(MouseEvent e) {
         isSelecting = false;
         imagePanel.setIsSelecting(isSelecting);
-        //end = e.getPoint();
-        //imagePanel.setEndPoint(end);
-        //drawSelection();
 
-        selectionRect = new Rectangle(Math.min(start.x, end.x), Math.min(start.y, end.y),
-                        Math.abs(end.x - start.x), Math.abs(end.y - start.y));
+        if (selectionRect != null && selectionRect.width != 0 && selectionRect.height != 0) {
+            // Ensure selection rectangle is normalized
+            selectionRect = new Rectangle(
+                    Math.min(start.x, end.x),
+                    Math.min(start.y, end.y),
+                    Math.abs(end.x - start.x),
+                    Math.abs(end.y - start.y)
+            );
+        } else {
+            // Reset selection rectangle if it's just a click
+            selectionRect = null;
+        }
         imagePanel.setSelectionRect(selectionRect);
         imagePanel.repaint();
     }
@@ -105,8 +115,49 @@ public class MouseSelection implements MouseListener, MouseMotionListener{
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        this.imageWidth = imagePanel.getImage().getCurrentImage().getWidth();
+        this.imageHeight = imagePanel.getImage().getCurrentImage().getHeight();
         end = e.getPoint();
         imagePanel.setEndPoint(end);
+        System.out.println(imagePanel.getImage());
+        if (imagePanel.getImage() != null) {
+            // int imageWidth = Math.min(
+            //     imagePanel.getImage().getCurrentImage().getWidth(imagePanel.getImage().getCurrentImage()),
+            //     imagePanel.getImage().getCurrentImage().getWidth());
+            // int imageHeight = Math.min(
+            //     imagePanel.getImage().getCurrentImage().getHeight(imagePanel.getImage().getCurrentImage()),
+            //     imagePanel.getImage().getCurrentImage().getHeight());
+            if (end.x < 0) {
+                end.x = 0;
+            } else if (end.x > imageWidth) {
+                end.x = imageWidth;
+            }
+            if (end.y < 0) {
+                end.y = 0;
+            } else if (end.y > imageHeight) {
+                end.y = imageHeight;
+            }
+            if (start.x < 0) {
+                start.x = 0;
+            } else if (start.x > imageWidth) {
+                start.x = imageWidth;
+            }
+            if (start.y < 0) {
+                start.y = 0;
+            } else if (start.y > imageHeight) {
+                start.y = imageHeight;
+            }
+            if (isSelecting) {
+                // Create the selection rectangle within the image bounds
+                selectionRect = new Rectangle(
+                        Math.min(start.x, end.x),
+                        Math.min(start.y, end.y),
+                        Math.abs(end.x - start.x),
+                        Math.abs(end.y - start.y)
+                );
+                imagePanel.setSelectionRect(selectionRect);
+            }
+        }
         imagePanel.repaint();
     }
 

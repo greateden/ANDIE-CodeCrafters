@@ -256,15 +256,15 @@ public class FileActions {
 
                     //Finding image dimensions in order to be able to bound selection box
                     // Read the image file
-                    BufferedImage image = ImageIO.read(new File(imageFilepath));
+                    //BufferedImage image = ImageIO.read(new File(imageFilepath));
                     // Get the dimensions of the image
-                    int width = image.getWidth();
-                    int height = image.getHeight();
+                    // int width = image.getWidth();
+                    // int height = image.getHeight();
 
                     target.getImage().open(imageFilepath);
 
                     //Adding mouse lisener to target panel
-                    target.addMouseListener(new MouseSelection(target,width,height));
+                    target.addMouseListener(new MouseSelection(target));
                 } catch (Exception ex) {
                     System.exit(1);
                 }
