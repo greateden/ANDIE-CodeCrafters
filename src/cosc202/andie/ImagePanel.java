@@ -27,6 +27,34 @@ public class ImagePanel extends JPanel {
      */
     private EditableImage image;
 
+    private Rectangle selectionRect;
+    private boolean isSelecting;
+    private int rotationAngle = 0;
+    private Point startPoint;
+    private Point endPoint;
+
+
+    public void setSelectionRect(Rectangle selectionRect) {
+        this.selectionRect = selectionRect;
+    }
+
+    public void setStartPoint(Point startPoint) {
+        this.startPoint = startPoint;
+    }
+
+    public void setEndPoint(Point endPoint) {
+        this.endPoint = endPoint;
+    }
+
+    public void setIsSelecting(boolean isSelecting) {
+        this.isSelecting = isSelecting;
+    }
+
+    public void setRotationAngle(int rotationAngle) {
+        this.rotationAngle = rotationAngle;
+    }
+
+
     /**
      * <p>
      * The zoom-level of the current view.
@@ -51,6 +79,14 @@ public class ImagePanel extends JPanel {
     public ImagePanel() {
         image = new EditableImage();
         scale = 1.0;
+
+        Timer timer = new Timer(100, e -> {
+            if (!isSelecting) {
+                rotationAngle -= 1; // Decrease rotation angle (clockwise rotation)
+                repaint();
+            }
+        });
+        timer.start();
     }
 
     /**
@@ -136,6 +172,41 @@ public class ImagePanel extends JPanel {
             g2.scale(scale, scale);
             g2.drawImage(EditableImage.getCurrentImage(), null, 0, 0);
             g2.dispose();
+        }
+        if (isSelecting || selectionRect != null) {
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setColor(Color.BLACK);
+
+            int x1 = Math.min(startPoint.x, endPoint.x);
+            int y1 = Math.min(startPoint.y, endPoint.y);
+            int x2 = Math.max(startPoint.x, endPoint.x);
+            int y2 = Math.max(startPoint.y, endPoint.y);
+            int width = Math.abs(x2 - x1);
+            int height = Math.abs(y2 - y1);
+
+            // Draw the outer border
+            g2d.setStroke(new BasicStroke(2));
+            g2d.drawRect(x1, y1, width, height);
+
+            // Draw alternating black and white segments on the border
+            for (int i = 0; i < width; i++) {
+                if (((i + rotationAngle) / 8) % 2 == 0) {
+                    g2d.setColor(Color.WHITE);
+                } else {
+                    g2d.setColor(Color.BLACK);
+                }
+                g2d.drawLine(x1 + i, y1, x1 + i, y1 + 1);
+                g2d.drawLine(x1 + i, y1 + height - 1, x1 + i, y1 + height);
+            }
+            for (int i = 0; i < height; i++) {
+                if (((i + rotationAngle) / 8) % 2 == 0) {
+                    g2d.setColor(Color.WHITE);
+                } else {
+                    g2d.setColor(Color.BLACK);
+                }
+                g2d.drawLine(x1, y1 + i, x1 + 1, y1 + i);
+                g2d.drawLine(x1 + width - 1, y1 + i, x1 + width, y1 + i);
+            }
         }
     }
 }
