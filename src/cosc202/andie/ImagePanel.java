@@ -181,7 +181,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
             setBackground(onyx);  
             Graphics2D g2  = (Graphics2D) g.create();
             g2.scale(scale, scale);
-            g2.drawImage(image.getCurrentImage(), null, 0, 0);
+            //g2.drawImage(image.getCurrentImage(), null, 0, 0);
 
             if (zoomer) {
                 AffineTransform at = new AffineTransform();
@@ -217,7 +217,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     
             // All drawings go here
     
-            //g2.drawImage(image.getCurrentImage(), 0, 0, this);
+            g2.drawImage(image.getCurrentImage(), 0, 0, this);
     
             g2.dispose();
         }
