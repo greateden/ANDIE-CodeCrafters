@@ -2,6 +2,12 @@ package cosc202.andie;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.geom.AffineTransform;
 
 /**
  * <p>
@@ -18,14 +24,27 @@ import javax.swing.*;
  * </p>
  * 
  * @author Steven Mills
+ * This class has been modified with code taken from: https://stackoverflow.com/questions/6543453/zooming-in-and-zooming-out-within-a-panel
+ * This is because Kevin wanted to emulate what Jackson's team did in their ANDIE implementation. Most of this code is lifted verbatim and modified <i>very</i> slightly.
+ * Kevin will ask Dave about the Student Honor Code thing on Friday. 5/5/2024
  * @version 1.0
  */
-public class ImagePanel extends JPanel {
+public class ImagePanel extends JPanel implements MouseWheelListener, MouseListener, MouseMotionListener{
     
     /**
      * The image to display in the ImagePanel.
      */
     private EditableImage image;
+    private double zoomFactor = 1;
+    private double prevZoomFactor = 1;
+    private boolean zoomer;
+    private boolean dragger;
+    private boolean released;
+    private double xOffset = 0;
+    private double yOffset = 0;
+    private int xDiff;
+    private int yDiff;
+    private Point startPoint;
 
     /**
      * <p>
@@ -51,9 +70,21 @@ public class ImagePanel extends JPanel {
     public ImagePanel() {
         image = new EditableImage();
         scale = 1.0;
+        initComponent();
     }
 
-    /**A replacement constructor to be used in displaying a new imagepanel. We can se tthis as a new target in imageAction. TESTING
+    /**Method that initializes the mouseListeners to make active scrolling in the ImagePanel a reality.
+     * Code taken from: https://stackoverflow.com/questions/6543453/zooming-in-and-zooming-out-within-a-panel
+     * No modifications necessary. I mean it's just 3 lines.  Kevin Steve Sathyanath
+     * date: 5/5/2024
+     */
+    private void initComponent() {
+        addMouseWheelListener(this);
+        addMouseMotionListener(this);
+        addMouseListener(this);
+    }
+
+    /**A replacement constructor to be used in displaying a new imagepanel. We can set this as a new target in imageAction. TESTING
      * @author Kevin Steve Sathyanath
      * @date 23/04/2024
      */
@@ -136,7 +167,8 @@ public class ImagePanel extends JPanel {
 
     /**
      * <p>
-     * (Re)draw the component in the GUI.
+     * (Re)draw the component in the GUI. Code taken from: https://stackoverflow.com/questions/6543453/zooming-in-and-zooming-out-within-a-panel
+     * Minor editing done. Kevin Steve Sathyanath.
      * </p>
      * 
      * @param g The Graphics component to draw the image on.
@@ -145,10 +177,117 @@ public class ImagePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (image.hasImage()) {
+            Color onyx = new Color(38,38,38); //Hey that's my cat's name!
+            setBackground(onyx);  
             Graphics2D g2  = (Graphics2D) g.create();
             g2.scale(scale, scale);
             g2.drawImage(image.getCurrentImage(), null, 0, 0);
+
+            if (zoomer) {
+                AffineTransform at = new AffineTransform();
+    
+                double xRel = MouseInfo.getPointerInfo().getLocation().getX() - getLocationOnScreen().getX();
+                double yRel = MouseInfo.getPointerInfo().getLocation().getY() - getLocationOnScreen().getY();
+    
+                double zoomDiv = zoomFactor / prevZoomFactor;
+    
+                xOffset = (zoomDiv) * (xOffset) + (1 - zoomDiv) * xRel;
+                yOffset = (zoomDiv) * (yOffset) + (1 - zoomDiv) * yRel;
+    
+                at.translate(xOffset, yOffset);
+                at.scale(zoomFactor, zoomFactor);
+                prevZoomFactor = zoomFactor;
+                g2.transform(at);
+                zoomer = false;
+            }
+    
+            if (dragger) {
+                AffineTransform at = new AffineTransform();
+                at.translate(xOffset + xDiff, yOffset + yDiff);
+                at.scale(zoomFactor, zoomFactor);
+                g2.transform(at);
+    
+                if (released) {
+                    xOffset += xDiff;
+                    yOffset += yDiff;
+                    dragger = false;
+                }
+    
+            }
+    
+            // All drawings go here
+    
+            //g2.drawImage(image.getCurrentImage(), 0, 0, this);
+    
             g2.dispose();
         }
+    }
+    /**Code to program the expected behaviour when the mouseWheel is moved.
+     * Code taken from: https://stackoverflow.com/questions/6543453/zooming-in-and-zooming-out-within-a-panel
+     * Code kept verbatim. No editing done. Kevin Steve Sathyanath. 
+     */
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+
+        zoomer = true;
+
+        //Zoom in
+        if (e.getWheelRotation() < 0) {
+            zoomFactor *= 1.1;
+            repaint();
+        }
+        //Zoom out
+        if (e.getWheelRotation() > 0) {
+            zoomFactor /= 1.1;
+            repaint();
+        }
+    }
+
+    /**Code to program the expected behaviour when the mouse is dragged over the imagePanel. Likely needs to be modified later when Emma finished mouse Selection.
+     * Code taken from: https://stackoverflow.com/questions/6543453/zooming-in-and-zooming-out-within-a-panel
+     * Code kept verbatim. No editing done. Kevin Steve Sathyanath
+     */
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        Point curPoint = e.getLocationOnScreen();
+        xDiff = curPoint.x - startPoint.x;
+        yDiff = curPoint.y - startPoint.y;
+
+        dragger = true;
+        repaint();
+
+    }
+    //You know the drill. COde taken from that stackOverFlow post etc. 
+    @Override
+    public void mouseMoved(MouseEvent e) {
+    }
+
+    //You know the drill. COde taken from that stackOverFlow post etc. 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    //You know the drill. COde taken from that stackOverFlow post etc. 
+    @Override
+    public void mousePressed(MouseEvent e) {
+        released = false;
+        startPoint = MouseInfo.getPointerInfo().getLocation();
+    }
+
+    //You know the drill. COde taken from that stackOverFlow post etc. 
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        released = true;
+        repaint();
+    }
+
+    //You know the drill. COde taken from that stackOverFlow post etc. 
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    //You know the drill. COde taken from that stackOverFlow post etc. 
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }

@@ -34,6 +34,7 @@ public class Andie {
     private static ImagePanel imagePanel;
     public static ResourceBundle bundle;
     public static JMenuBar menuBar;
+    public static JTabbedPane tabs;
 
     private static FileActions fileActions;
     private static EditActions editActions;
@@ -83,8 +84,11 @@ public class Andie {
         // The main content area is an ImagePanel
         imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
+        //tabs = new JTabbedPane();
+        //tabs.addTab("Welcome", null, null, "Does nothing yet");
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
+        //frame.add(tabs);
         fileActions = new FileActions();
         editActions = new EditActions();
         viewActions = new ViewActions();
@@ -131,6 +135,7 @@ public class Andie {
 
         // Provides an about page and link to online docs
         newMenuBar.add(helpActions.createMenu());
+      
 
         frame.setJMenuBar(newMenuBar);
         frame.repaint();
@@ -211,5 +216,13 @@ public class Andie {
      */
     public static ImagePanel getPanel(){
         return imagePanel;
+    }
+
+    /**A method to add tabs to the tabPane
+     * @author Kevin Steve Sathyanath
+     * date 5/5/2024
+     */
+    public static void addTab(EditableImage i){
+
     }
 }

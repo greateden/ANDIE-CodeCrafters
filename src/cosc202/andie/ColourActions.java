@@ -381,7 +381,7 @@ public class ColourActions {
 
                 previewPanel = new JPanel();
                 previewPanel.setPreferredSize(new Dimension(500,300));
-                //updatePreviewImage(prev);
+                updatePreviewImage(prev);
                 
 
                 
