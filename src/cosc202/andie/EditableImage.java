@@ -214,6 +214,7 @@ class EditableImage {
             objIn.close();
             fileIn.close();
             hasOpsFile = true;
+            System.out.println("Opened");
         } catch (Exception ex) {
             // Could be no file or something else. Carry on for now.
             hasOpsFile = false;
@@ -249,6 +250,7 @@ class EditableImage {
         // Write operations file
         FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
         ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+        System.out.println("Save confirmed.");
         objOut.writeObject(this.ops);
         objOut.close();
         fileOut.close();
@@ -291,7 +293,7 @@ class EditableImage {
 
         current = op.apply(current);
         ops.add(op);
-        //System.out.println();
+        System.out.println(ops.toString());  //Test line. Comment out later.
 
     }
     /**
@@ -301,6 +303,7 @@ class EditableImage {
      */
     public void undo() {
         redoOps.push(ops.pop());
+        System.out.println("Undone");
         refresh();
     }
 
@@ -311,6 +314,7 @@ class EditableImage {
      */
     public void redo() {
         apply(redoOps.pop());
+        System.out.println("Redone");
     }
 
     /**
