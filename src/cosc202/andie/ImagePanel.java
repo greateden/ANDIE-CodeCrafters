@@ -44,6 +44,18 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     private Point startPoint;
     private Point endPoint;
 
+    private double zoomFactor = 1;
+    private double prevZoomFactor = 1;
+    private boolean zoomer;
+    private boolean dragger;
+    private boolean released;
+    private double xOffset = 0;
+    private double yOffset = 0;
+    private int xDiff;
+    private int yDiff;
+
+    private Graphics2D g2d;
+
     public void setSelectionRect(Rectangle selectionRect) {
         this.selectionRect = selectionRect;
     }
@@ -63,15 +75,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     public void setRotationAngle(int rotationAngle) {
         this.rotationAngle = rotationAngle;
     }
-    private double zoomFactor = 1;
-    private double prevZoomFactor = 1;
-    private boolean zoomer;
-    private boolean dragger;
-    private boolean released;
-    private double xOffset = 0;
-    private double yOffset = 0;
-    private int xDiff;
-    private int yDiff;
+    
 
     /**
      * <p>
@@ -103,7 +107,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
         Timer timer = new Timer(100, e -> {
             if (!isSelecting) {
                 rotationAngle -= 1; // Decrease rotation angle (clockwise rotation)
-                repaint();
+                //repaint();
             }
         });
         timer.start();
@@ -230,37 +234,42 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
             g2.scale(scale, scale); // Scale the graphics context.
             //g2.drawImage(EditableImage.getCurrentImage(), null, 0, 0); // Draw the current image at (0, 0).
 
-            if (zoomer) {
-                AffineTransform at = new AffineTransform();
+            // if (zoomer) {
+            //     AffineTransform at = new AffineTransform();
     
-                double xRel = MouseInfo.getPointerInfo().getLocation().getX() - getLocationOnScreen().getX();
-                double yRel = MouseInfo.getPointerInfo().getLocation().getY() - getLocationOnScreen().getY();
+            //     double xRel = MouseInfo.getPointerInfo().getLocation().getX() - getLocationOnScreen().getX();
+            //     double yRel = MouseInfo.getPointerInfo().getLocation().getY() - getLocationOnScreen().getY();
     
-                double zoomDiv = zoomFactor / prevZoomFactor;
+            //     double zoomDiv = zoomFactor / prevZoomFactor;
     
-                xOffset = (zoomDiv) * (xOffset) + (1 - zoomDiv) * xRel;
-                yOffset = (zoomDiv) * (yOffset) + (1 - zoomDiv) * yRel;
+            //     xOffset = (zoomDiv) * (xOffset) + (1 - zoomDiv) * xRel;
+            //     yOffset = (zoomDiv) * (yOffset) + (1 - zoomDiv) * yRel;
     
-                at.translate(xOffset, yOffset);
-                at.scale(zoomFactor, zoomFactor);
-                prevZoomFactor = zoomFactor;
-                g2.transform(at);
-                zoomer = false;
-            }
+            //     at.translate(xOffset, yOffset);
+            //     at.scale(zoomFactor, zoomFactor);
+            //     prevZoomFactor = zoomFactor;
+            //     g2.transform(at);
+
+            //     if(g2d !=null){      //TEST CODE
+            //         g2d.dispose();
+            //     }
+
+            //     zoomer = false;
+            // }
     
-            if (dragger) {
-                AffineTransform at = new AffineTransform();
-                at.translate(xOffset + xDiff, yOffset + yDiff);
-                at.scale(zoomFactor, zoomFactor);
-                g2.transform(at);
+            // if (dragger) {
+            //     AffineTransform at = new AffineTransform();
+            //     at.translate(xOffset + xDiff, yOffset + yDiff);
+            //     at.scale(zoomFactor, zoomFactor);
+            //     g2.transform(at);
     
-                if (released) {
-                    xOffset += xDiff;
-                    yOffset += yDiff;
-                    dragger = false;
-                }
+            //     if (released) {
+            //         xOffset += xDiff;
+            //         yOffset += yDiff;
+            //         dragger = false;
+            //     }
     
-            }
+            // }
     
             // All drawings go here
     
@@ -270,7 +279,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
         }
 
         if (isSelecting || selectionRect != null) { // Check if there is a selection or a selection rectangle is present.
-            Graphics2D g2d = (Graphics2D) g; // Cast the graphics context to Graphics2D for additional drawing capabilities.
+            g2d = (Graphics2D) g; // Cast the graphics context to Graphics2D for additional drawing capabilities.
             g2d.setColor(Color.BLACK); // Set the drawing color to black.
 
             if (selectionRect != null) { // Check if a selection rectangle exists.
@@ -349,14 +358,14 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     public void mouseClicked(MouseEvent e) {
     }
 
-    //You know the drill. COde taken from that stackOverFlow post etc. 
+    
     @Override
     public void mousePressed(MouseEvent e) {
         released = false;
         startPoint = MouseInfo.getPointerInfo().getLocation();
     }
 
-    //You know the drill. COde taken from that stackOverFlow post etc. 
+    
     @Override
     public void mouseReleased(MouseEvent e) {
         released = true;
