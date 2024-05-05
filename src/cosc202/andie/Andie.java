@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+
 /**
  * <p>
  * Main class for A Non-Destructive Image Editor (ANDIE).
@@ -31,6 +33,7 @@ public class Andie {
     private static ImagePanel imagePanel;
     public static ResourceBundle bundle;
     public static JMenuBar menuBar;
+    public static JTabbedPane tabs;
 
     private static FileActions fileActions;
     private static EditActions editActions;
@@ -70,16 +73,23 @@ public class Andie {
     private static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
         frame = new JFrame("ANDIE: CodeCrafters");
-        // JFrame.setDefaultLookAndFeelDecorated(true);
+
+
         Image image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
         frame.setIconImage(image);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(true);
+        frame.setPreferredSize(new Dimension(800,600));
+
 
         // The main content area is an ImagePanel
         imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
+        //tabs = new JTabbedPane();
+        //tabs.addTab("Welcome", null, null, "Does nothing yet");
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
+        //frame.add(tabs);
         fileActions = new FileActions();
         editActions = new EditActions();
         viewActions = new ViewActions();
@@ -161,6 +171,7 @@ public class Andie {
 
         // actions that apply a macro funtion of the operations
         newMenuBar.add(macroActions.createMenu());
+      
 
         frame.setJMenuBar(newMenuBar);
 
@@ -174,6 +185,7 @@ public class Andie {
 
         frame.repaint();
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -218,6 +230,7 @@ public class Andie {
     public static void main(String[] args) throws Exception {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
+            
             public void run() {
 
                 Locale.setDefault(new Locale("en", "NZ"));
@@ -229,6 +242,17 @@ public class Andie {
                 // System.out.println(bundle.getString("convertToGreyAction"));
 
                 try {
+                    FlatMacDarkLaf.setup();
+                    try {
+                        UIManager.setLookAndFeel( new FlatMacDarkLaf() );
+                    } catch( Exception ex ) {
+                        System.err.println( "Failed to initialize LaF" );
+                    }
+                    //Keeping in case we need to revert. Also change dependency in Gradle file.
+                    // try{
+                    //     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    // }
+                    // catch(Exception ignored){}
                     createAndShowGUI();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -236,5 +260,22 @@ public class Andie {
                 }
             }
         });
+    }
+
+    /**An accessor for the imagePanel that is used in the preview panels for Brightness and Contrast, among others.
+     * @author Kevin Steve Sathyanath
+     * @return the ImagePanel in question
+     * @date 27/04/2024
+     */
+    public static ImagePanel getPanel(){
+        return imagePanel;
+    }
+
+    /**A method to add tabs to the tabPane
+     * @author Kevin Steve Sathyanath
+     * date 5/5/2024
+     */
+    public static void addTab(EditableImage i){
+
     }
 }

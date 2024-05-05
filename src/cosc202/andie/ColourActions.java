@@ -4,6 +4,9 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * <p>
@@ -34,6 +37,9 @@ public class ColourActions {
     protected ArrayList<Action> actions;
 
     public ResourceBundle bundle = Andie.bundle;
+    public BufferedImage previewImage;
+    public ImageIcon previewIcon;
+    public JPanel previewPanel;
 
     /**
      * <p>
@@ -57,6 +63,7 @@ public class ColourActions {
                 Andie.bundle.getString("RGBSwapDesc"),
                 Integer.valueOf(KeyEvent.VK_C));
         actions.add(rgbSwap);
+        actions.add(new brightnessAndContrastAction("Brightness and Contrast", null, "Change the Brightness and Contrast of the loaded image.", Integer.valueOf(KeyEvent.VK_B)));
 
     }
 
@@ -352,6 +359,182 @@ public class ColourActions {
                     System.out.println(err);
                 }
             }
-        }// end of actionPerformed
-    }
-}
+        }
+    }// End of RGBSwapping()
+
+    /**A class to implement the GUI for B&C manipulation.
+     * @author Kevin Steve Sathyanath
+     * @date 19/04/2024
+     */
+    public class brightnessAndContrastAction extends ImageAction{
+
+        int brightnessFactor = 0;
+        int contrastFactor = 0;
+
+        /**
+         * <p>
+         * Create a new brightnessAndContrast action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        brightnessAndContrastAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the brightnessAndContrast action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever brightnessAndContrast is triggered.
+         * It changes the image's brightness and contrast depending on user input.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        JSlider brightnessSlider;
+        JSlider contrastSlider;
+        
+
+        
+        public void actionPerformed(ActionEvent e){
+            try{
+                BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
+
+                final EditableImage preview = target.getImage().makeCopy();
+                final ImagePanel show = new ImagePanel(preview);
+
+                previewPanel = new JPanel();
+                previewPanel.setPreferredSize(new Dimension(500,300));
+                updatePreviewImage(prev);
+                
+
+                
+
+                JPanel sliderPane = new JPanel(new GridLayout(1,2, 17, 0));
+                JPanel labelPane = new JPanel(new GridLayout(1,2,167,0));
+                brightnessSlider = new JSlider(-100,100);
+                contrastSlider = new JSlider(-100,100);
+                JLabel brightnessSliderLabel = new JLabel("Brightness", JLabel.CENTER);
+                brightnessSliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                JLabel contrastSliderLabel = new JLabel("Contrast", JLabel.CENTER);
+                contrastSliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+                contrastSlider.setMajorTickSpacing(50);
+                contrastSlider.setPaintTicks(true);
+                contrastSlider.setPaintLabels(true);
+                contrastSlider.setValue(0);
+
+                brightnessSlider.setMajorTickSpacing(50);
+                brightnessSlider.setPaintTicks(true);
+                brightnessSlider.setPaintLabels(true);
+                brightnessSlider.setValue(0);
+
+
+
+                ChangeListener sliderChangeListener = new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+    
+                        brightnessFactor = brightnessSlider.getValue();
+                        contrastFactor = contrastSlider.getValue();
+
+                        //Setting a new target for the ImageActon
+                        // setTarget(show);
+                        // target.getImage().reset();
+                        // target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor)); 
+                        //target.getImage().repaint();
+                        // target.getParent().revalidate(); 
+                        //curr = BrightnessAndContrast.applyToPreview(prev, brightnessFactor, contrastFactor);
+                        BufferedImage curr = BrightnessAndContrast.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), brightnessFactor, contrastFactor);
+                        updatePreviewImage(curr);
+                        
+                        
+                    }
+                };
+
+                brightnessSlider.addChangeListener(sliderChangeListener);
+                contrastSlider.addChangeListener(sliderChangeListener);
+
+
+                labelPane.add(brightnessSliderLabel);
+                labelPane.add(contrastSliderLabel);
+                
+                sliderPane.add(brightnessSlider);
+                sliderPane.add(contrastSlider);
+                //p.add(show);
+
+                JPanel menu = new JPanel(new GridBagLayout());
+                GridBagConstraints a = new GridBagConstraints();
+                Insets i = new Insets(20,0,0,0);
+
+                //a.fill = GridBagConstraints.BOTH;
+                a.gridx = 0;
+                a.gridy = 0;
+                a.gridwidth = 2;
+                a.anchor = GridBagConstraints.PAGE_START;
+                menu.add(previewPanel, a);
+
+                a.fill = GridBagConstraints.VERTICAL;
+                a.gridx = 0;
+                a.gridy = 1;
+                a.weighty = 1.0;
+                a.insets = i;
+                menu.add(sliderPane, a);
+
+                a.gridx = 0;
+                a.gridy = 2;
+                a.weighty = 0.7;
+                a.ipady = 1;
+                i.set(10,0,0,0);
+                menu.add(labelPane, a);
+
+                int option = JOptionPane.showOptionDialog(null, menu, "Set Brightness And Contrast",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE, null, null, null);  //Added ImageIcon here
+
+               
+
+                if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
+                    
+                } 
+                else if (option == JOptionPane.OK_OPTION) {
+                    //System.out.println(brightnessFactor + " " + contrastFactor);
+                    //setTarget(Andie.getPanel());
+                    target.getImage().apply(new BrightnessAndContrast(brightnessFactor, contrastFactor));
+                    target.getParent().revalidate();
+                    target.repaint();
+                }
+            } //End of try
+        
+
+            catch(Exception err){
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    System.out.println(err);
+                }
+            } //End of catch
+
+         
+            } //End of actionPerformed()
+        }//End of B&C()
+
+
+        public void updatePreviewImage(BufferedImage i){
+            JLabel pic = new JLabel(new ImageIcon(i));
+            previewIcon = new ImageIcon(i);
+            previewPanel.add(pic);
+            previewPanel.repaint(); 
+            previewPanel.revalidate(); 
+        }
+
+    }//End of class
+
+

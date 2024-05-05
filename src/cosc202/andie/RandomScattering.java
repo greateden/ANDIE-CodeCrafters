@@ -1,6 +1,8 @@
 package cosc202.andie;
 
 import java.awt.image.*;
+import java.util.*;
+
 
 /**
  * <p>
@@ -79,7 +81,7 @@ public class RandomScattering implements ImageOperation, java.io.Serializable {
 
         int[] pixel = new int[side*side];
 
-        //Makes a copy of input to apply the Random Scattering effect to.
+        //Makes a copy of input to apply the Random Scattering effect to. 
         BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
 
         /* At this point we need to talk about boundary conditions.
@@ -105,6 +107,9 @@ public class RandomScattering implements ImageOperation, java.io.Serializable {
                     }
                 }
 
+                //Apply the filter now.
+                
+         
              }
         }
 

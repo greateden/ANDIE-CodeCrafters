@@ -100,6 +100,24 @@ class EditableImage {
         opsFilename = null;
     }
 
+    /**A method to make a copy of the EditableImage object. Mainly used in testing for now. Don't know if I'l commit to it.
+     * @author Kevin Steve Sathyanath
+     * @return a copy of the Editable image.
+     */
+    public EditableImage makeCopy(){
+
+        final EditableImage copy = new EditableImage();
+        copy.original = deepCopy(this.current);
+        copy.current = deepCopy(this.current);
+        copy.ops = this.ops;
+        copy.redoOps = this.redoOps;
+        copy.imageFilename = this.imageFilename;
+        copy.opsFilename = this.opsFilename;
+
+        return copy;
+
+    }
+
     /**
      * <p>
      * Check if there is an image loaded.
@@ -153,7 +171,7 @@ class EditableImage {
      * @param bi The BufferedImage to copy.
      * @return A deep copy of the input.
      */
-    private static BufferedImage deepCopy(BufferedImage bi) {
+    public static BufferedImage deepCopy(BufferedImage bi) {
         ColorModel cm = bi.getColorModel();
         boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
         WritableRaster raster = bi.copyData(null);
@@ -202,6 +220,7 @@ class EditableImage {
             objIn.close();
             fileIn.close();
             hasOpsFile = true;
+            System.out.println("Opened");
         } catch (Exception ex) {
             // Could be no file or something else. Carry on for now.
             hasOpsFile = false;
@@ -237,6 +256,7 @@ class EditableImage {
         // Write operations file
         FileOutputStream fileOut = new FileOutputStream(this.opsFilename);
         ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+        System.out.println("Save confirmed.");
         objOut.writeObject(this.ops);
         objOut.close();
         fileOut.close();
@@ -281,7 +301,7 @@ class EditableImage {
         }
         current = op.apply(current);
         ops.add(op);
-        // System.out.println();
+        System.out.println(ops.toString());  //Test line. Comment out later.
 
     }
 
@@ -292,6 +312,7 @@ class EditableImage {
      */
     public void undo() {
         redoOps.push(ops.pop());
+        System.out.println("Undone");
         refresh();
     }
 
@@ -302,6 +323,7 @@ class EditableImage {
      */
     public void redo() {
         apply(redoOps.pop());
+        System.out.println("Redone");
     }
 
     /**
@@ -337,5 +359,12 @@ class EditableImage {
         }
     }
 
+    /**A method to, well, 'reset' the EditableImage to the original. Only of use in a preview image before applying some effect. Hopefully.
+     * @author Kevin Steve Sathyanath
+     * @date 27/04/2024
+     */
+    public void reset(){
+        current = deepCopy(original);
+    }
 
 }

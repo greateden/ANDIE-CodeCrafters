@@ -77,6 +77,8 @@ public abstract class ImageAction extends AbstractAction {
         target = newTarget;
     }
 
+   
+
     /**
      * <p>
      * Get the target for ImageActions.
