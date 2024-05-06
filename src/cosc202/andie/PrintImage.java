@@ -1,12 +1,8 @@
 package cosc202.andie;
 
 import java.awt.*;
-import java.awt.Graphics;
 import java.awt.print.*;
 import java.awt.image.BufferedImage;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
 
 import javax.swing.JOptionPane;
 
@@ -26,7 +22,7 @@ public class PrintImage implements Printable {
      * @param fitWholePage Whether to fit the whole page or not
      */
     public PrintImage(boolean fitWholePage) {
-        this.imageToPrint = EditableImage.getCurrentImage();
+        this.imageToPrint = ImageAction.target.getImage().getCurrentImage();
         this.fitWholePage = fitWholePage;
     }
 

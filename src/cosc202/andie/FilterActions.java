@@ -293,13 +293,9 @@ public class FilterActions {
 
 
             } catch (Exception err) {
-                if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
-                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
-                }
-                else{
-                    System.out.println(err);
-                }
+               JOptionPane.showMessageDialog(Andie.getFrame(), err.toString(),
+                            Andie.bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
+
             }
         }
 

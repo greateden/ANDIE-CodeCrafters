@@ -367,7 +367,7 @@ public class FileActions {
                         String format = ((ImageFileFilter) selectedFilter).getExtension();
 
                         target.getImage();
-                        ImageIO.write(EditableImage.getCurrentImage(), format, new File(selectedFilePath));
+                        ImageIO.write(target.getImage().getCurrentImage(), format, new File(selectedFilePath));
 
                         // create a message box to tell user it's saved successfully
                         // JOptionPane.showMessageDialog(null,

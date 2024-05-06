@@ -32,7 +32,7 @@ import java.awt.geom.AffineTransform;
  * @version 1.0
  */
 public class ImagePanel extends JPanel implements MouseWheelListener, MouseListener, MouseMotionListener{
-    
+
     /**
      * The image to display in the ImagePanel.
      */
@@ -75,7 +75,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     public void setRotationAngle(int rotationAngle) {
         this.rotationAngle = rotationAngle;
     }
-    
+
 
     /**
      * <p>
@@ -204,8 +204,8 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     @Override
     public Dimension getPreferredSize() {
         if (image.hasImage()) {
-            return new Dimension((int) Math.round(EditableImage.getCurrentImage().getWidth() * scale),
-                    (int) Math.round(EditableImage.getCurrentImage().getHeight() * scale));
+            return new Dimension((int) Math.round(ImageAction.target.getImage().getCurrentImage().getWidth() * scale),
+                    (int) Math.round(ImageAction.target.getImage().getCurrentImage().getHeight() * scale));
         } else {
             return new Dimension(450, 450);
         }
@@ -213,7 +213,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
     //ADD SETPREFERREDSIZE().
 
-    
+
 
     /**
      * <p>
@@ -229,22 +229,22 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
         if (image.hasImage()) { // Check if there is an image to display.
             Color onyx = new Color(38,38,38); //Hey that's my cat's name!
-            setBackground(onyx);  
+            setBackground(onyx);
             Graphics2D g2 = (Graphics2D) g.create(); // Create a new Graphics2D object for transformations.
             g2.scale(scale, scale); // Scale the graphics context.
             //g2.drawImage(EditableImage.getCurrentImage(), null, 0, 0); // Draw the current image at (0, 0).
 
             // if (zoomer) {
             //     AffineTransform at = new AffineTransform();
-    
+
             //     double xRel = MouseInfo.getPointerInfo().getLocation().getX() - getLocationOnScreen().getX();
             //     double yRel = MouseInfo.getPointerInfo().getLocation().getY() - getLocationOnScreen().getY();
-    
+
             //     double zoomDiv = zoomFactor / prevZoomFactor;
-    
+
             //     xOffset = (zoomDiv) * (xOffset) + (1 - zoomDiv) * xRel;
             //     yOffset = (zoomDiv) * (yOffset) + (1 - zoomDiv) * yRel;
-    
+
             //     at.translate(xOffset, yOffset);
             //     at.scale(zoomFactor, zoomFactor);
             //     prevZoomFactor = zoomFactor;
@@ -256,25 +256,25 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
             //     zoomer = false;
             // }
-    
+
             // if (dragger) {
             //     AffineTransform at = new AffineTransform();
             //     at.translate(xOffset + xDiff, yOffset + yDiff);
             //     at.scale(zoomFactor, zoomFactor);
             //     g2.transform(at);
-    
+
             //     if (released) {
             //         xOffset += xDiff;
             //         yOffset += yDiff;
             //         dragger = false;
             //     }
-    
+
             // }
-    
+
             // All drawings go here
-    
+
             g2.drawImage(image.getCurrentImage(), 0, 0, this);
-    
+
             g2.dispose(); // Dispose of the Graphics2D object to release resources.
         }
 
@@ -315,7 +315,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     }
     /**Code to program the expected behaviour when the mouseWheel is moved.
      * Code taken from: https://stackoverflow.com/questions/6543453/zooming-in-and-zooming-out-within-a-panel
-     * Code kept verbatim. No editing done. Kevin Steve Sathyanath. 
+     * Code kept verbatim. No editing done. Kevin Steve Sathyanath.
      */
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
@@ -348,36 +348,36 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
         repaint();
 
     }
-    //You know the drill. COde taken from that stackOverFlow post etc. 
+    //You know the drill. COde taken from that stackOverFlow post etc.
     @Override
     public void mouseMoved(MouseEvent e) {
     }
 
-    //You know the drill. COde taken from that stackOverFlow post etc. 
+    //You know the drill. COde taken from that stackOverFlow post etc.
     @Override
     public void mouseClicked(MouseEvent e) {
     }
 
-    
+
     @Override
     public void mousePressed(MouseEvent e) {
         released = false;
         startPoint = MouseInfo.getPointerInfo().getLocation();
     }
 
-    
+
     @Override
     public void mouseReleased(MouseEvent e) {
         released = true;
         repaint();
     }
 
-    //You know the drill. COde taken from that stackOverFlow post etc. 
+    //You know the drill. COde taken from that stackOverFlow post etc.
     @Override
     public void mouseEntered(MouseEvent e) {
     }
 
-    //You know the drill. COde taken from that stackOverFlow post etc. 
+    //You know the drill. COde taken from that stackOverFlow post etc.
     @Override
     public void mouseExited(MouseEvent e) {
     }
