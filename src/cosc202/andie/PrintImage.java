@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * <p>
  * Prints the current image.
  * </p>
- * 
+ *
  * @author The Greatest Eden
  */
 public class PrintImage implements Printable {
@@ -34,10 +34,10 @@ public class PrintImage implements Printable {
      * <p>
      * Callback for when the file print action is triggered.
      * </p>
-     * 
+     *
      * Some of the code below is from Perplexity
      * (https://www.perplexity.ai/search/if-I-have-C1ciqa8pQ0aJ4vP5C1Mz6g)
-     * 
+     *
      * @param g graphics
      * @param pf page format
      * @param pageIndex page index
@@ -77,12 +77,12 @@ public class PrintImage implements Printable {
 
         /*
          * define dme = David Eyers
-         * 
+         *
          * Note:
          * Obviously, the printDialog() method is used to show the print dialog.
          * BUTT!
          * I have no idea about why I need to call this method twice.
-         * According to the distinguished professor dme, 
+         * According to the distinguished professor dme,
          * he said it is due to asynchronies for time (instead of space).
          * The first time when it is being called, probably due to other parts are not
          * fully loaded, so it would always return false. So, I need to call it twice.

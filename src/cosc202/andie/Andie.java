@@ -7,22 +7,24 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+
 /**
  * <p>
  * Main class for A Non-Destructive Image Editor (ANDIE).
  * </p>
- * 
+ *
  * <p>
  * This class is the entry point for the program.
  * It creates a Graphical User Interface (GUI) that provides access to various
  * image editing and processing operations.
  * </p>
- * 
+ *
  * <p>
  * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
  * 4.0</a>
  * </p>
- * 
+ *
  * @author Steven Mills
  * @version 1.0
  */
@@ -31,6 +33,7 @@ public class Andie {
     private static ImagePanel imagePanel;
     public static ResourceBundle bundle;
     public static JMenuBar menuBar;
+    public static JTabbedPane tabs;
 
     private static FileActions fileActions;
     private static EditActions editActions;
@@ -45,7 +48,7 @@ public class Andie {
      * <p>
      * Launches the main GUI for the ANDIE program.
      * </p>
-     * 
+     *
      * <p>
      * This method sets up an interface consisting of an active image (an
      * {@code ImagePanel})
@@ -54,7 +57,7 @@ public class Andie {
      * These operations are implemented {@link ImageOperation}s and triggered via
      * {@code ImageAction}s grouped by their general purpose into menus.
      * </p>
-     * 
+     *
      * @see ImagePanel
      * @see ImageAction
      * @see ImageOperation
@@ -64,22 +67,29 @@ public class Andie {
      * @see FilterActions
      * @see ColourActions
      * @see MacroActions
-     * 
+     *
      * @throws Exception if something goes wrong.
      */
     private static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
         frame = new JFrame("ANDIE: CodeCrafters");
-        // JFrame.setDefaultLookAndFeelDecorated(true);
+
+
         Image image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
         frame.setIconImage(image);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(true);
+        frame.setPreferredSize(new Dimension(800,600));
+
 
         // The main content area is an ImagePanel
         imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
+        //tabs = new JTabbedPane();
+        //tabs.addTab("Welcome", null, null, "Does nothing yet");
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
+        //frame.add(tabs);
         fileActions = new FileActions();
         editActions = new EditActions();
         viewActions = new ViewActions();
@@ -161,9 +171,10 @@ public class Andie {
 
         // actions that apply a macro funtion of the operations
         newMenuBar.add(macroActions.createMenu());
+      
 
         frame.setJMenuBar(newMenuBar);
-        
+
         CreateHotKey.createHotkey(fileMenu, KeyEvent.VK_F,0,"filemenu");
         CreateHotKey.createHotkey(editMenu, KeyEvent.VK_E, 0, "editmenu");
         CreateHotKey.createHotkey(viewMenu, KeyEvent.VK_V, 0, "viewmenu");
@@ -174,16 +185,17 @@ public class Andie {
 
         frame.repaint();
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    
+
 
     /**
      * <p>
      * Gets the frame.
      * </p>
-     * 
+     *
      * @return The frame.
      */
     public static JFrame getFrame() {
@@ -205,12 +217,12 @@ public class Andie {
      * <p>
      * Main entry point to the ANDIE program.
      * </p>
-     * 
+     *
      * <p>
      * Creates and launches the main GUI in a separate thread.
      * As a result, this is essentially a wrapper around {@code createAndShowGUI()}.
      * </p>
-     * 
+     *
      * @param args Command line arguments, not currently used
      * @throws Exception If something goes awry
      * @see #createAndShowGUI()
@@ -218,7 +230,9 @@ public class Andie {
     public static void main(String[] args) throws Exception {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
+            
             public void run() {
+
                 Locale.setDefault(new Locale("en", "NZ"));
 
                 // Now making the ResourceBundle
@@ -228,6 +242,17 @@ public class Andie {
                 // System.out.println(bundle.getString("convertToGreyAction"));
 
                 try {
+                    FlatMacDarkLaf.setup();
+                    try {
+                        UIManager.setLookAndFeel( new FlatMacDarkLaf() );
+                    } catch( Exception ex ) {
+                        System.err.println( "Failed to initialize LaF" );
+                    }
+                    //Keeping in case we need to revert. Also change dependency in Gradle file.
+                    // try{
+                    //     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    // }
+                    // catch(Exception ignored){}
                     createAndShowGUI();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -235,5 +260,22 @@ public class Andie {
                 }
             }
         });
+    }
+
+    /**An accessor for the imagePanel that is used in the preview panels for Brightness and Contrast, among others.
+     * @author Kevin Steve Sathyanath
+     * @return the ImagePanel in question
+     * @date 27/04/2024
+     */
+    public static ImagePanel getPanel(){
+        return imagePanel;
+    }
+
+    /**A method to add tabs to the tabPane
+     * @author Kevin Steve Sathyanath
+     * date 5/5/2024
+     */
+    public static void addTab(EditableImage i){
+
     }
 }

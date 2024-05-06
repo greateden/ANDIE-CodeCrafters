@@ -25,7 +25,8 @@ sourceSets {
 }
 
 dependencies {
-
+// https://mavenlibs.com/maven/dependency/com.formdev/flatlaf
+implementation group: 'com.formdev', name: 'flatlaf', version: '3.2'
 }
 
 run {

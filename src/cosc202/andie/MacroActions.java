@@ -11,18 +11,18 @@ import java.io.*;
  * <p>
  * Actions provided by the Action menu.
  * </p>
- * 
+ *
  * <p>
- * The Macro menu contains actions that could save all 
+ * The Macro menu contains actions that could save all
  * the operations performed between the start and stop actions.
  * Could also apply an ops file on another image to preform
  * the operations form the opened ops file
- * 
+ *
  *<p>
- * 
+ *
  * @author YUXING ZHANG
  * @version 1.0
- * 
+ *
  */
 public class MacroActions {
 
@@ -51,7 +51,7 @@ public class MacroActions {
      * <p>
      * Create a menu containing the list of Macro actions.
      * </p>
-     * 
+     *
      * @return The edit menu UI element.
      */
     public JMenu createMenu() {
@@ -68,7 +68,7 @@ public class MacroActions {
      * <p>
      * Create a macro start recording action.
      * </p>
-     * 
+     *
      */
     public class StartAction extends ImageAction {
 
@@ -106,10 +106,10 @@ public class MacroActions {
      * <p>
      * Create a macro stop recording action.
      * </p>
-     * 
+     *
      * This class peforms a stop action of the macro action
      * and save the operations to a new file
-     * 
+     *
      */
     public class StopAction extends ImageAction {
 
@@ -145,16 +145,16 @@ public class MacroActions {
 
                 // if user click ok, then let the user choose a file to save the ops file
                 else if (opsSaveOrNot == JOptionPane.OK_OPTION) {
-                    
+
 
                     JFileChooser fileChooser = new JFileChooser();
-                    
+
                     // Add file filters for OPS format only
                     FileNameExtensionFilter filter = new FileNameExtensionFilter("OPS Files (*.ops)", "ops");
-                    
+
                     fileChooser.addChoosableFileFilter(filter);
                     fileChooser.setFileFilter(filter);
-                   
+
                     //show the save window
                     int chosed = fileChooser.showSaveDialog(target);
                     if (chosed == JFileChooser.APPROVE_OPTION) {
@@ -217,7 +217,7 @@ public class MacroActions {
 
         }
 
-    } 
+    }
     }
 
     public class ApplyPrevMacroAction extends ImageAction {
@@ -230,7 +230,7 @@ public class MacroActions {
             if(FileActions.isOpened == true){
 
         try{
-            
+
                 // System.out.println("Select ops file");
                 JFileChooser fileChooser = new JFileChooser();
 
@@ -247,8 +247,8 @@ public class MacroActions {
                     try (ObjectInputStream obInput = new ObjectInputStream(fileinput)) {
                         @SuppressWarnings("unchecked")
                         Stack<ImageOperation> opsFromFile = (Stack<ImageOperation>) obInput.readObject();
-                        
-                        
+
+
                         for (int i = 0; i < opsFromFile.size(); i++) {
                             target.getImage().apply(opsFromFile.get(i));
                             target.repaint();
@@ -257,7 +257,7 @@ public class MacroActions {
                         // }catch(){
                     }
 
-                    
+
 
                     // }
 
@@ -273,7 +273,7 @@ public class MacroActions {
 
                 }
             }
-        
+
     }else{
          //System.out.println("Exception");
          JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),

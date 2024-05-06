@@ -47,7 +47,7 @@ public class ImageResize implements ImageOperation, java.io.Serializable {
 
   /**
    *  Apply a resize to the given image.
-   * 
+   *
    *  @param input The image to resize.
    *  @return The resulting image.
    */

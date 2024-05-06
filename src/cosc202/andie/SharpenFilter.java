@@ -6,9 +6,9 @@ import java.awt.image.*;
  * <p>
  * ImageOperation to apply a Sharpen (enhancing) filter.
  * </p>
- * 
+ *
  * <p>
- * This filter is the reverse of a blur filter, by enhancing the differences between neighbouring values. 
+ * This filter is the reverse of a blur filter, by enhancing the differences between neighbouring values.
  * Implimented by using a convoultion.
  * </p>
  * @author Emma
@@ -27,11 +27,11 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable{
      * <p>
      * Applies sharpen filter to an image
      * </p>
-     * 
+     *
      * <p>
      * The sharpen filter is applied via convolution
      * </p>
-     * 
+     *
      * @param input The image to apply the Sharpen filter to.
      */
     public BufferedImage apply(BufferedImage input) {
@@ -44,7 +44,7 @@ public class SharpenFilter implements ImageOperation, java.io.Serializable{
 
         //Create an instance of the class that creates image with border
         FilterBorder borderedImage = new FilterBorder(input, 1);
-        
+
         //Applies convolution to bordered image
         BufferedImage output = convOp.filter(borderedImage.applyBorder(), null);
 

@@ -25,7 +25,7 @@ Made by the CodeCrafters Team
 * Print Image
 
 `Kevin`
-* Enabled Multilingual support 
+* Enabled Multilingual support
 * Image flip (Horizontal and Vertical)
 * Median filter
 * Image rotation - polishing
@@ -56,6 +56,9 @@ Made by the CodeCrafters Team
 * Image rotation
 * Testing
 * User instuctions read me
+* Filters with negative results
+* Emboss Filter with edge detection
+* Sobel Filter
 
 
 ## Testing
@@ -81,7 +84,7 @@ We tested our code mainly via brute force. We went through and thought of all th
 
 🏃Running the program🏃
 - Open Terminal and navigate to project directory
-- Run `gradle build` 
+- Run `gradle build`
 - Run `gradle run`
 - To open files, go to file > open
 
@@ -126,7 +129,7 @@ We tested our code mainly via brute force. We went through and thought of all th
 |        | **H**otkey Instructions    | Alt + Shift + Ctrl + K | ⌥ ⇧ ⌘ K | H - H             | F1                             |
 ## Significant Refactoring
 
-* Multithreading has been implimented 
+* Multithreading has been implimented
 
 ## Gantt Diagram for Our Project
 
@@ -137,7 +140,7 @@ We tested our code mainly via brute force. We went through and thought of all th
         gantt
         title CodeCrafters' work on ANDIE
         dateFormat  DD-MM-YYYY
-        Start of project: milestone, m1,05-03-2024, 
+        Start of project: milestone, m1,05-03-2024,
         First deliverable: milestone, m2, 28-03-2024,
 
         section Developing
@@ -157,7 +160,7 @@ We tested our code mainly via brute force. We went through and thought of all th
             README                         :done, des2, 26-03-2024, 28-03-2024
             Multithreading                :active, des2, 30-03-2024, 31-03-2024
             Progress Bar                   :active, des2, 30-03-2024, 01-04-2024
-            Extended Filters (Convolution filters) :done, des2, 09-04-2024, 18-04-2024 
+            Extended Filters (Convolution filters) :done, des2, 09-04-2024, 18-04-2024
             Extended Filters (Median Filter) :done, des2, 19-04-2024, 23-04-2024
             Selection Tool                 :active, des2, 16-03-2024, 18-03-2024
             Selection Tool                 :active, des2, 23-04-2024, 30-04-2024

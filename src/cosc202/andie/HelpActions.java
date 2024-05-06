@@ -38,7 +38,7 @@ public class HelpActions {
      * <p>
      * Create a menu containing the list of Help actions.
      * </p>
-     * 
+     *
      * @return The Help menu UI element.
      */
     public JMenu createMenu() {
@@ -57,7 +57,7 @@ public class HelpActions {
          * <p>
          * Create a new about-us action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -73,12 +73,12 @@ public class HelpActions {
          * <p>
          * Callback for when the about-us action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the about-us-action is triggered.
          * It prints a message in a dialog box.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -93,7 +93,7 @@ public class HelpActions {
          * <p>
          * Create a new Hotkey Instruction action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -109,12 +109,12 @@ public class HelpActions {
          * <p>
          * Callback for when the Hotkey Instruction action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the Hotkey Instruction action is triggered.
          * It prints an HTML message in a dialog box.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
