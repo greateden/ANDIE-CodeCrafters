@@ -10,8 +10,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  * <p>
@@ -131,6 +129,20 @@ public class FileActions {
     }
 
     /**
+     * Change all the actions that require to change their availability before
+     * and/or after opening an image.
+     */
+    public void changeCertainMenuStatus(boolean status) {
+        // for (Action action : actions) {
+        // action.setEnabled(status);
+        // }
+        actions.get(1).setEnabled(status);
+        actions.get(2).setEnabled(status);
+        actions.get(3).setEnabled(status);
+        actions.get(4).setEnabled(status);
+    }
+
+    /**
      * <p>
      * Action to open an image from file.
      * </p>
@@ -210,7 +222,7 @@ public class FileActions {
          */
         public void openFile() {
 
-            //Removes any previous mouse listener instances
+            // Removes any previous mouse listener instances
             for (MouseListener listener : target.getMouseListeners()) {
                 target.removeMouseListener(listener);
             }
@@ -254,17 +266,20 @@ public class FileActions {
                     isOpened = true;
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
 
-                    //Finding image dimensions in order to be able to bound selection box
+                    // Finding image dimensions in order to be able to bound selection box
                     // Read the image file
-                    //BufferedImage image = ImageIO.read(new File(imageFilepath));
+                    // BufferedImage image = ImageIO.read(new File(imageFilepath));
                     // Get the dimensions of the image
                     // int width = image.getWidth();
                     // int height = image.getHeight();
 
                     target.getImage().open(imageFilepath);
 
-                    //Adding mouse lisener to target panel
+                    // Adding mouse lisener to target panel
                     target.addMouseListener(new MouseSelection(target));
+
+                    Andie.allCertainMenuStatus = true;
+                    Andie.changeAllCertainMenuStatus(Andie.allCertainMenuStatus);
                 } catch (Exception ex) {
                     System.exit(1);
                 }
@@ -352,7 +367,7 @@ public class FileActions {
                         String format = ((ImageFileFilter) selectedFilter).getExtension();
 
                         target.getImage();
-                        ImageIO.write(EditableImage.getCurrentImage(), format, new File(selectedFilePath));
+                        ImageIO.write(target.getImage().getCurrentImage(), format, new File(selectedFilePath));
 
                         // create a message box to tell user it's saved successfully
                         // JOptionPane.showMessageDialog(null,
@@ -657,7 +672,7 @@ public class FileActions {
      * A class that represents the action of printing an image.
      */
     public class FilePrintAction extends AbstractAction {
-        //private BufferedImage imageToPrint;
+        // private BufferedImage imageToPrint;
 
         /**
          * <p>
@@ -730,7 +745,7 @@ public class FileActions {
                         // Will educate the user if they didn't give any inputs and still wanna hit the
                         // OK button
                     } else {
-                        PrintImage p = new PrintImage (b2Choose);
+                        PrintImage p = new PrintImage(b2Choose);
                         p.printImage();
                     }
                 }
@@ -920,7 +935,7 @@ public class FileActions {
                     // l.setExtendedState(JFrame.NORMAL);
                 }
             });
-            //test?
+            // test?
             traChinese.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Andie.exitFullScreen();

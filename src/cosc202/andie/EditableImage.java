@@ -45,7 +45,7 @@ class EditableImage {
     /**
      * The current image, the result of applying {@link ops} to {@link original}.
      */
-    private static BufferedImage current;
+    private BufferedImage current;
     /** The sequence of operations currently applied to the image. */
     private Stack<ImageOperation> ops;
     /** A memory of 'undone' operations to support 'redo'. */
@@ -334,7 +334,7 @@ class EditableImage {
      * @return The result of applying all of the current operations to the
      *         {@link original} image.
      */
-    public static BufferedImage getCurrentImage() {
+    public BufferedImage getCurrentImage() {
         return current;
     }
 

@@ -64,6 +64,16 @@ public class MacroActions {
         return macroMenu;
     }
 
+        /**
+     * Change all the actions that require to change their availability before
+     * and/or after opening an image.
+     */
+    public void changeCertainMenuStatus(boolean status) {
+        for (Action action : actions) {
+            action.setEnabled(status);
+        }
+    }
+
     /**
      * <p>
      * Create a macro start recording action.

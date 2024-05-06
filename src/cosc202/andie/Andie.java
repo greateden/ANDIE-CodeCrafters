@@ -44,6 +44,8 @@ public class Andie {
     private static HelpActions helpActions;
     private static MacroActions macroActions;
 
+    public static boolean allCertainMenuStatus;
+
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -74,22 +76,20 @@ public class Andie {
         // Set up the main GUI frame
         frame = new JFrame("ANDIE: CodeCrafters");
 
-
         Image image = ImageIO.read(Andie.class.getClassLoader().getResource("icon.png"));
         frame.setIconImage(image);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
-        frame.setPreferredSize(new Dimension(800,600));
-
+        frame.setPreferredSize(new Dimension(800, 600));
 
         // The main content area is an ImagePanel
         imagePanel = new ImagePanel();
         ImageAction.setTarget(imagePanel);
-        //tabs = new JTabbedPane();
-        //tabs.addTab("Welcome", null, null, "Does nothing yet");
+        // tabs = new JTabbedPane();
+        // tabs.addTab("Welcome", null, null, "Does nothing yet");
         JScrollPane scrollPane = new JScrollPane(imagePanel);
         frame.add(scrollPane, BorderLayout.CENTER);
-        //frame.add(tabs);
+        // frame.add(tabs);
         fileActions = new FileActions();
         editActions = new EditActions();
         viewActions = new ViewActions();
@@ -118,6 +118,22 @@ public class Andie {
      */
     public static void getStatus() {
         System.out.println(frame.getExtendedState());
+    }
+
+    /**
+     * Method to change all the related "grey buttons'" status
+     * before/after the image get imported.
+     * @param status
+     */
+    public static void changeAllCertainMenuStatus(boolean status) {
+        fileActions.changeCertainMenuStatus(status);
+        editActions.changeCertainMenuStatus(status);
+        viewActions.changeCertainMenuStatus(status);
+        filterActions.changeCertainMenuStatus(status);
+        imageMenuBar.changeCertainMenuStatus(status);
+        colourActions.changeCertainMenuStatus(status);
+        macroActions.changeCertainMenuStatus(status);
+
     }
 
     /**
@@ -171,11 +187,12 @@ public class Andie {
 
         // actions that apply a macro funtion of the operations
         newMenuBar.add(macroActions.createMenu());
-      
 
         frame.setJMenuBar(newMenuBar);
 
-        CreateHotKey.createHotkey(fileMenu, KeyEvent.VK_F,0,"filemenu");
+        changeAllCertainMenuStatus(allCertainMenuStatus);// before open an image, set all to unable to click
+
+        CreateHotKey.createHotkey(fileMenu, KeyEvent.VK_F, 0, "filemenu");
         CreateHotKey.createHotkey(editMenu, KeyEvent.VK_E, 0, "editmenu");
         CreateHotKey.createHotkey(viewMenu, KeyEvent.VK_V, 0, "viewmenu");
         CreateHotKey.createHotkey(filterMenu, KeyEvent.VK_L, 0, "filtermenu");
@@ -188,8 +205,6 @@ public class Andie {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
-
 
     /**
      * <p>
@@ -230,7 +245,6 @@ public class Andie {
     public static void main(String[] args) throws Exception {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
-            
             public void run() {
 
                 Locale.setDefault(new Locale("en", "NZ"));
@@ -244,13 +258,13 @@ public class Andie {
                 try {
                     FlatMacDarkLaf.setup();
                     try {
-                        UIManager.setLookAndFeel( new FlatMacDarkLaf() );
-                    } catch( Exception ex ) {
-                        System.err.println( "Failed to initialize LaF" );
+                        UIManager.setLookAndFeel(new FlatMacDarkLaf());
+                    } catch (Exception ex) {
+                        System.err.println("Failed to initialize LaF");
                     }
-                    //Keeping in case we need to revert. Also change dependency in Gradle file.
+                    // Keeping in case we need to revert. Also change dependency in Gradle file.
                     // try{
-                    //     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                     // }
                     // catch(Exception ignored){}
                     createAndShowGUI();
@@ -262,20 +276,25 @@ public class Andie {
         });
     }
 
-    /**An accessor for the imagePanel that is used in the preview panels for Brightness and Contrast, among others.
+    /**
+     * An accessor for the imagePanel that is used in the preview panels for
+     * Brightness and Contrast, among others.
+     *
      * @author Kevin Steve Sathyanath
      * @return the ImagePanel in question
      * @date 27/04/2024
      */
-    public static ImagePanel getPanel(){
+    public static ImagePanel getPanel() {
         return imagePanel;
     }
 
-    /**A method to add tabs to the tabPane
+    /**
+     * A method to add tabs to the tabPane
+     *
      * @author Kevin Steve Sathyanath
-     * date 5/5/2024
+     *         date 5/5/2024
      */
-    public static void addTab(EditableImage i){
+    public static void addTab(EditableImage i) {
 
     }
 }

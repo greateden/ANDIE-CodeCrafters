@@ -85,6 +85,16 @@ public class ColourActions {
         return fileMenu;
     }
 
+        /**
+     * Change all the actions that require to change their availability before
+     * and/or after opening an image.
+     */
+    public void changeCertainMenuStatus(boolean status) {
+        for (Action action : actions) {
+            action.setEnabled(status);
+        }
+    }
+
     /**
      * <p>
      * Action to convert an image to greyscale.
@@ -375,7 +385,7 @@ public class ColourActions {
          * <p>
          * Create a new brightnessAndContrast action.
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -389,19 +399,19 @@ public class ColourActions {
          * <p>
          * Callback for when the brightnessAndContrast action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever brightnessAndContrast is triggered.
          * It changes the image's brightness and contrast depending on user input.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         JSlider brightnessSlider;
         JSlider contrastSlider;
-        
 
-        
+
+
         public void actionPerformed(ActionEvent e){
             try{
                 BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
@@ -412,9 +422,9 @@ public class ColourActions {
                 previewPanel = new JPanel();
                 previewPanel.setPreferredSize(new Dimension(500,300));
                 updatePreviewImage(prev);
-                
 
-                
+
+
 
                 JPanel sliderPane = new JPanel(new GridLayout(1,2, 17, 0));
                 JPanel labelPane = new JPanel(new GridLayout(1,2,167,0));
@@ -440,21 +450,21 @@ public class ColourActions {
                 ChangeListener sliderChangeListener = new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
-    
+
                         brightnessFactor = brightnessSlider.getValue();
                         contrastFactor = contrastSlider.getValue();
 
                         //Setting a new target for the ImageActon
                         // setTarget(show);
                         // target.getImage().reset();
-                        // target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor)); 
+                        // target.getImage().apply(new BrightnessAndContrast(brightnessFactor,contrastFactor));
                         //target.getImage().repaint();
-                        // target.getParent().revalidate(); 
+                        // target.getParent().revalidate();
                         //curr = BrightnessAndContrast.applyToPreview(prev, brightnessFactor, contrastFactor);
                         BufferedImage curr = BrightnessAndContrast.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), brightnessFactor, contrastFactor);
                         updatePreviewImage(curr);
-                        
-                        
+
+
                     }
                 };
 
@@ -464,7 +474,7 @@ public class ColourActions {
 
                 labelPane.add(brightnessSliderLabel);
                 labelPane.add(contrastSliderLabel);
-                
+
                 sliderPane.add(brightnessSlider);
                 sliderPane.add(contrastSlider);
                 //p.add(show);
@@ -498,11 +508,11 @@ public class ColourActions {
                         JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.PLAIN_MESSAGE, null, null, null);  //Added ImageIcon here
 
-               
+
 
                 if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
-                    
-                } 
+
+                }
                 else if (option == JOptionPane.OK_OPTION) {
                     //System.out.println(brightnessFactor + " " + contrastFactor);
                     //setTarget(Andie.getPanel());
@@ -511,7 +521,7 @@ public class ColourActions {
                     target.repaint();
                 }
             } //End of try
-        
+
 
             catch(Exception err){
                 if (err instanceof NullPointerException) {
@@ -522,7 +532,7 @@ public class ColourActions {
                 }
             } //End of catch
 
-         
+
             } //End of actionPerformed()
         }//End of B&C()
 
@@ -531,10 +541,8 @@ public class ColourActions {
             JLabel pic = new JLabel(new ImageIcon(i));
             previewIcon = new ImageIcon(i);
             previewPanel.add(pic);
-            previewPanel.repaint(); 
-            previewPanel.revalidate(); 
+            previewPanel.repaint();
+            previewPanel.revalidate();
         }
 
     }//End of class
-
-

@@ -40,6 +40,9 @@ public class ImageMenuBar {
     private RotateImageStrictAction rotAct;
     protected JDialog dialog;
 
+    private JMenuItem scale25, scale50, scale75, scale125, scale150;
+    private JMenuItem rotMenu90, rotMenu180, rotMenu270;
+
     /**
      * <p>
      * Create a set of Image menu actions.
@@ -104,6 +107,25 @@ public class ImageMenuBar {
         rotAct.createSubMenu();
 
         return fileMenu;
+    }
+
+    /**
+     * Change all the actions that require to change their availability before
+     * and/or after opening an image.
+     */
+    public void changeCertainMenuStatus(boolean status) {
+        for (Action action : actions) {
+            action.setEnabled(status);
+        }
+        scale25.setEnabled(status);
+        scale50.setEnabled(status);
+        scale75.setEnabled(status);
+        scale125.setEnabled(status);
+        scale150.setEnabled(status);
+
+        rotMenu90.setEnabled(status);
+        rotMenu180.setEnabled(status);
+        rotMenu270.setEnabled(status);
     }
 
     /**
@@ -496,19 +518,19 @@ public class ImageMenuBar {
         public void createSubMenu() {
 
             JMenu scaleMenu = new JMenu(Andie.bundle.getString("Scaling"));
-            JMenuItem scale25 = new JMenuItem("25%");
+            scale25 = new JMenuItem("25%");
             CreateHotKey.createHotkey(scale25, KeyEvent.VK_1, 0, "scale25");
 
-            JMenuItem scale50 = new JMenuItem("50%");
+            scale50 = new JMenuItem("50%");
             CreateHotKey.createHotkey(scale50, KeyEvent.VK_2, 0, "scale50");
 
-            JMenuItem scale75 = new JMenuItem("75%");
+            scale75 = new JMenuItem("75%");
             CreateHotKey.createHotkey(scale75, KeyEvent.VK_3, 0, "scale75");
 
-            JMenuItem scale125 = new JMenuItem("125%");
+            scale125 = new JMenuItem("125%");
             CreateHotKey.createHotkey(scale125, KeyEvent.VK_4, 0, "scale125");
 
-            JMenuItem scale150 = new JMenuItem("150%");
+            scale150 = new JMenuItem("150%");
             CreateHotKey.createHotkey(scale150, KeyEvent.VK_5, 0, "scale150");
 
             scale25.addActionListener(new ScaleActionListener(0.25));
@@ -622,13 +644,13 @@ public class ImageMenuBar {
 
             JMenu rotMenu = new JMenu(Andie.bundle.getString("RotateBy"));
 
-            JMenuItem rotMenu90 = new JMenuItem("90° right");
+            rotMenu90 = new JMenuItem("90° right");
             CreateHotKey.createHotkey(rotMenu90, KeyEvent.VK_1, 0, "rotMenu90");
 
-            JMenuItem rotMenu180 = new JMenuItem("180°");
+            rotMenu180 = new JMenuItem("180°");
             CreateHotKey.createHotkey(rotMenu180, KeyEvent.VK_2, 0, "rotMenu180");
 
-            JMenuItem rotMenu270 = new JMenuItem("90° left");
+            rotMenu270 = new JMenuItem("90° left");
             CreateHotKey.createHotkey(rotMenu270, KeyEvent.VK_3, 0, "rotMenu270");
 
             rotMenu90.addActionListener(new ScaleActionListener(90));

@@ -204,8 +204,8 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     @Override
     public Dimension getPreferredSize() {
         if (image.hasImage()) {
-            return new Dimension((int) Math.round(EditableImage.getCurrentImage().getWidth() * scale),
-                    (int) Math.round(EditableImage.getCurrentImage().getHeight() * scale));
+            return new Dimension((int) Math.round(ImageAction.target.getImage().getCurrentImage().getWidth() * scale),
+                    (int) Math.round(ImageAction.target.getImage().getCurrentImage().getHeight() * scale));
         } else {
             return new Dimension(450, 450);
         }
