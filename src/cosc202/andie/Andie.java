@@ -120,6 +120,11 @@ public class Andie {
         System.out.println(frame.getExtendedState());
     }
 
+    /**
+     * Method to change all the related "grey buttons'" status
+     * before/after the image get imported.
+     * @param status
+     */
     public static void changeAllCertainMenuStatus(boolean status) {
         fileActions.changeCertainMenuStatus(status);
         editActions.changeCertainMenuStatus(status);

@@ -1,6 +1,5 @@
-New error with Brightness and COntrast
+New error with Brightness and Contrast
 
 1. java.lang.IllegalArgumentException: Raster IntegerInterleavedRaster: width = 962 height = 542 #Bands = 4 xOff
 
 2. Image vanishes when pressing undo after using Brightness and Contrast. Is this a feature of the new theme?
-
