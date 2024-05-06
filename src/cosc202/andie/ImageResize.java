@@ -4,8 +4,24 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 /**
- *  A class that does image resize. Made by Yuxing Zhang 
+ * 
+ * 
+ * <p>
+ * ImageOperation to apply a image resize.
+ * </p>
+ * 
+ * <p>
+ * The image resize operation takes and image and resize
+ * on a regular image with the new height and width
+ * </p>
+ * 
+ 
+ * </p>
+ *
+ * @author YUXING ZHANG 
+ * @version 1.0
  */
+ 
 
 public class ImageResize implements ImageOperation, java.io.Serializable {
 

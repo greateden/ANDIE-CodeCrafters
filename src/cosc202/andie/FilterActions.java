@@ -72,6 +72,11 @@ public class FilterActions {
 
         Action sobel = new SobelFilterAction("Sobel Filter", null, "Applys a sobel filter vertically or horizionally", null);
         actions.add(sobel);
+        Action blockAveraging = new BlcokAveragingAction("BlcokAveraging", null,
+                "BlcokAveraging", null);
+        actions.add(blockAveraging);
+        // CreateHotKey.createHotkey(blockAveraging, KeyEvent.VK_I,
+        // InputEvent.META_DOWN_MASK | InputEvent.ALT_DOWN_MASK, "blockAveraging");
     }
 
     /**
@@ -537,4 +542,87 @@ public class FilterActions {
         }
 
     }
+     /**
+     * ImageBlcokAveraging extends ImageAction and represents an action for
+     * Averaging blocks of the image.
+     * Could be used to create a pixelated version of an image.
+     * This action is triggered by user interaction in the graphical user interface.
+     */
+    public class BlcokAveragingAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new BlcokAveraging action
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        BlcokAveragingAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+
+        }
+     /**
+         * <p>
+         * Callback for when the about-us action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the about-us-action is triggered.
+         * It prints a message in a dialog box.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+
+            try {
+
+                int blockSizeHeight=0;
+                int blockSizeWidth = 0;
+
+                JPanel panel = new JPanel();
+                panel.setLayout(new GridLayout(2,1));
+                JLabel info1 = new JLabel();
+                info1.setText("Height ("+Andie.bundle.getString("PleaseEnter")+")");
+                JLabel info2 = new JLabel();
+                info2.setText("Width ("+Andie.bundle.getString("PleaseEnter")+")");
+                // Pop-up dialog box to ask for the radius value.
+                SpinnerNumberModel blockSizeHeightModel = new SpinnerNumberModel(0, 0, 1000, 1);
+                JSpinner blockSizeHeightSpinner = new JSpinner(blockSizeHeightModel);
+                SpinnerNumberModel blockSizeWidthModel = new SpinnerNumberModel(0, 0, 1000, 1);
+                JSpinner blockSizeWidthSpinner = new JSpinner(blockSizeWidthModel);
+                panel.add(info1);
+                panel.add(blockSizeHeightSpinner);
+                panel.add(info2);
+                panel.add(blockSizeWidthSpinner);
+
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), panel,
+                        "Enter Block Size",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+                    blockSizeHeight = blockSizeHeightModel.getNumber().intValue();
+                    blockSizeWidth = blockSizeWidthModel.getNumber().intValue();
+                   
+                }
+               
+
+                target.getImage().apply(new BlockAveraging(blockSizeHeight,blockSizeWidth));
+                target.repaint();
+                target.getParent().revalidate();
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+    }
+
 }

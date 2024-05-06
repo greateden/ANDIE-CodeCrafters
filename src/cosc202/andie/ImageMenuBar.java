@@ -62,19 +62,23 @@ public class ImageMenuBar {
         Action resize = new ImageResizeAction(Andie.bundle.getString("ImageResizeAction"), null,
                 Andie.bundle.getString("ImageResizeAction"), Integer.valueOf(KeyEvent.VK_E));
         actions.add(resize);
-        CreateHotKey.createHotkey(resize, KeyEvent.VK_I, InputEvent.META_DOWN_MASK | InputEvent.ALT_DOWN_MASK, "resize");
-
+        CreateHotKey.createHotkey(resize, KeyEvent.VK_I, InputEvent.META_DOWN_MASK | InputEvent.ALT_DOWN_MASK,
+                "resize");
 
         Action scattering = new RandomScatteringAction(Andie.bundle.getString("RandomScattering"), null,
                 Andie.bundle.getString("RandomScattering"), Integer.valueOf(KeyEvent.VK_A));
         actions.add(scattering);
 
         scalAct = new ImageScalingAction(Andie.bundle.getString("Scaling"), null, Andie.bundle.getString("ReScaling"),
-        Integer.valueOf(KeyEvent.VK_S));
+                Integer.valueOf(KeyEvent.VK_S));
         actions.add(scalAct);
 
-        rotAct = new RotateImageStrictAction("Rotate by", null, "Rotating by multiples of right angles", Integer.valueOf(KeyEvent.VK_O));
+        rotAct = new RotateImageStrictAction("Rotate by", null, "Rotating by multiples of right angles",
+                Integer.valueOf(KeyEvent.VK_O));
         actions.add(rotAct);
+
+        
+
     }
 
     /**
@@ -506,7 +510,6 @@ public class ImageMenuBar {
             JMenuItem scale150 = new JMenuItem("150%");
             CreateHotKey.createHotkey(scale150, KeyEvent.VK_5, 0, "scale150");
 
-
             scale25.addActionListener(new ScaleActionListener(0.25));
             scale50.addActionListener(new ScaleActionListener(0.5));
             scale75.addActionListener(new ScaleActionListener(0.75));
@@ -626,7 +629,6 @@ public class ImageMenuBar {
 
             JMenuItem rotMenu270 = new JMenuItem("90° left");
             CreateHotKey.createHotkey(rotMenu270, KeyEvent.VK_3, 0, "rotMenu270");
-
 
             rotMenu90.addActionListener(new ScaleActionListener(90));
             rotMenu180.addActionListener(new ScaleActionListener(180));
@@ -754,4 +756,7 @@ public class ImageMenuBar {
 
     }
 
+   
+
+       
 }
