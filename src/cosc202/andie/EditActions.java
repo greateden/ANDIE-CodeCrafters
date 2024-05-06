@@ -40,12 +40,12 @@ public class EditActions {
         actions = new ArrayList<Action>();
 
         Action undo = new UndoAction(Andie.bundle.getString("Undo"), null, Andie.bundle.getString("Undo"),
-        Integer.valueOf(KeyEvent.VK_U));
+                Integer.valueOf(KeyEvent.VK_U));
         actions.add(undo);
         CreateHotKey.createHotkey(undo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK, "Undo");
 
         Action redo = new RedoAction(Andie.bundle.getString("Redo"), null, Andie.bundle.getString("Redo"),
-        Integer.valueOf(KeyEvent.VK_R));
+                Integer.valueOf(KeyEvent.VK_R));
         actions.add(redo);
         CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "Redo");
         CreateHotKey.createHotkey(redo, KeyEvent.VK_Y, InputEvent.META_DOWN_MASK, "Redo");
@@ -66,6 +66,16 @@ public class EditActions {
         }
 
         return editMenu;
+    }
+
+    /**
+     * Change all the actions that require to change their availability before
+     * and/or after opening an image.
+     */
+    public void changeCertainMenuStatus(boolean status) {
+        for (Action action : actions) {
+            action.setEnabled(status);
+        }
     }
 
     /**

@@ -95,6 +95,16 @@ public class FilterActions {
         return fileMenu;
     }
 
+        /**
+     * Change all the actions that require to change their availability before
+     * and/or after opening an image.
+     */
+    public void changeCertainMenuStatus(boolean status) {
+        for (Action action : actions) {
+            action.setEnabled(status);
+        }
+    }
+
     /**
      * <p>
      * Action to blur an image with a mean filter.
@@ -242,16 +252,16 @@ public class FilterActions {
                 ChangeListener sliderChangeListener = new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
-    
+
                         int rad = medianSlider.getValue();
 
                         //Setting a new target for the ImageActon
                         setTarget(show);
                         target.getImage().reset();
-                        target.getImage().apply(new MedianFilter(rad)); 
-                        target.repaint(); 
-                        target.getParent().revalidate(); 
-                        
+                        target.getImage().apply(new MedianFilter(rad));
+                        target.repaint();
+                        target.getParent().revalidate();
+
                     }
                 };
 
@@ -272,7 +282,7 @@ public class FilterActions {
 
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
-                    
+
                 } else if (option == JOptionPane.OK_OPTION) {
                     radius = medianSlider.getValue();
                     setTarget(Andie.getPanel());
@@ -280,8 +290,8 @@ public class FilterActions {
                     target.repaint();
                     target.getParent().revalidate();
                 }
-                
-                
+
+
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),

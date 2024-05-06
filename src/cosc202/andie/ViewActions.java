@@ -82,6 +82,16 @@ public class ViewActions {
         return viewMenu;
     }
 
+        /**
+     * Change all the actions that require to change their availability before
+     * and/or after opening an image.
+     */
+    public void changeCertainMenuStatus(boolean status) {
+        for (Action action : actions) {
+            action.setEnabled(status);
+        }
+    }
+
     /**
      * <p>
      * Action to zoom in on an image.
