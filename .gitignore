@@ -20,3 +20,4 @@ doc/
 # Don't ignore gradle wrapper JAR
 !gradle-wrapper.jar
 dockerfile
+src/cosc202/andie/Config.config
