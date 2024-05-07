@@ -538,8 +538,9 @@ public class ColourActions {
 
 
         public void updatePreviewImage(BufferedImage i){
-            JLabel pic = new JLabel(new ImageIcon(i));
-            previewIcon = new ImageIcon(i);
+            BufferedImage j = ImageResize.applyToPreview(i);
+            JLabel pic = new JLabel(new ImageIcon(j));
+            //previewIcon = new ImageIcon(j);
             previewPanel.removeAll();
             previewPanel.add(pic);
             previewPanel.repaint();
