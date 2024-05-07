@@ -80,4 +80,51 @@ public class ImageResize implements ImageOperation, java.io.Serializable {
     return resultImage;
 
   }
+
+  /**A method that resizes an image to fit a previewPanel.
+   * Modified yuxing's code slightly.
+   * @param BuferedImage input
+   * @return the resultant bufferedImage.
+   */
+  public static BufferedImage applyToPreview(BufferedImage input) {
+    int width=0; 
+    int height=0;
+    int oriWidth = input.getWidth();
+    int oriHeight = input.getHeight();
+    if(oriWidth < oriHeight*1.1){
+      width = 300;
+      height = 300;
+    }
+    else if(oriWidth>oriHeight){
+       height = 300;
+       width = 500;
+    }
+    else{
+      height = 500;
+      width = 300;
+    }
+    Image inp = (Image) input;
+
+    BufferedImage resultImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+    Image scaled;
+    // = inp.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
+
+    if (oriWidth > width && oriHeight > height) {
+      scaled = inp.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
+    } else if (oriWidth < width && oriHeight < height) {
+      scaled = inp.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    } else {
+      scaled = inp.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
+    }
+
+    resultImage.getGraphics().drawImage(scaled, 0, 0, null);
+
+    // Graphics2D g2d = resultImage.createGraphics();
+    // g2d.drawImage(temp, 0, 0, null);
+    // g2d.dispose();
+
+    return resultImage;
+
+  }
 }

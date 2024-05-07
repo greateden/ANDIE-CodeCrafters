@@ -418,9 +418,21 @@ public class ColourActions {
 
                 final EditableImage preview = target.getImage().makeCopy();
                 final ImagePanel show = new ImagePanel(preview);
+                int prevHeight = prev.getHeight();
+                int prevWidth = prev.getWidth();
+                Dimension d;
+                if(prevWidth<prevHeight*1.1){
+                    d = new Dimension(300,300);
+                }
+                else if(prevHeight<prevWidth){
+                    d = new Dimension(500,300);
+                }
+                else{
+                    d = new Dimension(300,500);
+                }
 
                 previewPanel = new JPanel();
-                previewPanel.setPreferredSize(new Dimension(500,300));
+                previewPanel.setPreferredSize(d);
                 updatePreviewImage(prev);
 
 
@@ -538,8 +550,9 @@ public class ColourActions {
 
 
         public void updatePreviewImage(BufferedImage i){
-            JLabel pic = new JLabel(new ImageIcon(i));
             previewIcon = new ImageIcon(i);
+            BufferedImage j = ImageResize.applyToPreview(i);
+            JLabel pic = new JLabel(new ImageIcon(j));
             previewPanel.removeAll();
             previewPanel.add(pic);
             previewPanel.repaint();
