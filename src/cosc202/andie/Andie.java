@@ -7,7 +7,12 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatDarculaLaf;
+
 
 /**
  * <p>
@@ -262,9 +267,10 @@ public class Andie {
                 // System.out.println(bundle.getString("convertToGreyAction"));
 
                 try {
-                    //FlatMacDarkLaf.setup();
+                    //calling ThemeConfig for changing themes
+                    LookAndFeel laf = ThemeConfig.CreateTheme();
                     try {
-                        //UIManager.setLookAndFeel(new FlatMacDarkLaf());
+                        UIManager.setLookAndFeel(laf);
                     } catch (Exception ex) {
                         System.err.println("Failed to initialize LaF");
                     }
