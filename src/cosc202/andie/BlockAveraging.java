@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  
- * </p>
+ * 
  * 
  * @author YUXING ZHANG 
  * @version 1.0

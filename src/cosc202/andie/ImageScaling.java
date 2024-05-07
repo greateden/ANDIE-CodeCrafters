@@ -70,8 +70,8 @@ public class ImageScaling implements ImageOperation, java.io.Serializable {
 
   /**A static method that scales an object for the previewPanel.
    * This code is compied from Yuxing's work above and modified slightly
-   * @date 07/05/2024
-   * @param BufferedImage i
+   * @since 07/05/2024
+   * @param input buffered image
    * @return bufferedImage that is properly scaled
    **/
   public static BufferedImage applyToPreview(BufferedImage input) {

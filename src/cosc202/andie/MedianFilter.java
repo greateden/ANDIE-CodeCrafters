@@ -1,10 +1,15 @@
 
 package cosc202.andie;
 
-import java.awt.image.*;
-import java.util.*;
-import javax.swing.*;
 import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
+import java.util.Arrays;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
 /**
  * <p>
  * ImageOperation to apply a Median filter.
@@ -215,8 +220,9 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
 
     /**A method that does the same as above, but for preview images. Also it's static. 
      * @author Kevin Steve Sathyanath
-     * @date 07/05/2024
-     * @param BufferedImage i, int radius
+     * @since 07/05/2024
+     * @param  input the inpit buffered image
+     * @param radius the input radius for the image 
      * @return The output BufferedImage
      */
 

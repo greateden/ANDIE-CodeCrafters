@@ -4,7 +4,7 @@ import java.awt.image.*;
 
 /**This class is written to implement the Brightness and Contrast operation in ANDIE. 
  * @author Kevin Steve Sathyanath
- * @date 19/04/2024
+ * date: 19/04/2024
  */
 
 public class BrightnessAndContrast implements ImageOperation, java.io.Serializable {
@@ -24,7 +24,7 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
 
     /**This method must be implemented when the class implements ImageOperation. It will apply the output of the equation()
      * here while taking care of the bounds.
-     * @return output: A BufferedImage that has the B&C operation applied to it.
+     * @return output: A BufferedImage that has the B and C operation applied to it.
      * @param input A BufferedImage that is to be operated on. 
      */
     public BufferedImage apply(BufferedImage input){
@@ -58,9 +58,7 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
     }//End of apply().
 
     /**A function to apply the equation given in the lab book.
-     * @param c The parameter representing the RGB value of the pixel. 
-     * @param b The parameter passed to represent a change in brightness.
-     * @param c The parameter passed to represent a change in contrast.
+     * @param v The parameter representing the RGB value of the pixel. 
      * @return The output integer from applying the equation using in. 
      */
     public int equation(int v){
@@ -76,9 +74,9 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
 
 
     /**A function to apply the equation given in the lab book.
-     * @param c The parameter representing the RGB value of the pixel. 
-     * @param b The parameter passed to represent a change in brightness.
-     * @param c The parameter passed to represent a change in contrast.
+     * @param v The parameter representing the RGB value of the pixel. 
+     * @param br The parameter passed to represent a change in brightness.
+     * @param cr The parameter passed to represent a change in contrast.
      * @return The output integer from applying the equation using in. 
      */
     public static int equation(int v, int br, int cr){
@@ -93,7 +91,7 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
 
 
     /**This method is the same as apply() above, but it is to be exclusively for the previewPanel.
-     * @return output: A BufferedImage that has the B&C operation applied to it.
+     * @return output: A BufferedImage that has the B and C operation applied to it.
      * @param input A BufferedImage that is to be operated on. 
      */
     public static BufferedImage applyToPreview(BufferedImage input, int br, int cr){

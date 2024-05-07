@@ -127,7 +127,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
     /**A replacement constructor to be used in displaying a new imagepanel. We can set this as a new target in imageAction. TESTING
      * @author Kevin Steve Sathyanath
-     * @date 23/04/2024
+     * @since 23/04/2024
      */
     public ImagePanel(EditableImage working){
         image = working;

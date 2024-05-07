@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 
+
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -134,7 +135,7 @@ public class Andie {
     /**
      * Method to change all the related "grey buttons'" status
      * before/after the image get imported.
-     * @param status
+     * @param status updates the status of all of the menu buttons.
      */
     public static void changeAllCertainMenuStatus(boolean status) {
         fileActions.changeCertainMenuStatus(status);
@@ -297,7 +298,7 @@ public class Andie {
      *
      * @author Kevin Steve Sathyanath
      * @return the ImagePanel in question
-     * @date 27/04/2024
+     * @since 27/04/2024
      */
     public static ImagePanel getPanel() {
         return imagePanel;

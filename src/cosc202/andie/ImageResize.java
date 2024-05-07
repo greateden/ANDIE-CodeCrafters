@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  
- * </p>
+ * 
  *
  * @author YUXING ZHANG 
  * @version 1.0
@@ -83,7 +83,7 @@ public class ImageResize implements ImageOperation, java.io.Serializable {
 
   /**A method that resizes an image to fit a previewPanel.
    * Modified yuxing's code slightly.
-   * @param BuferedImage input
+   * @param input
    * @return the resultant bufferedImage.
    */
   public static BufferedImage applyToPreview(BufferedImage input) {

@@ -677,7 +677,7 @@ public class FilterActions {
     /**A method to update the preview Image. Common to all methods that pop up a preview image. 
      * Please don't cut our marks for lack of comments. 
      * @author Kevin Steve Sathyanath
-     * @date 07/05/2024
+     * date: 07/05/2024
      * @param i BufferedImage
      */
     public void updatePreviewImage(BufferedImage i){
