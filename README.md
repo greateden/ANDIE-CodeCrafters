@@ -61,6 +61,7 @@ Made by the CodeCrafters Team
 * Filters with negative results
 * Emboss Filter with edge detection
 * Sobel Filter
+* Continuous Integration
 
 
 ## Testing
@@ -80,6 +81,7 @@ We tested our code mainly via brute force. We went through and thought of all th
 - Java Development Kit (JDK): You'll need a recent version of the JDK installed on your system. Download and install it from the official Oracle website: https://www.oracle.com/nz/java/technologies/downloads/. Verify the installation by opening a terminal and running java -version.
 
 - Gradle: Version 8.6
+- FlatLaf: Version 3.2  (https://mavenlibs.com/maven/dependency/com.formdev/flatlaf)
 
 🔧Installation🔧
 - Clone or Download the Project: Obtain the project files using your preferred method (Git clone or direct download).
