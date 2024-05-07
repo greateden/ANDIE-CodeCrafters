@@ -42,7 +42,7 @@ build:
 build-javadoc:
     stage: createdocs
     script:
-      - javadoc -exclude com.* -d docs src/cosc202/andie/*.java
+      - gradle javadoc
     artifacts:
       paths:
       - docs
