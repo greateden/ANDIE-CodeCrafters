@@ -34,6 +34,7 @@ public class Andie {
     public static ResourceBundle bundle;
     public static JMenuBar menuBar;
     public static JTabbedPane tabs;
+    public static TooIbarActions toolbar;
 
     private static FileActions fileActions;
     private static EditActions editActions;
@@ -99,6 +100,11 @@ public class Andie {
         helpActions = new HelpActions();
 
         createMenuBar();
+
+        //We hereby beget toolbar.
+        toolbar = new TooIbarActions();
+        frame.getContentPane().add(toolbar.createToolBar(), BorderLayout.NORTH);
+        frame.repaint();
 
     }
 
@@ -256,9 +262,9 @@ public class Andie {
                 // System.out.println(bundle.getString("convertToGreyAction"));
 
                 try {
-                    FlatMacDarkLaf.setup();
+                    //FlatMacDarkLaf.setup();
                     try {
-                        UIManager.setLookAndFeel(new FlatMacDarkLaf());
+                        //UIManager.setLookAndFeel(new FlatMacDarkLaf());
                     } catch (Exception ex) {
                         System.err.println("Failed to initialize LaF");
                     }
