@@ -7,7 +7,12 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatDarculaLaf;
+
 
 /**
  * <p>
@@ -34,6 +39,7 @@ public class Andie {
     public static ResourceBundle bundle;
     public static JMenuBar menuBar;
     public static JTabbedPane tabs;
+    public static TooIbarActions toolbar;
 
     private static FileActions fileActions;
     private static EditActions editActions;
@@ -72,7 +78,7 @@ public class Andie {
      *
      * @throws Exception if something goes wrong.
      */
-    private static void createAndShowGUI() throws Exception {
+    public static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
         frame = new JFrame("ANDIE: CodeCrafters");
 
@@ -99,6 +105,11 @@ public class Andie {
         helpActions = new HelpActions();
 
         createMenuBar();
+
+        //We hereby beget toolbar.
+        toolbar = new TooIbarActions();
+        frame.getContentPane().add(toolbar.createToolBar(), BorderLayout.NORTH);
+        frame.repaint();
 
     }
 
@@ -256,12 +267,8 @@ public class Andie {
                 // System.out.println(bundle.getString("convertToGreyAction"));
 
                 try {
-                    FlatMacDarkLaf.setup();
-                    try {
-                        UIManager.setLookAndFeel(new FlatMacDarkLaf());
-                    } catch (Exception ex) {
-                        System.err.println("Failed to initialize LaF");
-                    }
+                    //calling ThemeConfig for changing themes
+                    createTheme();
                     // Keeping in case we need to revert. Also change dependency in Gradle file.
                     // try{
                     // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -276,6 +283,14 @@ public class Andie {
         });
     }
 
+    public static void createTheme(){
+        LookAndFeel laf = ThemeConfig.CreateTheme();
+                    try {
+                        UIManager.setLookAndFeel(laf);
+                    } catch (Exception ex) {
+                        System.err.println("Failed to initialize LaF");
+                    }
+    }
     /**
      * An accessor for the imagePanel that is used in the preview panels for
      * Brightness and Contrast, among others.

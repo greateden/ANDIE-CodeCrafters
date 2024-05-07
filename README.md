@@ -23,6 +23,8 @@ Made by the CodeCrafters Team
 * Implemented multithreading for median filter
 * Added two types of keyboard hotkeys and their instructions
 * Print Image
+* Skeleton Code for ToolBar
+* Theme Change
 
 `Kevin`
 * Enabled Multilingual support
