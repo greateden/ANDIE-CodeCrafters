@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * <p>
@@ -67,6 +68,8 @@ public class FileActions {
 
     public FileActions() {
 
+        ImageIcon fileOpenIcon = new ImageIcon("src/cosc202/andie/icons/openFile.png");
+
         actions = new ArrayList<Action>();
 
         Action fileOpen = new FileOpenAction(Andie.bundle.getString("OpenAction"), null,
@@ -119,10 +122,29 @@ public class FileActions {
      * @return The File menu UI element.
      */
     public JMenu createMenu() {
+
+        ArrayList<Integer> keystrokes = new ArrayList<Integer>();
+        keystrokes.add(KeyEvent.VK_O);
+        keystrokes.add(KeyEvent.VK_S);
+        keystrokes.add(KeyEvent.VK_A);
+        keystrokes.add(KeyEvent.VK_E);
+        keystrokes.add(KeyEvent.VK_P);
+        keystrokes.add(0);
+        keystrokes.add(KeyEvent.VK_Q);
+
+        int index=0;
+
         JMenu fileMenu = new JMenu(Andie.bundle.getString("File"));
 
+        // JMenuItem fileOpenMenuManual = new JMenuItem("Open");
+        // fileOpenMenuManual.setAccelerator(KeyStroke.getKeyStroke("control O"));
+        // fileMenu.add(fileOpenMenuManual);
+
         for (Action action : actions) {
-            fileMenu.add(new JMenuItem(action));
+            JMenuItem newItem = new JMenuItem(action);
+            newItem.setAccelerator(KeyStroke.getKeyStroke(keystrokes.get(index),0));
+            fileMenu.add(newItem);
+            index++;
         }
 
         return fileMenu;
