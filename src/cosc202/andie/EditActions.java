@@ -186,6 +186,12 @@ public class EditActions {
         }
     }
 
+    /**
+     * Represents an action to change the theme of the application.
+     *
+     * @author GreatestEden
+     * @version 1.0
+     */
     public class ChangeThemeAction extends ImageAction {
 
         private JCheckBox followOSTheme;
@@ -193,9 +199,7 @@ public class EditActions {
         private JButton okButton, cancelButton;
 
         /**
-         * <p>
          * Create a new change theme action.
-         * </p>
          *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
@@ -206,18 +210,25 @@ public class EditActions {
             super(name, icon, desc, mnemonic);
         }
 
+        /**
+         * Performs the action of changing the theme.
+         *
+         * @param event The action event that triggered this action.
+         */
         public void actionPerformed(ActionEvent event) {
             try {
                 JFrame frame = new JFrame();
                 JPanel panel = new JPanel();
                 followOSTheme = new JCheckBox("Follow OS theme");
-                JLabel lable = new JLabel("Theme:");
+                JLabel label = new JLabel("Theme:");
                 String[] themes = { "FlatLightLaf", "FlatMacDarkLaf", "FlatMacLightLaf", "FlatDarkLaf",
+                        "FlatIntelliJLaf",
                         "FlatDarculaLaf" };
                 themeSelector = new JComboBox<>(themes);
                 okButton = new JButton("OK");
                 cancelButton = new JButton("Cancel");
 
+                // Listener for "Follow OS theme" checkbox
                 followOSTheme.addItemListener(e -> {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
                         themeSelector.setEnabled(false);
@@ -227,18 +238,25 @@ public class EditActions {
                     }
                 });
 
+                // Listener for OK button
                 okButton.addActionListener(e -> {
-                    // Handle OK button click
+                    ThemeConfig.SetTheme(followOSTheme.isSelected(), (String) themeSelector.getSelectedItem());
+                    Andie.createTheme();
+                    JOptionPane.showMessageDialog(Andie.getFrame(),
+                            "New theme will be applied next time when the program runs.",
+                            Andie.bundle.getString("Warning"), 1); // Handle OK button click
                 });
 
+                // Listener for Cancel button
                 cancelButton.addActionListener(e -> {
+                    frame.dispose();
                     // Handle Cancel button click
                 });
 
-                panel.setLayout(new GridLayout(3,2));
+                panel.setLayout(new GridLayout(3, 2));
                 panel.add(followOSTheme);
                 panel.add(new JLabel());
-                panel.add(lable);
+                panel.add(label);
                 panel.add(themeSelector);
                 panel.add(okButton);
                 panel.add(cancelButton);
