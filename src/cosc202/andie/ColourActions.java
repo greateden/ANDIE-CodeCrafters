@@ -413,6 +413,7 @@ public class ColourActions {
 
 
         public void actionPerformed(ActionEvent e){
+            //Yeah this is a mess. But it took 3 weeks and 4 demonstrators to make this work. Please just leave it as it is. 
             try{
                 BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
 

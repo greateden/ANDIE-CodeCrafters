@@ -7,6 +7,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import java.awt.*;
+import java.awt.image.*;
 
 /**
  * <p>
@@ -31,6 +32,9 @@ import java.awt.*;
 public class FilterActions {
 
     public ResourceBundle bundle = Andie.bundle;
+    public JPanel previewPanel;
+    public ImageIcon previewIcon;
+
 
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
@@ -242,11 +246,14 @@ public class FilterActions {
             try {
                 // Determine the radius - ask the user.
                 int radius = 0;
-
+                BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
                 final EditableImage preview = target.getImage().makeCopy();
                 final ImagePanel show = new ImagePanel(preview);
-                PreviewPanel show2 = new PreviewPanel(preview);
 
+                previewPanel = PreviewPanel.makePanel(prev);
+                updatePreviewImage(prev);
+
+                
                 medianSlider = new JSlider(JSlider.VERTICAL, 0,10,0);
                 medianSlider.setMajorTickSpacing(1);
                 medianSlider.setPaintTicks(true);
@@ -260,12 +267,9 @@ public class FilterActions {
 
                         int rad = medianSlider.getValue();
 
-                        //Setting a new target for the ImageActon
-                        setTarget(show);
-                        target.getImage().reset();
-                        target.getImage().apply(new MedianFilter(rad));
-                        target.repaint();
-                        target.getParent().revalidate();
+                        BufferedImage curr = MedianFilter.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
+                        updatePreviewImage(curr);
+
 
                     }
                 };
@@ -278,7 +282,7 @@ public class FilterActions {
 
                 JPanel menu = new JPanel(new FlowLayout());
                 //GridBagConstraints a = new GridBagConstraints();
-                menu.add(show);
+                menu.add(previewPanel);
                 menu.add(medianSlider);
 
 
@@ -290,7 +294,6 @@ public class FilterActions {
 
                 } else if (option == JOptionPane.OK_OPTION) {
                     radius = medianSlider.getValue();
-                    setTarget(Andie.getPanel());
                     target.getImage().apply(new MedianFilter(radius));
                     target.repaint();
                     target.getParent().revalidate();
@@ -671,5 +674,21 @@ public class FilterActions {
             }
         }
     }
+    /**A method to update the preview Image. Common to all methods that pop up a preview image. 
+     * Please don't cut our marks for lack of comments. 
+     * @author Kevin Steve Sathyanath
+     * @date 07/05/2024
+     * @param i BufferedImage
+     */
+    public void updatePreviewImage(BufferedImage i){
+        previewIcon = new ImageIcon(i);
+        BufferedImage j = ImageResize.applyToPreview(i);
+        JLabel pic = new JLabel(new ImageIcon(j));
+        previewPanel.removeAll();
+        previewPanel.add(pic);
+        previewPanel.repaint();
+        previewPanel.revalidate();
+    }
+
 
 }
