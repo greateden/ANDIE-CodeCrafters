@@ -1,6 +1,6 @@
 package cosc202.andie;
 
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 
 /**This class is written to implement the Brightness and Contrast operation in ANDIE. 
  * @author Kevin Steve Sathyanath
@@ -14,9 +14,17 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
     private int b; //Brightness value
     private int c; //Contrast value
 
+    /**
+    * Default constructor for BrightnessAndContrast
+    */    
     public BrightnessAndContrast(){ //Default constructor
     }
 
+    /**
+     * Constructor that sets the brightness and contrast that a user has input.
+     * @param brightness the brightness value
+     * @param contrast  the contrast value
+    */
     public BrightnessAndContrast(int brightness, int contrast){
         this.b = brightness;
         this.c = contrast;
@@ -77,7 +85,7 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
      * @param v The parameter representing the RGB value of the pixel. 
      * @param br The parameter passed to represent a change in brightness.
      * @param cr The parameter passed to represent a change in contrast.
-     * @return The output integer from applying the equation using in. 
+     * @return vOut the output integer from applying the equation using in. 
      */
     public static int equation(int v, int br, int cr){
 
@@ -91,8 +99,10 @@ public class BrightnessAndContrast implements ImageOperation, java.io.Serializab
 
 
     /**This method is the same as apply() above, but it is to be exclusively for the previewPanel.
-     * @return output: A BufferedImage that has the B and C operation applied to it.
-     * @param input A BufferedImage that is to be operated on. 
+     * @param input A BufferedImage that is to be operated on.
+     * @param br The parameter passed to represent a change in brightness.
+     * @param cr The parameter passed to represent a change in contrast.
+     * @return output A BufferedImage that has the B and C operation applied to it.
      */
     public static BufferedImage applyToPreview(BufferedImage input, int br, int cr){
 

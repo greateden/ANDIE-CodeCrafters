@@ -53,10 +53,13 @@ public class ColourActions {
 
     /** A list of actions for the Colour menu. */
     protected ArrayList<Action> actions;
-
+    /** The resource bundle for internationalization. */
     public ResourceBundle bundle = Andie.bundle;
+    /** The image that will be previewed. */
     public BufferedImage previewImage;
+    /** The icon of the preview image. */
     public ImageIcon previewIcon;
+    /** The panel where the preview image will be displayed.  */
     public JPanel previewPanel;
 
     /**
@@ -103,9 +106,10 @@ public class ColourActions {
         return fileMenu;
     }
 
-        /**
+     /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
+     * @param status The status of the menu items.
      */
     public void changeCertainMenuStatus(boolean status) {
         for (Action action : actions) {
@@ -565,7 +569,10 @@ public class ColourActions {
             } //End of actionPerformed()
         }//End of B&C()
 
-
+        /**
+         * A method to update the preview image.
+         * @param i
+         */
         public void updatePreviewImage(BufferedImage i){
             previewIcon = new ImageIcon(i);
             BufferedImage j = ImageResize.applyToPreview(i);

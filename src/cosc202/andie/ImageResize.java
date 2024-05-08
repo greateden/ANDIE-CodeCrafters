@@ -24,8 +24,9 @@ import java.awt.image.BufferedImage;
  
 
 public class ImageResize implements ImageOperation, java.io.Serializable {
-
+  /** the input width to resize too */
   private int width;
+  /** the input height to resize too */
   private int height;
 
   /**

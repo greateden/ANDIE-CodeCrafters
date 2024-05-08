@@ -1,6 +1,6 @@
 package cosc202.andie;
 
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 
 /**
  * This class is designed for swapping the RGB channels' position
@@ -14,12 +14,17 @@ import java.awt.image.*;
 
 public class RGBSwapping implements ImageOperation, java.io.Serializable{
 
+    /** The red component of the original color. */
     private int R = 0;
+    /** The green component of the original color. */
     private int G = 0;
+    /** The blue component of the original color. */
     private int B = 0;
-
+    /** The red component of the new color. */
     private int newR = 0;
+    /** The green component of the new color. */
     private int newG = 0;
+    /** The blue component of the new color. */
     private int newB = 0;
 
     /**

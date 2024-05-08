@@ -1,13 +1,28 @@
 package cosc202.andie;
 
-import java.util.*;
-import java.awt.event.*;
-
-import javax.swing.*;
-
 //import cosc202.andie.ResizePannel;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-import java.awt.*;
+import javax.swing.Action;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 /**
  * <p>
@@ -308,12 +323,15 @@ public class ImageMenuBar {
      *
      */
     public class ImageResizeAction extends ImageAction {
-
+        /** The height of the image. */
         int height;
+        /** The width of the image. */
         int width;
+        /** The label for the width, height and title . */
         JLabel widthJLabel, heightLabel, titleLabel, blankLabel;
-
+        /** The text field for the height and width. */
         JTextField widthField, heightField;
+        /** The button to apply changes. */
         JButton goButton;
 
         /**

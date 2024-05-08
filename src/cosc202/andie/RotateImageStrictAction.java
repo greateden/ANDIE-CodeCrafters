@@ -1,9 +1,9 @@
 package cosc202.andie;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.image.*;
-import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * <p>
@@ -22,7 +22,7 @@ import java.awt.*;
  * @version 1.0
  */
 public class RotateImageStrictAction implements ImageOperation, java.io.Serializable {
-
+    /** the angle of rotation in deg given by the user */
     private int deg;
 
 

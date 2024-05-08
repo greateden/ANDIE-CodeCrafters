@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * functionality to scale an image by a given percentage.
  */
 public class ImageScaling implements ImageOperation, java.io.Serializable {
-
+  /** The percent the the image is scaled by which is given by the user */
   private double scalePercentage;
   // private int heightPer;
 

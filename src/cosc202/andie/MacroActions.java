@@ -18,7 +18,7 @@ import java.io.*;
  * Could also apply an ops file on another image to preform
  * the operations form the opened ops file
  *
- *<p>
+ *</p>
  *
  * @author YUXING ZHANG
  * @version 1.0

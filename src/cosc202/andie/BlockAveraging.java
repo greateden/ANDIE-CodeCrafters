@@ -23,6 +23,14 @@ public class BlockAveraging implements ImageOperation, java.io.Serializable {
     private int blockSizeHeight;
     private int blockSizeWidth;
 
+    /**
+     * <p>
+     * Constructor that sets the block size of the BlockAveraging operation.
+     * </p>
+     * 
+     * @param blockSizeHeigh the height of the block
+     * @param blockSizeWidth the width of the block
+     */
     public BlockAveraging(int blockSizeHeigh, int blockSizeWidth) {
         this.blockSizeWidth = blockSizeWidth;
         this.blockSizeHeight=blockSizeHeigh;

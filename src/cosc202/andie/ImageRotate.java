@@ -25,7 +25,7 @@ import java.awt.image.*;
  * @version 1.0
  */
 public class ImageRotate implements ImageOperation, java.io.Serializable {
-
+    /** the angle of rotation in deg given by the user */
     private double deg;
 
 

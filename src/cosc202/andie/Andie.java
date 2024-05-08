@@ -1,18 +1,20 @@
 package cosc202.andie;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javax.swing.*;
-import java.awt.event.*;
+
 import javax.imageio.ImageIO;
-
-
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatDarculaLaf;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
 
 
 /**
@@ -35,24 +37,67 @@ import com.formdev.flatlaf.FlatDarculaLaf;
  * @version 1.0
  */
 public class Andie {
+    /**
+     * The main application frame.
+     */
     public static JFrame frame;
+
+    /**
+     * The panel that displays the image.
+     */
     private static ImagePanel imagePanel;
+    /**
+     * The resource bundle for internationalization.
+     */
     public static ResourceBundle bundle;
+    /**
+     * The main menu bar of the application.
+     */
     public static JMenuBar menuBar;
+    /**
+     * The tabbed pane that holds the image tabs.
+     */
     public static JTabbedPane tabs;
+    /**
+     * The actions associated with the toolbar.
+     */
     public static TooIbarActions toolbar;
-
+    /**
+     * The actions associated with file operations.
+     */
     private static FileActions fileActions;
+    /**
+     * The actions associated with edit operations.
+     */
     private static EditActions editActions;
+    /**
+     * The actions associated with view operations.
+     */
     private static ViewActions viewActions;
+    /**
+     * The actions associated with filter operations.
+     */
     private static FilterActions filterActions;
+    /**
+     * The menu bar associated with the image.
+     */
     private static ImageMenuBar imageMenuBar;
+    /**
+     * The actions associated with colour operations.
+     */
     private static ColourActions colourActions;
+    /**
+     * The actions associated with help operations.
+     */
     private static HelpActions helpActions;
+    /**
+     * The actions associated with macro operations.
+     */
     private static MacroActions macroActions;
-
+    /**
+     * The status of all certain menu items.
+     */
     public static boolean allCertainMenuStatus;
-
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -284,6 +329,9 @@ public class Andie {
         });
     }
 
+    /**
+     * Method to create the theme for the GUI.
+     */
     public static void createTheme(){
         LookAndFeel laf = ThemeConfig.CreateTheme();
                     try {
@@ -305,10 +353,11 @@ public class Andie {
     }
 
     /**
-     * A method to add tabs to the tabPane
+     * A method to add an EditableImage to a tabPane.
      *
+     * @param i The EditableImage to be added to the tabPane.
      * @author Kevin Steve Sathyanath
-     *         date 5/5/2024
+     * @since 5/5/2024
      */
     public static void addTab(EditableImage i) {
 
