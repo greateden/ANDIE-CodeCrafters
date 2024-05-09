@@ -35,7 +35,7 @@ public class EditActions {
 
     public ResourceBundle bundle = Andie.bundle;
 
-    private Action undo, redo;
+    public Action undo, redo;
 
     /**
      * <p>
