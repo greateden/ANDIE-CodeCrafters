@@ -246,14 +246,16 @@ public class FilterActions {
             try {
                 // Determine the radius - ask the user.
                 int radius = 0;
-                BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
-                final EditableImage preview = target.getImage().makeCopy();
-                final ImagePanel show = new ImagePanel(preview);
+                BufferedImage prev = new BufferedImage( (target.getImage().getCurrentImage()).getWidth(), (target.getImage().getCurrentImage()).getHeight(), BufferedImage.TYPE_INT_RGB);
+                prev.getGraphics().drawImage((target.getImage().getCurrentImage()), 0, 0, null);
+                //BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage()); //Error here
+                //EditableImage preview = target.getImage().makeCopy();
+                //ImagePanel show = new ImagePanel(preview);
 
                 previewPanel = PreviewPanel.makePanel(prev);
                 updatePreviewImage(prev);
 
-                
+
                 medianSlider = new JSlider(JSlider.VERTICAL, 0,10,0);
                 medianSlider.setMajorTickSpacing(1);
                 medianSlider.setPaintTicks(true);
@@ -604,7 +606,7 @@ public class FilterActions {
          * <p>
          * Create a new BlcokAveraging action
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -618,12 +620,12 @@ public class FilterActions {
          * <p>
          * Callback for when the about-us action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the about-us-action is triggered.
          * It prints a message in a dialog box.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -659,9 +661,9 @@ public class FilterActions {
                 } else if (option == JOptionPane.OK_OPTION) {
                     blockSizeHeight = blockSizeHeightModel.getNumber().intValue();
                     blockSizeWidth = blockSizeWidthModel.getNumber().intValue();
-                   
+
                 }
-               
+
 
                 target.getImage().apply(new BlockAveraging(blockSizeHeight,blockSizeWidth));
                 target.repaint();
@@ -674,8 +676,8 @@ public class FilterActions {
             }
         }
     }
-    /**A method to update the preview Image. Common to all methods that pop up a preview image. 
-     * Please don't cut our marks for lack of comments. 
+    /**A method to update the preview Image. Common to all methods that pop up a preview image.
+     * Please don't cut our marks for lack of comments.
      * @author Kevin Steve Sathyanath
      * date: 07/05/2024
      * @param i BufferedImage
