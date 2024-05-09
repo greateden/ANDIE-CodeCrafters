@@ -65,15 +65,15 @@ public class Andie {
     /**
      * The actions associated with file operations.
      */
-    private static FileActions fileActions;
+    public static FileActions fileActions;
     /**
      * The actions associated with edit operations.
      */
-    private static EditActions editActions;
+    public static EditActions editActions;
     /**
      * The actions associated with view operations.
      */
-    private static ViewActions viewActions;
+    public static ViewActions viewActions;
     /**
      * The actions associated with filter operations.
      */
@@ -155,6 +155,9 @@ public class Andie {
         //We hereby beget toolbar.
         toolbar = new TooIbarActions();
         frame.getContentPane().add(toolbar.createToolBar(), BorderLayout.NORTH);
+
+        changeAllCertainMenuStatus(allCertainMenuStatus);// before open an image, set all to unable to click
+
         frame.repaint();
 
     }
@@ -190,6 +193,8 @@ public class Andie {
         imageMenuBar.changeCertainMenuStatus(status);
         colourActions.changeCertainMenuStatus(status);
         macroActions.changeCertainMenuStatus(status);
+
+        toolbar.changeCertainToolbarStatus(status);
 
     }
 
@@ -247,7 +252,6 @@ public class Andie {
 
         frame.setJMenuBar(newMenuBar);
 
-        changeAllCertainMenuStatus(allCertainMenuStatus);// before open an image, set all to unable to click
 
         CreateHotKey.createHotkey(fileMenu, KeyEvent.VK_F, 0, "filemenu");
         CreateHotKey.createHotkey(editMenu, KeyEvent.VK_E, 0, "editmenu");

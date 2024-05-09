@@ -39,6 +39,12 @@ public class FileActions {
     protected static boolean isOpened = false;
     // protected boolean isSaved = false;
 
+    public Action fileOpen;
+    public Action fileSave;
+    public Action fileExport;
+    public Action filePrint;
+
+
     /**
      * To get the state of the isOpened variable
      *
@@ -69,13 +75,13 @@ public class FileActions {
 
         actions = new ArrayList<Action>();
 
-        Action fileOpen = new FileOpenAction(Andie.bundle.getString("OpenAction"), null,
+        fileOpen = new FileOpenAction(Andie.bundle.getString("OpenAction"), null,
                 Andie.bundle.getString("OpenDesc"),
                 Integer.valueOf(KeyEvent.VK_O));
         actions.add(fileOpen);
         CreateHotKey.createHotkey(fileOpen, KeyEvent.VK_O, InputEvent.META_DOWN_MASK, "fileOpen");
 
-        Action fileSave = new FileSaveAction(Andie.bundle.getString("SaveAction"), null,
+        fileSave = new FileSaveAction(Andie.bundle.getString("SaveAction"), null,
                 Andie.bundle.getString("SaveDesc"), Integer.valueOf(KeyEvent.VK_S));
         actions.add(fileSave);
         CreateHotKey.createHotkey(fileSave, KeyEvent.VK_S, InputEvent.META_DOWN_MASK, "fileSave");
@@ -87,13 +93,13 @@ public class FileActions {
         CreateHotKey.createHotkey(fileSaveAs, KeyEvent.VK_S, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK,
                 "fileSaveAs");
 
-        Action fileExport = new FileExportAction(Andie.bundle.getString("ExportAction"), null,
+        fileExport = new FileExportAction(Andie.bundle.getString("ExportAction"), null,
                 Andie.bundle.getString("ExportDesc"),
                 Integer.valueOf(KeyEvent.VK_E));
         actions.add(fileExport);
         CreateHotKey.createHotkey(fileExport, KeyEvent.VK_E, InputEvent.META_DOWN_MASK, "fileExport");
 
-        Action filePrint = new FilePrintAction(Andie.bundle.getString("PrintAction"), null,
+        filePrint = new FilePrintAction(Andie.bundle.getString("PrintAction"), null,
                 Andie.bundle.getString("PrintDesc"),
                 Integer.valueOf(KeyEvent.VK_P));
         actions.add(filePrint);

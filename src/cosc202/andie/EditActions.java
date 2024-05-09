@@ -35,7 +35,7 @@ public class EditActions {
 
     public ResourceBundle bundle = Andie.bundle;
 
-    private Action undo, redo;
+    public Action undo, redo;
 
     /**
      * <p>
@@ -225,8 +225,8 @@ public class EditActions {
                         "FlatIntelliJLaf",
                         "FlatDarculaLaf" };
                 themeSelector = new JComboBox<>(themes);
-                okButton = new JButton("OK");
                 cancelButton = new JButton("Cancel");
+                okButton = new JButton("OK");
 
                 // Listener for "Follow OS theme" checkbox
                 followOSTheme.addItemListener(e -> {
@@ -258,8 +258,8 @@ public class EditActions {
                 panel.add(new JLabel());
                 panel.add(label);
                 panel.add(themeSelector);
-                panel.add(okButton);
                 panel.add(cancelButton);
+                panel.add(okButton);
 
                 frame.add(panel);
                 frame.setSize(300, 200);
