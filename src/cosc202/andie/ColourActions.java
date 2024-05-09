@@ -65,6 +65,12 @@ public class ColourActions {
         actions.add(rgbSwap);
         actions.add(new brightnessAndContrastAction("Brightness and Contrast", null, "Change the Brightness and Contrast of the loaded image.", Integer.valueOf(KeyEvent.VK_B)));
 
+        Action sepia = new ConvertToSepiaAction("Sepia", null, "Applies a sepia filter to images", null);
+        actions.add(sepia);
+
+        Action temperature = new ChangeTemperatureAction("Temperature", null, "Change the temperature in the image", null);
+        actions.add(temperature);
+
     }
 
     /**
@@ -517,6 +523,215 @@ public class ColourActions {
                     //System.out.println(brightnessFactor + " " + contrastFactor);
                     //setTarget(Andie.getPanel());
                     target.getImage().apply(new BrightnessAndContrast(brightnessFactor, contrastFactor));
+                    target.getParent().revalidate();
+                    target.repaint();
+                }
+            } //End of try
+
+
+            catch(Exception err){
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    System.out.println(err);
+                }
+            } //End of catch
+
+
+            } //End of actionPerformed()
+        }//End of B&C()
+
+
+        /**
+     * <p>
+     * Action to convert an image to Sepia.
+     * </p>
+     *
+     * @see ConvertToSepia
+     */
+    public class ConvertToSepiaAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new convert-to-grey action.
+         * </p>
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ConvertToSepiaAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the convert-to-grey action is triggered.
+         * </p>
+         *
+         * <p>
+         * This method is called whenever the ConvertToGreyAction is triggered.
+         * It changes the image to greyscale.
+         * </p>
+         *
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            try {
+                target.getImage().apply(new Sepia());
+                target.repaint();
+                target.getParent().revalidate();
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+
+    }
+
+
+    /**A class to implement the change temperature action
+     * @author Kevin Steve Sathyanath
+     * @date 19/04/2024
+     */
+    public class ChangeTemperatureAction extends ImageAction{
+
+        double dial = 0.0f;
+
+        /**
+         * <p>
+         * Create a new changeTemperature action.
+         * </p>
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ChangeTemperatureAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the brightnessAndContrast action is triggered.
+         * </p>
+         *
+         * <p>
+         * This method is called whenever brightnessAndContrast is triggered.
+         * It changes the image's brightness and contrast depending on user input.
+         * </p>
+         *
+         * @param e The event triggering this callback.
+         */
+        JSlider tempSlider;
+
+
+
+        public void actionPerformed(ActionEvent e){
+            try{
+                BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
+
+                final EditableImage preview = target.getImage().makeCopy();
+                final ImagePanel show = new ImagePanel(preview);
+
+                previewPanel = new JPanel();
+                previewPanel.setPreferredSize(new Dimension(500,300));
+                updatePreviewImage(prev);
+
+
+
+
+                JPanel sliderPane = new JPanel(new FlowLayout());
+                sliderPane.setSize(new Dimension(450,50));
+                JPanel labelPane = new JPanel(new GridLayout(1,1,167,0));
+                tempSlider = new JSlider(1000,13000, 6500);
+                //Numbers taken from GIMP
+                
+                JLabel tempLabel = new JLabel("Temperature in K", JLabel.CENTER);
+                tempSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
+                
+                tempSlider.setMajorTickSpacing(2000);
+                tempSlider.setPaintTicks(true);
+                tempSlider.setPaintLabels(true);
+                //tempSlider.setValue(0);
+
+        
+
+                ChangeListener sliderChangeListener = new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+
+                        double temp = tempSlider.getValue();
+                        double di = 0;
+                        System.out.println(temp);
+                        if(temp>=6500){
+                            di = 1 + (Math.abs(6500-temp)/6500);
+                            //System.out.println(di);
+                            //System.out.println(Math.abs((6500-temp)/6500));
+                        }
+                        else{
+                            di = 1 - ((6500-temp)/6500);
+                            //System.out.println(di);
+                            //System.out.println(Math.abs((6500-temp)/6500));
+
+
+                        }
+
+                        BufferedImage curr = Temperature.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), di);
+                        updatePreviewImage(curr);
+                        dial = di;
+                    }
+                };
+
+                tempSlider.addChangeListener(sliderChangeListener);
+
+                labelPane.add(tempLabel);
+
+                sliderPane.add(tempSlider);
+
+                JPanel menu = new JPanel(new GridBagLayout());
+                GridBagConstraints a = new GridBagConstraints();
+                Insets i = new Insets(20,0,0,0);
+
+                //a.fill = GridBagConstraints.BOTH;
+                a.gridx = 0;
+                a.gridy = 0;
+                a.gridwidth = 2;
+                a.anchor = GridBagConstraints.PAGE_START;
+                menu.add(previewPanel, a);
+
+                a.fill = GridBagConstraints.VERTICAL;
+                a.gridx = 0;
+                a.gridy = 1;
+                a.weighty = 1.0;
+                a.insets = i;
+                menu.add(sliderPane, a);
+
+                a.gridx = 0;
+                a.gridy = 2;
+                a.weighty = 0.7;
+                a.ipady = 1;
+                i.set(10,0,0,0);
+                menu.add(labelPane, a);
+
+                int option = JOptionPane.showOptionDialog(null, menu, "Change temperature",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE, null, null, null);  //Added ImageIcon here
+
+
+
+                if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
+
+                }
+                else if (option == JOptionPane.OK_OPTION) {
+                    //System.out.println(brightnessFactor + " " + contrastFactor);
+                    //setTarget(Andie.getPanel());
+                    target.getImage().apply(new Temperature(dial));
                     target.getParent().revalidate();
                     target.repaint();
                 }
