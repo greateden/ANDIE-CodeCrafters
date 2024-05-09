@@ -88,6 +88,25 @@ public class Andie {
         // tabs = new JTabbedPane();
         // tabs.addTab("Welcome", null, null, "Does nothing yet");
         JScrollPane scrollPane = new JScrollPane(imagePanel);
+        
+
+        scrollPane.getViewport().getView().addMouseWheelListener(new MouseWheelListener(){
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                int verticalScrollAmount = e.getUnitsToScroll();
+                //int horizontalScrollAmount = e.getUnitsToScroll();
+
+                JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+                //JScrollBar horizontalScrollBar = scrollPane.getHorizontalScrollBar();
+
+                verticalScrollBar.setValue(verticalScrollBar.getValue() - verticalScrollAmount);
+                //horizontalScrollBar.setValue(horizontalScrollBar.getValue() - horizontalScrollAmount);
+            }
+            
+
+        });
+
         frame.add(scrollPane, BorderLayout.CENTER);
         // frame.add(tabs);
         fileActions = new FileActions();
