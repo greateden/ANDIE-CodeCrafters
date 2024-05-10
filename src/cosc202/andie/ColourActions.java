@@ -74,6 +74,9 @@ public class ColourActions {
         Action HSV = new ChangeHSVAction("Edit HSV", null, "Change the hue, saturation and brightness", null);
         actions.add(HSV);
 
+        Action choose = new ChooseAction("Choose colour", null, "Choose a colour from the colour wheel", null);
+        actions.add(choose);
+
     }
 
     /**
@@ -932,4 +935,61 @@ public class ColourActions {
         }//End of B&C()
 
 
-    }//End of class
+        /**
+     * <p>
+     * Action to convert an image to greyscale.
+     * </p>
+     *
+     * @see ConvertToGrey
+     */
+    public class ChooseAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new convert-to-grey action.
+         * </p>
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ChooseAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for choosing a colour
+         * </p>
+         *
+         * <p>
+         * This method is called to chooe a colour from the colour wheel.
+         * </p>
+         *
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            try {
+
+                ColourWheel.pickColour();
+                System.out.println(ColourWheel.getChosenColour());
+                // JFrame f = new JFrame();
+                // f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                // JPanel p = new JPanel();
+                // p.setPreferredSize(new Dimension(100,100));
+                // p.setBackground(ColourWheel.getChosenColour());
+                // f.add(p);
+                // f.pack();
+                // f.setVisible(true);
+
+            }
+            catch(Exception err){
+                System.out.println("There was an error.");
+            }
+        }
+    }
+
+
+
+}//End of class
