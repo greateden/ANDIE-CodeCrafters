@@ -71,6 +71,9 @@ public class ColourActions {
         Action temperature = new ChangeTemperatureAction("Temperature", null, "Change the temperature in the image", null);
         actions.add(temperature);
 
+        Action HSV = new ChangeHSVAction("Edit HSV", null, "Change the hue, saturation and brightness", null);
+        actions.add(HSV);
+
     }
 
     /**
@@ -762,5 +765,171 @@ public class ColourActions {
             previewPanel.repaint();
             previewPanel.revalidate();
         }
+
+
+
+        /**A class to implement the GUI for B&C manipulation.
+     * @author Kevin Steve Sathyanath
+     * @date 19/04/2024
+     */
+    public class ChangeHSVAction extends ImageAction{
+
+        float hueFactor = 0;
+        float saturationFactor = 0;
+        float brightnessFactor;
+
+        /**
+         * <p>
+         * Create a new brightnessAndContrast action.
+         * </p>
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ChangeHSVAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the brightnessAndContrast action is triggered.
+         * </p>
+         *
+         * <p>
+         * This method is called whenever brightnessAndContrast is triggered.
+         * It changes the image's brightness and contrast depending on user input.
+         * </p>
+         *
+         * @param e The event triggering this callback.
+         */
+        JSlider HueSlider;
+        JSlider SaturationSlider;
+        JSlider BrightnessSlider;
+
+
+
+        public void actionPerformed(ActionEvent e){
+            try{
+                BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
+
+                final EditableImage preview = target.getImage().makeCopy();
+                final ImagePanel show = new ImagePanel(preview);
+
+                previewPanel = new JPanel();
+                previewPanel.setPreferredSize(new Dimension(500,300));
+                updatePreviewImage(prev);
+
+
+
+
+                JPanel HuePane = new JPanel(new GridLayout(2,1, 17, 0));
+                JPanel SaturationPane = new JPanel(new GridLayout(2,1, 17, 0));
+                JPanel BrightnessPane = new JPanel(new GridLayout(2,1, 17, 0));
+                JPanel OptionsPane = new JPanel(new GridLayout(3,1,17,0));
+
+                HueSlider = new JSlider(-360,360,0);
+                SaturationSlider = new JSlider(-100,100,0);
+                BrightnessSlider = new JSlider(-100,100,0);
+
+                //Hue Slider labels
+                JLabel HueSliderLabel = new JLabel("Hue", JLabel.CENTER);
+                HueSliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                //Saturation slider labels
+                JLabel SaturationSliderLabel = new JLabel("Saturation", JLabel.CENTER);
+                SaturationSliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                //Brightness slider labels
+                JLabel BrightnessSliderLabel = new JLabel("Brightness", JLabel.CENTER);
+                BrightnessSliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                
+
+                ChangeListener sliderChangeListener = new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+
+                        hueFactor = HueSlider.getValue()/360.0f;
+                        
+                        float sat = SaturationSlider.getValue();
+                        saturationFactor = sat/100.0f;
+                        
+                        brightnessFactor = BrightnessSlider.getValue()/100f;
+
+                        BufferedImage curr = HSV.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), hueFactor, saturationFactor, brightnessFactor);
+                        updatePreviewImage(curr);
+
+
+                    }
+                };
+
+                HueSlider.addChangeListener(sliderChangeListener);
+                SaturationSlider.addChangeListener(sliderChangeListener);
+                BrightnessSlider.addChangeListener(sliderChangeListener);
+
+                HuePane.add(HueSlider);
+                HuePane.add(HueSliderLabel);
+
+                SaturationPane.add(SaturationSlider);
+                SaturationPane.add(SaturationSliderLabel);
+
+                BrightnessPane.add(BrightnessSlider);
+                BrightnessPane.add(BrightnessSliderLabel);
+
+                OptionsPane.add(HuePane);
+                OptionsPane.add(SaturationPane);
+                OptionsPane.add(BrightnessPane);
+                //p.add(show);
+
+                JPanel menu = new JPanel(new GridBagLayout());
+                GridBagConstraints a = new GridBagConstraints();
+                Insets i = new Insets(20,0,0,0);
+
+                //a.fill = GridBagConstraints.BOTH;
+                a.gridx = 0;
+                a.gridy = 0;
+                a.gridwidth = 2;
+                a.anchor = GridBagConstraints.PAGE_START;
+                menu.add(previewPanel, a);
+
+                a.fill = GridBagConstraints.VERTICAL;
+                a.gridx = 0;
+                a.gridy = 1;
+                a.weighty = 1.0;
+                a.insets = i;
+                menu.add(OptionsPane, a);
+
+
+                int option = JOptionPane.showOptionDialog(null, menu, "Edit hue, saturation and brightness",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE, null, null, null);  //Added ImageIcon here
+
+
+
+                if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
+
+                }
+                else if (option == JOptionPane.OK_OPTION) {
+                    //System.out.println(brightnessFactor + " " + contrastFactor);
+                    //setTarget(Andie.getPanel());
+                    target.getImage().apply(new HSV(hueFactor, saturationFactor, brightnessFactor));
+                    target.getParent().revalidate();
+                    target.repaint();
+                }
+            } //End of try
+
+
+            catch(Exception err){
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    System.out.println(err);
+                }
+            } //End of catch
+
+
+            } //End of actionPerformed()
+        }//End of B&C()
+
 
     }//End of class
