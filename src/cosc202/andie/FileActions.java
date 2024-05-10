@@ -136,9 +136,9 @@ public class FileActions {
 
         JMenu fileMenu = new JMenu(Andie.bundle.getString("File"));
 
-        // JMenuItem fileOpenMenuManual = new JMenuItem("Open");
-        // fileOpenMenuManual.setAccelerator(KeyStroke.getKeyStroke("control O"));
-        // fileMenu.add(fileOpenMenuManual);
+        //  JMenuItem fileOpenMenuManual = new JMenuItem("Open");
+        //  fileOpenMenuManual.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,0));
+        //  fileMenu.add(fileOpenMenuManual);
 
         for (Action action : actions) {
             JMenuItem newItem = new JMenuItem(action);

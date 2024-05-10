@@ -99,7 +99,10 @@ public class BlockAveraging implements ImageOperation, java.io.Serializable {
      * @return the output image
      */
     public static BufferedImage applyToPreview(BufferedImage input, int bWidth, int bHeight) {
-      
+        
+        if(bWidth==0 || bHeight==0){
+            return input;
+        }
         int width = input.getWidth();
         int height = input.getHeight();
         BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);

@@ -647,15 +647,16 @@ public class ColourActions {
 
 
                 JPanel sliderPane = new JPanel(new FlowLayout());
-                sliderPane.setSize(new Dimension(450,50));
+                sliderPane.setPreferredSize(new Dimension(450,50));
                 JPanel labelPane = new JPanel(new GridLayout(1,1,167,0));
                 tempSlider = new JSlider(1000,13000, 6500);
+                tempSlider.setPreferredSize(new Dimension(400,50));
                 //Numbers taken from GIMP
                 
                 JLabel tempLabel = new JLabel("Temperature in K", JLabel.CENTER);
                 tempSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
                 
-                tempSlider.setMajorTickSpacing(2000);
+                tempSlider.setMajorTickSpacing(4000);
                 tempSlider.setPaintTicks(true);
                 tempSlider.setPaintLabels(true);
                 //tempSlider.setValue(0);
