@@ -81,6 +81,9 @@ public class ImageMenuBar {
                 Integer.valueOf(KeyEvent.VK_O));
         actions.add(rotAct);
 
+        Action pencil = new PencilAction("Pencil", null, "Draw on the image", null);
+        actions.add(pencil);
+
         
 
     }
@@ -777,7 +780,58 @@ public class ImageMenuBar {
             }
         }
 
+    }//End of randomScattering
+
+    /**
+     * you can draw on the image! This call that method and stuff.
+     * @author Kevin Steve Sathyanath
+     */
+    public class PencilAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new Flip Horizontal action
+         * </p>
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        PencilAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            putValue(SHORT_DESCRIPTION, desc);
+            putValue(MNEMONIC_KEY, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the about-us action is triggered.
+         * </p>
+         *
+         * <p>
+         * This method is called whenever the about-us-action is triggered.
+         * It prints a message in a dialog box.
+         * </p>
+         *
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            try {
+                ImagePanel.isUsingPencil = true;
+                target.getImage().apply(new Pencil());
+                target.repaint();
+                target.getParent().revalidate();
+                ImagePanel.isUsingPencil = false;
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
     }
+
 
    
 

@@ -56,6 +56,9 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
     private Graphics2D g2d;
 
+    public boolean isUsingPencil = false;
+    public boolean isUsingSelectionTool = false;
+
     public void setSelectionRect(Rectangle selectionRect) {
         this.selectionRect = selectionRect;
     }
@@ -277,7 +280,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
             g2.dispose(); // Dispose of the Graphics2D object to release resources.
         }
-
+        
         if (isSelecting || selectionRect != null) { // Check if there is a selection or a selection rectangle is present.
             g2d = (Graphics2D) g; // Cast the graphics context to Graphics2D for additional drawing capabilities.
             g2d.setColor(Color.BLACK); // Set the drawing color to black.
@@ -340,12 +343,13 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-        Point curPoint = e.getLocationOnScreen();
-        xDiff = curPoint.x - startPoint.x;
-        yDiff = curPoint.y - startPoint.y;
+        
+            Point curPoint = e.getLocationOnScreen();
+            xDiff = curPoint.x - startPoint.x;
+            yDiff = curPoint.y - startPoint.y;
 
-        dragger = true;
-        repaint();
+            dragger = true;
+            repaint();
 
     }
     //You know the drill. COde taken from that stackOverFlow post etc.
@@ -361,8 +365,10 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
     @Override
     public void mousePressed(MouseEvent e) {
-        released = false;
-        startPoint = MouseInfo.getPointerInfo().getLocation();
+        if(!isUsingPencil){
+            released = false;
+            startPoint = MouseInfo.getPointerInfo().getLocation();
+        }
     }
 
 
