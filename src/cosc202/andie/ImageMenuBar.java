@@ -818,11 +818,11 @@ public class ImageMenuBar {
          */
         public void actionPerformed(ActionEvent e) {
             try {
-                ImagePanel.isUsingPencil = true;
+                // = true;
                 target.getImage().apply(new Pencil());
                 target.repaint();
                 target.getParent().revalidate();
-                ImagePanel.isUsingPencil = false;
+                //ImagePanel.isUsingPencil = false;
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
