@@ -1,10 +1,15 @@
 
 package cosc202.andie;
 
-import java.awt.image.*;
-import java.util.*;
-import javax.swing.*;
 import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
+import java.util.Arrays;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
 /**
  * <p>
  * ImageOperation to apply a Median filter.
@@ -31,7 +36,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * 5x5 filter, and so forth.
      */
     private int radius;
-    // Number of threads to use
+    //** Number of threads to use */
     private final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
     private static final int NUM_THREADS2 = Runtime.getRuntime().availableProcessors();  //This one's static. No, I'm not about to mess with hyperthreading again. If it works, I'm not about to try fixing it.
 

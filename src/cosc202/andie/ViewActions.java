@@ -35,6 +35,8 @@ public class ViewActions {
      */
     protected ArrayList<Action> actions;
 
+    public Action zoomIn, zoomOut;
+
     /**
      * <p>
      * Create a set of View menu actions.
@@ -50,7 +52,7 @@ public class ViewActions {
         actions.add(zoomIn);
         CreateHotKey.createHotkey(zoomIn, KeyEvent.VK_EQUALS, InputEvent.META_DOWN_MASK, "zoomIn");
 
-        Action zoomOut = new ZoomOutAction(Andie.bundle.getString("ZoomOutAction"), null,
+        zoomOut = new ZoomOutAction(Andie.bundle.getString("ZoomOutAction"), null,
                 Andie.bundle.getString("ZoomOutAction"),
                 Integer.valueOf(KeyEvent.VK_O));
         actions.add(zoomOut);

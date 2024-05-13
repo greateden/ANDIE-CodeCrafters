@@ -3,6 +3,10 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * <p>
@@ -31,6 +35,8 @@ public class EditActions {
 
     public ResourceBundle bundle = Andie.bundle;
 
+    public Action undo, redo;
+
     /**
      * <p>
      * Create a set of Edit menu actions.
@@ -41,18 +47,22 @@ public class EditActions {
 
         ImageIcon undoIcon = new ImageIcon("src/cosc202/andie/icons/undo.png");
         //Icon downloaded from: <a href="https://www.flaticon.com/free-icons/undo" title="undo icons">Undo icons created by Creatype - Flaticon</a>
-        Action undo = new UndoAction(Andie.bundle.getString("Undo"), undoIcon, Andie.bundle.getString("Undo"),
+        undo = new UndoAction(Andie.bundle.getString("Undo"), undoIcon, Andie.bundle.getString("Undo"),
                 Integer.valueOf(KeyEvent.VK_U));
         actions.add(undo);
         CreateHotKey.createHotkey(undo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK, "Undo");
 
         ImageIcon redoIcon = new ImageIcon("src/cosc202/andie/icons/redo.png");
         //Image downloaded from: <a href="https://www.flaticon.com/free-icons/redo" title="redo icons">Redo icons created by Creatype - Flaticon</a>
-        Action redo = new RedoAction(Andie.bundle.getString("Redo"), redoIcon, Andie.bundle.getString("Redo"),
+        redo = new RedoAction(Andie.bundle.getString("Redo"), redoIcon, Andie.bundle.getString("Redo"),
                 Integer.valueOf(KeyEvent.VK_R));
         actions.add(redo);
         CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "Redo");
         CreateHotKey.createHotkey(redo, KeyEvent.VK_Y, InputEvent.META_DOWN_MASK, "Redo");
+
+        Action changeTheme = new ChangeThemeAction("Change Theme", null, Andie.bundle.getString("Redo"),
+                Integer.valueOf(KeyEvent.VK_C));
+        actions.add(changeTheme);
     }
 
     /**
@@ -77,9 +87,8 @@ public class EditActions {
      * and/or after opening an image.
      */
     public void changeCertainMenuStatus(boolean status) {
-        for (Action action : actions) {
-            action.setEnabled(status);
-        }
+        undo.setEnabled(status);
+        redo.setEnabled(status);
     }
 
     /**
@@ -179,6 +188,94 @@ public class EditActions {
                 }
             }
         }
+    }
+
+    /**
+     * Represents an action to change the theme of the application.
+     *
+     * @author GreatestEden
+     * @version 1.0
+     */
+    public class ChangeThemeAction extends ImageAction {
+
+        private JCheckBox followOSTheme;
+        private JComboBox<String> themeSelector;
+        private JButton okButton, cancelButton;
+
+        /**
+         * Create a new change theme action.
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ChangeThemeAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * Performs the action of changing the theme.
+         *
+         * @param event The action event that triggered this action.
+         */
+        public void actionPerformed(ActionEvent event) {
+            try {
+                JFrame frame = new JFrame();
+                JPanel panel = new JPanel();
+                followOSTheme = new JCheckBox("Follow OS theme");
+                JLabel label = new JLabel("Theme:");
+                String[] themes = { "FlatLightLaf", "FlatMacDarkLaf", "FlatMacLightLaf", "FlatDarkLaf",
+                        "FlatIntelliJLaf",
+                        "FlatDarculaLaf" };
+                themeSelector = new JComboBox<>(themes);
+                cancelButton = new JButton("Cancel");
+                okButton = new JButton("OK");
+
+                // Listener for "Follow OS theme" checkbox
+                followOSTheme.addItemListener(e -> {
+                    if (e.getStateChange() == ItemEvent.SELECTED) {
+                        themeSelector.setEnabled(false);
+                        // Do something when "Follow OS theme" is selected
+                    } else {
+                        themeSelector.setEnabled(true);
+                    }
+                });
+
+                // Listener for OK button
+                okButton.addActionListener(e -> {
+                    ThemeConfig.SetTheme(followOSTheme.isSelected(), (String) themeSelector.getSelectedItem());
+                    Andie.createTheme();
+                    JOptionPane.showMessageDialog(Andie.getFrame(),
+                            "New theme will be applied next time when the program runs.",
+                            Andie.bundle.getString("Warning"), 1); // Handle OK button click
+                });
+
+                // Listener for Cancel button
+                cancelButton.addActionListener(e -> {
+                    frame.dispose();
+                    // Handle Cancel button click
+                });
+
+                panel.setLayout(new GridLayout(3, 2));
+                panel.add(followOSTheme);
+                panel.add(new JLabel());
+                panel.add(label);
+                panel.add(themeSelector);
+                panel.add(cancelButton);
+                panel.add(okButton);
+
+                frame.add(panel);
+                frame.setSize(300, 200);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+
+            } catch (Exception exc) {
+                System.out.println(exc.toString());
+            }
+        }
+
     }
 
 }

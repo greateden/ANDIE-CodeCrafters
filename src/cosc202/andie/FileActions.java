@@ -39,6 +39,12 @@ public class FileActions {
     protected static boolean isOpened = false;
     // protected boolean isSaved = false;
 
+    public Action fileOpen;
+    public Action fileSave;
+    public Action fileExport;
+    public Action filePrint;
+
+
     /**
      * To get the state of the isOpened variable
      *

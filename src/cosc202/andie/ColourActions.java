@@ -1,12 +1,31 @@
 package cosc202.andie;
 
-import java.util.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import javax.swing.Action;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.FlowLayout;
 
 /**
  * <p>
@@ -35,10 +54,13 @@ public class ColourActions {
 
     /** A list of actions for the Colour menu. */
     protected ArrayList<Action> actions;
-
+    /** The resource bundle for internationalization. */
     public ResourceBundle bundle = Andie.bundle;
+    /** The image that will be previewed. */
     public BufferedImage previewImage;
+    /** The icon of the preview image. */
     public ImageIcon previewIcon;
+    /** The panel where the preview image will be displayed.  */
     public JPanel previewPanel;
 
     /**
@@ -97,9 +119,10 @@ public class ColourActions {
         return fileMenu;
     }
 
-        /**
+     /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
+     * @param status The status of the menu items.
      */
     public void changeCertainMenuStatus(boolean status) {
         for (Action action : actions) {
@@ -232,15 +255,13 @@ public class ColourActions {
         }
 
         /**
-         * <p>
          * Callback for when the RGBSwapping action is triggered.
-         * </p>
-         *
+         * 
          * <p>
-         * This method is called whenever the RGBSwapping is triggered.
-         * It changes the image's colour channel's order based on the user's taste.
+         * This method is called whenever the RGBSwapping action is triggered.
+         * It changes the order of the color channels in the image based on user preferences.
          * </p>
-         *
+         * 
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -384,9 +405,11 @@ public class ColourActions {
         }
     }// End of RGBSwapping()
 
-    /**A class to implement the GUI for B&C manipulation.
+    /**
+     * A class to implement the GUI for B and C manipulation.
+     * 
      * @author Kevin Steve Sathyanath
-     * @date 19/04/2024
+     * @since 19/04/2024
      */
     public class brightnessAndContrastAction extends ImageAction{
 
@@ -407,6 +430,9 @@ public class ColourActions {
             super(name, icon, desc, mnemonic);
         }
 
+        JSlider brightnessSlider;
+        JSlider contrastSlider;
+
         /**
          * <p>
          * Callback for when the brightnessAndContrast action is triggered.
@@ -419,20 +445,28 @@ public class ColourActions {
          *
          * @param e The event triggering this callback.
          */
-        JSlider brightnessSlider;
-        JSlider contrastSlider;
-
-
-
         public void actionPerformed(ActionEvent e){
+            //Yeah this is a mess. But it took 3 weeks and 4 demonstrators to make this work. Please just leave it as it is. 
             try{
                 BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
 
                 final EditableImage preview = target.getImage().makeCopy();
                 final ImagePanel show = new ImagePanel(preview);
+                int prevHeight = prev.getHeight();
+                int prevWidth = prev.getWidth();
+                Dimension d;
+                if(prevWidth<prevHeight*1.1){
+                    d = new Dimension(300,300);
+                }
+                else if(prevHeight<prevWidth){
+                    d = new Dimension(500,300);
+                }
+                else{
+                    d = new Dimension(300,500);
+                }
 
                 previewPanel = new JPanel();
-                previewPanel.setPreferredSize(new Dimension(500,300));
+                previewPanel.setPreferredSize(d);
                 updatePreviewImage(prev);
 
 
@@ -643,7 +677,7 @@ public class ColourActions {
                 BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
 
                 final EditableImage preview = target.getImage().makeCopy();
-                final ImagePanel show = new ImagePanel(preview);
+                //final ImagePanel show = new ImagePanel(preview);
 
                 previewPanel = new JPanel();
                 previewPanel.setPreferredSize(new Dimension(500,300));
@@ -758,7 +792,10 @@ public class ColourActions {
             } //End of actionPerformed()
         }//End of B&C()
 
-
+        /**
+         * A method to update the preview image.
+         * @param i
+         */
         public void updatePreviewImage(BufferedImage i){
             BufferedImage j = ImageResize.applyToPreview(i);
             JLabel pic = new JLabel(new ImageIcon(j));
