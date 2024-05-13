@@ -39,12 +39,16 @@ public class EditActions {
     public EditActions() {
         actions = new ArrayList<Action>();
 
-        Action undo = new UndoAction(Andie.bundle.getString("Undo"), null, Andie.bundle.getString("Undo"),
+        ImageIcon undoIcon = new ImageIcon("src/cosc202/andie/icons/undo.png");
+        //Icon downloaded from: <a href="https://www.flaticon.com/free-icons/undo" title="undo icons">Undo icons created by Creatype - Flaticon</a>
+        Action undo = new UndoAction(Andie.bundle.getString("Undo"), undoIcon, Andie.bundle.getString("Undo"),
                 Integer.valueOf(KeyEvent.VK_U));
         actions.add(undo);
         CreateHotKey.createHotkey(undo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK, "Undo");
 
-        Action redo = new RedoAction(Andie.bundle.getString("Redo"), null, Andie.bundle.getString("Redo"),
+        ImageIcon redoIcon = new ImageIcon("src/cosc202/andie/icons/redo.png");
+        //Image downloaded from: <a href="https://www.flaticon.com/free-icons/redo" title="redo icons">Redo icons created by Creatype - Flaticon</a>
+        Action redo = new RedoAction(Andie.bundle.getString("Redo"), redoIcon, Andie.bundle.getString("Redo"),
                 Integer.valueOf(KeyEvent.VK_R));
         actions.add(redo);
         CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "Redo");

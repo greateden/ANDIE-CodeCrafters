@@ -937,7 +937,7 @@ public class ColourActions {
 
         /**
      * <p>
-     * Action to convert an image to greyscale.
+     * Action to pick a new colour.
      * </p>
      *
      * @see ConvertToGrey
@@ -946,7 +946,7 @@ public class ColourActions {
 
         /**
          * <p>
-         * Create a new convert-to-grey action.
+         * Create a new colour chooser action
          * </p>
          *
          * @param name     The name of the action (ignored if null).

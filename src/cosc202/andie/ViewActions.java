@@ -43,6 +43,7 @@ public class ViewActions {
     public ViewActions() {
         actions = new ArrayList<Action>();
 
+        
         Action zoomIn = new ZoomInAction(Andie.bundle.getString("ZoomInAction"), null,
                 Andie.bundle.getString("ZoomInAction"),
                 Integer.valueOf(KeyEvent.VK_I));

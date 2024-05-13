@@ -170,8 +170,8 @@ public class Andie {
         filterActions = new FilterActions();
         imageMenuBar = new ImageMenuBar();
         colourActions = new ColourActions();
-        helpActions = new HelpActions();
         macroActions = new MacroActions();
+        helpActions = new HelpActions();
         // File menus are pretty standard, so things that usually go in File menus go
         // here.
 
@@ -200,12 +200,14 @@ public class Andie {
         JMenu imageMenu = imageMenuBar.createMenu();
         newMenuBar.add(imageMenu);
 
+        // actions that apply a macro funtion of the operations
+        newMenuBar.add(macroActions.createMenu());
+
         // Provides an about page and link to online docs
         JMenu helpMenu = helpActions.createMenu();
         newMenuBar.add(helpMenu);
 
-        // actions that apply a macro funtion of the operations
-        newMenuBar.add(macroActions.createMenu());
+        
 
         frame.setJMenuBar(newMenuBar);
 

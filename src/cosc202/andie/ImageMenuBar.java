@@ -2,8 +2,12 @@ package cosc202.andie;
 
 import java.util.*;
 import java.awt.event.*;
+import java.awt.image.*;
 
 import javax.swing.*;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 //import cosc202.andie.ResizePannel;
 
@@ -42,6 +46,10 @@ public class ImageMenuBar {
 
     private JMenuItem scale25, scale50, scale75, scale125, scale150;
     private JMenuItem rotMenu90, rotMenu180, rotMenu270;
+
+    public BufferedImage previewImage;
+    public ImageIcon previewIcon;
+    public JPanel previewPanel;
 
     /**
      * <p>
@@ -716,6 +724,8 @@ public class ImageMenuBar {
      * RandomScattering filter accordingly.
      */
     public class RandomScatteringAction extends ImageAction {
+        int radius = 0;
+
 
         /**
          * <p>
@@ -748,30 +758,94 @@ public class ImageMenuBar {
          *
          * @param e The event triggering this callback.
          */
+
+         JSlider radiusSlider;
+
         public void actionPerformed(ActionEvent e) {
             try {
                 // Determine the radius - ask the user.
-                int radius = 0;
+                BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
+
+                //final EditableImage preview = target.getImage().makeCopy();
+                //final ImagePanel show = new ImagePanel(preview);
+
+                previewPanel = new JPanel();
+                previewPanel.setPreferredSize(new Dimension(500,300));
+                updatePreviewImage(prev);
 
                 // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, null, 1);
-                JSpinner radiusSpinner = new JSpinner(radiusModel);
-                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner,
+                JPanel sliderPane = new JPanel(new FlowLayout());
+                sliderPane.setPreferredSize(new Dimension(450,50));
+                JPanel labelPane = new JPanel(new GridLayout(1,1,167,0));
+                radiusSlider = new JSlider(0,10, 0);
+                radiusSlider.setPreferredSize(new Dimension(400,50));
+
+                JLabel tempLabel = new JLabel("Radius", JLabel.CENTER);
+                radiusSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+                radiusSlider.setMajorTickSpacing(1);
+                radiusSlider.setPaintTicks(true);
+                radiusSlider.setPaintLabels(true);
+                radiusSlider.setSnapToTicks(true);
+
+                ChangeListener sliderChangeListener = new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+
+                        int rad = radiusSlider.getValue();
+                        BufferedImage curr = RandomScattering2.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
+                        updatePreviewImage(curr);
+                        radius = rad;
+                        
+                    }
+                };
+
+                radiusSlider.addChangeListener(sliderChangeListener);
+
+                labelPane.add(tempLabel);
+
+                sliderPane.add(radiusSlider);
+
+                JPanel menu = new JPanel(new GridBagLayout());
+                GridBagConstraints a = new GridBagConstraints();
+                Insets i = new Insets(20,0,0,0);
+
+                //a.fill = GridBagConstraints.BOTH;
+                a.gridx = 0;
+                a.gridy = 0;
+                a.gridwidth = 2;
+                a.anchor = GridBagConstraints.PAGE_START;
+                menu.add(previewPanel, a);
+
+                a.fill = GridBagConstraints.VERTICAL;
+                a.gridx = 0;
+                a.gridy = 1;
+                a.weighty = 1.0;
+                a.insets = i;
+                menu.add(sliderPane, a);
+
+                a.gridx = 0;
+                a.gridy = 2;
+                a.weighty = 0.7;
+                a.ipady = 1;
+                i.set(10,0,0,0);
+                menu.add(labelPane, a);
+
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), menu,
                         Andie.bundle.getString("EnterFilterRadius"),
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
                     return;
                 } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
-                    System.out.println(radius);
+                    target.getImage().apply(new RandomScattering2(radius));
+                    target.getParent().revalidate();
+                    target.repaint();
                 }
 
                 // Create and apply the filter
-                target.getImage().apply(new RandomScattering2(radius));
-                target.repaint();
-                target.getParent().revalidate();
+                
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
@@ -830,6 +904,19 @@ public class ImageMenuBar {
                 }
             }
         }
+    }
+    /**A method to update the preview pane common across all menu classes that use the preview panel.
+     * @author Kevin Steve Sathyanath
+     * @param i The Buffered image input on the Preview Panel
+     */
+    public void updatePreviewImage(BufferedImage i){
+        BufferedImage j = ImageResize.applyToPreview(i);
+        JLabel pic = new JLabel(new ImageIcon(j));
+        //previewIcon = new ImageIcon(j);
+        previewPanel.removeAll();
+        previewPanel.add(pic);
+        previewPanel.repaint();
+        previewPanel.revalidate();
     }
 
 
