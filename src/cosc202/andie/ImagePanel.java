@@ -46,7 +46,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     /** The rectangle representing the selected area. */
     private Rectangle selectionRect;
     /** Flag indicating if a selection is being made. */
-    private boolean isSelecting;
+    public boolean isSelecting;
     /** The rotation angle of the image. */
     private int rotationAngle = 0;
     /** The starting point of the selection. */
@@ -74,6 +74,10 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     /** The Graphics2D object for drawing on the image. */
     private Graphics2D g2d;
 
+    public Rectangle getSelectionRect(){
+        return selectionRect;
+    }
+
     public void setSelectionRect(Rectangle selectionRect) {
         this.selectionRect = selectionRect;
     }
@@ -93,7 +97,6 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     public void setRotationAngle(int rotationAngle) {
         this.rotationAngle = rotationAngle;
     }
-
 
     /**
      * <p>
@@ -121,6 +124,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     public ImagePanel() {
         image = new EditableImage();
         scale = 1.0;
+        //mouseSelection = new MouseSelection(this); // Initialize MouseSelection
 
         Timer timer = new Timer(100, e -> {
             if (!isSelecting) {
@@ -150,6 +154,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     public ImagePanel(EditableImage working){
         image = working;
         scale = 0.2;
+        //mouseSelection = new MouseSelection(this); // Initialize MouseSelection
     }
 
     /**
@@ -295,7 +300,6 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
             g2.dispose(); // Dispose of the Graphics2D object to release resources.
         }
-
         if (isSelecting || selectionRect != null) { // Check if there is a selection or a selection rectangle is present.
             g2d = (Graphics2D) g; // Cast the graphics context to Graphics2D for additional drawing capabilities.
             g2d.setColor(Color.BLACK); // Set the drawing color to black.

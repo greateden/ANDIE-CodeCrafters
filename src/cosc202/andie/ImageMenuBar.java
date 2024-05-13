@@ -10,6 +10,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.awt.Rectangle;
 
 import javax.swing.Action;
 import javax.swing.ImageIcon;
@@ -73,6 +74,13 @@ public class ImageMenuBar {
         Action vertical = new ImageMenuBarFlipVertical(Andie.bundle.getString("FlipVertical"), null,
                 Andie.bundle.getString("FVDesc"), Integer.valueOf(KeyEvent.VK_V));
         actions.add(vertical);
+
+        // Action crop = new ImageCropAction(Andie.bundle.getString("ImageCrop", null,
+                // Andie.bundle.getString("ImageCropAction"), Integer.valueOf(KeyEvent.VK_J));
+
+        Action crop = new ImageCropAction("Image crop", null,
+                "Crops the image duh", Integer.valueOf(KeyEvent.VK_J));
+        actions.add(crop);
 
         Action rotate = new RotateImageAction(Andie.bundle.getString("RotateImageAction"), null,
                 Andie.bundle.getString("RIADesc"), Integer.valueOf(KeyEvent.VK_R));
@@ -231,6 +239,64 @@ public class ImageMenuBar {
                 target.getImage().apply(new ImageFlipVertical());
                 target.repaint();
                 target.getParent().revalidate();
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+    }
+
+    /**
+     * ImageMenuBarFlipVertical extends ImageAction and represents an action for
+     * flipping the image vertically.
+     * This action is triggered by user interaction in the graphical user interface.
+     */
+    public class ImageCropAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new Flip Vertical action
+         * </p>
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ImageCropAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when crop button is pressed.
+         * </p>
+         *
+         * <p>
+         * This method is called whenever the Flip Vertical method is called.
+         * </p>
+         *
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            try {
+                Rectangle selection = target.getSelectionRect();
+                int x = (int) (selection.getX()*(target.getZoom() / 100));
+                int y = (int) (selection.getY() * (target.getZoom() / 100));
+                int width = (int) (selection.getWidth() * (target.getZoom() / 100));
+                int height = (int) (selection.getHeight() * (target.getZoom() / 100));
+
+
+                target.getImage().apply(new ImageCrop(x, y, width, height));
+                //ImageCrop imCrop = new ImageCrop(x, y, width, height);
+                //imCrop.apply(target.getImage().getCurrentImage());
+                target.repaint();
+                target.getParent().revalidate();
+                MouseSelection.imagePanel.setIsSelecting(false);
+                MouseSelection.imagePanel.setSelectionRect(null);
+                MouseSelection.imagePanel.repaint();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
