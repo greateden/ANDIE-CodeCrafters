@@ -1,14 +1,30 @@
 package cosc202.andie;
 
-import java.util.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import javax.swing.Action;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentListener;
-
-import java.awt.*;
-import java.awt.image.*;
 
 //NOTES: Maybe consider adding a Document Listener to the textfield
 
@@ -251,9 +267,9 @@ public class FilterActions {
             try {
                 // Determine the radius - ask the user.
                 int radius = 0;
-                BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
-                final EditableImage preview = target.getImage().makeCopy();
-                final ImagePanel show = new ImagePanel(preview);
+                BufferedImage prev = new BufferedImage( (target.getImage().getCurrentImage()).getWidth(), (target.getImage().getCurrentImage()).getHeight(), BufferedImage.TYPE_INT_RGB);
+                prev.getGraphics().drawImage((target.getImage().getCurrentImage()), 0, 0, null);
+
 
                 previewPanel = PreviewPanel.makePanel(prev);
                 updatePreviewImage(prev);
