@@ -654,7 +654,9 @@ public class FilterActions {
                 int blockSizeHeight=0;
                 int blockSizeWidth = 0;
 
-                BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
+                BufferedImage prev = new BufferedImage( (target.getImage().getCurrentImage()).getWidth(), (target.getImage().getCurrentImage()).getHeight(), BufferedImage.TYPE_INT_RGB);
+                prev.getGraphics().drawImage((target.getImage().getCurrentImage()), 0, 0, null);
+
                 previewPanel = PreviewPanel.makePanel(prev);
                 updatePreviewImage(prev);
 
