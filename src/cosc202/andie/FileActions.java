@@ -1,15 +1,37 @@
 package cosc202.andie;
 
-import java.util.*;
-import java.util.prefs.Preferences;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
+
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 
 /**
  * <p>
@@ -322,13 +344,15 @@ public class FileActions {
 
                     Andie.allCertainMenuStatus = true;
                     Andie.changeAllCertainMenuStatus(Andie.allCertainMenuStatus);
+                    target.repaint();
+                    target.getParent().revalidate();
                 } catch (Exception ex) {
-                    System.exit(1);
+                        JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("FileTypeErr"),
+                        Andie.bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
                 }
             }
 
-            target.repaint();
-            target.getParent().revalidate();
+
         }
 
     }
