@@ -1,28 +1,20 @@
 package cosc202.andie;
 
 
-import java.awt.image.*;
-
-import javax.swing.*;
-
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-//import cosc202.andie.ResizePannel;
-import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Component;
 
 import javax.swing.Action;
 import javax.swing.ImageIcon;
@@ -33,9 +25,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * <p>
@@ -405,55 +400,62 @@ public class ImageMenuBar {
             // Write code to create the panel
             // JPanel panel=new JPanel();
 
-            dialog = new JDialog(Andie.getFrame(), Andie.bundle.getString("Resize"), true);
-            dialog.setPreferredSize(new Dimension(500, 400));
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            int height = 0;
+            int width =0;
+            SpinnerNumberModel heightModel = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
+            SpinnerNumberModel widthModel = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
+            JPanel panel = new JPanel(new GridLayout(4, 1));
+            JLabel l1 = new JLabel(Andie.bundle.getString("Height"));
+            JSpinner s1 = new JSpinner(heightModel);
+            JSpinner s2 = new JSpinner(widthModel);
 
-            JPanel p = new JPanel();
-            p.setLayout(new GridLayout(4, 2));
+            JLabel l2 = new JLabel(Andie.bundle.getString("Width"));
+            panel.add(l1);
+            panel.add(s1);
+            panel.add(l2);
+            panel.add(s2);
+            int option = JOptionPane.showOptionDialog(Andie.getFrame(), panel,Andie.bundle.getString("ReScalingInstruction"),
+            JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-            p.setPreferredSize(new Dimension(250, 350));
-            titleLabel = new JLabel(Andie.bundle.getString("ReScalingInstruction"));
-            titleLabel.setPreferredSize(new Dimension(200, 50));
-            blankLabel = new JLabel("                       ");
+                // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+            } else if (option == JOptionPane.OK_OPTION) {
+                height = heightModel.getNumber().intValue();
+                width = widthModel.getNumber().intValue();
+                try{
+                    target.getImage().apply(new ImageResize(height, width));
+                    target.repaint();
+                    target.getParent().revalidate();
+                    
+                } catch (Exception e) {
+                    System.out.println(e);
+                    if (e instanceof NumberFormatException) {
+                        JOptionPane.showMessageDialog(Andie.getFrame(),
+                        Andie.bundle.getString("PosInt"),
+                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                    } else if (e instanceof java.lang.NegativeArraySizeException) {
+                        JOptionPane.showMessageDialog(Andie.getFrame(),
+                        Andie.bundle.getString("SmallNum"),
+                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                    } else if (e instanceof java.lang.IllegalArgumentException) {
+                        JOptionPane.showMessageDialog(Andie.getFrame(),
+                        Andie.bundle.getString("PosOrSmallInt"),
+                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                    } else if (e instanceof NullPointerException) {
+                        JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
+                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                    } else {
+                            // show message dialog and print the e into the box, saying that's an unexpected
+                            // error.
+                        JOptionPane.showMessageDialog(Andie.getFrame(),
+                        Andie.bundle.getString("BooBoo"),
+                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
 
-            heightLabel = new JLabel(Andie.bundle.getString("Height"));
-            heightLabel.setPreferredSize(new Dimension(100, 50));
-            widthJLabel = new JLabel(Andie.bundle.getString("Width"));
-            widthJLabel.setPreferredSize(new Dimension(100, 50));
-
-            widthField = new JTextField(5);
-            heightField = new JTextField(5);
-            heightField.setPreferredSize(new Dimension(100, 50));
-            widthField.setPreferredSize(new Dimension(100, 50));
-
-            goButton = new JButton(Andie.bundle.getString("Go"));
-            goButton.setOpaque(true);
-            goButton.setBackground(Color.black);
-            goButton.setPreferredSize(new Dimension(200, 50));
-
-            // panel.add(frame);
-
-            // add all the lables and buttons to the panel
-            p.add(titleLabel);
-            p.add(blankLabel);
-            p.add(heightLabel);
-            p.add(heightField);
-            p.add(widthJLabel);
-            p.add(widthField);
-            p.add(goButton);
-
-            JPanel buttonPanel = new JPanel();
-            ButtonListener bl = new ButtonListener();
-            buttonPanel.add(goButton);
-            goButton.addActionListener(bl);
-            p.add(buttonPanel);
-
-            // dialog.getContentPane().add(p);
-            dialog.getContentPane().add(p);
-            dialog.pack();
-            dialog.setVisible(true);
-            // frame.getContentPane().add(dialog);
+             
 
         }
 
@@ -464,56 +466,7 @@ public class ImageMenuBar {
          * specifically for the "Go" button
          * in the image resizing panel.
          */
-        public class ButtonListener implements ActionListener {
-            /**
-             * Responds to button click events.
-             *
-             * This method is called when a button is clicked. It retrieves the source of
-             * the action, parses the input fields for height and width, initiates the
-             * resizing process,
-             * and updates the target component accordingly. It also handles various
-             * exceptions that may occur during the resizing process.
-             *
-             * @param ae The action event triggered by the button click.
-             */
-            public void actionPerformed(ActionEvent ae) {
-                JButton source = (JButton) ae.getSource();
-                try {
-                    if (source == goButton) {
-                        height = Integer.parseInt(heightField.getText());
-                        width = Integer.parseInt(widthField.getText());
-                    }
-                    target.getImage().apply(new ImageResize(height, width));
-                    target.repaint();
-                    target.getParent().revalidate();
-                    dialog.dispose();
-                } catch (Exception e) {
-                    System.out.println(e);
-                    if (e instanceof NumberFormatException) {
-                        JOptionPane.showMessageDialog(Andie.getFrame(),
-                                Andie.bundle.getString("PosInt"),
-                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
-                    } else if (e instanceof java.lang.NegativeArraySizeException) {
-                        JOptionPane.showMessageDialog(Andie.getFrame(),
-                                Andie.bundle.getString("SmallNum"),
-                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
-                    } else if (e instanceof java.lang.IllegalArgumentException) {
-                        JOptionPane.showMessageDialog(Andie.getFrame(),
-                                Andie.bundle.getString("PosOrSmallInt"),
-                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
-                    } else if (e instanceof NullPointerException) {
-                        JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
-                                Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
-                    } else {
-                        // show message dialog and print the e into the box, saying that's an unexpected
-                        // error.
-                        JOptionPane.showMessageDialog(Andie.getFrame(),
-                                Andie.bundle.getString("BooBoo"),
-                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        }
+
     }
 
     /**
