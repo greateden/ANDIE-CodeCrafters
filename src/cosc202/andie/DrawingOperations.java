@@ -62,13 +62,12 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
       int y = Math.min(startPoint.y, endPoint.y);
       int width = Math.abs(startPoint.x - endPoint.x);
       int height = Math.abs(startPoint.y - endPoint.y);
-      if(ColourWheel.getChosenColour()!=null){
-        Color color=ColourWheel.getChosenColour();
-        g.setColor(color);
-      }
-      else{
-        g.setColor(Color.green);
-      }
+
+     
+      Color color=ColourWheel.getChosenColour();
+      g.setColor(color);
+
+     
       g.drawRect(x, y, width, height);
       g.dispose();
     }
@@ -96,15 +95,9 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
         height = yEnd - yStart;
       }
 
-      if(ColourWheel.getChosenColour()!=null){
-        Color color=ColourWheel.getChosenColour();
-        g2d.setColor(color);
-      }
-      else{
-        g2d.setColor(Color.green);
-      }
+      Color color=ColourWheel.getChosenColour();
+      g2d.setColor(color);
       g2d.fillOval(x, y, width, height); // (x, y, width, height)
-
 
       g2d.dispose();
 
@@ -116,14 +109,10 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
       int xEnd = MouseSelection.getEndPoint().x;
       int yEnd = MouseSelection.getEndPoint().y;
 
-      if(ColourWheel.getChosenColour()!=null){
-        Color color=ColourWheel.getChosenColour();
-        g2d.setColor(color);
-      }
-      else{
-        g2d.setColor(Color.green);
-      }
+      Color color=ColourWheel.getChosenColour();
+      g2d.setColor(color);
       g2d.drawLine(xStart, yStart,xEnd, yEnd); // (x, y,x2, y2)
+      
       g2d.dispose();
     }
 return input;

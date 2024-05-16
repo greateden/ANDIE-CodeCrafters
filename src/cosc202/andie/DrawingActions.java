@@ -92,6 +92,8 @@ public class DrawingActions {
         public void actionPerformed(ActionEvent e) {
             if (FileActions.isOpened == true) {
                 try {
+                    ColourWheel.pickColour();
+
                     DrawingOperations.isDrawingOval=true;
 
                     // target.getImage().apply(new DrawingOperations('o'));
@@ -130,7 +132,7 @@ public class DrawingActions {
         public void actionPerformed(ActionEvent e) {
             if (FileActions.isOpened == true) {
                 try {
-
+                    ColourWheel.pickColour();
                    DrawingOperations.isDrawingRect=true;
                     //target.getImage().apply(new DrawingOperations('r'));
                     target.repaint();
@@ -168,6 +170,8 @@ public class DrawingActions {
         public void actionPerformed(ActionEvent e) {
             if (FileActions.isOpened == true) {
                 try {
+                    ColourWheel.pickColour();
+
                     DrawingOperations.isDrawingLine=true;
 
                     // target.getImage().apply(new DrawingOperations('l'));
