@@ -99,4 +99,69 @@ public class BlockAveraging implements ImageOperation, java.io.Serializable {
         return output;
     }
 
+
+    /**The same method as above, but it's static and it's for previewPanels. 
+     * @author Really can't take credit for copy-pasting Yuxing's code. 
+     * @date 07/05/2024
+     * @param bufferedImage i, int height, int width
+     * @return the output image
+     */
+    public static BufferedImage applyToPreview(BufferedImage input, int bWidth, int bHeight) {
+        
+        if(bWidth==0 || bHeight==0){
+            return input;
+        }
+        int width = input.getWidth();
+        int height = input.getHeight();
+        BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        // iterates over the image
+        for (int xpixel = 0; xpixel < width; xpixel += bWidth) {
+            for (int ypixel = 0; ypixel < height; ypixel += bHeight) {
+                int totalR = 0;
+                int totalG = 0;
+                int totalB = 0;
+                int a = 0;
+                int count=0;
+                for (int inSidex = xpixel; inSidex < xpixel + bWidth; inSidex++) {
+                    for (int inSidey = ypixel; inSidey < ypixel + bHeight; inSidey++) {
+                        if (inSidex < width && inSidey < height) {
+                            int rgb = input.getRGB(inSidex, inSidey);
+                            a = (rgb & 0xFF000000) >> 24;
+                            int r = (rgb & 0x00FF0000) >> 16;
+                            int g = (rgb & 0x0000FF00) >> 8;
+                            int b = (rgb & 0x000000FF);
+
+                            totalR += r;
+                            totalG += g;
+                            totalB += b;
+                            count++;
+
+                        }
+
+                    }
+                }
+                totalR/=count;
+                totalG/=count;
+                totalB/=count;
+
+                for (int inSidex = xpixel; inSidex < xpixel + bWidth; inSidex++) {
+                    for (int inSidey = ypixel; inSidey < ypixel + bHeight; inSidey++) {
+                        if (inSidex < width && inSidey < height) {
+
+                            int avrageRGB = (a << 24) | (totalR << 16)
+                                    | (totalG  << 8) | totalB ;
+
+                            output.setRGB(inSidex, inSidey, avrageRGB);
+
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return output;
+    }
+
 }

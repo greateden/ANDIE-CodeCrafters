@@ -4,6 +4,9 @@
  ANDIE - A Non-Destructive Image Editor
 
 Made by the CodeCrafters Team
+<p>
+ANDIE Code Crafters © 2024 by Emma Boult, Eden Li, Angus Lyall, Kevin Sathyanath, Yuxing Zhang is licensed under CC BY-NC-SA 4.0
+</p>
 </h2>
 
 [![pipeline status](https://altitude.otago.ac.nz/cosc202-c/andie/badges/main/pipeline.svg)](https://altitude.otago.ac.nz/cosc202-c/andie/-/commits/main)

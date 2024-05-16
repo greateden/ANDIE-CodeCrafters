@@ -38,7 +38,6 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
     private int radius;
     //** Number of threads to use */
     private final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
-    /** static Number to use for generating the median filter */
     private static final int NUM_THREADS2 = Runtime.getRuntime().availableProcessors();  //This one's static. No, I'm not about to mess with hyperthreading again. If it works, I'm not about to try fixing it.
 
     /**
@@ -221,9 +220,8 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
 
     /**A method that does the same as above, but for preview images. Also it's static. 
      * @author Kevin Steve Sathyanath
-     * @since 07/05/2024
-     * @param  input the inpit buffered image
-     * @param radius the input radius for the image 
+     * @date 07/05/2024
+     * @param BufferedImage i, int radius
      * @return The output BufferedImage
      */
 

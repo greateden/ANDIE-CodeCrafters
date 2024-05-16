@@ -84,7 +84,7 @@ public class ImageResize implements ImageOperation, java.io.Serializable {
 
   /**A method that resizes an image to fit a previewPanel.
    * Modified yuxing's code slightly.
-   * @param input
+   * @param BuferedImage input
    * @return the resultant bufferedImage.
    */
   public static BufferedImage applyToPreview(BufferedImage input) {

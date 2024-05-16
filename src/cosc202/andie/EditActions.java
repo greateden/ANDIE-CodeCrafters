@@ -35,7 +35,7 @@ public class EditActions {
 
     public ResourceBundle bundle = Andie.bundle;
 
-    private Action undo, redo;
+    public Action undo, redo;
 
     /**
      * <p>
@@ -45,12 +45,16 @@ public class EditActions {
     public EditActions() {
         actions = new ArrayList<Action>();
 
-        undo = new UndoAction(Andie.bundle.getString("Undo"), null, Andie.bundle.getString("Undo"),
+        ImageIcon undoIcon = new ImageIcon("src/cosc202/andie/icons/undo.png");
+        //Icon downloaded from: <a href="https://www.flaticon.com/free-icons/undo" title="undo icons">Undo icons created by Creatype - Flaticon</a>
+        undo = new UndoAction(Andie.bundle.getString("Undo"), undoIcon, Andie.bundle.getString("Undo"),
                 Integer.valueOf(KeyEvent.VK_U));
         actions.add(undo);
         CreateHotKey.createHotkey(undo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK, "Undo");
 
-        redo = new RedoAction(Andie.bundle.getString("Redo"), null, Andie.bundle.getString("Redo"),
+        ImageIcon redoIcon = new ImageIcon("src/cosc202/andie/icons/redo.png");
+        //Image downloaded from: <a href="https://www.flaticon.com/free-icons/redo" title="redo icons">Redo icons created by Creatype - Flaticon</a>
+        redo = new RedoAction(Andie.bundle.getString("Redo"), redoIcon, Andie.bundle.getString("Redo"),
                 Integer.valueOf(KeyEvent.VK_R));
         actions.add(redo);
         CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "Redo");
@@ -225,8 +229,8 @@ public class EditActions {
                         "FlatIntelliJLaf",
                         "FlatDarculaLaf" };
                 themeSelector = new JComboBox<>(themes);
-                okButton = new JButton("OK");
                 cancelButton = new JButton("Cancel");
+                okButton = new JButton("OK");
 
                 // Listener for "Follow OS theme" checkbox
                 followOSTheme.addItemListener(e -> {
@@ -258,8 +262,8 @@ public class EditActions {
                 panel.add(new JLabel());
                 panel.add(label);
                 panel.add(themeSelector);
-                panel.add(okButton);
                 panel.add(cancelButton);
+                panel.add(okButton);
 
                 frame.add(panel);
                 frame.setSize(300, 200);

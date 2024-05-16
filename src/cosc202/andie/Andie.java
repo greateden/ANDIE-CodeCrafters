@@ -12,9 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
 import javax.swing.JTabbedPane;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
+
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import javax.swing.JPanel;
 
 
 /**
@@ -65,15 +70,15 @@ public class Andie {
     /**
      * The actions associated with file operations.
      */
-    private static FileActions fileActions;
+    public static FileActions fileActions;
     /**
      * The actions associated with edit operations.
      */
-    private static EditActions editActions;
+    public static EditActions editActions;
     /**
      * The actions associated with view operations.
      */
-    private static ViewActions viewActions;
+    public static ViewActions viewActions;
     /**
      * The actions associated with filter operations.
      */
@@ -140,6 +145,25 @@ public class Andie {
         // tabs = new JTabbedPane();
         // tabs.addTab("Welcome", null, null, "Does nothing yet");
         JScrollPane scrollPane = new JScrollPane(imagePanel);
+        
+
+        scrollPane.getViewport().getView().addMouseWheelListener(new MouseWheelListener(){
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                int verticalScrollAmount = e.getUnitsToScroll();
+                //int horizontalScrollAmount = e.getUnitsToScroll();
+
+                JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+                //JScrollBar horizontalScrollBar = scrollPane.getHorizontalScrollBar();
+
+                verticalScrollBar.setValue(verticalScrollBar.getValue() - verticalScrollAmount);
+                //horizontalScrollBar.setValue(horizontalScrollBar.getValue() - horizontalScrollAmount);
+            }
+            
+
+        });
+
         frame.add(scrollPane, BorderLayout.CENTER);
         // frame.add(tabs);
         fileActions = new FileActions();
@@ -155,6 +179,9 @@ public class Andie {
         //We hereby beget toolbar.
         toolbar = new TooIbarActions();
         frame.getContentPane().add(toolbar.createToolBar(), BorderLayout.NORTH);
+
+        changeAllCertainMenuStatus(allCertainMenuStatus);// before open an image, set all to unable to click
+
         frame.repaint();
 
     }
@@ -191,6 +218,8 @@ public class Andie {
         colourActions.changeCertainMenuStatus(status);
         macroActions.changeCertainMenuStatus(status);
 
+        toolbar.changeCertainToolbarStatus(status);
+
     }
 
     /**
@@ -208,8 +237,8 @@ public class Andie {
         filterActions = new FilterActions();
         imageMenuBar = new ImageMenuBar();
         colourActions = new ColourActions();
-        helpActions = new HelpActions();
         macroActions = new MacroActions();
+        helpActions = new HelpActions();
         // File menus are pretty standard, so things that usually go in File menus go
         // here.
 
@@ -238,16 +267,17 @@ public class Andie {
         JMenu imageMenu = imageMenuBar.createMenu();
         newMenuBar.add(imageMenu);
 
+        // actions that apply a macro funtion of the operations
+        newMenuBar.add(macroActions.createMenu());
+
         // Provides an about page and link to online docs
         JMenu helpMenu = helpActions.createMenu();
         newMenuBar.add(helpMenu);
 
-        // actions that apply a macro funtion of the operations
-        newMenuBar.add(macroActions.createMenu());
+        
 
         frame.setJMenuBar(newMenuBar);
 
-        changeAllCertainMenuStatus(allCertainMenuStatus);// before open an image, set all to unable to click
 
         CreateHotKey.createHotkey(fileMenu, KeyEvent.VK_F, 0, "filemenu");
         CreateHotKey.createHotkey(editMenu, KeyEvent.VK_E, 0, "editmenu");

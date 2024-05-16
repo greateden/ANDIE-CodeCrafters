@@ -21,6 +21,16 @@ public class TooIbarActions {
 
     private JToolBar toolbar;
 
+    private JButton saveButton;
+    private JButton exportButton;
+    private JButton printButton;
+    private JButton undoButton;
+    private JButton redoButton;
+    private JButton selectButton;
+    private JButton cropButton;
+    private JButton zoomInButton;
+    private JButton zoomOutButton;
+
     /**
      * Initializes the TooIbarActions object and sets up the toolbar.
      */
@@ -28,21 +38,22 @@ public class TooIbarActions {
         toolbar = new JToolBar("Toolbar", JToolBar.HORIZONTAL);
 
         // Create buttons
-        JButton openButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/open-file stockes_02.png", 20, 20));
-        JButton saveButton = new JButton(
+        JButton openButton = new JButton(
+                resizeAndAdjustIcon("src/cosc202/andie/icon/open-file stockes_02.png", 20, 20));
+        saveButton = new JButton(
                 resizeAndAdjustIcon("src/cosc202/andie/icon/diskette Yogi Aprelliyanto.png", 20, 20));
-        JButton exportButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/export Freepik.png", 20, 20));
-        JButton printButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/printer Freepik.png", 20, 20));
+        exportButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/export Freepik.png", 20, 20));
+        printButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/printer Freepik.png", 20, 20));
 
-        JButton undoButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/undo-arrow Dave Gandy.png", 20, 20));
-        JButton redoButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/redo-arrow Dave Gandy.png", 20, 20));
+        undoButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/undo-arrow Dave Gandy.png", 20, 20));
+        redoButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/redo-arrow Dave Gandy.png", 20, 20));
 
-        JButton selectButton = new JButton(
+        selectButton = new JButton(
                 resizeAndAdjustIcon("src/cosc202/andie/icon/selection-box Saepul Nahwan.png", 20, 20));
-        JButton cropButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/crop google.png", 20, 20));
+        cropButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/crop google.png", 20, 20));
 
-        JButton zoomInButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/zoom zafdesign.png", 20, 20));
-        JButton zoomOutButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/zoom-out zafdesign.png", 20, 20));
+        zoomInButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/zoom zafdesign.png", 20, 20));
+        zoomOutButton = new JButton(resizeAndAdjustIcon("src/cosc202/andie/icon/zoom-out zafdesign.png", 20, 20));
 
         openButton.setToolTipText("Open");
         saveButton.setToolTipText("Save");
@@ -58,7 +69,56 @@ public class TooIbarActions {
         zoomInButton.setToolTipText("Zoom In");
         zoomOutButton.setToolTipText("Zoom Out");
 
+        openButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Implement crop functionality here
+                Andie.fileActions.fileOpen.actionPerformed(e);
+            }
+        });
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Implement crop functionality here
+                Andie.fileActions.fileSave.actionPerformed(e);
+            }
+        });
+
+        exportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Implement crop functionality here
+                Andie.fileActions.fileExport.actionPerformed(e);
+            }
+        });
+
+        printButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Implement crop functionality here
+                Andie.fileActions.filePrint.actionPerformed(e);
+            }
+        });
+
         // Add action listeners to buttons
+
+        undoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Implement crop functionality here
+                Andie.editActions.undo.actionPerformed(e);
+            }
+        });
+
+        redoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Implement crop functionality here
+                Andie.editActions.redo.actionPerformed(e);
+            }
+        });
+
         cropButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,12 +126,30 @@ public class TooIbarActions {
             }
         });
 
-        selectButton.addActionListener(new ActionListener() {
+        zoomInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implement select functionality here
+                // Implement crop functionality here
+                Andie.viewActions.zoomIn.actionPerformed(e);
             }
         });
+
+        zoomOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Implement crop functionality here
+                Andie.viewActions.zoomOut.actionPerformed(e);
+            }
+        });
+
+
+        // selectButton.addActionListener(new ActionListener() {
+            // @Override
+            // public void actionPerformed(ActionEvent e) {
+
+        // // Implement select functionality here
+        // }
+        // });
 
         // Add buttons to toolbar
         toolbar.add(openButton);
@@ -84,27 +162,24 @@ public class TooIbarActions {
         toolbar.add(redoButton);
         toolbar.addSeparator();
 
-        toolbar.add(selectButton);
+        // toolbar.add(selectButton);
         toolbar.add(cropButton);
         toolbar.addSeparator();
 
         toolbar.add(zoomInButton);
         toolbar.add(zoomOutButton);
+    }
 
-        // Add action listeners to buttons
-        cropButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Implement crop functionality here
-            }
-        });
-
-        selectButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Implement select functionality here
-            }
-        });
+    public void changeCertainToolbarStatus(boolean status) {
+        saveButton.setEnabled(status);
+        exportButton.setEnabled(status);
+        printButton.setEnabled(status);
+        undoButton.setEnabled(status);
+        redoButton.setEnabled(status);
+        selectButton.setEnabled(status);
+        cropButton.setEnabled(status);
+        zoomInButton.setEnabled(status);
+        zoomOutButton.setEnabled(status);
     }
 
     /**
