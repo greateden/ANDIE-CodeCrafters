@@ -25,14 +25,15 @@ import javax.swing.*;
  */
 public class MouseSelection implements MouseListener, MouseMotionListener {
 
-    private Point start;
-    private Point end;
-    private ImagePanel imagePanel;
+    private static Point start;
+    private  static Point end;
+    private  static ImagePanel imagePanel;
     private int imageWidth;
     private int imageHeight;
     private Rectangle selectionRect;
     private boolean isSelecting;
     private int rotationAngle = 0;
+    
 
     /**
      * Initilises MouseSelection
@@ -47,6 +48,18 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         this.imagePanel.addMouseMotionListener(this);
     }
 
+    public static Point getStartPoint() {
+        return start;
+    }
+
+    public static Point getEndPoint() {
+        return end;
+    }
+
+    public static ImagePanel getImagePanel(){
+        return imagePanel;
+    }
+   
     /**
      * Records start coordinates of selection when mouse is pressed
      */
@@ -71,6 +84,18 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
+        if(DrawingOperations.isDrawingRect){
+            imagePanel.getImage().apply(new DrawingOperations('r'));
+            DrawingOperations.isDrawingRect=false;
+        }else if(DrawingOperations.isDrawingOval){
+            imagePanel.getImage().apply(new DrawingOperations('o'));
+            DrawingOperations.isDrawingOval=false;
+
+        }else if(DrawingOperations.isDrawingLine){
+            imagePanel.getImage().apply(new DrawingOperations('l'));
+            DrawingOperations.isDrawingLine=false;
+
+        }
         isSelecting = false;
         imagePanel.setIsSelecting(isSelecting);
 
@@ -85,8 +110,12 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
             // Reset selection rectangle if it's just a click
             selectionRect = null;
         }
+        if(!DrawingOperations.isDrawingRect||!DrawingOperations.isDrawingOval||!DrawingOperations.isDrawingLine){
+
+        
         imagePanel.setSelectionRect(selectionRect);
         imagePanel.repaint();
+        }
     }
 
     /**

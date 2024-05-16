@@ -41,9 +41,9 @@ public class MacroActions {
 
         actions = new ArrayList<Action>();
         actions.add(new StartAction("Start", null, "Start the Macro Action", null));
-        actions.add(new StopAction("Stop", null, Andie.bundle.getString("Redo"),
+        actions.add(new StopAction("Stop", null,"Stop the Macro Action",
                 null));
-        actions.add(new ApplyPrevMacroAction("Apply ops", null, Andie.bundle.getString("Redo"),
+        actions.add(new ApplyPrevMacroAction("Apply ops", null,"Apply an ops file to the image",
                 null));
     }
 

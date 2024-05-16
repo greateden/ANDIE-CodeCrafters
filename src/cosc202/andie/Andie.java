@@ -43,9 +43,10 @@ public class Andie {
     private static ColourActions colourActions;
     private static HelpActions helpActions;
     private static MacroActions macroActions;
-
+    private static DrawingActions drawingActions;
+    
     public static boolean allCertainMenuStatus;
-
+ 
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -133,7 +134,7 @@ public class Andie {
         imageMenuBar.changeCertainMenuStatus(status);
         colourActions.changeCertainMenuStatus(status);
         macroActions.changeCertainMenuStatus(status);
-
+        drawingActions.changeCertainMenuStatus(status);
     }
 
     /**
@@ -153,6 +154,7 @@ public class Andie {
         colourActions = new ColourActions();
         helpActions = new HelpActions();
         macroActions = new MacroActions();
+        drawingActions=new DrawingActions();
         // File menus are pretty standard, so things that usually go in File menus go
         // here.
 
@@ -187,6 +189,9 @@ public class Andie {
 
         // actions that apply a macro funtion of the operations
         newMenuBar.add(macroActions.createMenu());
+
+        JMenu drawMenu = drawingActions.createMenu();
+        newMenuBar.add(drawMenu);
 
         frame.setJMenuBar(newMenuBar);
 
