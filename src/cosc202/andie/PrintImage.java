@@ -84,15 +84,21 @@ public class PrintImage implements Printable {
          * fully loaded, so it would always return false. So, I need to call it twice.
          * If I delete this code, the program will not work.
          */
-        job.printDialog();
+        //job.printDialog();
 
         if (job.printDialog()) {
             try {
                 job.print();
             } catch (PrinterException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(),
+                if (job.isCancelled()) {
+                    JOptionPane.showMessageDialog(null, "Printing has been cancelled.",
                                 Andie.bundle.getString("Error"),
                                 JOptionPane.WARNING_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, ex.getMessage(),
+                                Andie.bundle.getString("Error"),
+                                JOptionPane.WARNING_MESSAGE);
+                }
             }
             // Handle printing exception
         }
