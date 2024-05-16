@@ -104,7 +104,7 @@ public class ImageMenuBar {
                 Integer.valueOf(KeyEvent.VK_O));
         actions.add(rotAct);
 
-        
+
 
     }
 
@@ -283,10 +283,10 @@ public class ImageMenuBar {
         public void actionPerformed(ActionEvent e) {
             try {
                 Rectangle selection = target.getSelectionRect();
-                int x = (int) (selection.getX()*(target.getZoom() / 100));
-                int y = (int) (selection.getY() * (target.getZoom() / 100));
-                int width = (int) (selection.getWidth() * (target.getZoom() / 100));
-                int height = (int) (selection.getHeight() * (target.getZoom() / 100));
+                int x = (int) (selection.getX() / (target.getZoom() / 100));
+                int y = (int) (selection.getY() / (target.getZoom() / 100));
+                int width = (int) (selection.getWidth() / (target.getZoom() / 100));
+                int height = (int) (selection.getHeight() / (target.getZoom() / 100));
 
 
                 target.getImage().apply(new ImageCrop(x, y, width, height));
@@ -863,7 +863,7 @@ public class ImageMenuBar {
 
     }
 
-   
 
-       
+
+
 }
