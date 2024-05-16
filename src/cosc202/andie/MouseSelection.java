@@ -27,7 +27,7 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
 
     private Point start;
     private Point end;
-    private ImagePanel imagePanel;
+    public static ImagePanel imagePanel;
     private int imageWidth;
     private int imageHeight;
     private Rectangle selectionRect;
@@ -87,6 +87,7 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         }
         imagePanel.setSelectionRect(selectionRect);
         imagePanel.repaint();
+        imagePanel.setCrop(true);
     }
 
     /**
@@ -160,6 +161,10 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
             }
         }
         imagePanel.repaint();
+    }
+
+    public Rectangle getSelectionRect(){
+        return selectionRect;
     }
 
     /**
