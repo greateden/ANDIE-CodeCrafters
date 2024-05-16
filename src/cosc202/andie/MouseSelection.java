@@ -125,6 +125,8 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         imagePanel.repaint();
         imagePanel.setCrop(true);
     }
+}
+
 
     /**
      * Calculates and draws the selction box
