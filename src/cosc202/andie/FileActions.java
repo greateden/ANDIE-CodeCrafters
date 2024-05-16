@@ -1,15 +1,37 @@
 package cosc202.andie;
 
-import java.util.*;
-import java.util.prefs.Preferences;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
+
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 
 /**
  * <p>
@@ -39,6 +61,12 @@ public class FileActions {
     protected static boolean isOpened = false;
     // protected boolean isSaved = false;
 
+    public Action fileOpen;
+    public Action fileSave;
+    public Action fileExport;
+    public Action filePrint;
+
+
     /**
      * To get the state of the isOpened variable
      *
@@ -67,18 +95,25 @@ public class FileActions {
 
     public FileActions() {
 
+
         actions = new ArrayList<Action>();
 
-        Action fileOpen = new FileOpenAction(Andie.bundle.getString("OpenAction"), null,
+        ImageIcon openFileIcon = new ImageIcon("src/cosc202/andie/icons/open-file.png");
+        //Image downloaded from: <a href="https://www.flaticon.com/free-icons/folder" title="folder icons">Folder icons created by stockes_02 - Flaticon</a>
+        Action fileOpen = new FileOpenAction(Andie.bundle.getString("OpenAction"), openFileIcon,
                 Andie.bundle.getString("OpenDesc"),
                 Integer.valueOf(KeyEvent.VK_O));
         actions.add(fileOpen);
         CreateHotKey.createHotkey(fileOpen, KeyEvent.VK_O, InputEvent.META_DOWN_MASK, "fileOpen");
 
-        Action fileSave = new FileSaveAction(Andie.bundle.getString("SaveAction"), null,
+
+        ImageIcon saveIcon = new ImageIcon("src/cosc202/andie/icons/diskette.png");
+        //Downloaded from : <a href="https://www.flaticon.com/free-icons/folder" title="folder icons">Folder icons created by stockes_02 - Flaticon</a>
+        Action fileSave = new FileSaveAction(Andie.bundle.getString("SaveAction"), saveIcon,
                 Andie.bundle.getString("SaveDesc"), Integer.valueOf(KeyEvent.VK_S));
         actions.add(fileSave);
         CreateHotKey.createHotkey(fileSave, KeyEvent.VK_S, InputEvent.META_DOWN_MASK, "fileSave");
+
 
         Action fileSaveAs = new FileSaveAsAction(Andie.bundle.getString("SaveAsAction"), null,
                 Andie.bundle.getString("SaveAsDesc"),
@@ -87,24 +122,32 @@ public class FileActions {
         CreateHotKey.createHotkey(fileSaveAs, KeyEvent.VK_S, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK,
                 "fileSaveAs");
 
-        Action fileExport = new FileExportAction(Andie.bundle.getString("ExportAction"), null,
+        ImageIcon exportIcon = new ImageIcon("src/cosc202/andie/icons/upload.png");
+        //Downloaded from: <a href="https://www.flaticon.com/free-icons/output" title="output icons">Output icons created by NajmunNahar - Flaticon</a>
+        Action fileExport = new FileExportAction(Andie.bundle.getString("ExportAction"), exportIcon,
                 Andie.bundle.getString("ExportDesc"),
                 Integer.valueOf(KeyEvent.VK_E));
         actions.add(fileExport);
         CreateHotKey.createHotkey(fileExport, KeyEvent.VK_E, InputEvent.META_DOWN_MASK, "fileExport");
 
-        Action filePrint = new FilePrintAction(Andie.bundle.getString("PrintAction"), null,
+        ImageIcon printIcon = new ImageIcon("src/cosc202/andie/icons/printing.png");
+        //Downloaded from: <a href="https://www.flaticon.com/free-icons/print" title="print icons">Print icons created by Freepik - Flaticon</a>
+        Action filePrint = new FilePrintAction(Andie.bundle.getString("PrintAction"), printIcon,
                 Andie.bundle.getString("PrintDesc"),
                 Integer.valueOf(KeyEvent.VK_P));
         actions.add(filePrint);
         CreateHotKey.createHotkey(filePrint, KeyEvent.VK_P, InputEvent.META_DOWN_MASK, "filePrint");
 
-        Action fileChangeLangue = new FileChangeLanguageAction(Andie.bundle.getString("ChangeLanguage"), null,
+        ImageIcon languageIcon = new ImageIcon("src/cosc202/andie/icons/arrow.png");
+        //Downloaded from: <a href="https://www.flaticon.com/free-icons/translate" title="translate icons">Translate icons created by Roundicons Premium - Flaticon</a>
+        Action fileChangeLangue = new FileChangeLanguageAction(Andie.bundle.getString("ChangeLanguage"), languageIcon,
                 Andie.bundle.getString("ChangeLanguage"), Integer.valueOf(KeyEvent.VK_L));
         actions.add(fileChangeLangue);
         CreateHotKey.createHotkey(fileChangeLangue, 0, 0, "fileChangeLangue");
 
-        Action fileExit = new FileExitAction(Andie.bundle.getString("ExitAction"), null,
+        ImageIcon exitIcon = new ImageIcon("src/cosc202/andie/icons/logout.png");
+        //Downloaded from: <a href="https://www.flaticon.com/free-icons/mobile-app" title="mobile app icons">Mobile app icons created by Andy Horvath - Flaticon</a>
+        Action fileExit = new FileExitAction(Andie.bundle.getString("ExitAction"), exitIcon,
                 Andie.bundle.getString("ExitDesc"),
                 Integer.valueOf(KeyEvent.VK_Q));
         actions.add(fileExit);
@@ -119,10 +162,31 @@ public class FileActions {
      * @return The File menu UI element.
      */
     public JMenu createMenu() {
+
+        ArrayList<Integer> keystrokes = new ArrayList<Integer>();
+        keystrokes.add(KeyEvent.VK_O);
+        keystrokes.add(KeyEvent.VK_S);
+        keystrokes.add(KeyEvent.VK_A);
+        keystrokes.add(KeyEvent.VK_E);
+        keystrokes.add(KeyEvent.VK_P);
+        keystrokes.add(0);
+        keystrokes.add(KeyEvent.VK_Q);
+
+        int index=0;
+
         JMenu fileMenu = new JMenu(Andie.bundle.getString("File"));
 
+        //  JMenuItem fileOpenMenuManual = new JMenuItem("Open");
+        //  fileOpenMenuManual.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,0));
+        //  fileMenu.add(fileOpenMenuManual);
+
         for (Action action : actions) {
+            // JMenuItem newItem = new JMenuItem(action);
+            // newItem.setAccelerator(KeyStroke.getKeyStroke(keystrokes.get(index),0));
+            // fileMenu.add(newItem);
+            // index++;
             fileMenu.add(new JMenuItem(action));
+
         }
 
         return fileMenu;
@@ -280,13 +344,15 @@ public class FileActions {
 
                     Andie.allCertainMenuStatus = true;
                     Andie.changeAllCertainMenuStatus(Andie.allCertainMenuStatus);
+                    target.repaint();
+                    target.getParent().revalidate();
                 } catch (Exception ex) {
-                    System.exit(1);
+                        JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("FileTypeErr"),
+                        Andie.bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
                 }
             }
 
-            target.repaint();
-            target.getParent().revalidate();
+
         }
 
     }

@@ -178,4 +178,116 @@ public class RandomScattering2 implements ImageOperation, java.io.Serializable {
 
     return output;  //Is this necessary? The code can't compile without it. Ask demonstrators.
     }
+
+    /**The method above, but static. Applied on preview panels. Also the progress bar is not visible.
+     * @author Kevin Steve Sathyanath
+     * @param input The BufferedImage
+     * @param rad the radius
+     * @return The output Bufferedimage
+     */
+    public static BufferedImage applyToPreview(BufferedImage input, int rad) {
+
+        if(rad==0){
+            return input;
+        }
+
+        int side = 2*rad+1; //The side of the matrix using the user-given radius.
+
+
+        //Arrays to hold the pixels in the matrix constructed from the radius.
+
+        int[] pixel = new int[side*side];
+
+        
+        //Makes a copy of input to apply the Random Scattering effect to. 
+        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
+
+        /* At this point we need to talk about boundary conditions.
+         * Like the median filter, this effect relies on the neighbourhood of the given filter. For a given radius r, this means that pixels located within r pixels of the edge of the image will
+         * inevitably have a smaller neighbourhood to work with. Is this a problem? Unlike the median filter, the lab book doesn't explicitly mention that we can ignore the boundary condition.
+         * I won't be accounting for this in the beginning simply because I don't think the impact will be noticeable. If it turns out it is, I will account for the boundary condition.
+         */
+
+        //Random generator
+        Random r = new Random();
+
+        //JProgressBar progressBar;
+        //progressBar = new JProgressBar(0,input.getHeight());
+        //progressBar.setValue(0);
+        //progressBar.setStringPainted(true);
+
+        JFrame f = new JFrame("Progress bar");
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        f.setSize(200,150);
+        JPanel c = new JPanel();
+        c.setLayout(new BorderLayout());
+        //c.add(progressBar);
+
+        f.setContentPane(c);
+        //f.setVisible(true);
+        /* The code below for JProgressBar was refactored from code made by Copilot. It
+         * isn't a blind copy. I got it to make a program that finds prime numbers
+         * using a progress bar and adapted the code for this method and class.
+         *
+         * I need to ask whether having the 2 return statements for BUffered Image makes sense.
+         * It works, but it's good to know for sure. Testing is also required.
+         */
+        JDialog progressDialog = new JDialog(f, "progress", true);
+        //JProgressBar progressBar = new JProgressBar(0,100);
+        JProgressBar progressBar = new JProgressBar(0,input.getHeight());
+
+        progressBar.setValue(progressBar.getMinimum());
+        progressBar.setStringPainted(true);
+        //int r,g,b;
+        SwingWorker<BufferedImage, Integer> worker = new SwingWorker<BufferedImage, Integer>(){
+            @Override
+            protected BufferedImage doInBackground() throws Exception{
+                for(int i=0; i<input.getHeight(); i++){
+                    for(int j=0; j<input.getWidth(); j++){
+                        int a1 = 0; //Counter to help fit a square matrix into a 1-D array.
+                        for(int k=i-side/2; k<i+side/2; k++){
+                            for(int l=j-side/2; l<j+side/2; l++){
+                                if(k >0 && k < input.getHeight() && l >0 && l < input.getWidth()){
+
+                                pixel[a1] = input.getRGB(l,k);
+                                //Incrementing the counter.
+                                a1++;
+                            }
+                        }
+                    }
+
+                    //Apply the filter now.
+                    int chosenNum = r.nextInt(a1);
+                    //System.out.println("chosenNum: "+ chosenNum + "\ni: " + i + "\nj: " + j + "\na1: " + a1);
+
+                    output.setRGB(j,i, pixel[chosenNum]);
+                    }
+                    publish(i);
+
+                }// End of for loop
+
+            return output;
+
+            }// End of doInBackground()
+
+        @Override
+        protected void process(java.util.List<Integer> chunks){
+            progressBar.setValue(chunks.get(chunks.size()-1));
+        }
+
+        @Override
+        protected void done(){
+            progressDialog.dispose();
+        }
+
+    };
+    worker.execute();
+    progressDialog.add(progressBar);
+    progressDialog.pack();
+    progressDialog.setLocationRelativeTo(Andie.getFrame());
+    //progressDialog.setLocationByPlatform(true);
+    progressDialog.setVisible(true);
+
+    return output;  //Is this necessary? The code can't compile without it. Ask demonstrators.
+    }
 }
