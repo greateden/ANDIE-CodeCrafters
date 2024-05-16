@@ -14,6 +14,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+import javax.swing.Action;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -73,6 +74,18 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     private int yDiff;
     /** The Graphics2D object for drawing on the image. */
     private Graphics2D g2d;
+    private Action crop;
+
+    public Action getCrop(){
+        return crop;
+    }
+    
+    public void setCrop(Action crop){
+        this.crop = crop;
+    }
+    public void setCrop(boolean status){
+        this.crop.setEnabled(status);
+    }
 
     public Rectangle getSelectionRect(){
         return selectionRect;

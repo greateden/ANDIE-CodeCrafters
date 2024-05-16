@@ -58,6 +58,7 @@ public class ImageMenuBar {
 
     private JMenuItem scale25, scale50, scale75, scale125, scale150;
     private JMenuItem rotMenu90, rotMenu180, rotMenu270;
+    private Action crop;
 
     /**
      * <p>
@@ -78,7 +79,7 @@ public class ImageMenuBar {
         // Action crop = new ImageCropAction(Andie.bundle.getString("ImageCrop", null,
                 // Andie.bundle.getString("ImageCropAction"), Integer.valueOf(KeyEvent.VK_J));
 
-        Action crop = new ImageCropAction("Image crop", null,
+        crop = new ImageCropAction("Image crop", null,
                 "Crops the image duh", Integer.valueOf(KeyEvent.VK_J));
         actions.add(crop);
 
@@ -140,6 +141,8 @@ public class ImageMenuBar {
         for (Action action : actions) {
             action.setEnabled(status);
         }
+        crop.setEnabled(!status);
+        ImageAction.target.setCrop(crop);
         scale25.setEnabled(status);
         scale50.setEnabled(status);
         scale75.setEnabled(status);
@@ -297,6 +300,8 @@ public class ImageMenuBar {
                 MouseSelection.imagePanel.setIsSelecting(false);
                 MouseSelection.imagePanel.setSelectionRect(null);
                 MouseSelection.imagePanel.repaint();
+                crop.setEnabled(false);
+                ImageAction.target.setCrop(false);
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
