@@ -85,17 +85,26 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         if(DrawingOperations.isDrawingRect){
-            imagePanel.getImage().apply(new DrawingOperations('r'));
-            DrawingOperations.isDrawingRect=false;
+           Color color=ColourWheel.getChosenColour();
+            imagePanel.getImage().apply(new DrawingOperations('r',start,end,color));
+            //DrawingOperations.isDrawingRect=false;
         }else if(DrawingOperations.isDrawingOval){
-            imagePanel.getImage().apply(new DrawingOperations('o'));
+           Color color=ColourWheel.getChosenColour();
+
+            imagePanel.getImage().apply(new DrawingOperations('o',start,end,color));
             DrawingOperations.isDrawingOval=false;
 
         }else if(DrawingOperations.isDrawingLine){
-            imagePanel.getImage().apply(new DrawingOperations('l'));
+           Color color=ColourWheel.getChosenColour();
+
+            imagePanel.getImage().apply(new DrawingOperations('l',start,end,color));
             DrawingOperations.isDrawingLine=false;
 
         }
+
+        imagePanel.repaint();
+        imagePanel.getParent().revalidate();
+
         isSelecting = false;
         imagePanel.setIsSelecting(isSelecting);
 

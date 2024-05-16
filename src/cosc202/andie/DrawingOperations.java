@@ -28,15 +28,19 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
   public static boolean isDrawingRect;
   public static boolean isDrawingOval;
   public static boolean isDrawingLine;
-
+  private Point start;
+  private Point end;
+  private Color color;
 
 
   /**
    * Construct an DrawingOperations with no parameters.
    */
-  public DrawingOperations(char shape) {
-
+  public DrawingOperations(char shape, Point start, Point end,Color color) {
+this.start=start;
+this.end=end;
     this.shape = shape;
+    this.color=color;
 
   }
 
@@ -55,8 +59,8 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
 
    Graphics2D g = input.createGraphics();
 
-    Point startPoint=MouseSelection.getStartPoint();
-    Point endPoint= MouseSelection.getEndPoint();
+    Point startPoint= start;//MouseSelection.getStartPoint();
+    Point endPoint= end; //MouseSelection.getEndPoint();
     if (startPoint != null && endPoint != null) {
       int x = Math.min(startPoint.x, endPoint.x);
       int y = Math.min(startPoint.y, endPoint.y);
@@ -64,21 +68,26 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
       int height = Math.abs(startPoint.y - endPoint.y);
 
      
-      Color color=ColourWheel.getChosenColour();
+     //  color=ColourWheel.getChosenColour();
       g.setColor(color);
 
      
       g.drawRect(x, y, width, height);
-      g.dispose();
+      //g.dispose();
+
+      DrawingOperations.isDrawingRect=false;
     }
   
   }else if (shape == 'o') {// draw an oval
-      Graphics2D g2d = input.createGraphics();
-      int xStart = MouseSelection.getStartPoint().x;
-      int yStart = MouseSelection.getStartPoint().y;
-      int xEnd = MouseSelection.getEndPoint().x;
 
-      int yEnd = MouseSelection.getEndPoint().y;
+    System.out.println("Drawing oval");
+
+      Graphics2D g2d = input.createGraphics();
+      int xStart = start.x;//MouseSelection.getStartPoint().x;
+      int yStart =start.y; //MouseSelection.getStartPoint().y;
+      int xEnd =end.x;// MouseSelection.getEndPoint().x;
+
+      int yEnd = end.y;//MouseSelection.getEndPoint().y;
 
       int x = Math.min(xStart, xEnd);
       int y = Math.min(yStart, yEnd);
@@ -95,25 +104,30 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
         height = yEnd - yStart;
       }
 
-      Color color=ColourWheel.getChosenColour();
+    
       g2d.setColor(color);
       g2d.fillOval(x, y, width, height); // (x, y, width, height)
 
-      g2d.dispose();
+      //g2d.dispose();
 
     } else if (shape == 'l') {// draw a line
+
+    System.out.println("Drawing line");
+
       Graphics2D g2d = input.createGraphics();
 
-      int xStart = MouseSelection.getStartPoint().x;
-      int yStart = MouseSelection.getStartPoint().y;
-      int xEnd = MouseSelection.getEndPoint().x;
-      int yEnd = MouseSelection.getEndPoint().y;
+      int xStart = start.x;//MouseSelection.getStartPoint().x;
+      int yStart =start.y; //MouseSelection.getStartPoint().y;
+      int xEnd =end.x;// MouseSelection.getEndPoint().x;
 
-      Color color=ColourWheel.getChosenColour();
+      int yEnd = end.y;//MouseSelection.getEndPoint().y;
+
+
+     
       g2d.setColor(color);
       g2d.drawLine(xStart, yStart,xEnd, yEnd); // (x, y,x2, y2)
-      
-      g2d.dispose();
+
+     //g2d.dispose();
     }
 return input;
 
