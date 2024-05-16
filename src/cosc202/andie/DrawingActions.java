@@ -2,17 +2,15 @@ package cosc202.andie;
 
 /**
  * 
- * 
  * <p>
  * ImageOperation to apply drawing functions.
  * </p>
  * 
  * <p>
- * The DrawingOperation menu contains actions that update each pixel in an image based on
- * some small local neighbourhood.
- * This includes 3 drawing shapes actions.
- * </p>
+ * The DrawingActions menu contains actions 3 drawing shapes actions.
+ * Users are able to choose to draw rectangle, oval and line use different colors
  * 
+ * </p>
  * 
  * </p>
  *

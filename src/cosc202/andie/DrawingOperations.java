@@ -62,8 +62,15 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
       int y = Math.min(startPoint.y, endPoint.y);
       int width = Math.abs(startPoint.x - endPoint.x);
       int height = Math.abs(startPoint.y - endPoint.y);
-    
+      if(ColourWheel.getChosenColour()!=null){
+        Color color=ColourWheel.getChosenColour();
+        g.setColor(color);
+      }
+      else{
+        g.setColor(Color.green);
+      }
       g.drawRect(x, y, width, height);
+      g.dispose();
     }
   
   }else if (shape == 'o') {// draw an oval
@@ -89,8 +96,16 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
         height = yEnd - yStart;
       }
 
-      g2d.setColor(Color.GREEN);
+      if(ColourWheel.getChosenColour()!=null){
+        Color color=ColourWheel.getChosenColour();
+        g2d.setColor(color);
+      }
+      else{
+        g2d.setColor(Color.green);
+      }
       g2d.fillOval(x, y, width, height); // (x, y, width, height)
+
+
       g2d.dispose();
 
     } else if (shape == 'l') {// draw a line
@@ -100,7 +115,14 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
       int yStart = MouseSelection.getStartPoint().y;
       int xEnd = MouseSelection.getEndPoint().x;
       int yEnd = MouseSelection.getEndPoint().y;
-      g2d.setColor(Color.GREEN);
+
+      if(ColourWheel.getChosenColour()!=null){
+        Color color=ColourWheel.getChosenColour();
+        g2d.setColor(color);
+      }
+      else{
+        g2d.setColor(Color.green);
+      }
       g2d.drawLine(xStart, yStart,xEnd, yEnd); // (x, y,x2, y2)
       g2d.dispose();
     }
