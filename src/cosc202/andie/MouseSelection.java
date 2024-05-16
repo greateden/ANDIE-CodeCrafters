@@ -25,15 +25,14 @@ import javax.swing.*;
  */
 public class MouseSelection implements MouseListener, MouseMotionListener {
 
-    private static Point start;
-    private  static Point end;
-    private  static ImagePanel imagePanel;
+    private Point start;
+    private Point end;
+    public static ImagePanel imagePanel;
     private int imageWidth;
     private int imageHeight;
     private Rectangle selectionRect;
     private boolean isSelecting;
     private int rotationAngle = 0;
-    
 
     /**
      * Initilises MouseSelection
@@ -48,17 +47,17 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         this.imagePanel.addMouseMotionListener(this);
     }
 
-    public static Point getStartPoint() {
-        return start;
-    }
+    // public static Point getStartPoint() {
+    //     return start;
+    // }
 
-    public static Point getEndPoint() {
-        return end;
-    }
+    // public static Point getEndPoint() {
+    //     return end;
+    // }
 
-    public static ImagePanel getImagePanel(){
-        return imagePanel;
-    }
+    // public static ImagePanel getImagePanel(){
+    //     return imagePanel;
+    // }
    
     /**
      * Records start coordinates of selection when mouse is pressed
@@ -124,7 +123,7 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         
         imagePanel.setSelectionRect(selectionRect);
         imagePanel.repaint();
-        }
+        imagePanel.setCrop(true);
     }
 
     /**
@@ -198,6 +197,10 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
             }
         }
         imagePanel.repaint();
+    }
+
+    public Rectangle getSelectionRect(){
+        return selectionRect;
     }
 
     /**
