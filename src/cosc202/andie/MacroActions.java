@@ -18,7 +18,7 @@ import java.io.*;
  * Could also apply an ops file on another image to preform
  * the operations form the opened ops file
  *
- *<p>
+ *</p>
  *
  * @author YUXING ZHANG
  * @version 1.0
@@ -40,10 +40,18 @@ public class MacroActions {
     public MacroActions() {
 
         actions = new ArrayList<Action>();
-        actions.add(new StartAction("Start", null, "Start the Macro Action", null));
-        actions.add(new StopAction("Stop", null,"Stop the Macro Action",
+        ImageIcon startIcon = new ImageIcon("src/cosc202/andie/icons/start.png");
+        //Image downloaded from: https://www.flaticon.com/free-icon/play_9581128?term=start&page=1&position=8&origin=search&related_id=9581128
+        actions.add(new StartAction("Start", startIcon, "Start the Macro Action", null));
+
+        ImageIcon stopIcon = new ImageIcon("src/cosc202/andie/icons/stop.png");
+        //Image downloaded from: <a href="https://www.flaticon.com/free-icons/forbidden" title="forbidden icons">Forbidden icons created by Vitaly Gorbachev - Flaticon</a>
+        actions.add(new StopAction("Stop", stopIcon, Andie.bundle.getString("Redo"),
                 null));
-        actions.add(new ApplyPrevMacroAction("Apply ops", null,"Apply an ops file to the image",
+
+        ImageIcon applyIcon = new ImageIcon("src/cosc202/andie/icons/Apply.png");
+        //Icon downloaded from: <a href="https://www.flaticon.com/free-icons/finger" title="finger icons">Finger icons created by pojok d - Flaticon</a>
+        actions.add(new ApplyPrevMacroAction("Apply ops", applyIcon, Andie.bundle.getString("Redo"),
                 null));
     }
 
@@ -97,7 +105,7 @@ public class MacroActions {
                     target.getParent().revalidate();
                 } catch (Exception err) {
                     if (err instanceof EmptyStackException) {
-                        JOptionPane.showMessageDialog(null, Andie.bundle.getString("NotOpenedOrFirstStep"),
+                        JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("NotOpenedOrFirstStep"),
                                 Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
 
                     }
@@ -135,7 +143,7 @@ public class MacroActions {
                 // yes: save the oerations or
                 // cancel: keep adding some other operations
                 // no: delete all operations and starts again
-                int opsSaveOrNot = JOptionPane.showConfirmDialog(null,
+                int opsSaveOrNot = JOptionPane.showConfirmDialog(Andie.getFrame(),
                         "Would you like to save the operations as an ops file?", "Save the Macro Operations",
                         JOptionPane.YES_NO_CANCEL_OPTION);
 
@@ -166,7 +174,7 @@ public class MacroActions {
                     fileChooser.setFileFilter(filter);
 
                     //show the save window
-                    int chosed = fileChooser.showSaveDialog(target);
+                    int chosed = fileChooser.showSaveDialog(Andie.getFrame());
                     if (chosed == JFileChooser.APPROVE_OPTION) {
                         try {
                              File fileToSave = fileChooser.getSelectedFile();
@@ -215,14 +223,14 @@ public class MacroActions {
                 }
             } catch (Exception err) {
                 if (err instanceof EmptyStackException) {
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("NotOpenedOrFirstStep"),
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("NotOpenedOrFirstStep"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
 
                 }
             }
 
         }else{
-            JOptionPane.showMessageDialog(null,"Not Able to Stop without Start Macro First, and Do Some Operations",
+            JOptionPane.showMessageDialog(Andie.getFrame(),"Not Able to Stop without Start Macro First, and Do Some Operations",
             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
 
         }
@@ -245,7 +253,7 @@ public class MacroActions {
                 JFileChooser fileChooser = new JFileChooser();
 
                 // Show open dialog
-                int userSelection = fileChooser.showOpenDialog(null);
+                int userSelection = fileChooser.showOpenDialog(Andie.getFrame());
 
                 if (userSelection == JFileChooser.APPROVE_OPTION) {
                     // Get the selected file
@@ -278,7 +286,7 @@ public class MacroActions {
 
             } catch (Exception err) {
                 if (err instanceof EmptyStackException) {
-                    JOptionPane.showMessageDialog(null, Andie.bundle.getString("NotOpenedOrFirstStep"),
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("NotOpenedOrFirstStep"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
 
                 }

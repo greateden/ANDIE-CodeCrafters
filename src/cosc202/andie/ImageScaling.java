@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * functionality to scale an image by a given percentage.
  */
 public class ImageScaling implements ImageOperation, java.io.Serializable {
-
+  /** The percent the the image is scaled by which is given by the user */
   private double scalePercentage;
   // private int heightPer;
 
@@ -70,8 +70,8 @@ public class ImageScaling implements ImageOperation, java.io.Serializable {
 
   /**A static method that scales an object for the previewPanel.
    * This code is compied from Yuxing's work above and modified slightly
-   * @date 07/05/2024
-   * @param BufferedImage i
+   * @since 07/05/2024
+   * @param input buffered image
    * @return bufferedImage that is properly scaled
    **/
   public static BufferedImage applyToPreview(BufferedImage input) {

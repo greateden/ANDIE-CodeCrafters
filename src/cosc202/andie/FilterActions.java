@@ -1,12 +1,32 @@
 package cosc202.andie;
 
-import java.util.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import javax.swing.Action;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import java.awt.*;
+//NOTES: Maybe consider adding a Document Listener to the textfield
 
 /**
  * <p>
@@ -31,6 +51,11 @@ import java.awt.*;
 public class FilterActions {
 
     public ResourceBundle bundle = Andie.bundle;
+    public JPanel previewPanel;
+    public ImageIcon previewIcon;
+    public int blockHeight;
+    public int blockWidth;
+
 
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
@@ -75,8 +100,8 @@ public class FilterActions {
 
         Action sobel = new SobelFilterAction("Sobel Filter", null, "Applys a sobel filter vertically or horizionally", null);
         actions.add(sobel);
-        Action blockAveraging = new BlcokAveragingAction("BlcokAveraging", null,
-                "BlcokAveraging", null);
+        Action blockAveraging = new BlcokAveragingAction("BlockAveraging", null,
+                "BlockAveraging", null);
         actions.add(blockAveraging);
         // CreateHotKey.createHotkey(blockAveraging, KeyEvent.VK_I,
         // InputEvent.META_DOWN_MASK | InputEvent.ALT_DOWN_MASK, "blockAveraging");
@@ -242,11 +267,14 @@ public class FilterActions {
             try {
                 // Determine the radius - ask the user.
                 int radius = 0;
+                BufferedImage prev = new BufferedImage( (target.getImage().getCurrentImage()).getWidth(), (target.getImage().getCurrentImage()).getHeight(), BufferedImage.TYPE_INT_RGB);
+                prev.getGraphics().drawImage((target.getImage().getCurrentImage()), 0, 0, null);
 
-                final EditableImage preview = target.getImage().makeCopy();
-                final ImagePanel show = new ImagePanel(preview);
-                PreviewPanel show2 = new PreviewPanel(preview);
 
+                previewPanel = PreviewPanel.makePanel(prev);
+                updatePreviewImage(prev);
+
+                
                 medianSlider = new JSlider(JSlider.VERTICAL, 0,10,0);
                 medianSlider.setMajorTickSpacing(1);
                 medianSlider.setPaintTicks(true);
@@ -260,12 +288,9 @@ public class FilterActions {
 
                         int rad = medianSlider.getValue();
 
-                        //Setting a new target for the ImageActon
-                        setTarget(show);
-                        target.getImage().reset();
-                        target.getImage().apply(new MedianFilter(rad));
-                        target.repaint();
-                        target.getParent().revalidate();
+                        BufferedImage curr = MedianFilter.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
+                        updatePreviewImage(curr);
+
 
                     }
                 };
@@ -278,7 +303,7 @@ public class FilterActions {
 
                 JPanel menu = new JPanel(new FlowLayout());
                 //GridBagConstraints a = new GridBagConstraints();
-                menu.add(show);
+                menu.add(previewPanel);
                 menu.add(medianSlider);
 
 
@@ -290,7 +315,6 @@ public class FilterActions {
 
                 } else if (option == JOptionPane.OK_OPTION) {
                     radius = medianSlider.getValue();
-                    setTarget(Andie.getPanel());
                     target.getImage().apply(new MedianFilter(radius));
                     target.repaint();
                     target.getParent().revalidate();
@@ -601,7 +625,7 @@ public class FilterActions {
          * <p>
          * Create a new BlcokAveraging action
          * </p>
-         * 
+         *
          * @param name     The name of the action (ignored if null).
          * @param icon     An icon to use to represent the action (ignored if null).
          * @param desc     A brief description of the action (ignored if null).
@@ -615,12 +639,12 @@ public class FilterActions {
          * <p>
          * Callback for when the about-us action is triggered.
          * </p>
-         * 
+         *
          * <p>
          * This method is called whenever the about-us-action is triggered.
          * It prints a message in a dialog box.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -630,6 +654,14 @@ public class FilterActions {
                 int blockSizeHeight=0;
                 int blockSizeWidth = 0;
 
+                BufferedImage prev = new BufferedImage( (target.getImage().getCurrentImage()).getWidth(), (target.getImage().getCurrentImage()).getHeight(), BufferedImage.TYPE_INT_RGB);
+                prev.getGraphics().drawImage((target.getImage().getCurrentImage()), 0, 0, null);
+
+                previewPanel = PreviewPanel.makePanel(prev);
+                updatePreviewImage(prev);
+
+                //JPanel menu = new JPanel(new GridLayout(2,1));
+
                 JPanel panel = new JPanel();
                 panel.setLayout(new GridLayout(2,1));
                 JLabel info1 = new JLabel();
@@ -637,18 +669,62 @@ public class FilterActions {
                 JLabel info2 = new JLabel();
                 info2.setText("Width ("+Andie.bundle.getString("PleaseEnter")+")");
                 // Pop-up dialog box to ask for the radius value.
+
                 SpinnerNumberModel blockSizeHeightModel = new SpinnerNumberModel(0, 0, 1000, 1);
-                JSpinner blockSizeHeightSpinner = new JSpinner(blockSizeHeightModel);
                 SpinnerNumberModel blockSizeWidthModel = new SpinnerNumberModel(0, 0, 1000, 1);
+                JSpinner blockSizeHeightSpinner = new JSpinner(blockSizeHeightModel);
                 JSpinner blockSizeWidthSpinner = new JSpinner(blockSizeWidthModel);
+
+
+
+
+                // Add a ChangeListener to both spinners
+                ChangeListener listener = new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+                        blockWidth = (int) blockSizeWidthSpinner.getValue();
+                        blockHeight = (int) blockSizeHeightSpinner.getValue();
+                        BufferedImage curr = BlockAveraging.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), blockHeight, blockWidth);
+                        updatePreviewImage(curr);
+                    }
+                };
+                
+                //Adding listener to spinner 1:
+                blockSizeHeightSpinner.addChangeListener(listener);
+
+                //Now on to spinner 2:
+                blockSizeWidthSpinner.addChangeListener(listener);
+
+                
+
                 panel.add(info1);
                 panel.add(blockSizeHeightSpinner);
                 panel.add(info2);
                 panel.add(blockSizeWidthSpinner);
 
-                int option = JOptionPane.showOptionDialog(Andie.getFrame(), panel,
+                JPanel menu = new JPanel(new GridBagLayout());
+                GridBagConstraints a = new GridBagConstraints();
+                Insets i = new Insets(20,0,0,0);
+
+                //a.fill = GridBagConstraints.BOTH;
+                a.gridx = 0;
+                a.gridy = 0;
+                a.gridwidth = 2;
+                a.anchor = GridBagConstraints.PAGE_START;
+                menu.add(previewPanel, a);
+
+                a.fill = GridBagConstraints.VERTICAL;
+                a.gridx = 0;
+                a.gridy = 1;
+                a.weighty = 1.0;
+                a.insets = i;
+                menu.add(panel, a);
+
+               
+
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), menu,
                         "Enter Block Size",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
@@ -656,9 +732,9 @@ public class FilterActions {
                 } else if (option == JOptionPane.OK_OPTION) {
                     blockSizeHeight = blockSizeHeightModel.getNumber().intValue();
                     blockSizeWidth = blockSizeWidthModel.getNumber().intValue();
-                   
+
                 }
-               
+
 
                 target.getImage().apply(new BlockAveraging(blockSizeHeight,blockSizeWidth));
                 target.repaint();
@@ -671,5 +747,21 @@ public class FilterActions {
             }
         }
     }
+    /**A method to update the preview Image. Common to all methods that pop up a preview image. 
+     * Please don't cut our marks for lack of comments. 
+     * @author Kevin Steve Sathyanath
+     * @date 07/05/2024
+     * @param i BufferedImage
+     */
+    public void updatePreviewImage(BufferedImage i){
+        previewIcon = new ImageIcon(i);
+        BufferedImage j = ImageResize.applyToPreview(i);
+        JLabel pic = new JLabel(new ImageIcon(j));
+        previewPanel.removeAll();
+        previewPanel.add(pic);
+        previewPanel.repaint();
+        previewPanel.revalidate();
+    }
+
 
 }

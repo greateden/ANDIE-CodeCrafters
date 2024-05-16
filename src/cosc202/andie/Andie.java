@@ -1,13 +1,26 @@
 package cosc202.andie;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javax.swing.*;
-import java.awt.event.*;
-import javax.imageio.ImageIO;
 
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
+import javax.swing.JTabbedPane;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import javax.swing.JPanel;
+
 
 /**
  * <p>
@@ -29,22 +42,67 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
  * @version 1.0
  */
 public class Andie {
+    /**
+     * The main application frame.
+     */
     public static JFrame frame;
-    private static ImagePanel imagePanel;
-    public static ResourceBundle bundle;
-    public static JMenuBar menuBar;
-    public static JTabbedPane tabs;
 
-    private static FileActions fileActions;
-    private static EditActions editActions;
-    private static ViewActions viewActions;
+    /**
+     * The panel that displays the image.
+     */
+    private static ImagePanel imagePanel;
+    /**
+     * The resource bundle for internationalization.
+     */
+    public static ResourceBundle bundle;
+    /**
+     * The main menu bar of the application.
+     */
+    public static JMenuBar menuBar;
+    /**
+     * The tabbed pane that holds the image tabs.
+     */
+    public static JTabbedPane tabs;
+    /**
+     * The actions associated with the toolbar.
+     */
+    public static TooIbarActions toolbar;
+    /**
+     * The actions associated with file operations.
+     */
+    public static FileActions fileActions;
+    /**
+     * The actions associated with edit operations.
+     */
+    public static EditActions editActions;
+    /**
+     * The actions associated with view operations.
+     */
+    public static ViewActions viewActions;
+    /**
+     * The actions associated with filter operations.
+     */
     private static FilterActions filterActions;
+    /**
+     * The menu bar associated with the image.
+     */
     private static ImageMenuBar imageMenuBar;
+    /**
+     * The actions associated with colour operations.
+     */
     private static ColourActions colourActions;
+    /**
+     * The actions associated with help operations.
+     */
     private static HelpActions helpActions;
+    /**
+     * The actions associated with macro operations.
+     */
     private static MacroActions macroActions;
     private static DrawingActions drawingActions;
-    
+        /**
+     * The status of all certain menu items.
+     */
     public static boolean allCertainMenuStatus;
  
     /**
@@ -73,7 +131,7 @@ public class Andie {
      *
      * @throws Exception if something goes wrong.
      */
-    private static void createAndShowGUI() throws Exception {
+    public static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
         frame = new JFrame("ANDIE: CodeCrafters");
 
@@ -89,6 +147,25 @@ public class Andie {
         // tabs = new JTabbedPane();
         // tabs.addTab("Welcome", null, null, "Does nothing yet");
         JScrollPane scrollPane = new JScrollPane(imagePanel);
+        
+
+        scrollPane.getViewport().getView().addMouseWheelListener(new MouseWheelListener(){
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                int verticalScrollAmount = e.getUnitsToScroll();
+                //int horizontalScrollAmount = e.getUnitsToScroll();
+
+                JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+                //JScrollBar horizontalScrollBar = scrollPane.getHorizontalScrollBar();
+
+                verticalScrollBar.setValue(verticalScrollBar.getValue() - verticalScrollAmount);
+                //horizontalScrollBar.setValue(horizontalScrollBar.getValue() - horizontalScrollAmount);
+            }
+            
+
+        });
+
         frame.add(scrollPane, BorderLayout.CENTER);
         // frame.add(tabs);
         fileActions = new FileActions();
@@ -100,6 +177,14 @@ public class Andie {
         helpActions = new HelpActions();
 
         createMenuBar();
+
+        //We hereby beget toolbar.
+        toolbar = new TooIbarActions();
+        frame.getContentPane().add(toolbar.createToolBar(), BorderLayout.NORTH);
+
+        changeAllCertainMenuStatus(allCertainMenuStatus);// before open an image, set all to unable to click
+
+        frame.repaint();
 
     }
 
@@ -124,7 +209,7 @@ public class Andie {
     /**
      * Method to change all the related "grey buttons'" status
      * before/after the image get imported.
-     * @param status
+     * @param status updates the status of all of the menu buttons.
      */
     public static void changeAllCertainMenuStatus(boolean status) {
         fileActions.changeCertainMenuStatus(status);
@@ -135,6 +220,8 @@ public class Andie {
         colourActions.changeCertainMenuStatus(status);
         macroActions.changeCertainMenuStatus(status);
         drawingActions.changeCertainMenuStatus(status);
+        toolbar.changeCertainToolbarStatus(status);
+
     }
 
     /**
@@ -152,7 +239,6 @@ public class Andie {
         filterActions = new FilterActions();
         imageMenuBar = new ImageMenuBar();
         colourActions = new ColourActions();
-        helpActions = new HelpActions();
         macroActions = new MacroActions();
         drawingActions=new DrawingActions();
         // File menus are pretty standard, so things that usually go in File menus go
@@ -183,6 +269,9 @@ public class Andie {
         JMenu imageMenu = imageMenuBar.createMenu();
         newMenuBar.add(imageMenu);
 
+        // actions that apply a macro funtion of the operations
+        newMenuBar.add(macroActions.createMenu());
+
         // Provides an about page and link to online docs
         JMenu helpMenu = helpActions.createMenu();
         newMenuBar.add(helpMenu);
@@ -195,7 +284,6 @@ public class Andie {
 
         frame.setJMenuBar(newMenuBar);
 
-        changeAllCertainMenuStatus(allCertainMenuStatus);// before open an image, set all to unable to click
 
         CreateHotKey.createHotkey(fileMenu, KeyEvent.VK_F, 0, "filemenu");
         CreateHotKey.createHotkey(editMenu, KeyEvent.VK_E, 0, "editmenu");
@@ -261,12 +349,8 @@ public class Andie {
                 // System.out.println(bundle.getString("convertToGreyAction"));
 
                 try {
-                    FlatMacDarkLaf.setup();
-                    try {
-                        UIManager.setLookAndFeel(new FlatMacDarkLaf());
-                    } catch (Exception ex) {
-                        System.err.println("Failed to initialize LaF");
-                    }
+                    //calling ThemeConfig for changing themes
+                    createTheme();
                     // Keeping in case we need to revert. Also change dependency in Gradle file.
                     // try{
                     // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -282,22 +366,34 @@ public class Andie {
     }
 
     /**
+     * Method to create the theme for the GUI.
+     */
+    public static void createTheme(){
+        LookAndFeel laf = ThemeConfig.CreateTheme();
+                    try {
+                        UIManager.setLookAndFeel(laf);
+                    } catch (Exception ex) {
+                        System.err.println("Failed to initialize LaF");
+                    }
+    }
+    /**
      * An accessor for the imagePanel that is used in the preview panels for
      * Brightness and Contrast, among others.
      *
      * @author Kevin Steve Sathyanath
      * @return the ImagePanel in question
-     * @date 27/04/2024
+     * @since 27/04/2024
      */
     public static ImagePanel getPanel() {
         return imagePanel;
     }
 
     /**
-     * A method to add tabs to the tabPane
+     * A method to add an EditableImage to a tabPane.
      *
+     * @param i The EditableImage to be added to the tabPane.
      * @author Kevin Steve Sathyanath
-     *         date 5/5/2024
+     * @since 5/5/2024
      */
     public static void addTab(EditableImage i) {
 

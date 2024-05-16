@@ -1,13 +1,21 @@
 package cosc202.andie;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseWheelListener;
-import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseMotionListener;
-import java.awt.geom.AffineTransform;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  * <p>
@@ -33,28 +41,41 @@ import java.awt.geom.AffineTransform;
  */
 public class ImagePanel extends JPanel implements MouseWheelListener, MouseListener, MouseMotionListener{
 
-    /**
-     * The image to display in the ImagePanel.
-     */
+    /** The image to display in the ImagePanel. */
     private EditableImage image;
-
+    /** The rectangle representing the selected area. */
     private Rectangle selectionRect;
+    /** Flag indicating if a selection is being made. */
     private boolean isSelecting;
+    /** The rotation angle of the image. */
     private int rotationAngle = 0;
+    /** The starting point of the selection. */
     private Point startPoint;
+    /** The ending point of the selection. */
     private Point endPoint;
-
+    /** The zoom factor for the image. */
     private double zoomFactor = 1;
+    /** The previous zoom factor for the image. */
     private double prevZoomFactor = 1;
+    /** Flag indicating if the image is being zoomed. */
     private boolean zoomer;
+    /** Flag indicating if the image is being dragged. */
     private boolean dragger;
+    /** Flag indicating if the mouse has been released. */
     private boolean released;
+    /** The x offset of the image. */
     private double xOffset = 0;
+    /** The y offset of the image. */
     private double yOffset = 0;
+    /** The difference in x coordinates between the current and previous mouse positions. */
     private int xDiff;
+    /** The difference in y coordinates between the current and previous mouse positions. */
     private int yDiff;
-
+    /** The Graphics2D object for drawing on the image. */
     private Graphics2D g2d;
+
+    public boolean isUsingPencil = false;
+    public boolean isUsingSelectionTool = false;
 
     public void setSelectionRect(Rectangle selectionRect) {
         this.selectionRect = selectionRect;
@@ -127,7 +148,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
     /**A replacement constructor to be used in displaying a new imagepanel. We can set this as a new target in imageAction. TESTING
      * @author Kevin Steve Sathyanath
-     * @date 23/04/2024
+     * @since 23/04/2024
      */
     public ImagePanel(EditableImage working){
         image = working;
@@ -277,7 +298,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
             g2.dispose(); // Dispose of the Graphics2D object to release resources.
         }
-
+        
         if (isSelecting || selectionRect != null) { // Check if there is a selection or a selection rectangle is present.
             g2d = (Graphics2D) g; // Cast the graphics context to Graphics2D for additional drawing capabilities.
             g2d.setColor(Color.BLACK); // Set the drawing color to black.
@@ -340,12 +361,13 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-        Point curPoint = e.getLocationOnScreen();
-        xDiff = curPoint.x - startPoint.x;
-        yDiff = curPoint.y - startPoint.y;
+        
+            Point curPoint = e.getLocationOnScreen();
+            xDiff = curPoint.x - startPoint.x;
+            yDiff = curPoint.y - startPoint.y;
 
-        dragger = true;
-        repaint();
+            dragger = true;
+            repaint();
 
     }
     //You know the drill. COde taken from that stackOverFlow post etc.
@@ -361,8 +383,10 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
     @Override
     public void mousePressed(MouseEvent e) {
-        released = false;
-        startPoint = MouseInfo.getPointerInfo().getLocation();
+        if(!isUsingPencil){
+            released = false;
+            startPoint = MouseInfo.getPointerInfo().getLocation();
+        }
     }
 
 

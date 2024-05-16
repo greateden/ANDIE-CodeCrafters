@@ -22,12 +22,15 @@ public class HelpActions {
      */
     public HelpActions() {
         actions = new ArrayList<Action>();
-
-        Action about = new HelpActionsAboutUs(Andie.bundle.getString("AboutUs"), null,
+        ImageIcon aboutUsIcon = new ImageIcon("src/cosc202/andie/icons/About_us.png");
+        //Icon downloaded from: <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
+        Action about = new HelpActionsAboutUs(Andie.bundle.getString("AboutUs"), aboutUsIcon,
                 Andie.bundle.getString("AboutUsMessage"), Integer.valueOf(KeyEvent.VK_A));
         actions.add(about);
 
-        Action hotKey = new HotKeyInstructions(Andie.bundle.getString("HotKey"), null,
+        ImageIcon hotkeyIcon = new ImageIcon("src/cosc202/andie/icons/Hotkey.png");
+        //Icon downloaded from: <a href="https://www.flaticon.com/free-icons/letter-w" title="letter-w icons">Letter-w icons created by Md Tanvirul Haque - Flaticon</a>
+        Action hotKey = new HotKeyInstructions(Andie.bundle.getString("HotKey"), hotkeyIcon,
                 Andie.bundle.getString("HotKeyMessage"), Integer.valueOf(KeyEvent.VK_H));
         actions.add(hotKey);
         CreateHotKey.createHotkey(hotKey, KeyEvent.VK_K, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK | InputEvent.ALT_DOWN_MASK, "hotKey");

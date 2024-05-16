@@ -26,13 +26,17 @@ sourceSets {
 
 dependencies {
 // https://mavenlibs.com/maven/dependency/com.formdev/flatlaf
-implementation group: 'com.formdev', name: 'flatlaf', version: '3.2'
+    implementation 'com.formdev:flatlaf:3.2'
 }
 
 run {
     standardInput = System.in;
 }
 
+// adds location of javadocs to /docs dir
+javadoc {
+    destinationDir = file("/docs")
+}
 /* convenience tasks for working with a project */
 
 tasks.register("createMissingSourceDirs") {
