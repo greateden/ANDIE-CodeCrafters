@@ -85,6 +85,8 @@ public class PrintImage implements Printable {
          * If I delete this code, the program will not work.
          */
         //job.printDialog();
+        //Commented out due to the fact that the issue only happens on edens device.
+
 
         if (job.printDialog()) {
             try {
