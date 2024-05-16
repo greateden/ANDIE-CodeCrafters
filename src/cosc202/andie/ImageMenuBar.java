@@ -120,8 +120,6 @@ public class ImageMenuBar {
         Action pencil = new PencilAction("Pencil", null, "Draw on the image", null);
         actions.add(pencil);
 
-        Action pencil = new PencilAction("Pencil", null, "Draw on the image", null);
-        actions.add(pencil);
 
 
 
