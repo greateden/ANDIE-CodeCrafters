@@ -104,7 +104,7 @@ public class Andie {
      * The status of all certain menu items.
      */
     public static boolean allCertainMenuStatus;
- 
+
     /**
      * <p>
      * Launches the main GUI for the ANDIE program.
@@ -147,7 +147,7 @@ public class Andie {
         // tabs = new JTabbedPane();
         // tabs.addTab("Welcome", null, null, "Does nothing yet");
         JScrollPane scrollPane = new JScrollPane(imagePanel);
-        
+
 
         scrollPane.getViewport().getView().addMouseWheelListener(new MouseWheelListener(){
 
@@ -162,7 +162,7 @@ public class Andie {
                 verticalScrollBar.setValue(verticalScrollBar.getValue() - verticalScrollAmount);
                 //horizontalScrollBar.setValue(horizontalScrollBar.getValue() - horizontalScrollAmount);
             }
-            
+
 
         });
 
@@ -269,8 +269,6 @@ public class Andie {
         JMenu imageMenu = imageMenuBar.createMenu();
         newMenuBar.add(imageMenu);
 
-        // actions that apply a macro funtion of the operations
-        newMenuBar.add(macroActions.createMenu());
 
         // Provides an about page and link to online docs
         JMenu helpMenu = helpActions.createMenu();
