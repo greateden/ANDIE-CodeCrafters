@@ -397,7 +397,7 @@ public class FilterActions {
         GaussianFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
-
+        /**The slider used in the preview panel. */
         JSlider gaussianSlider;
         /**
          * <p>

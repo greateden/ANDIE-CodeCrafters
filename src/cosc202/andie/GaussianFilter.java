@@ -120,6 +120,7 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
      * @author Angus Lyall
      * @param input the BufferedImage input
      * @param rad the radius
+     * @return the BufferedImage output for the preview pane
      */
     public static BufferedImage applyToPreview(BufferedImage input, int rad) {
         if(rad == 0){
