@@ -9,9 +9,13 @@ import java.awt.image.BufferedImage;
 
 public class BrightnessAndContrast implements ImageOperation, java.io.Serializable {
 
+    /**The maximum value */
     private static final int MAX = 255;     //The maximum 255 on the RGB scale, used for readability
+    /**The minimum value */
     private static final int MIN = 0;      //The minimum 0 on the RGB scale, used for readability
+    /**The value of the brightness */
     private int b; //Brightness value
+    /**The value of the contrast */
     private int c; //Contrast value
 
     /**

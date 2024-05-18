@@ -773,6 +773,7 @@ public class ImageMenuBar {
      * RandomScattering filter accordingly.
      */
     public class RandomScatteringAction extends ImageAction {
+        /**The radius */
         int radius = 0;
 
         /**

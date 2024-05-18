@@ -200,6 +200,7 @@ public class FileActions {
     /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
+     * @param status the status of the menubar
      */
     public void changeCertainMenuStatus(boolean status) {
         // for (Action action : actions) {
@@ -916,12 +917,14 @@ public class FileActions {
      *
      */
     public class FileChangeLanguageAction extends ImageAction {
+        /**The height */
         int height;
+        /**The width */
         int width;
+        /**The labels  */
         JLabel widthJLabel, heightLabel, titleLabel, blankLabel;
+        /**The textfields containing language options */
         JTextField widthField, heightField;
-        JButton bahasaButton;
-        JButton englishButton;
 
         /**
          * <p>

@@ -407,8 +407,9 @@ public class ColourActions {
      * @since 19/04/2024
      */
     public class brightnessAndContrastAction extends ImageAction{
-
+        /**The scaling for the brightness */
         int brightnessFactor = 0;
+        /**The scaling for the contrast */
         int contrastFactor = 0;
 
         /**
@@ -424,8 +425,9 @@ public class ColourActions {
         brightnessAndContrastAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
-
+        /**The brightness slider used in the preview panel */
         JSlider brightnessSlider;
+        /**The contrast slider used in the preview panel */
         JSlider contrastSlider;
 
         /**
@@ -630,7 +632,7 @@ public class ColourActions {
      * @author Kevin Steve Sathyanath
      */
     public class ChangeTemperatureAction extends ImageAction{
-
+        /**The scaling for the temperature action */
         double dial = 0.0f;
 
         /**
@@ -646,6 +648,7 @@ public class ColourActions {
         ChangeTemperatureAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
+        /**The slider for getting values for the temperature. */
         JSlider tempSlider;
 
         /**
@@ -799,9 +802,11 @@ public class ColourActions {
      * @author Kevin Steve Sathyanath
      */
     public class ChangeHSVAction extends ImageAction{
-
+        /**The scaling for the Hue */
         float hueFactor = 0;
+        /**The scaling for the saturation */
         float saturationFactor = 0;
+        /**The scaling for the brightness */
         float brightnessFactor;
 
         /**
@@ -817,9 +822,11 @@ public class ColourActions {
         ChangeHSVAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
-
+        /**The slider for getting hue values */
         JSlider HueSlider;
+        /**The slider for getting saturation values */
         JSlider SaturationSlider;
+        /**the slider for getting brightness values */
         JSlider BrightnessSlider;
 
 

@@ -253,6 +253,7 @@ public class FilterActions {
         MedianFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
+        /**The slider used in the preview panel for the median filter. */
         JSlider medianSlider;
         /**
          * <p>

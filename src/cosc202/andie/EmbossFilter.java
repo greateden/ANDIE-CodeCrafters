@@ -19,12 +19,12 @@ import java.awt.image.Kernel;
  * @author Angus Lyall
  * @version 1.0
 */
-
 public class EmbossFilter implements ImageOperation, java.io.Serializable{
     /**
-    * The radius of the Emboss filter. This currently is not implmented but will allow for a larger emboss matrix
+    * The direction of the Emboss filter. This currently is not implmented but will allow for a larger emboss matrix
     */
     private int direction;
+    /**The radius of the emboss filter. */
     private int radius;
 
     /**

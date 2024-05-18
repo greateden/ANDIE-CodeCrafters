@@ -23,9 +23,11 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class HSV implements ImageOperation, java.io.Serializable {
-
+    /**The value of the hue */
     float hue;
+    /**The value of the saturation */
     float saturation;
+    /**The value of the brightness */
     float brightness;
 
  /**

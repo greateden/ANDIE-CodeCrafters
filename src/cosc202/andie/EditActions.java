@@ -198,9 +198,11 @@ public class EditActions {
      * @version 1.0
      */
     public class ChangeThemeAction extends ImageAction {
-
+        /**The checkbox to be shown in the UI */
         private JCheckBox followOSTheme;
+        /**The combobox containing theme options */
         private JComboBox<String> themeSelector;
+        /**The ok and cancel buttons */
         private JButton okButton, cancelButton;
 
         /**
