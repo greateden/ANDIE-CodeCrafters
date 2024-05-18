@@ -36,7 +36,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * 5x5 filter, and so forth.
      */
     private int radius;
-    //** Number of threads to use */
+    /** Number of threads to use */
     private final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
     /**Static version of the thread above :-D */
     private static final int NUM_THREADS2 = Runtime.getRuntime().availableProcessors();  //This one's static. No, I'm not about to mess with hyperthreading again. If it works, I'm not about to try fixing it.
