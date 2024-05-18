@@ -96,9 +96,6 @@ public class ColourActions {
         Action HSV = new ChangeHSVAction("Edit HSV", null, "Change the hue, saturation and brightness", null);
         actions.add(HSV);
 
-        Action choose = new ChooseAction("Choose colour", null, "Choose a colour from the colour wheel", null);
-        actions.add(choose);
-
     }
 
     /**
@@ -256,12 +253,12 @@ public class ColourActions {
 
         /**
          * Callback for when the RGBSwapping action is triggered.
-         * 
+         *
          * <p>
          * This method is called whenever the RGBSwapping action is triggered.
          * It changes the order of the color channels in the image based on user preferences.
          * </p>
-         * 
+         *
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
@@ -407,7 +404,7 @@ public class ColourActions {
 
     /**
      * A class to implement the GUI for B and C manipulation.
-     * 
+     *
      * @author Kevin Steve Sathyanath
      * @since 19/04/2024
      */
@@ -446,7 +443,7 @@ public class ColourActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e){
-            //Yeah this is a mess. But it took 3 weeks and 4 demonstrators to make this work. Please just leave it as it is. 
+            //Yeah this is a mess. But it took 3 weeks and 4 demonstrators to make this work. Please just leave it as it is.
             try{
                 BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
 
@@ -692,16 +689,16 @@ public class ColourActions {
                 tempSlider = new JSlider(1000,13000, 6500);
                 tempSlider.setPreferredSize(new Dimension(400,50));
                 //Numbers taken from GIMP
-                
+
                 JLabel tempLabel = new JLabel("Temperature in K", JLabel.CENTER);
                 tempSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
-                
+
                 tempSlider.setMajorTickSpacing(4000);
                 tempSlider.setPaintTicks(true);
                 tempSlider.setPaintLabels(true);
                 //tempSlider.setValue(0);
 
-        
+
 
                 ChangeListener sliderChangeListener = new ChangeListener() {
                     @Override
@@ -882,17 +879,17 @@ public class ColourActions {
                 //Brightness slider labels
                 JLabel BrightnessSliderLabel = new JLabel("Brightness", JLabel.CENTER);
                 BrightnessSliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-                
+
 
                 ChangeListener sliderChangeListener = new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
 
                         hueFactor = HueSlider.getValue()/360.0f;
-                        
+
                         float sat = SaturationSlider.getValue();
                         saturationFactor = sat/100.0f;
-                        
+
                         brightnessFactor = BrightnessSlider.getValue()/100f;
 
                         BufferedImage curr = HSV.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), hueFactor, saturationFactor, brightnessFactor);
@@ -972,60 +969,7 @@ public class ColourActions {
         }//End of B&C()
 
 
-        /**
-     * <p>
-     * Action to pick a new colour.
-     * </p>
-     *
-     * @see ConvertToGrey
-     */
-    public class ChooseAction extends ImageAction {
 
-        /**
-         * <p>
-         * Create a new colour chooser action
-         * </p>
-         *
-         * @param name     The name of the action (ignored if null).
-         * @param icon     An icon to use to represent the action (ignored if null).
-         * @param desc     A brief description of the action (ignored if null).
-         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
-         */
-        ChooseAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-            super(name, icon, desc, mnemonic);
-        }
-
-        /**
-         * <p>
-         * Callback for choosing a colour
-         * </p>
-         *
-         * <p>
-         * This method is called to chooe a colour from the colour wheel.
-         * </p>
-         *
-         * @param e The event triggering this callback.
-         */
-        public void actionPerformed(ActionEvent e) {
-            try {
-
-                ColourWheel.pickColour();
-                System.out.println(ColourWheel.getChosenColour());
-                // JFrame f = new JFrame();
-                // f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                // JPanel p = new JPanel();
-                // p.setPreferredSize(new Dimension(100,100));
-                // p.setBackground(ColourWheel.getChosenColour());
-                // f.add(p);
-                // f.pack();
-                // f.setVisible(true);
-
-            }
-            catch(Exception err){
-                System.out.println("There was an error.");
-            }
-        }
-    }
 
 
 
