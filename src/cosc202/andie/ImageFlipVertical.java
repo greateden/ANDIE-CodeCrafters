@@ -8,6 +8,9 @@ import java.awt.image.*;
  *
  * The flip operation flips the image along a vertical axis, specifically the
  * halfway point of the image.
+ * 
+ * @author Kevin Steve Sathyanath
+ * @version 1.0
  */
 public class ImageFlipVertical implements ImageOperation, java.io.Serializable {
 

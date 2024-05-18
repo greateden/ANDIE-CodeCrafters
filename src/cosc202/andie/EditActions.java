@@ -32,9 +32,9 @@ public class EditActions {
 
     /** A list of actions for the Edit menu. */
     protected ArrayList<Action> actions;
-
+    /**The bundle for multilingual support */
     public ResourceBundle bundle = Andie.bundle;
-
+    /**Undo and redo I think? */
     public Action undo, redo;
 
     /**
@@ -85,6 +85,7 @@ public class EditActions {
     /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
+     * @param status the conditional affecting the method of execution of the program.
      */
     public void changeCertainMenuStatus(boolean status) {
         undo.setEnabled(status);
