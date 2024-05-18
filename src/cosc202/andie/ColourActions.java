@@ -664,14 +664,15 @@ public class ColourActions {
          */
         public void actionPerformed(ActionEvent e){
             try{
+                /** A copy of the BufferedImage onn  the image panel to put on the preview panel.*/
                 BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
-
+                /** An editableImage. I don't think this is used but I'm not going to delete it this close to the deadline. */
                 final EditableImage preview = target.getImage().makeCopy();
                 //final ImagePanel show = new ImagePanel(preview);
 
                 previewPanel = new JPanel();
                 previewPanel.setPreferredSize(new Dimension(500,300));
-                updatePreviewImage(prev);
+                updatePreviewImage(prev);    //Method developed thanks to a lot of help from Niamh.
 
 
 

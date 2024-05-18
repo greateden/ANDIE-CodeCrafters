@@ -102,11 +102,11 @@ public class FilterActions {
                 Integer.valueOf(KeyEvent.VK_E));
         actions.add(emboss);
 
-        Action sobel = new SobelFilterAction("Sobel Filter (O)", null, "Applys a sobel filter vertically or horizionally", Integer.valueOf(KeyEvent.VK_O));
+        Action sobel = new SobelFilterAction(Andie.bundle.getString("SobelMenu"), null, Andie.bundle.getString("SobelDesc"), Integer.valueOf(KeyEvent.VK_O));
         actions.add(sobel);
 
-        Action blockAveraging = new BlcokAveragingAction("BlockAveraging (B)", null,
-                "BlockAveraging", Integer.valueOf(KeyEvent.VK_B));
+        Action blockAveraging = new BlcokAveragingAction(Andie.bundle.getString("BlockMenu"), null,
+                Andie.bundle.getString("BlockDesc"), Integer.valueOf(KeyEvent.VK_B));
         actions.add(blockAveraging);
         // CreateHotKey.createHotkey(blockAveraging, KeyEvent.VK_I,
         // InputEvent.META_DOWN_MASK | InputEvent.ALT_DOWN_MASK, "blockAveraging");
@@ -421,10 +421,10 @@ public class FilterActions {
         public void actionPerformed(ActionEvent e){
             try{
                 JPanel panel = new JPanel(new GridLayout(3, 1));
-                JLabel l1 = new JLabel("Please Select Sobel Direction");
+                JLabel l1 = new JLabel(Andie.bundle.getString("SelectSobelDirection"));
                 panel.add(l1);
-                JRadioButton r1 = new JRadioButton("Horizontal");
-                JRadioButton r2 = new JRadioButton("Vertical");
+                JRadioButton r1 = new JRadioButton(Andie.bundle.getString("Horizontal"));
+                JRadioButton r2 = new JRadioButton(Andie.bundle.getString("Vertical"));
                 ButtonGroup g1 = new ButtonGroup();
                 g1.add(r1);
                 g1.add(r2);
@@ -432,7 +432,7 @@ public class FilterActions {
                 panel.add(r1);
                 panel.add(r2);
 
-                int option = JOptionPane.showOptionDialog(null, panel, "Select Sobel Direction", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,null,null);
+                int option = JOptionPane.showOptionDialog(null, panel, Andie.bundle.getString("SelectSobelDirection"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,null,null);
                 if (option == JOptionPane.OK_OPTION){
                     boolean Direction = false;
                     if (r1.isSelected()){
@@ -682,9 +682,9 @@ public class FilterActions {
                 JPanel panel = new JPanel();
                 panel.setLayout(new GridLayout(2,1));
                 JLabel info1 = new JLabel();
-                info1.setText("Height ("+Andie.bundle.getString("PleaseEnter")+")");
+                info1.setText(Andie.bundle.getString("Height") + " ("+Andie.bundle.getString("PleaseEnter")+")");
                 JLabel info2 = new JLabel();
-                info2.setText("Width ("+Andie.bundle.getString("PleaseEnter")+")");
+                info2.setText(Andie.bundle.getString("Width")+" ("+Andie.bundle.getString("PleaseEnter")+")");
                 // Pop-up dialog box to ask for the radius value.
 
                 SpinnerNumberModel blockSizeHeightModel = new SpinnerNumberModel(0, 0, 1000, 1);
@@ -740,7 +740,7 @@ public class FilterActions {
 
 
                 int option = JOptionPane.showOptionDialog(Andie.getFrame(), menu,
-                        "Enter Block Size",
+                        Andie.bundle.getString("EnterBlock"),
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.

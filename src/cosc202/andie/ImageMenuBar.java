@@ -94,8 +94,8 @@ public class ImageMenuBar {
                 Andie.bundle.getString("FVDesc"), Integer.valueOf(KeyEvent.VK_V));
         actions.add(vertical);
 
-        crop = new ImageCropAction("Image crop", null,
-                "Crops the image duh", Integer.valueOf(KeyEvent.VK_J));
+        crop = new ImageCropAction(Andie.bundle.getString("ImageCrop"), null,
+                Andie.bundle.getString("CropDesc"), Integer.valueOf(KeyEvent.VK_J));
         actions.add(crop);
 
         Action rotate = new RotateImageAction(Andie.bundle.getString("RotateImageAction"), null,
@@ -116,7 +116,7 @@ public class ImageMenuBar {
                 Integer.valueOf(KeyEvent.VK_S));
         actions.add(scalAct);
 
-        rotAct = new RotateImageStrictAction("Rotate by", null, "Rotating by multiples of right angles",
+        rotAct = new RotateImageStrictAction(Andie.bundle.getString("RotateBy"), null, Andie.bundle.getString("RotateDesc"),
                 Integer.valueOf(KeyEvent.VK_O));
         actions.add(rotAct);
 

@@ -43,16 +43,16 @@ public class MacroActions {
         actions = new ArrayList<Action>();
         ImageIcon startIcon = new ImageIcon("src/cosc202/andie/icons/start.png");
         //Image downloaded from: https://www.flaticon.com/free-icon/play_9581128?term=start&page=1&position=8&origin=search&related_id=9581128
-        actions.add(new StartAction("Start (S)", startIcon, "Start the Macro Action", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new StartAction(Andie.bundle.getString("Start"), startIcon, Andie.bundle.getString("StartMacro"), Integer.valueOf(KeyEvent.VK_S)));
 
         ImageIcon stopIcon = new ImageIcon("src/cosc202/andie/icons/stop.png");
         //Image downloaded from: <a href="https://www.flaticon.com/free-icons/forbidden" title="forbidden icons">Forbidden icons created by Vitaly Gorbachev - Flaticon</a>
-        actions.add(new StopAction("Stop (T)", stopIcon, Andie.bundle.getString("Redo"),
+        actions.add(new StopAction(Andie.bundle.getString("Stop"), stopIcon, Andie.bundle.getString("Redo"),
         Integer.valueOf(KeyEvent.VK_T)));
 
         ImageIcon applyIcon = new ImageIcon("src/cosc202/andie/icons/Apply.png");
         //Icon downloaded from: <a href="https://www.flaticon.com/free-icons/finger" title="finger icons">Finger icons created by pojok d - Flaticon</a>
-        actions.add(new ApplyPrevMacroAction("Apply ops (A)", applyIcon, Andie.bundle.getString("Redo"),
+        actions.add(new ApplyPrevMacroAction(Andie.bundle.getString("Apply"), applyIcon, Andie.bundle.getString("Redo"),
         Integer.valueOf(KeyEvent.VK_A)));
     }
 
@@ -64,7 +64,7 @@ public class MacroActions {
      * @return The edit menu UI element.
      */
     public JMenu createMenu() {
-        JMenu macroMenu = new JMenu("Macro (M)");
+        JMenu macroMenu = new JMenu(Andie.bundle.getString("Macro"));
 
         for (Action action : actions) {
             macroMenu.add(new JMenuItem(action));
@@ -151,17 +151,17 @@ public class MacroActions {
                 // cancel: keep adding some other operations
                 // no: delete all operations and starts again
                 int opsSaveOrNot = JOptionPane.showConfirmDialog(Andie.getFrame(),
-                        "Would you like to save the operations as an ops file?", "Save the Macro Operations",
+                        Andie.bundle.getString("WouldSaveOPS"), Andie.bundle.getString("SaveMacro"),
                         JOptionPane.YES_NO_CANCEL_OPTION);
 
                 if (opsSaveOrNot == JOptionPane.CANCEL_OPTION) {
-                    JOptionPane.showMessageDialog(Andie.getFrame(), "OPS File Save Cancled, You Could Continue Adding Operations",
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("OPSSaveCancel"),
                     "" , JOptionPane.WARNING_MESSAGE);
 
                 }
 
                 else if (opsSaveOrNot == JOptionPane.NO_OPTION) {
-                    JOptionPane.showMessageDialog(Andie.getFrame(), "OPS File Save Cancled, All the Operations Discarded,You Colud STart Agian and Add New Operaions",
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("DiscardMacro"),
                     "" , JOptionPane.WARNING_MESSAGE);
                      EditableImage.macroStack.clear();
                      EditableImage.recordingStart = false;
@@ -208,7 +208,7 @@ public class MacroActions {
                             fileOut.close();
 
                             // create a message box to tell user it's saved successfully
-                            JOptionPane.showMessageDialog(Andie.getFrame(), "OPS File Saved",
+                            JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("OPSFileSaved"),
                                     Andie.bundle.getString("Information"), JOptionPane.WARNING_MESSAGE);
 
                         } catch (Exception ex) {
@@ -237,7 +237,7 @@ public class MacroActions {
             }
 
         }else{
-            JOptionPane.showMessageDialog(Andie.getFrame(),"Not Able to Stop without Start Macro First, and Do Some Operations",
+            JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("MacroInstruction"),
             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
 
         }
