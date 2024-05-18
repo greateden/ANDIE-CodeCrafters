@@ -586,7 +586,6 @@ public class ColourActions {
      * Action to convert an image to Sepia.
      * </p>
      *
-     * @see ConvertToSepia
      */
     public class ConvertToSepiaAction extends ImageAction {
 
@@ -634,7 +633,6 @@ public class ColourActions {
 
     /**A class to implement the change temperature action
      * @author Kevin Steve Sathyanath
-     * @date 19/04/2024
      */
     public class ChangeTemperatureAction extends ImageAction{
 
@@ -792,7 +790,7 @@ public class ColourActions {
 
         /**
          * A method to update the preview image.
-         * @param i
+         * @param i The BufferedImage input
          */
         public void updatePreviewImage(BufferedImage i){
             BufferedImage j = ImageResize.applyToPreview(i);
@@ -806,9 +804,8 @@ public class ColourActions {
 
 
 
-        /**A class to implement the GUI for B&C manipulation.
+    /**A class to implement the GUI for B and C manipulation.
      * @author Kevin Steve Sathyanath
-     * @date 19/04/2024
      */
     public class ChangeHSVAction extends ImageAction{
 
