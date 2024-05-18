@@ -282,6 +282,8 @@ public class Andie {
         CreateHotKey.createHotkey(colourMenu, KeyEvent.VK_C, 0, "colourmenu");
         CreateHotKey.createHotkey(imageMenu, KeyEvent.VK_I, 0, "imagemenu");
         CreateHotKey.createHotkey(helpMenu, KeyEvent.VK_H, 0, "helpmenu");
+        CreateHotKey.createHotkey(macroMenu, KeyEvent.VK_M, 0, "macroMenu");
+        CreateHotKey.createHotkey(drawMenu, KeyEvent.VK_D, 0, "drawMenu");
 
         frame.repaint();
         frame.pack();

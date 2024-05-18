@@ -87,13 +87,13 @@ public class ColourActions {
         actions.add(rgbSwap);
         actions.add(new brightnessAndContrastAction(Andie.bundle.getString("BC"), null, Andie.bundle.getString("BCDesc"), Integer.valueOf(KeyEvent.VK_B)));
 
-        Action sepia = new ConvertToSepiaAction(Andie.bundle.getString("Sepia"), null, Andie.bundle.getString("SepiaDesc"), null);
+        Action sepia = new ConvertToSepiaAction(Andie.bundle.getString("Sepia"), null, Andie.bundle.getString("SepiaDesc"), Integer.valueOf(KeyEvent.VK_S));
         actions.add(sepia);
 
-        Action temperature = new ChangeTemperatureAction(Andie.bundle.getString("Temp"), null, Andie.bundle.getString("TempDesc"), null);
+        Action temperature = new ChangeTemperatureAction(Andie.bundle.getString("Temp"), null, Andie.bundle.getString("TempDesc"), Integer.valueOf(KeyEvent.VK_T));
         actions.add(temperature);
 
-        Action HSV = new ChangeHSVAction(Andie.bundle.getString("HSV"), null, Andie.bundle.getString("HSVDesc"), null);
+        Action HSV = new ChangeHSVAction(Andie.bundle.getString("HSV"), null, Andie.bundle.getString("HSVDesc"), Integer.valueOf(KeyEvent.VK_H));
         actions.add(HSV);
 
 

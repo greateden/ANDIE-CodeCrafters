@@ -102,10 +102,11 @@ public class FilterActions {
                 Integer.valueOf(KeyEvent.VK_E));
         actions.add(emboss);
 
-        Action sobel = new SobelFilterAction("Sobel Filter", null, "Applys a sobel filter vertically or horizionally", null);
+        Action sobel = new SobelFilterAction("Sobel Filter (O)", null, "Applys a sobel filter vertically or horizionally", Integer.valueOf(KeyEvent.VK_O));
         actions.add(sobel);
-        Action blockAveraging = new BlcokAveragingAction("BlockAveraging", null,
-                "BlockAveraging", null);
+
+        Action blockAveraging = new BlcokAveragingAction("BlockAveraging (B)", null,
+                "BlockAveraging", Integer.valueOf(KeyEvent.VK_B));
         actions.add(blockAveraging);
         // CreateHotKey.createHotkey(blockAveraging, KeyEvent.VK_I,
         // InputEvent.META_DOWN_MASK | InputEvent.ALT_DOWN_MASK, "blockAveraging");
@@ -279,7 +280,7 @@ public class FilterActions {
                 previewPanel = PreviewPanel.makePanel(prev);
                 updatePreviewImage(prev);
 
-                
+
                 medianSlider = new JSlider(JSlider.VERTICAL, 0,10,0);
                 medianSlider.setMajorTickSpacing(1);
                 medianSlider.setPaintTicks(true);
@@ -703,14 +704,14 @@ public class FilterActions {
                         updatePreviewImage(curr);
                     }
                 };
-                
+
                 //Adding listener to spinner 1:
                 blockSizeHeightSpinner.addChangeListener(listener);
 
                 //Now on to spinner 2:
                 blockSizeWidthSpinner.addChangeListener(listener);
 
-                
+
 
                 panel.add(info1);
                 panel.add(blockSizeHeightSpinner);
@@ -735,7 +736,7 @@ public class FilterActions {
                 a.insets = i;
                 menu.add(panel, a);
 
-               
+
 
                 int option = JOptionPane.showOptionDialog(Andie.getFrame(), menu,
                         "Enter Block Size",
@@ -762,8 +763,8 @@ public class FilterActions {
             }
         }
     }
-    /**A method to update the preview Image. Common to all methods that pop up a preview image. 
-     * Please don't cut our marks for lack of comments. 
+    /**A method to update the preview Image. Common to all methods that pop up a preview image.
+     * Please don't cut our marks for lack of comments.
      * @author Kevin Steve Sathyanath
      * @param i BufferedImage
      */

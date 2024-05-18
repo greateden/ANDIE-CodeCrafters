@@ -18,6 +18,7 @@ package cosc202.andie;
  * @version 1.0
  */
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.ResourceBundle;
@@ -32,11 +33,11 @@ import javax.swing.JOptionPane;
  * <p>
  * You can draw stuff now
  * </p>
- * 
+ *
  * <p>
  * This method draws stuff.
  * </p>
- * @author YUXING ZHANG 
+ * @author YUXING ZHANG
  * @version 1.0
  */
 public class DrawingActions {
@@ -53,11 +54,11 @@ public class DrawingActions {
     public DrawingActions() {
         actions = new ArrayList<Action>();
 
-        actions.add(new DrawOvalAction("Oval", null, "Draw an oval on the image", null));
-        actions.add(new DrawRectAction("Rectangle", null, "Draw rectangle on the image",
-                null));
-        actions.add(new DrawLineAction("Line", null, "Draw line on the image",
-                null));
+        actions.add(new DrawOvalAction("Oval (O)", null, "Draw an oval on the image", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new DrawRectAction("Rectangle (R)", null, "Draw rectangle on the image",
+        Integer.valueOf(KeyEvent.VK_R)));
+        actions.add(new DrawLineAction("Line (L)", null, "Draw line on the image",
+        Integer.valueOf(KeyEvent.VK_L)));
     }
 
     /**
@@ -68,7 +69,7 @@ public class DrawingActions {
      * @return The edit menu UI element.
      */
     public JMenu createMenu() {
-        JMenu drawMenu = new JMenu("Drawing");
+        JMenu drawMenu = new JMenu("Drawing (D)");
         for (Action action : actions) {
             drawMenu.add(new JMenuItem(action));
         }

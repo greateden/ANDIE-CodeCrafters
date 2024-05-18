@@ -60,7 +60,7 @@ public class EditActions {
         CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "Redo");
         CreateHotKey.createHotkey(redo, KeyEvent.VK_Y, InputEvent.META_DOWN_MASK, "Redo");
 
-        Action changeTheme = new ChangeThemeAction("Change Theme", null, Andie.bundle.getString("Redo"),
+        Action changeTheme = new ChangeThemeAction("Change Theme (C)", null, Andie.bundle.getString("Redo"),
                 Integer.valueOf(KeyEvent.VK_C));
         actions.add(changeTheme);
     }

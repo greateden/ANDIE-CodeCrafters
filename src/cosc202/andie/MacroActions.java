@@ -2,6 +2,8 @@ package cosc202.andie;
 
 import java.util.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
@@ -41,17 +43,17 @@ public class MacroActions {
         actions = new ArrayList<Action>();
         ImageIcon startIcon = new ImageIcon("src/cosc202/andie/icons/start.png");
         //Image downloaded from: https://www.flaticon.com/free-icon/play_9581128?term=start&page=1&position=8&origin=search&related_id=9581128
-        actions.add(new StartAction("Start", startIcon, "Start the Macro Action", null));
+        actions.add(new StartAction("Start (S)", startIcon, "Start the Macro Action", Integer.valueOf(KeyEvent.VK_S)));
 
         ImageIcon stopIcon = new ImageIcon("src/cosc202/andie/icons/stop.png");
         //Image downloaded from: <a href="https://www.flaticon.com/free-icons/forbidden" title="forbidden icons">Forbidden icons created by Vitaly Gorbachev - Flaticon</a>
-        actions.add(new StopAction("Stop", stopIcon, Andie.bundle.getString("Redo"),
-                null));
+        actions.add(new StopAction("Stop (T)", stopIcon, Andie.bundle.getString("Redo"),
+        Integer.valueOf(KeyEvent.VK_T)));
 
         ImageIcon applyIcon = new ImageIcon("src/cosc202/andie/icons/Apply.png");
         //Icon downloaded from: <a href="https://www.flaticon.com/free-icons/finger" title="finger icons">Finger icons created by pojok d - Flaticon</a>
-        actions.add(new ApplyPrevMacroAction("Apply ops", applyIcon, Andie.bundle.getString("Redo"),
-                null));
+        actions.add(new ApplyPrevMacroAction("Apply ops (A)", applyIcon, Andie.bundle.getString("Redo"),
+        Integer.valueOf(KeyEvent.VK_A)));
     }
 
     /**
@@ -62,7 +64,7 @@ public class MacroActions {
      * @return The edit menu UI element.
      */
     public JMenu createMenu() {
-        JMenu macroMenu = new JMenu("Macro");
+        JMenu macroMenu = new JMenu("Macro (M)");
 
         for (Action action : actions) {
             macroMenu.add(new JMenuItem(action));
