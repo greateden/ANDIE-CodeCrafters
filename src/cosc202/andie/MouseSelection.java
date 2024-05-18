@@ -86,18 +86,21 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         if (DrawingOperations.isDrawingRect) {
             Color color = ColourWheel.getChosenColour();
             imagePanel.getImage().apply(new DrawingOperations('r', start, end, color));
-            // DrawingOperations.isDrawingRect=false;
+            DrawingOperations.isDrawingRect=false;
+            selectionRect = null;
         } else if (DrawingOperations.isDrawingOval) {
             Color color = ColourWheel.getChosenColour();
 
             imagePanel.getImage().apply(new DrawingOperations('o', start, end, color));
             DrawingOperations.isDrawingOval = false;
+            selectionRect = null;
 
         } else if (DrawingOperations.isDrawingLine) {
             Color color = ColourWheel.getChosenColour();
 
             imagePanel.getImage().apply(new DrawingOperations('l', start, end, color));
             DrawingOperations.isDrawingLine = false;
+            selectionRect = null;
 
         }
 
@@ -107,24 +110,24 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         isSelecting = false;
         imagePanel.setIsSelecting(isSelecting);
 
-        // if (selectionRect != null && selectionRect.width != 0 && selectionRect.height != 0) {
-        //     // Ensure selection rectangle is normalized
-        //     selectionRect = new Rectangle(
-        //             Math.min(start.x, end.x),
-        //             Math.min(start.y, end.y),
-        //             Math.abs(end.x - start.x),
-        //             Math.abs(end.y - start.y));
-        // } else {
-        //     // Reset selection rectangle if it's just a click
-        //     selectionRect = null;
-        // }
-        // if(!DrawingOperations.isDrawingRect||!DrawingOperations.isDrawingOval||!DrawingOperations.isDrawingLine){
+        if (selectionRect != null && selectionRect.width != 0 && selectionRect.height != 0) {
+            // Ensure selection rectangle is normalized
+            selectionRect = new Rectangle(
+                    Math.min(start.x, end.x),
+                    Math.min(start.y, end.y),
+                    Math.abs(end.x - start.x),
+                    Math.abs(end.y - start.y));
+        } else {
+            // Reset selection rectangle if it's just a click
+            selectionRect = null;
+        }
+        if(!DrawingOperations.isDrawingRect||!DrawingOperations.isDrawingOval||!DrawingOperations.isDrawingLine){
 
 
-        imagePanel.setSelectionRect(selectionRect);
-        imagePanel.repaint();
-        imagePanel.setCrop(true);
-
+            imagePanel.setSelectionRect(selectionRect);
+            imagePanel.repaint();
+            imagePanel.setCrop(true);
+        }
 }
 
 

@@ -45,7 +45,7 @@ public class ViewActions {
     public ViewActions() {
         actions = new ArrayList<Action>();
 
-        
+
         Action zoomIn = new ZoomInAction(Andie.bundle.getString("ZoomInAction"), null,
                 Andie.bundle.getString("ZoomInAction"),
                 Integer.valueOf(KeyEvent.VK_I));
@@ -144,6 +144,10 @@ public class ViewActions {
                 target.setZoom(target.getZoom() + 10);
                 target.repaint();
                 target.getParent().revalidate();
+                // to delete the current selection box
+                target.setCrop(false);
+                target.setIsSelecting(false);
+                target.setSelectionRect(null);
                 // TODO error messages catching
             } catch (Exception err) {
                 JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
@@ -202,6 +206,10 @@ public class ViewActions {
                 target.setZoom(target.getZoom() - 10);
                 target.repaint();
                 target.getParent().revalidate();
+                // to delete the current selection box
+                target.setCrop(false);
+                target.setIsSelecting(false);
+                target.setSelectionRect(null);
             } catch (Exception err) {
                 JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
@@ -261,6 +269,11 @@ public class ViewActions {
                 target.setZoom(100);
                 target.repaint();
                 target.getParent().revalidate();
+
+                // to delete the current selection box
+                target.setCrop(false);
+                target.setIsSelecting(false);
+                target.setSelectionRect(null);
             } catch (Exception err) {
                 JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                         Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);

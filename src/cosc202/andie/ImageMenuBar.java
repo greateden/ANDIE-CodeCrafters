@@ -265,15 +265,15 @@ public class ImageMenuBar {
     }
 
     /**
-     * ImageMenuBarFlipVertical extends ImageAction and represents an action for
-     * flipping the image vertically.
+     * ImageCropAction extends ImageAction and represents an action for
+     * cropping the image
      * This action is triggered by user interaction in the graphical user interface.
      */
     public class ImageCropAction extends ImageAction {
 
         /**
          * <p>
-         * Create a new Flip Vertical action
+         * Create a new Crop action
          * </p>
          *
          * @param name     The name of the action (ignored if null).
@@ -291,7 +291,7 @@ public class ImageMenuBar {
          * </p>
          *
          * <p>
-         * This method is called whenever the Flip Vertical method is called.
+         * This method is called whenever the Crop method is called.
          * </p>
          *
          * @param e The event triggering this callback.
@@ -305,8 +305,6 @@ public class ImageMenuBar {
                 int height = (int) (selection.getHeight() / (target.getZoom() / 100));
 
                 target.getImage().apply(new ImageCrop(x, y, width, height));
-                // ImageCrop imCrop = new ImageCrop(x, y, width, height);
-                // imCrop.apply(target.getImage().getCurrentImage());
                 target.repaint();
                 target.getParent().revalidate();
                 MouseSelection.imagePanel.setIsSelecting(false);
