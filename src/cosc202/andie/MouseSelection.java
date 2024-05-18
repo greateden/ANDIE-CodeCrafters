@@ -107,8 +107,8 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         imagePanel.repaint();
         imagePanel.getParent().revalidate();
 
-        //isSelecting = false;
-        //imagePanel.setIsSelecting(isSelecting);
+        isSelecting = false;
+        imagePanel.setIsSelecting(isSelecting);
 
         if (selectionRect != null && selectionRect.width != 0 && selectionRect.height != 0) {
             // Ensure selection rectangle is normalized
