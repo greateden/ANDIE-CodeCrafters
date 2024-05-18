@@ -788,7 +788,7 @@ public class ImageMenuBar {
         RandomScatteringAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
-
+        /**The JSlider used in the code below. */
         JSlider radiusSlider;
         
         /**
@@ -799,7 +799,6 @@ public class ImageMenuBar {
          * <p>
          * This method is called whenever the RandomScatteringAction is triggered.
          * It prompts the user for a filter radius, then applys an appropriately sized
-         * {@link RandomScattering}.
          * </p>
          *
          * @param e The event triggering this callback.

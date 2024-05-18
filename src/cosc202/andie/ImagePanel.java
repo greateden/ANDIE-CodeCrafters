@@ -74,42 +74,65 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     private int yDiff;
     /** The Graphics2D object for drawing on the image. */
     private Graphics2D g2d;
+    /**A crop action */
     private Action crop;
 
+    /**Gets the crop
+     * @param crop the crop action
+     */
     public Action getCrop(){
         return crop;
     }
 
+    /** Sets the crop?
+     * @param crop crop crop crop
+    */
     public void setCrop(Action crop){
         this.crop = crop;
     }
+    /**sets crop with boolean
+     * @param status the boolean
+     */
     public void setCrop(boolean status){
         this.crop.setEnabled(status);
     }
-
+    /**Method to get a rectangle
+     * @return The selection rectangle
+     */
     public Rectangle getSelectionRect(){
         return selectionRect;
     }
-
+    /**Modifies app behaviour */
     public boolean isUsingPencil = false;
+    /**Modifies app behaviour pt2. */
     public boolean isUsingSelectionTool = false;
-
+    /**Sets selection rect
+     * @param selectionRect the Rectangle to set
+     */
     public void setSelectionRect(Rectangle selectionRect) {
         this.selectionRect = selectionRect;
     }
-
+    /**sets the start point
+     * @param startPoint sets the start point
+     */
     public void setStartPoint(Point startPoint) {
         this.startPoint = startPoint;
     }
-
+    /**sets the end point     
+     * @param endPoint sets the end point
+     */
     public void setEndPoint(Point endPoint) {
         this.endPoint = endPoint;
     }
-
+    /**Setter
+     * @param isSelecting boolean value
+     */
     public void setIsSelecting(boolean isSelecting) {
         this.isSelecting = isSelecting;
     }
-
+    /**setter
+     * @param rotationAngle the rotation Angle.
+     */
     public void setRotationAngle(int rotationAngle) {
         this.rotationAngle = rotationAngle;
     }
@@ -155,7 +178,6 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     /**Method that initializes the mouseListeners to make active scrolling in the ImagePanel a reality.
      * Code taken from: https://stackoverflow.com/questions/6543453/zooming-in-and-zooming-out-within-a-panel
      * No modifications necessary. I mean it's just 3 lines.  Kevin Steve Sathyanath
-     * date: 5/5/2024
      */
     private void initComponent() {
         addMouseWheelListener(this);
@@ -165,7 +187,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
 
     /**A replacement constructor to be used in displaying a new imagepanel. We can set this as a new target in imageAction. TESTING
      * @author Kevin Steve Sathyanath
-     * @since 23/04/2024
+     * @param working the Editable image.
      */
     public ImagePanel(EditableImage working){
         image = working;
@@ -184,6 +206,9 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
         return image;
     }
 
+    /**A getter
+     * @return boolean for whether the imagePanel has a image.
+     */
     public boolean imageHasImage(){
         return image.hasImage();
     }
@@ -249,10 +274,6 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
             return new Dimension(450, 450);
         }
     }
-
-    //ADD SETPREFERREDSIZE().
-
-
 
     /**
      * <p>
@@ -355,6 +376,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     /**Code to program the expected behaviour when the mouseWheel is moved.
      * Code taken from: https://stackoverflow.com/questions/6543453/zooming-in-and-zooming-out-within-a-panel
      * Code kept verbatim. No editing done. Kevin Steve Sathyanath.
+     * @param e the MouseWheelEvent
      */
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
@@ -376,6 +398,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     /**Code to program the expected behaviour when the mouse is dragged over the imagePanel. Likely needs to be modified later when Emma finished mouse Selection.
      * Code taken from: https://stackoverflow.com/questions/6543453/zooming-in-and-zooming-out-within-a-panel
      * Code kept verbatim. No editing done. Kevin Steve Sathyanath
+     * @param e the MouseEvent
      */
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -388,17 +411,23 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
             repaint();
 
     }
-    //You know the drill. COde taken from that stackOverFlow post etc.
+    /**You know the drill. COde taken from that stackOverFlow post etc.
+     * @param e the MouseEvent
+     */
     @Override
     public void mouseMoved(MouseEvent e) {
     }
 
-    //You know the drill. COde taken from that stackOverFlow post etc.
+    /**You know the drill. COde taken from that stackOverFlow post etc.
+     * @param e the MouseEvent
+     */    
     @Override
     public void mouseClicked(MouseEvent e) {
     }
 
-
+    /**You know the drill. COde taken from that stackOverFlow post etc.
+     * @param e the MouseEvent
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         if(!isUsingPencil){
@@ -407,19 +436,25 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
         }
     }
 
-
+    /**You know the drill. COde taken from that stackOverFlow post etc.
+     * @param e the MouseEvent
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         released = true;
         repaint();
     }
 
-    //You know the drill. COde taken from that stackOverFlow post etc.
+    /**You know the drill. COde taken from that stackOverFlow post etc.
+     * @param e the MouseEvent
+     */    
     @Override
     public void mouseEntered(MouseEvent e) {
     }
 
-    //You know the drill. COde taken from that stackOverFlow post etc.
+    /**You know the drill. COde taken from that stackOverFlow post etc.
+     * @param e the MouseEvent
+     */         
     @Override
     public void mouseExited(MouseEvent e) {
     }

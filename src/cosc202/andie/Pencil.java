@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
+
 
 /**A class that simulates a pencil drawing on a canvas 
  * @author Kevin Steve Sathyanath
@@ -14,7 +12,9 @@ import java.io.IOException;
 */
 public class Pencil extends JPanel implements ImageOperation, java.io.Serializable, MouseListener, MouseMotionListener {
 
+    /**Graphics object */
     private Graphics2D g;
+    /**The bufferedImage to return */
     private BufferedImage out;
 
     /**The constructor */
@@ -22,7 +22,9 @@ public class Pencil extends JPanel implements ImageOperation, java.io.Serializab
 
     }
     
-    /**The apply method. */
+    /**The apply method. 
+     * @param in the input BufferedImage.
+    */
     @Override
     public BufferedImage apply(BufferedImage in){
 
@@ -37,52 +39,59 @@ public class Pencil extends JPanel implements ImageOperation, java.io.Serializab
         else{
             g.setColor(Color.BLACK);
         }
-
-        
-        
-
-
         return in;
     }
 
-    
+    /**A method to show what to do when the mouse is pressed.
+     * @param e the MouseEvent
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         g.drawLine(e.getX(), e.getY(), e.getX(), e.getY());
         repaint();
     }
-
+    /**A method to show what to do when the mouse is exited.
+     * @param e the MouseEvent
+     */
     @Override
     public void mouseExited(MouseEvent e){
     }
-
+    /**A method to show what to do when the mouse is released.
+     * @param e the MouseEvent
+     */
     @Override
     public void mouseReleased(MouseEvent e){
-
     }
-
+    /**A method to show what to do when the mouse is clicked.
+     * @param e the MouseEvent
+     */
     @Override 
     public void mouseClicked(MouseEvent e){
-
     }
-
+    /**A method to show what to do when the mouse is entered.
+     * @param e the MouseEvent
+     */
     @Override
     public void mouseEntered(MouseEvent e){
 
     }
-    
+    /**A method to show what to do when the mouse is dragged.
+     * @param e the MouseEvent
+     */
     @Override
     public void mouseDragged(MouseEvent e){
         g.drawLine(e.getX(), e.getY(), e.getX(), e.getY());
             repaint();
     }
-
+    /**A method to show what to do when the mouse is moved.
+     * @param e the MouseEvent
+     */
     @Override
     public void mouseMoved(MouseEvent e){
-
     }
-
-
+    /**Paint component
+     * @param g the graphics object
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
