@@ -1,6 +1,5 @@
 package cosc202.andie;
 
-
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -89,7 +88,7 @@ public class ImageMenuBar {
         actions.add(vertical);
 
         // Action crop = new ImageCropAction(Andie.bundle.getString("ImageCrop", null,
-                // Andie.bundle.getString("ImageCropAction"), Integer.valueOf(KeyEvent.VK_J));
+        // Andie.bundle.getString("ImageCropAction"), Integer.valueOf(KeyEvent.VK_J));
 
         crop = new ImageCropAction("Image crop", null,
                 "Crops the image duh", Integer.valueOf(KeyEvent.VK_J));
@@ -119,9 +118,6 @@ public class ImageMenuBar {
 
         Action pencil = new PencilAction("Pencil", null, "Draw on the image", null);
         actions.add(pencil);
-
-
-
 
     }
 
@@ -157,7 +153,9 @@ public class ImageMenuBar {
         for (Action action : actions) {
             action.setEnabled(status);
         }
-        crop.setEnabled(!status);
+        if (FileActions.isOpened) {
+            crop.setEnabled(!status);
+        }
         ImageAction.target.setCrop(crop);
         scale25.setEnabled(status);
         scale50.setEnabled(status);
@@ -307,10 +305,9 @@ public class ImageMenuBar {
                 int width = (int) (selection.getWidth() / (target.getZoom() / 100));
                 int height = (int) (selection.getHeight() / (target.getZoom() / 100));
 
-
                 target.getImage().apply(new ImageCrop(x, y, width, height));
-                //ImageCrop imCrop = new ImageCrop(x, y, width, height);
-                //imCrop.apply(target.getImage().getCurrentImage());
+                // ImageCrop imCrop = new ImageCrop(x, y, width, height);
+                // imCrop.apply(target.getImage().getCurrentImage());
                 target.repaint();
                 target.getParent().revalidate();
                 MouseSelection.imagePanel.setIsSelecting(false);
@@ -473,7 +470,7 @@ public class ImageMenuBar {
             // JPanel panel=new JPanel();
 
             int height = 0;
-            int width =0;
+            int width = 0;
             SpinnerNumberModel heightModel = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
             SpinnerNumberModel widthModel = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
             JPanel panel = new JPanel(new GridLayout(4, 1));
@@ -486,16 +483,17 @@ public class ImageMenuBar {
             panel.add(s1);
             panel.add(l2);
             panel.add(s2);
-            int option = JOptionPane.showOptionDialog(Andie.getFrame(), panel,Andie.bundle.getString("ReScalingInstruction"),
-            JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            int option = JOptionPane.showOptionDialog(Andie.getFrame(), panel,
+                    Andie.bundle.getString("ReScalingInstruction"),
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-                // Check the return value from the dialog box.
+            // Check the return value from the dialog box.
             if (option == JOptionPane.CANCEL_OPTION) {
-                    return;
+                return;
             } else if (option == JOptionPane.OK_OPTION) {
                 height = heightModel.getNumber().intValue();
                 width = widthModel.getNumber().intValue();
-                try{
+                try {
                     target.getImage().apply(new ImageResize(height, width));
                     target.repaint();
                     target.getParent().revalidate();
@@ -504,30 +502,28 @@ public class ImageMenuBar {
                     System.out.println(e);
                     if (e instanceof NumberFormatException) {
                         JOptionPane.showMessageDialog(Andie.getFrame(),
-                        Andie.bundle.getString("PosInt"),
-                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                                Andie.bundle.getString("PosInt"),
+                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
                     } else if (e instanceof java.lang.NegativeArraySizeException) {
                         JOptionPane.showMessageDialog(Andie.getFrame(),
-                        Andie.bundle.getString("SmallNum"),
-                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                                Andie.bundle.getString("SmallNum"),
+                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
                     } else if (e instanceof java.lang.IllegalArgumentException) {
                         JOptionPane.showMessageDialog(Andie.getFrame(),
-                        Andie.bundle.getString("PosOrSmallInt"),
-                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                                Andie.bundle.getString("PosOrSmallInt"),
+                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
                     } else if (e instanceof NullPointerException) {
                         JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
-                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                                Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                     } else {
-                            // show message dialog and print the e into the box, saying that's an unexpected
-                            // error.
+                        // show message dialog and print the e into the box, saying that's an unexpected
+                        // error.
                         JOptionPane.showMessageDialog(Andie.getFrame(),
-                        Andie.bundle.getString("BooBoo"),
-                        Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
+                                Andie.bundle.getString("BooBoo"),
+                                Andie.bundle.getString("Error"), JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
-
-
 
         }
 
@@ -778,7 +774,6 @@ public class ImageMenuBar {
     public class RandomScatteringAction extends ImageAction {
         int radius = 0;
 
-
         /**
          * <p>
          * Create a new Random Scattering action.
@@ -811,26 +806,26 @@ public class ImageMenuBar {
          * @param e The event triggering this callback.
          */
 
-         JSlider radiusSlider;
+        JSlider radiusSlider;
 
         public void actionPerformed(ActionEvent e) {
             try {
                 // Determine the radius - ask the user.
                 BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
 
-                //final EditableImage preview = target.getImage().makeCopy();
-                //final ImagePanel show = new ImagePanel(preview);
+                // final EditableImage preview = target.getImage().makeCopy();
+                // final ImagePanel show = new ImagePanel(preview);
 
                 previewPanel = new JPanel();
-                previewPanel.setPreferredSize(new Dimension(500,300));
+                previewPanel.setPreferredSize(new Dimension(500, 300));
                 updatePreviewImage(prev);
 
                 // Pop-up dialog box to ask for the radius value.
                 JPanel sliderPane = new JPanel(new FlowLayout());
-                sliderPane.setPreferredSize(new Dimension(450,50));
-                JPanel labelPane = new JPanel(new GridLayout(1,1,167,0));
-                radiusSlider = new JSlider(0,10, 0);
-                radiusSlider.setPreferredSize(new Dimension(400,50));
+                sliderPane.setPreferredSize(new Dimension(450, 50));
+                JPanel labelPane = new JPanel(new GridLayout(1, 1, 167, 0));
+                radiusSlider = new JSlider(0, 10, 0);
+                radiusSlider.setPreferredSize(new Dimension(400, 50));
 
                 JLabel tempLabel = new JLabel("Radius", JLabel.CENTER);
                 radiusSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -845,7 +840,8 @@ public class ImageMenuBar {
                     public void stateChanged(ChangeEvent e) {
 
                         int rad = radiusSlider.getValue();
-                        BufferedImage curr = RandomScattering2.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
+                        BufferedImage curr = RandomScattering2
+                                .applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
                         updatePreviewImage(curr);
                         radius = rad;
 
@@ -860,9 +856,9 @@ public class ImageMenuBar {
 
                 JPanel menu = new JPanel(new GridBagLayout());
                 GridBagConstraints a = new GridBagConstraints();
-                Insets i = new Insets(20,0,0,0);
+                Insets i = new Insets(20, 0, 0, 0);
 
-                //a.fill = GridBagConstraints.BOTH;
+                // a.fill = GridBagConstraints.BOTH;
                 a.gridx = 0;
                 a.gridy = 0;
                 a.gridwidth = 2;
@@ -880,7 +876,7 @@ public class ImageMenuBar {
                 a.gridy = 2;
                 a.weighty = 0.7;
                 a.ipady = 1;
-                i.set(10,0,0,0);
+                i.set(10, 0, 0, 0);
                 menu.add(labelPane, a);
 
                 int option = JOptionPane.showOptionDialog(Andie.getFrame(), menu,
@@ -906,10 +902,11 @@ public class ImageMenuBar {
             }
         }
 
-    }//End of randomScattering
+    }// End of randomScattering
 
     /**
      * you can draw on the image! This call that method and stuff.
+     *
      * @author Kevin Steve Sathyanath
      */
     public class PencilAction extends ImageAction {
@@ -948,7 +945,7 @@ public class ImageMenuBar {
                 target.getImage().apply(new Pencil());
                 target.repaint();
                 target.getParent().revalidate();
-                //ImagePanel.isUsingPencil = false;
+                // ImagePanel.isUsingPencil = false;
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
@@ -957,22 +954,22 @@ public class ImageMenuBar {
             }
         }
     }
-    /**A method to update the preview pane common across all menu classes that use the preview panel.
+
+    /**
+     * A method to update the preview pane common across all menu classes that use
+     * the preview panel.
+     *
      * @author Kevin Steve Sathyanath
      * @param i The Buffered image input on the Preview Panel
      */
-    public void updatePreviewImage(BufferedImage i){
+    public void updatePreviewImage(BufferedImage i) {
         BufferedImage j = ImageResize.applyToPreview(i);
         JLabel pic = new JLabel(new ImageIcon(j));
-        //previewIcon = new ImageIcon(j);
+        // previewIcon = new ImageIcon(j);
         previewPanel.removeAll();
         previewPanel.add(pic);
         previewPanel.repaint();
         previewPanel.revalidate();
     }
-
-
-
-
 
 }
