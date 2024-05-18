@@ -274,7 +274,7 @@ public class FilterActions {
                 previewPanel = PreviewPanel.makePanel(prev);
                 updatePreviewImage(prev);
 
-                
+
                 medianSlider = new JSlider(JSlider.VERTICAL, 0,10,0);
                 medianSlider.setMajorTickSpacing(1);
                 medianSlider.setPaintTicks(true);
@@ -399,6 +399,12 @@ public class FilterActions {
         }
 
     }
+
+    /**
+     * <p>
+     * Action to apply an sobel filter to an image.
+     * </p>
+     */
     public class SobelFilterAction extends ImageAction{
         SobelFilterAction(String name, ImageIcon icon, String desc, Integer mnemonic){
             super(name,icon,desc,mnemonic);
@@ -441,7 +447,11 @@ public class FilterActions {
         }
     }
 
-
+    /**
+     * <p>
+     * Action to apply an emboss filter to an image.
+     * </p>
+     */
     public class EmbossFilterAction extends ImageAction {
 
         /**
@@ -688,14 +698,14 @@ public class FilterActions {
                         updatePreviewImage(curr);
                     }
                 };
-                
+
                 //Adding listener to spinner 1:
                 blockSizeHeightSpinner.addChangeListener(listener);
 
                 //Now on to spinner 2:
                 blockSizeWidthSpinner.addChangeListener(listener);
 
-                
+
 
                 panel.add(info1);
                 panel.add(blockSizeHeightSpinner);
@@ -720,7 +730,7 @@ public class FilterActions {
                 a.insets = i;
                 menu.add(panel, a);
 
-               
+
 
                 int option = JOptionPane.showOptionDialog(Andie.getFrame(), menu,
                         "Enter Block Size",
@@ -747,8 +757,8 @@ public class FilterActions {
             }
         }
     }
-    /**A method to update the preview Image. Common to all methods that pop up a preview image. 
-     * Please don't cut our marks for lack of comments. 
+    /**A method to update the preview Image. Common to all methods that pop up a preview image.
+     * Please don't cut our marks for lack of comments.
      * @author Kevin Steve Sathyanath
      * @date 07/05/2024
      * @param i BufferedImage
