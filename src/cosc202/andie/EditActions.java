@@ -54,7 +54,7 @@ public class EditActions {
 
         ImageIcon redoIcon = new ImageIcon("src/cosc202/andie/icons/redo.png");
         //Image downloaded from: <a href="https://www.flaticon.com/free-icons/redo" title="redo icons">Redo icons created by Creatype - Flaticon</a>
-        redo = new RedoAction(Andie.bundle.getString("Redo"), redoIcon, Andie.bundle.getString(Andie.bundle.getString("Redo")),
+        redo = new RedoAction(Andie.bundle.getString("Redo"), redoIcon, Andie.bundle.getString("Redo"),
                 Integer.valueOf(KeyEvent.VK_R));
         actions.add(redo);
         CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, Andie.bundle.getString("Redo"));
