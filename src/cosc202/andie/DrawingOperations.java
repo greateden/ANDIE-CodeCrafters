@@ -38,13 +38,10 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
    * Construct an DrawingOperations with no parameters.
    */
   public DrawingOperations(char shape, Point start, Point end,Color color) {
-    System.out.print("AM I BEING CONSTUCED?");
     this.start=start;
     this.end=end;
     this.shape = shape;
     this.color=color;
-
-
   }
 
   /**
