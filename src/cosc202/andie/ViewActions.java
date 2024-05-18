@@ -35,7 +35,7 @@ public class ViewActions {
      */
     protected ArrayList<Action> actions;
 
-    public Action zoomIn, zoomOut;
+    public Action zoomIn, zoomOut, zoomFull;
 
     /**
      * <p>
@@ -46,7 +46,7 @@ public class ViewActions {
         actions = new ArrayList<Action>();
 
 
-        Action zoomIn = new ZoomInAction(Andie.bundle.getString("ZoomInAction"), null,
+        zoomIn = new ZoomInAction(Andie.bundle.getString("ZoomInAction"), null,
                 Andie.bundle.getString("ZoomInAction"),
                 Integer.valueOf(KeyEvent.VK_I));
         actions.add(zoomIn);
@@ -58,7 +58,7 @@ public class ViewActions {
         actions.add(zoomOut);
         CreateHotKey.createHotkey(zoomOut, KeyEvent.VK_MINUS, InputEvent.META_DOWN_MASK, "zoomOut");
 
-        Action zoomFull = new ZoomFullAction(Andie.bundle.getString("ZoomFullAction"), null,
+        zoomFull = new ZoomFullAction(Andie.bundle.getString("ZoomFullAction"), null,
                 Andie.bundle.getString("ZoomFullAction"),
                 Integer.valueOf(KeyEvent.VK_F));
         actions.add(zoomFull);

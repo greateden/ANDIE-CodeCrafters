@@ -105,7 +105,7 @@ public class FileActions {
 
         ImageIcon openFileIcon = new ImageIcon("src/cosc202/andie/icons/open-file.png");
         //Image downloaded from: <a href="https://www.flaticon.com/free-icons/folder" title="folder icons">Folder icons created by stockes_02 - Flaticon</a>
-        Action fileOpen = new FileOpenAction(Andie.bundle.getString("OpenAction"), openFileIcon,
+        fileOpen = new FileOpenAction(Andie.bundle.getString("OpenAction"), openFileIcon,
                 Andie.bundle.getString("OpenDesc"),
                 Integer.valueOf(KeyEvent.VK_O));
         actions.add(fileOpen);
@@ -114,7 +114,7 @@ public class FileActions {
 
         ImageIcon saveIcon = new ImageIcon("src/cosc202/andie/icons/diskette.png");
         //Downloaded from : <a href="https://www.flaticon.com/free-icons/folder" title="folder icons">Folder icons created by stockes_02 - Flaticon</a>
-        Action fileSave = new FileSaveAction(Andie.bundle.getString("SaveAction"), saveIcon,
+        fileSave = new FileSaveAction(Andie.bundle.getString("SaveAction"), saveIcon,
                 Andie.bundle.getString("SaveDesc"), Integer.valueOf(KeyEvent.VK_S));
         actions.add(fileSave);
         CreateHotKey.createHotkey(fileSave, KeyEvent.VK_S, InputEvent.META_DOWN_MASK, "fileSave");
@@ -129,7 +129,7 @@ public class FileActions {
 
         ImageIcon exportIcon = new ImageIcon("src/cosc202/andie/icons/upload.png");
         //Downloaded from: <a href="https://www.flaticon.com/free-icons/output" title="output icons">Output icons created by NajmunNahar - Flaticon</a>
-        Action fileExport = new FileExportAction(Andie.bundle.getString("ExportAction"), exportIcon,
+        fileExport = new FileExportAction(Andie.bundle.getString("ExportAction"), exportIcon,
                 Andie.bundle.getString("ExportDesc"),
                 Integer.valueOf(KeyEvent.VK_E));
         actions.add(fileExport);
@@ -137,7 +137,7 @@ public class FileActions {
 
         ImageIcon printIcon = new ImageIcon("src/cosc202/andie/icons/printing.png");
         //Downloaded from: <a href="https://www.flaticon.com/free-icons/print" title="print icons">Print icons created by Freepik - Flaticon</a>
-        Action filePrint = new FilePrintAction(Andie.bundle.getString("PrintAction"), printIcon,
+        filePrint = new FilePrintAction(Andie.bundle.getString("PrintAction"), printIcon,
                 Andie.bundle.getString("PrintDesc"),
                 Integer.valueOf(KeyEvent.VK_P));
         actions.add(filePrint);
@@ -349,6 +349,7 @@ public class FileActions {
 
                     Andie.allCertainMenuStatus = true;
                     Andie.changeAllCertainMenuStatus(Andie.allCertainMenuStatus);
+                    Andie.toolbar.changeCropStatus(false);
                     target.repaint();
                     target.getParent().revalidate();
                 } catch (Exception ex) {
@@ -982,7 +983,7 @@ public class FileActions {
                     p.put("language", "en");
                     p.put("country", "NZ");
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
-                    System.out.println(p.get("language", "id"));
+                    //System.out.println(p.get("language", "id"));
                     Andie.setLanguage();
                     // l.setExtendedState(JFrame.NORMAL);
                     l.dispose();
@@ -998,7 +999,7 @@ public class FileActions {
                     p.put("language", "id");
                     p.put("country", "ID");
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
-                    System.out.println(p.get("language", "en"));
+                    //System.out.println(p.get("language", "en"));
                     Andie.getStatus();
                     Andie.setLanguage();
                     // l.setExtendedState(JFrame.NORMAL);
@@ -1016,7 +1017,7 @@ public class FileActions {
                     p.put("country", "TW");
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
 
-                    System.out.println(p.get("language", "zh"));
+                    //System.out.println(p.get("language", "zh"));
                     Andie.setLanguage();
                     // System.out.println(Andie.bundle.getString("EnterFilterRadius"));
                     // l.setExtendedState(JFrame.NORMAL);

@@ -86,7 +86,7 @@ public class Andie {
     /**
      * The menu bar associated with the image.
      */
-    private static ImageMenuBar imageMenuBar;
+    public static ImageMenuBar imageMenuBar;
     /**
      * The actions associated with colour operations.
      */
@@ -167,14 +167,6 @@ public class Andie {
         });
 
         frame.add(scrollPane, BorderLayout.CENTER);
-        // frame.add(tabs);
-        fileActions = new FileActions();
-        editActions = new EditActions();
-        viewActions = new ViewActions();
-        filterActions = new FilterActions();
-        imageMenuBar = new ImageMenuBar();
-        colourActions = new ColourActions();
-        helpActions = new HelpActions();
 
         createMenuBar();
 
@@ -221,7 +213,6 @@ public class Andie {
         macroActions.changeCertainMenuStatus(status);
         drawingActions.changeCertainMenuStatus(status);
         toolbar.changeCertainToolbarStatus(status);
-
     }
 
     /**
@@ -241,6 +232,7 @@ public class Andie {
         colourActions = new ColourActions();
         macroActions = new MacroActions();
         drawingActions=new DrawingActions();
+        helpActions = new HelpActions();
         // File menus are pretty standard, so things that usually go in File menus go
         // here.
 
@@ -256,6 +248,10 @@ public class Andie {
         JMenu viewMenu = viewActions.createMenu();
         newMenuBar.add(viewMenu);
 
+        // Actions that alter the image such as image flip/rotate
+        JMenu imageMenu = imageMenuBar.createMenu();
+        newMenuBar.add(imageMenu);
+
         // Filters apply a per-pixel operation to the image, generally based on a local
         // window
         JMenu filterMenu = filterActions.createMenu();
@@ -265,20 +261,16 @@ public class Andie {
         JMenu colourMenu = colourActions.createMenu();
         newMenuBar.add(colourMenu);
 
-        // Actions that alter the image such as image flip/rotate
-        JMenu imageMenu = imageMenuBar.createMenu();
-        newMenuBar.add(imageMenu);
+        // actions that apply a macro funtion of the operations
+        JMenu macroMenu = macroActions.createMenu();
+        newMenuBar.add(macroMenu);
 
+        JMenu drawMenu = drawingActions.createMenu();
+        newMenuBar.add(drawMenu);
 
         // Provides an about page and link to online docs
         JMenu helpMenu = helpActions.createMenu();
         newMenuBar.add(helpMenu);
-
-        // actions that apply a macro funtion of the operations
-        newMenuBar.add(macroActions.createMenu());
-
-        JMenu drawMenu = drawingActions.createMenu();
-        newMenuBar.add(drawMenu);
 
         frame.setJMenuBar(newMenuBar);
 

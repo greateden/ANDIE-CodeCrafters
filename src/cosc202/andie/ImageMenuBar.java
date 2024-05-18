@@ -69,7 +69,7 @@ public class ImageMenuBar {
     public BufferedImage previewImage;
     public ImageIcon previewIcon;
     public JPanel previewPanel;
-    private Action crop;
+    public Action crop;
 
     /**
      * <p>
@@ -86,9 +86,6 @@ public class ImageMenuBar {
         Action vertical = new ImageMenuBarFlipVertical(Andie.bundle.getString("FlipVertical"), null,
                 Andie.bundle.getString("FVDesc"), Integer.valueOf(KeyEvent.VK_V));
         actions.add(vertical);
-
-        // Action crop = new ImageCropAction(Andie.bundle.getString("ImageCrop", null,
-        // Andie.bundle.getString("ImageCropAction"), Integer.valueOf(KeyEvent.VK_J));
 
         crop = new ImageCropAction("Image crop", null,
                 "Crops the image duh", Integer.valueOf(KeyEvent.VK_J));
@@ -312,6 +309,7 @@ public class ImageMenuBar {
                 MouseSelection.imagePanel.repaint();
                 crop.setEnabled(false);
                 ImageAction.target.setCrop(false);
+                Andie.toolbar.changeCropStatus(false);
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),

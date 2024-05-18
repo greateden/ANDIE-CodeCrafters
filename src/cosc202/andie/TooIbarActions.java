@@ -30,6 +30,7 @@ public class TooIbarActions {
     private JButton cropButton;
     private JButton zoomInButton;
     private JButton zoomOutButton;
+    private JButton openButton;
 
     /**
      * Initializes the TooIbarActions object and sets up the toolbar.
@@ -38,7 +39,7 @@ public class TooIbarActions {
         toolbar = new JToolBar("Toolbar", JToolBar.HORIZONTAL);
 
         // Create buttons
-        JButton openButton = new JButton(
+        openButton = new JButton(
                 resizeAndAdjustIcon("src/cosc202/andie/icon/open-file stockes_02.png", 20, 20));
         saveButton = new JButton(
                 resizeAndAdjustIcon("src/cosc202/andie/icon/diskette Yogi Aprelliyanto.png", 20, 20));
@@ -71,9 +72,14 @@ public class TooIbarActions {
 
         openButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent ee) {
                 // Implement crop functionality here
-                Andie.fileActions.fileOpen.actionPerformed(e);
+                // System.out.println("hola");
+                try {
+                    Andie.fileActions.fileOpen.actionPerformed(ee);
+                } catch (Exception ex) {
+                    System.out.println(ex.toString());
+                }
             }
         });
 
@@ -123,6 +129,11 @@ public class TooIbarActions {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Implement crop functionality here
+                try{
+                    Andie.imageMenuBar.crop.actionPerformed(e);
+                }catch(Exception ex){
+                    System.out.println(ex.toString());
+                }
             }
         });
 
@@ -130,7 +141,11 @@ public class TooIbarActions {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Implement crop functionality here
-                Andie.viewActions.zoomIn.actionPerformed(e);
+                try {
+                    Andie.viewActions.zoomIn.actionPerformed(e);
+                } catch (Exception ex) {
+                    System.out.println(ex.toString());
+                }
             }
         });
 
@@ -142,10 +157,9 @@ public class TooIbarActions {
             }
         });
 
-
         // selectButton.addActionListener(new ActionListener() {
-            // @Override
-            // public void actionPerformed(ActionEvent e) {
+        // @Override
+        // public void actionPerformed(ActionEvent e) {
 
         // // Implement select functionality here
         // }
@@ -180,6 +194,10 @@ public class TooIbarActions {
         cropButton.setEnabled(status);
         zoomInButton.setEnabled(status);
         zoomOutButton.setEnabled(status);
+    }
+
+    public void changeCropStatus(boolean status){
+        cropButton.setEnabled(status);
     }
 
     /**

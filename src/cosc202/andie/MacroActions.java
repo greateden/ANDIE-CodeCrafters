@@ -99,7 +99,7 @@ public class MacroActions {
             if (FileActions.isOpened == true) {
                 try {
                     EditableImage.recordingStart = true;
-                    System.out.println("Start Recording");
+                    //System.out.println("Start Recording");
                     // target.getImage().recordOperations(op);
                     target.repaint();
                     target.getParent().revalidate();
@@ -182,7 +182,7 @@ public class MacroActions {
                             // Append ".ops" extension if not already present
                             String filePath = fileToSave.getAbsolutePath();
                             if (!filePath.toLowerCase().endsWith(".ops")) {
-                                System.out.println("no ops extension added");
+                                //System.out.println("no ops extension added");
 
                                 filePath += ".ops";
                             }
@@ -190,7 +190,7 @@ public class MacroActions {
                             // Rename the file with the enforced extension
                             File renamedFile = new File(filePath);
                             fileToSave.renameTo(renamedFile);
-                            System.out.println("File saved as: " + renamedFile.getAbsolutePath());
+                            //System.out.println("File saved as: " + renamedFile.getAbsolutePath());
 
 
                             EditableImage.isOpsNotEmptyStatus = false;
@@ -290,9 +290,9 @@ public class MacroActions {
 
                     // }
 
-                    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                    //System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                 } else if (userSelection == JFileChooser.CANCEL_OPTION) {
-                    System.out.println("Operation canceled.");
+                    //System.out.println("Operation canceled.");
                 }
 
             } catch (Exception err) {

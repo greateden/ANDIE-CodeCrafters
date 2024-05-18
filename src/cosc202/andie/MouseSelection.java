@@ -122,11 +122,10 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
             selectionRect = null;
         }
         if(!DrawingOperations.isDrawingRect||!DrawingOperations.isDrawingOval||!DrawingOperations.isDrawingLine){
-
-
             imagePanel.setSelectionRect(selectionRect);
             imagePanel.repaint();
             imagePanel.setCrop(true);
+            Andie.toolbar.changeCropStatus(true);
         }
 }
 
@@ -156,6 +155,7 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         // Removes the selection box
         imagePanel.repaint();
         imagePanel.setCrop(false);
+        Andie.toolbar.changeCropStatus(false);
     }
 
     @Override

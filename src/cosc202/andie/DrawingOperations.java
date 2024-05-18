@@ -61,14 +61,14 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
     }
 
     if (shape == 'r') {
-    System.out.println("Drawing rect");
+    //System.out.println("Drawing rect");
 
    Graphics2D g = input.createGraphics();
 
     Point startPoint= start;//MouseSelection.getStartPoint();
     Point endPoint= end; //MouseSelection.getEndPoint();
     if (startPoint != null && endPoint != null) {
-      System.out.println(this.zoom);
+      //System.out.println(this.zoom);
 
 
       int x = Math.min(startPoint.x, endPoint.x);
@@ -88,7 +88,7 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
 
   }else if (shape == 'o') {// draw an oval
 
-    System.out.println("Drawing oval");
+    //System.out.println("Drawing oval");
 
       Graphics2D g2d = input.createGraphics();
       int xStart = start.x;//MouseSelection.getStartPoint().x;
@@ -120,7 +120,7 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
 
     } else if (shape == 'l') {// draw a line
 
-    System.out.println("Drawing line");
+    //System.out.println("Drawing line");
 
       Graphics2D g2d = input.createGraphics();
 

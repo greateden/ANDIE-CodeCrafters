@@ -80,7 +80,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * @return The resulting (blurred)) image.
      */
     public BufferedImage apply(BufferedImage input) {
-        System.out.println(NUM_THREADS);
+        //System.out.println(NUM_THREADS);
         if (radius == 0) {
             return input;
         }
@@ -212,13 +212,13 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         progressDialog.setLocationRelativeTo(Andie.getFrame());
         // progressDialog.setLocationByPlatform(true);
         //progressDialog.setVisible(true);  //It's a pain to detangle the progress bar from the hypertheading. But if the user can't see it, it's out of sight, out of mind.
-        //If Eden reads this, he might get an aneursym from my love of commenting things out. 
+        //If Eden reads this, he might get an aneursym from my love of commenting things out.
         return output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
 
     }
 
 
-    /**A method that does the same as above, but for preview images. Also it's static. 
+    /**A method that does the same as above, but for preview images. Also it's static.
      * @author Kevin Steve Sathyanath
      * @date 07/05/2024
      * @param BufferedImage i, int radius
@@ -226,7 +226,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      */
 
      public static BufferedImage applyToPreview(BufferedImage input, int radius) {
-        System.out.println(NUM_THREADS2);
+        //System.out.println(NUM_THREADS2);
         if (radius == 0) {
             return input;
         }
@@ -358,7 +358,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         progressDialog.setLocationRelativeTo(Andie.getFrame());
         // progressDialog.setLocationByPlatform(true);
         //progressDialog.setVisible(true);  //It's a pain to detangle the progress bar from the hypertheading. But if the user can't see it, it's out of sight, out of mind.
-        //If Eden reads this, he might get an aneursym from my love of commenting things out. 
+        //If Eden reads this, he might get an aneursym from my love of commenting things out.
         return output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
 
     }
@@ -366,4 +366,3 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
 
 
 }
-
