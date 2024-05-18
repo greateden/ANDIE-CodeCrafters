@@ -85,17 +85,23 @@ public class ColourActions {
                 Andie.bundle.getString("RGBSwapDesc"),
                 Integer.valueOf(KeyEvent.VK_C));
         actions.add(rgbSwap);
-        actions.add(new brightnessAndContrastAction("Brightness and Contrast", null, "Change the Brightness and Contrast of the loaded image.", Integer.valueOf(KeyEvent.VK_B)));
+        actions.add(new brightnessAndContrastAction(Andie.bundle.getString("BC"), null, Andie.bundle.getString("BCDesc"), Integer.valueOf(KeyEvent.VK_B)));
 
-        Action sepia = new ConvertToSepiaAction("Sepia", null, "Applies a sepia filter to images", null);
+        Action sepia = new ConvertToSepiaAction(Andie.bundle.getString("Sepia"), null, Andie.bundle.getString("SepiaDesc"), null);
         actions.add(sepia);
 
-        Action temperature = new ChangeTemperatureAction("Temperature", null, "Change the temperature in the image", null);
+        Action temperature = new ChangeTemperatureAction(Andie.bundle.getString("Temp"), null, Andie.bundle.getString("TempDesc"), null);
         actions.add(temperature);
 
-        Action HSV = new ChangeHSVAction("Edit HSV", null, "Change the hue, saturation and brightness", null);
+        Action HSV = new ChangeHSVAction(Andie.bundle.getString("HSV"), null, Andie.bundle.getString("HSVDesc"), null);
         actions.add(HSV);
 
+<<<<<<< Updated upstream
+=======
+        Action choose = new ChooseAction(Andie.bundle.getString("ChooseColour"), null, Andie.bundle.getString("ChooseDesc"), null);
+        actions.add(choose);
+
+>>>>>>> Stashed changes
     }
 
     /**
@@ -473,9 +479,9 @@ public class ColourActions {
                 JPanel labelPane = new JPanel(new GridLayout(1,2,167,0));
                 brightnessSlider = new JSlider(-100,100);
                 contrastSlider = new JSlider(-100,100);
-                JLabel brightnessSliderLabel = new JLabel("Brightness", JLabel.CENTER);
+                JLabel brightnessSliderLabel = new JLabel(Andie.bundle.getString("BrightnessLabel"), JLabel.CENTER);
                 brightnessSliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-                JLabel contrastSliderLabel = new JLabel("Contrast", JLabel.CENTER);
+                JLabel contrastSliderLabel = new JLabel(Andie.bundle.getString("ContrastLabel"), JLabel.CENTER);
                 contrastSliderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
                 contrastSlider.setMajorTickSpacing(50);
@@ -547,7 +553,7 @@ public class ColourActions {
                 i.set(10,0,0,0);
                 menu.add(labelPane, a);
 
-                int option = JOptionPane.showOptionDialog(null, menu, "Set Brightness And Contrast",
+                int option = JOptionPane.showOptionDialog(null, menu, Andie.bundle.getString("SetBC"),
                         JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.PLAIN_MESSAGE, null, null, null);  //Added ImageIcon here
 
