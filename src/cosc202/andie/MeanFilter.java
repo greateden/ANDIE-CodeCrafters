@@ -75,6 +75,9 @@ public class MeanFilter implements ImageOperation, java.io.Serializable {
      * @return The resulting (blurred)) image.
      */
     public BufferedImage apply(BufferedImage input) {
+        if(radius == 0){
+            return input;
+        }
         int size = (2*radius+1) * (2*radius+1);
         float [] array = new float[size];
         Arrays.fill(array, 1.0f/size);
@@ -90,6 +93,36 @@ public class MeanFilter implements ImageOperation, java.io.Serializable {
 
         //Crops image back to original size
         output = output.getSubimage(radius, radius, input.getWidth(), input.getHeight());
+
+        return output;
+    }
+
+
+    /**A method that does the same as the one above, but is used for preview panels only.
+     * @author Emma Boult
+     * @param input The incoming image
+     * @param rad The radius
+     * @return The output image
+     */
+    public static BufferedImage applyToPreview(BufferedImage input, int rad) {
+        if(rad == 0){
+            return input;
+        }
+        int size = (2*rad+1) * (2*rad+1);
+        float [] array = new float[size];
+        Arrays.fill(array, 1.0f/size);
+
+        Kernel kernel = new Kernel(2*rad+1, 2*rad+1, array);
+        ConvolveOp convOp = new ConvolveOp(kernel);
+
+        //Create an instance of the class that creates image with border
+        FilterBorder borderedImage = new FilterBorder(input, rad);
+
+        //Applies convolution to bordered image
+        BufferedImage output = convOp.filter(borderedImage.applyBorder(), null);
+
+        //Crops image back to original size
+        output = output.getSubimage(rad, rad, input.getWidth(), input.getHeight());
 
         return output;
     }

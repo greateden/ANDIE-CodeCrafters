@@ -168,6 +168,9 @@ public class FilterActions {
             super(name, icon, desc, mnemonic);
         }
 
+        /**The slider used in the preview panel for the mean filter. */
+        JSlider meanSlider;
+
         /**
          * <p>
          * Callback for when the mean filter action is triggered.
@@ -186,6 +189,41 @@ public class FilterActions {
             try {
                 // Determine the radius - ask the user.
                 int radius = 0;
+                BufferedImage prev = new BufferedImage( (target.getImage().getCurrentImage()).getWidth(), (target.getImage().getCurrentImage()).getHeight(), BufferedImage.TYPE_INT_RGB);
+                prev.getGraphics().drawImage((target.getImage().getCurrentImage()), 0, 0, null);
+
+
+                previewPanel = PreviewPanel.makePanel(prev);
+                updatePreviewImage(prev);
+
+                meanSlider = new JSlider(JSlider.VERTICAL, 0,10,0);
+                meanSlider.setMajorTickSpacing(1);
+                meanSlider.setPaintTicks(true);
+                meanSlider.setPaintLabels(true);
+                meanSlider.setSnapToTicks(true);
+                meanSlider.setValue(0);
+
+                ChangeListener sliderChangeListener = new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+
+                        int rad = meanSlider.getValue();
+
+                        BufferedImage curr = MeanFilter.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
+                        updatePreviewImage(curr);
+
+
+                    }
+                };
+
+                meanSlider.addChangeListener(sliderChangeListener);
+
+                JPanel menu = new JPanel(new FlowLayout());
+                //GridBagConstraints a = new GridBagConstraints();
+                menu.add(previewPanel);
+                menu.add(meanSlider);
+
+
 
                 JPanel panel = new JPanel();
                 panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
@@ -197,26 +235,29 @@ public class FilterActions {
                 panel.add(info);
                 panel.add(radiusSpinner);
 
-                int option = JOptionPane.showOptionDialog(Andie.getFrame(), panel,
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), menu,
                         Andie.bundle.getString("EnterFilterRadius"),
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
                     return;
                 } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
+                    radius = meanSlider.getValue();
+                    target.getImage().apply(new MeanFilter(radius));
+                    target.repaint();
+                    target.getParent().revalidate();
                 }
-                // Check the return value from the dialog box.
-                if (option == JOptionPane.CANCEL_OPTION) {
-                    return;
-                } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
-                }
+                // // Check the return value from the dialog box.
+                // if (option == JOptionPane.CANCEL_OPTION) {
+                //     return;
+                // } else if (option == JOptionPane.OK_OPTION) {
+                //     radius = radiusModel.getNumber().intValue();
+                // }
 
-                target.getImage().apply(new MeanFilter(radius));
-                target.repaint();
-                target.getParent().revalidate();
+                // target.getImage().apply(new MeanFilter(radius));
+                // target.repaint();
+                // target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
@@ -356,6 +397,7 @@ public class FilterActions {
             super(name, icon, desc, mnemonic);
         }
 
+        JSlider gaussianSlider;
         /**
          * <p>
          * Callback for when the convert-to-grey action is triggered.
@@ -375,27 +417,65 @@ public class FilterActions {
                 // Determine the radius - ask the user.
                 int radius = 0;
 
+                BufferedImage prev = new BufferedImage( (target.getImage().getCurrentImage()).getWidth(), (target.getImage().getCurrentImage()).getHeight(), BufferedImage.TYPE_INT_RGB);
+                prev.getGraphics().drawImage((target.getImage().getCurrentImage()), 0, 0, null);
+
+
+                previewPanel = PreviewPanel.makePanel(prev);
+                updatePreviewImage(prev);
+
+                gaussianSlider = new JSlider(JSlider.VERTICAL, 0,10,0);
+                gaussianSlider.setMajorTickSpacing(1);
+                gaussianSlider.setPaintTicks(true);
+                gaussianSlider.setPaintLabels(true);
+                gaussianSlider.setSnapToTicks(true);
+                gaussianSlider.setValue(0);
+
+                ChangeListener sliderChangeListener = new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+
+                        int rad = gaussianSlider.getValue();
+
+                        BufferedImage curr = GaussianFilter.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
+                        updatePreviewImage(curr);
+
+
+                    }
+                };
+
+                gaussianSlider.addChangeListener(sliderChangeListener);
+
+                JPanel menu = new JPanel(new FlowLayout());
+                //GridBagConstraints a = new GridBagConstraints();
+                menu.add(previewPanel);
+                menu.add(gaussianSlider);
+
+
                 // Pop-up dialog box to ask for the radius value.
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
-                JSpinner radiusSpinner = new JSpinner(radiusModel);
+                // SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
+                // JSpinner radiusSpinner = new JSpinner(radiusModel);
                 // System.out.println("the language is" +
                 // Andie.bundle.getString("EnterFilterRadius"));
 
-                int option = JOptionPane.showOptionDialog(Andie.getFrame(), radiusSpinner,
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), menu,
                         Andie.bundle.getString("EnterFilterRadius"),
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 
                 // Check the return value from the dialog box.
                 if (option == JOptionPane.CANCEL_OPTION) {
                     return;
                 } else if (option == JOptionPane.OK_OPTION) {
-                    radius = radiusModel.getNumber().intValue();
+                    radius = gaussianSlider.getValue();
+                    target.getImage().apply(new GaussianFilter(radius));
+                    target.repaint();
+                    target.getParent().revalidate();
                 }
 
                 // Create and apply the filter
-                target.getImage().apply(new GaussianFilter(radius));
-                target.repaint();
-                target.getParent().revalidate();
+                // target.getImage().apply(new GaussianFilter(radius));
+                // target.repaint();
+                // target.getParent().revalidate();
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),

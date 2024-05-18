@@ -50,6 +50,9 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
      * @return a new BufferedImage with the applied Gaussian blur
     */
     public BufferedImage apply(BufferedImage input) {
+        if(radius ==0){
+            return input;
+        }
         int size = (2*radius+1) * (2*radius+1);
         float [] array = new float[size];
         double sum =0;
@@ -110,6 +113,48 @@ public class GaussianFilter implements ImageOperation, java.io.Serializable {
         int y = center - num / height;
         return x +","+ y;
     }
+
+
+
+    /**A method that does the same as above for the preview panel
+     * @author Angus Lyall
+     * @param input the BufferedImage input
+     * @param rad the radius
+     */
+    public static BufferedImage applyToPreview(BufferedImage input, int rad) {
+        if(rad == 0){
+            return input;
+        }
+        int size = (2*rad+1) * (2*rad+1);
+        float [] array = new float[size];
+        double sum =0;
+        for(int i = 0; i < size ; i++){
+            String[] posString = getpos(i,(2*rad+1)).split(",");
+            int x = Integer.parseInt(posString[0]);
+            int y = Integer.parseInt(posString[1]);
+            double result = GaussianEquation(x,y, (double)rad / 3);
+            sum = sum + result;
+            array[i] = (float)result;
+         }
+        for(int i = 0; i < size ; i++){
+             array[i] = array[i]/ (float)sum;
+         }
+
+        Kernel kernel = new Kernel(2*rad+1, 2*rad+1, array);
+        ConvolveOp convOp = new ConvolveOp(kernel);
+
+        //Create an instance of the class that creates image with border
+        FilterBorder borderedImage = new FilterBorder(input, rad);
+
+        //Applies convolution to bordered image
+        BufferedImage output = convOp.filter(borderedImage.applyBorder(), null);
+
+        //Crops image back to original size
+        output = output.getSubimage(rad, rad, input.getWidth(), input.getHeight());
+
+        return output;
+    }
+
 
 
 }
