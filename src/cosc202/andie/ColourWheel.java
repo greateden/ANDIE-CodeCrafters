@@ -5,10 +5,29 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+/**
+ * <p>
+ * A support class to pick a colour
+ * </p>
+ * 
+ * <p>
+ * This support class enables the user to pick a colour to use on the drawing tool.
+ * </p>
+ * 
+ 
+ * 
+ * 
+ * @author Kevin Steve Sathyanath
+ * @version 1.0
+ */
 public class ColourWheel {
 
+    /**The chosen colour */
     private static Color chosenColour;
+    /**A data field for the Colour chooser */
     public static JColorChooser chooser;
+    /**A temporary variable to hold the colour */
     public static Color a;
 
     /**The constructor
@@ -73,7 +92,9 @@ public class ColourWheel {
     
 
 
-    /**A getter method for the class that allows the program to get the colour the user has chosen. */
+    /**A getter method for the class that allows the program to get the colour the user has chosen. 
+     * @return The chosen colour
+    */
     public static Color getChosenColour(){
         return chosenColour;
     }
