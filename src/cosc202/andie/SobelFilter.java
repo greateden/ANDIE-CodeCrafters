@@ -21,7 +21,6 @@ import java.awt.image.*;
  * @author Angus Lyall
  * @version 1.0
 */
-
 public class SobelFilter implements ImageOperation, java.io.Serializable {
     /**
      * The Direction of the sobel filter.
@@ -79,7 +78,9 @@ public class SobelFilter implements ImageOperation, java.io.Serializable {
 
         return sobelImage; // returns the sobel and color adjusted image
     }
-
+    /**A method that creates a matrix
+     * @return the float array
+     */
     public float[] createMatrix(){
         if(this.dir){
             float[] SobelMatrix = {

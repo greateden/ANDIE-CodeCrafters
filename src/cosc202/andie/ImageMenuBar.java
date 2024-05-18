@@ -53,23 +53,30 @@ import javax.swing.event.ChangeListener;
  * @version 1.0
  */
 public class ImageMenuBar {
-
+    /**Resource for multilingual support */
     public ResourceBundle bundle = Andie.bundle;
-
     /** A list of actions for the Filter menu. */
     protected ArrayList<Action> actions;
+    /**The fileMenu */
     private JMenu fileMenu;
+    /**The image scaling action */
     private ImageScalingAction scalAct;
+    /**The rotateImage action */
     private RotateImageStrictAction rotAct;
+    /**the JDialog  */
     protected JDialog dialog;
-
+    /**The various scales used in the scaling function */
     private JMenuItem scale25, scale50, scale75, scale125, scale150;
+    /**The various menu options */
     private JMenuItem rotMenu90, rotMenu180, rotMenu270;
-
+    /**The image to show in the preview panel */
     public BufferedImage previewImage;
+    /**The icon for the preview Image to display */
     public ImageIcon previewIcon;
+    /**The preview panel */
     public JPanel previewPanel;
-    public Action crop;
+    /**The crop action */
+    private Action crop;
 
     /**
      * <p>
@@ -144,6 +151,7 @@ public class ImageMenuBar {
     /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
+     * @param status the boolean used to change the menu status
      */
     public void changeCertainMenuStatus(boolean status) {
         for (Action action : actions) {
@@ -544,7 +552,6 @@ public class ImageMenuBar {
         /**
          * <p>
          * Create a Image Scale Action.
-         *
          * </p>
          *
          * @param name     The name of the action (ignored if null).
@@ -727,8 +734,7 @@ public class ImageMenuBar {
 
             /**
              * Constructs a ScaleActionListener with the specified rotation angle.
-             *
-             *
+             * @param scalePercentage the percentage of the scaling
              */
             public ScaleActionListener(double scalePercentage) {
                 this.scalePercentage = scalePercentage;

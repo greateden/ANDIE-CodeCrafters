@@ -12,7 +12,7 @@ public class HelpActions {
 
     /** A list of actions for the Help menu. */
     protected ArrayList<Action> actions;
-
+    /**Bundle for multilingual support */
     public ResourceBundle bundle = Andie.bundle;
 
     /**
@@ -53,7 +53,21 @@ public class HelpActions {
 
         return fileMenu;
     }
-
+    /**
+     * <p>
+     * Gives help and stuff
+     * </p>
+     * 
+     * <p>
+     * Just some info about us and our app
+     * </p>
+     * 
+     
+    * 
+    * 
+    * @author Kevin Steve Sathyanath
+    * @version 1.0
+    */
     public class HelpActionsAboutUs extends AbstractAction {
 
         /**
@@ -90,6 +104,18 @@ public class HelpActions {
         }
     }
 
+    /**
+     * <p>
+     * Info about hotkeys
+     * </p>
+     * 
+     * <p>
+     * Info if you need it
+     * </p>
+     *     
+     * @author The Greatest Eden
+     * @version 1.0
+     */
     public class HotKeyInstructions extends AbstractAction {
 
         /**

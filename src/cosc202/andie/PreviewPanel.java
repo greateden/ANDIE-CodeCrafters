@@ -4,11 +4,12 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.image.*;
 
-public class PreviewPanel extends JPanel{
 
-    /**A method that makes a well-sized container to hold preview images and make things look fancy and bougie.
-import java.awt.image.*;
-
+/**
+ * <p>
+ * A class that provides common behaviour to implement in the preview panel for all methods that need them.
+ * </p>
+ * */
 public class PreviewPanel extends JPanel{
 
     /**A method that makes a well-sized container to hold preview images and make things look fancy and bougie.

@@ -28,7 +28,17 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-
+/**
+ * <p>
+ * You can draw stuff now
+ * </p>
+ * 
+ * <p>
+ * This method draws stuff.
+ * </p>
+ * @author YUXING ZHANG 
+ * @version 1.0
+ */
 public class DrawingActions {
     /** An arrayList of actions needed for this class. Ask Yuxing I guess. */
     protected ArrayList<Action> actions;

@@ -45,11 +45,6 @@ public class ImageRotate implements ImageOperation, java.io.Serializable {
      * <p>
      * Apply image rotate conversion to an image.
      * </p>
-     *
-     * <p>
-     *
-     * </p>
-     *
      * @param input The image to be rotated.
      * @return The resulting rotated image.
      */

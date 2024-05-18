@@ -25,10 +25,9 @@ import java.io.*;
  *
  */
 public class MacroActions {
-
+    /**An arrayList of actions to help in creatig the ops file */
     protected ArrayList<Action> actions;
     /** The file where the operation sequence is stored. */
-
     public ResourceBundle bundle = Andie.bundle;
 
 
@@ -75,6 +74,7 @@ public class MacroActions {
         /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
+     * @param status the boolean that decided whether the items in the menu are greyed out.
      */
     public void changeCertainMenuStatus(boolean status) {
         for (Action action : actions) {
@@ -131,7 +131,12 @@ public class MacroActions {
      */
     public class StopAction extends ImageAction {
 
-
+        /**A constructor
+         * @param name the name of the action
+         * @param icon the icon
+         * @param desc  the Description
+         * @param mnemonic the mnemonic key
+         */
         StopAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
@@ -237,9 +242,18 @@ public class MacroActions {
 
     }
     }
-
+    /**A class that applies previously recorded macro actions on a new image.
+     * @author Yuxing Zhang
+     * @version 1.0
+     */
     public class ApplyPrevMacroAction extends ImageAction {
 
+        /**A constructor
+         * @param name the name of the action
+         * @param icon the icon
+         * @param desc  the Description
+         * @param mnemonic the mnemonic key
+         */
         ApplyPrevMacroAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }

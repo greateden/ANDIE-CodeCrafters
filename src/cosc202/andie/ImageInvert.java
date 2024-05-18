@@ -34,11 +34,6 @@ public class ImageInvert implements ImageOperation, java.io.Serializable {
      * <p>
      * Apply image invert conversion to an image.
      * </p>
-     *
-     * <p>
-     *
-     * </p>
-     *
      * @param input The image to be inverted.
      * @return The resulting inverted image.
      */

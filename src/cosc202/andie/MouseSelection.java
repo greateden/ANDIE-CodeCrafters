@@ -25,13 +25,21 @@ import javax.swing.*;
  */
 public class MouseSelection implements MouseListener, MouseMotionListener {
 
+    /**The start point */
     private Point start;
+    /**The end point */
     private Point end;
+    /** Our imagePanel */
     public static ImagePanel imagePanel;
+    /**The width of the image */
     private int imageWidth;
+    /**The height of the image */
     private int imageHeight;
+    /**The seclection rectangle */
     private Rectangle selectionRect;
+    /**A boolean that decides whether the dotten lines box should stay on the screen */
     private boolean isSelecting;
+    /**The rotation angle to make the dotted lines move */
     private int rotationAngle = 0;
 
     /**
@@ -158,6 +166,7 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         Andie.toolbar.changeCropStatus(false);
     }
 
+    /**Decides app behaviour when the mouse is dragged. */
     @Override
     public void mouseDragged(MouseEvent e) {
         this.imageWidth = (int) (imagePanel.getImage().getCurrentImage().getWidth() * (imagePanel.getZoom() / 100));
@@ -205,6 +214,9 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         imagePanel.repaint();
     }
 
+    /**a getter for the selection rectangle
+     * @return the selection rectangle
+     */
     public Rectangle getSelectionRect() {
         return selectionRect;
     }
@@ -230,7 +242,7 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
-
+    /**not needed ofr this implementation */
     @Override
     public void mouseMoved(MouseEvent e) {
     }

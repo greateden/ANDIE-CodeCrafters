@@ -120,6 +120,9 @@ public class HSV implements ImageOperation, java.io.Serializable {
      * </p>
      *
      * @param input The image to be converted to greyscale
+     * @param h the hue
+     * @param s the saturation
+     * @param v the Value
      * @return The resulting greyscale image.
      */
     public static BufferedImage applyToPreview(BufferedImage input, float h, float s, float v) {

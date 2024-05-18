@@ -46,13 +46,8 @@ public class RotateImageStrictAction implements ImageOperation, java.io.Serializ
      * <p>
      * Rotates the image.
      * </p>
-     *
-     * <p>
-     *
-     * </p>
-     *
      * @param input The image to be rotated.
-     * @return The resulting roated image.
+     * @return The resulting rotated image.
      */
     public BufferedImage apply(BufferedImage input) {
 

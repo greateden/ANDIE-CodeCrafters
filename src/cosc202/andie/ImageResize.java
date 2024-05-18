@@ -38,6 +38,8 @@ public class ImageResize implements ImageOperation, java.io.Serializable {
 
   /**
    *  Construct an ImageResize with the given parameters.
+   * @param height the height to be resized to.
+   * @param width the width to be resized to.
    */
   public ImageResize(int height, int width) {
 
