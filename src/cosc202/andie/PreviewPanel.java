@@ -13,9 +13,8 @@ public class PreviewPanel extends JPanel{
 
     /**A method that makes a well-sized container to hold preview images and make things look fancy and bougie.
      * @author Kevin Steve Sathyanath
-     * @param i
-     * @return
-     * @date 07/05/2024
+     * @param i The BufferedImage
+     * @return the JPanel in question
      */
     public static JPanel makePanel(BufferedImage i){
 

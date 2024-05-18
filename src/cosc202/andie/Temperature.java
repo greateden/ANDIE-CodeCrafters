@@ -21,6 +21,7 @@ import java.awt.image.*;
  */
 public class Temperature implements ImageOperation, java.io.Serializable {
 
+    /**The degree to which temperature is changed. */
     private double dial;
         /**
          * <p>
@@ -75,7 +76,8 @@ public class Temperature implements ImageOperation, java.io.Serializable {
 
     /**The same method as above, but static and with the dial given as a parameter for the preview panel.
      * @author Kevin Steve Sathyanath
-     * @param BufferedImage original image and double dial
+     * @param input the BufferedImage
+     * @param di the dial value
      * @return The resultant image.
      */
     public static BufferedImage applyToPreview(BufferedImage input, double di) {

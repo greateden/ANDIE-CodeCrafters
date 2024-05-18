@@ -78,7 +78,7 @@ public class ImagePanel extends JPanel implements MouseWheelListener, MouseListe
     private Action crop;
 
     /**Gets the crop
-     * @param crop the crop action
+     * @return crop the crop action
      */
     public Action getCrop(){
         return crop;
