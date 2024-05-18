@@ -53,11 +53,19 @@ public class DrawingActions {
      */
     public DrawingActions() {
         actions = new ArrayList<Action>();
+        //Icon downloaded from: <a href="https://www.flaticon.com/free-icons/oval" title="oval icons">Oval icons created by Freepik - Flaticon</a>
+        ImageIcon ellipseIcon = new ImageIcon("src/cosc202/andie/icons/ellipse.png");
+        //Icon taken from: <a href="https://www.flaticon.com/free-icons/rectangle" title="rectangle icons">Rectangle icons created by Freepik - Flaticon</a>
+        ImageIcon rectangleIcon = new ImageIcon("src/cosc202/andie/icons/rectangle.png");
+        //Icon taken from: <a href="https://www.flaticon.com/free-icons/line" title="line icons">Line icons created by Freepik - Flaticon</a>
+        ImageIcon lineIcon = new ImageIcon("src/cosc202/andie/icons/diagonal-line.png");
 
-        actions.add(new DrawOvalAction(Andie.bundle.getString("Oval"), null, Andie.bundle.getString("OvalDesc"), Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new DrawRectAction(Andie.bundle.getString("Rectangle"), null, Andie.bundle.getString("RectangleDesc"),
+
+
+        actions.add(new DrawOvalAction(Andie.bundle.getString("Oval"), ellipseIcon, Andie.bundle.getString("OvalDesc"), Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new DrawRectAction(Andie.bundle.getString("Rectangle"), rectangleIcon, Andie.bundle.getString("RectangleDesc"),
         Integer.valueOf(KeyEvent.VK_R)));
-        actions.add(new DrawLineAction(Andie.bundle.getString("Line"), null, Andie.bundle.getString("LineDesc"),
+        actions.add(new DrawLineAction(Andie.bundle.getString("Line"), lineIcon, Andie.bundle.getString("LineDesc"),
         Integer.valueOf(KeyEvent.VK_L)));
     }
 

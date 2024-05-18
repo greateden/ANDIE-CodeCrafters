@@ -99,8 +99,9 @@ public class Andie {
      * The actions associated with macro operations.
      */
     private static MacroActions macroActions;
+    /**The actions associated with drawing operations. */
     private static DrawingActions drawingActions;
-        /**
+    /**
      * The status of all certain menu items.
      */
     public static boolean allCertainMenuStatus;
