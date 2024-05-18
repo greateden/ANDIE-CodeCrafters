@@ -995,6 +995,7 @@ public class FileActions {
             });
 
             bahasa.addActionListener(new ActionListener() {
+                @SuppressWarnings("deprecation")
                 public void actionPerformed(ActionEvent e) {
                     Andie.exitFullScreen();
                     Preferences p = Preferences.userNodeForPackage(Andie.class);

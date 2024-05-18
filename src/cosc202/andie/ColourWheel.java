@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 
 
 /**
@@ -69,7 +72,7 @@ public class ColourWheel {
             }
         };
         try{
-        a = JColorChooser.showDialog(colorFrame, "Pick a colour", Color.BLACK, true);
+        a = JColorChooser.showDialog(colorFrame, Andie.bundle.getString("PickAColour"), Color.BLACK, true);
         }catch(HeadlessException h){
             System.out.println(h);
         }

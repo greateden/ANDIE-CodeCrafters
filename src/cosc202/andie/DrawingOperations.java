@@ -45,13 +45,10 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
    * @param color the color
    */
   public DrawingOperations(char shape, Point start, Point end,Color color) {
-    System.out.print("AM I BEING CONSTUCED?");
     this.start=start;
     this.end=end;
     this.shape = shape;
     this.color=color;
-
-
   }
 
   /**
@@ -143,6 +140,8 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
 
 
       g2d.setColor(color);
+      g2d.setStroke(new BasicStroke(3));
+      g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
       g2d.drawLine(xStart, yStart,xEnd, yEnd); // (x, y,x2, y2)
 
      //g2d.dispose();
