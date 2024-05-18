@@ -700,13 +700,13 @@ public class ImageMenuBar {
 
             JMenu rotMenu = new JMenu(Andie.bundle.getString("RotateBy"));
 
-            rotMenu90 = new JMenuItem("90° right");
+            rotMenu90 = new JMenuItem(Andie.bundle.getString("90Right"));
             CreateHotKey.createHotkey(rotMenu90, KeyEvent.VK_1, 0, "rotMenu90");
 
             rotMenu180 = new JMenuItem("180°");
             CreateHotKey.createHotkey(rotMenu180, KeyEvent.VK_2, 0, "rotMenu180");
 
-            rotMenu270 = new JMenuItem("90° left");
+            rotMenu270 = new JMenuItem(Andie.bundle.getString("90Left"));
             CreateHotKey.createHotkey(rotMenu270, KeyEvent.VK_3, 0, "rotMenu270");
 
             rotMenu90.addActionListener(new ScaleActionListener(90));
@@ -789,6 +789,8 @@ public class ImageMenuBar {
             super(name, icon, desc, mnemonic);
         }
 
+        JSlider radiusSlider;
+        
         /**
          * <p>
          * Callback for when the Random Scattering action is triggered.
@@ -802,9 +804,6 @@ public class ImageMenuBar {
          *
          * @param e The event triggering this callback.
          */
-
-        JSlider radiusSlider;
-
         public void actionPerformed(ActionEvent e) {
             try {
                 // Determine the radius - ask the user.

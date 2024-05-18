@@ -49,11 +49,15 @@ import javax.swing.event.ChangeListener;
  * @version 1.0
  */
 public class FilterActions {
-
+    /**The multilingual support feature */
     public ResourceBundle bundle = Andie.bundle;
+    /**The JPanel */
     public JPanel previewPanel;
+    /**The previewIcon */
     public ImageIcon previewIcon;
+    /** The height of the block */
     public int blockHeight;
+    /**The width of the block */
     public int blockWidth;
 
 
@@ -128,6 +132,7 @@ public class FilterActions {
         /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
+     * @param status the boolean changing the way the program works
      */
     public void changeCertainMenuStatus(boolean status) {
         for (Action action : actions) {
@@ -274,7 +279,7 @@ public class FilterActions {
                 previewPanel = PreviewPanel.makePanel(prev);
                 updatePreviewImage(prev);
 
-
+                
                 medianSlider = new JSlider(JSlider.VERTICAL, 0,10,0);
                 medianSlider.setMajorTickSpacing(1);
                 medianSlider.setPaintTicks(true);
@@ -698,14 +703,14 @@ public class FilterActions {
                         updatePreviewImage(curr);
                     }
                 };
-
+                
                 //Adding listener to spinner 1:
                 blockSizeHeightSpinner.addChangeListener(listener);
 
                 //Now on to spinner 2:
                 blockSizeWidthSpinner.addChangeListener(listener);
 
-
+                
 
                 panel.add(info1);
                 panel.add(blockSizeHeightSpinner);
@@ -730,7 +735,7 @@ public class FilterActions {
                 a.insets = i;
                 menu.add(panel, a);
 
-
+               
 
                 int option = JOptionPane.showOptionDialog(Andie.getFrame(), menu,
                         "Enter Block Size",
@@ -757,10 +762,9 @@ public class FilterActions {
             }
         }
     }
-    /**A method to update the preview Image. Common to all methods that pop up a preview image.
-     * Please don't cut our marks for lack of comments.
+    /**A method to update the preview Image. Common to all methods that pop up a preview image. 
+     * Please don't cut our marks for lack of comments. 
      * @author Kevin Steve Sathyanath
-     * @date 07/05/2024
      * @param i BufferedImage
      */
     public void updatePreviewImage(BufferedImage i){

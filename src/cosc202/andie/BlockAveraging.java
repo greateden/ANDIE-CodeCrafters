@@ -42,6 +42,7 @@ public class BlockAveraging implements ImageOperation, java.io.Serializable {
      * apply a blcok averaging action.
      * </p>
      * 
+     * @param input the BufferedImage
      */
     @Override
     public BufferedImage apply(BufferedImage input) {
@@ -102,8 +103,9 @@ public class BlockAveraging implements ImageOperation, java.io.Serializable {
 
     /**The same method as above, but it's static and it's for previewPanels. 
      * @author Really can't take credit for copy-pasting Yuxing's code. 
-     * @date 07/05/2024
-     * @param bufferedImage i, int height, int width
+     * @param input BufferedImage input
+     * @param bWidth the width of the block
+     * @param bHeight the Height of the block
      * @return the output image
      */
     public static BufferedImage applyToPreview(BufferedImage input, int bWidth, int bHeight) {
