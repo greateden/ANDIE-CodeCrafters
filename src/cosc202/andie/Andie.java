@@ -371,7 +371,7 @@ public class Andie {
                     try {
                         UIManager.setLookAndFeel(laf);
                     } catch (Exception ex) {
-                        System.err.println("Failed to initialize LaF");
+                        System.err.println(Andie.bundle.getString("FailedLAF"));
                     }
     }
     /**
