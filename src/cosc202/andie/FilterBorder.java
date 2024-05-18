@@ -26,6 +26,8 @@ public class FilterBorder {
      * <p>
      * Create a new Filter Border operation, default constructor.
      * </p>
+     * @param input BufferedImage input
+     * @param radius the radius
      */
     public FilterBorder(BufferedImage input, int radius){
         this.radius = radius;

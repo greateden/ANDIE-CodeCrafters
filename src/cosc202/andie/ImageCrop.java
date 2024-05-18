@@ -2,6 +2,14 @@ package cosc202.andie;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * <p>
+ * ImageCrop to crop an image based on the MouseSelection selection box bounds
+ * </p>
+ *
+ * @author Emma
+ * @version 2.0
+ */
 public class ImageCrop implements ImageOperation {
     private int x;
     private int y;

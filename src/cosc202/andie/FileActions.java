@@ -53,17 +53,22 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @version 1.0
  */
 public class FileActions {
-
+    /**Multilingual support */
     public ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
+    /** A boolean for controlling the program */
     protected static boolean isOpened = false;
     // protected boolean isSaved = false;
 
+    /**Action to open a file */
     public Action fileOpen;
+    /**Action to save a file */
     public Action fileSave;
+    /**Action to export a file */
     public Action fileExport;
+    /**Action to print a file */
     public Action filePrint;
 
 
