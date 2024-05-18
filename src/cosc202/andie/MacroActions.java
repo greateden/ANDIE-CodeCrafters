@@ -252,6 +252,12 @@ public class MacroActions {
                 // System.out.println("Select ops file");
                 JFileChooser fileChooser = new JFileChooser();
 
+                // Add file filters for OPS format only
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("OPS Files (*.ops)", "ops");
+
+                fileChooser.addChoosableFileFilter(filter);
+                fileChooser.setFileFilter(filter);
+
                 // Show open dialog
                 int userSelection = fileChooser.showOpenDialog(Andie.getFrame());
 
@@ -259,6 +265,11 @@ public class MacroActions {
                     // Get the selected file
                     File selectedFile = fileChooser.getSelectedFile();
                     String opsFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                    if (!opsFilepath.toLowerCase().endsWith(".ops")) {
+                        JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("FileTypeErr"),
+                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
 
                     // try{
                     FileInputStream fileinput = new FileInputStream(opsFilepath);
