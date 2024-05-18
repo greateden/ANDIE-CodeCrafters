@@ -41,7 +41,7 @@ import javax.swing.JOptionPane;
  * @version 1.0
  */
 public class DrawingActions {
-    /** An arrayList of actions needed for this class. Ask Yuxing I guess. */
+    /** An arrayList of actions needed for this class. Ask Yuxing what it does I guess. */
     protected ArrayList<Action> actions;
     /** The file where the operation sequence is stored. */
     public ResourceBundle bundle = Andie.bundle;
@@ -54,10 +54,10 @@ public class DrawingActions {
     public DrawingActions() {
         actions = new ArrayList<Action>();
 
-        actions.add(new DrawOvalAction("Oval (O)", null, "Draw an oval on the image", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new DrawRectAction("Rectangle (R)", null, "Draw rectangle on the image",
+        actions.add(new DrawOvalAction(Andie.bundle.getString("Oval"), null, Andie.bundle.getString("OvalDesc"), Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new DrawRectAction(Andie.bundle.getString("Rectangle"), null, Andie.bundle.getString("RectangleDesc"),
         Integer.valueOf(KeyEvent.VK_R)));
-        actions.add(new DrawLineAction("Line (L)", null, "Draw line on the image",
+        actions.add(new DrawLineAction(Andie.bundle.getString("Line"), null, Andie.bundle.getString("LineDesc"),
         Integer.valueOf(KeyEvent.VK_L)));
     }
 
@@ -69,7 +69,7 @@ public class DrawingActions {
      * @return The edit menu UI element.
      */
     public JMenu createMenu() {
-        JMenu drawMenu = new JMenu("Drawing (D)");
+        JMenu drawMenu = new JMenu(Andie.bundle.getString("Drawing"));
         for (Action action : actions) {
             drawMenu.add(new JMenuItem(action));
         }

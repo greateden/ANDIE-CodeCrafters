@@ -50,17 +50,17 @@ public class EditActions {
         undo = new UndoAction(Andie.bundle.getString("Undo"), undoIcon, Andie.bundle.getString("Undo"),
                 Integer.valueOf(KeyEvent.VK_U));
         actions.add(undo);
-        CreateHotKey.createHotkey(undo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK, "Undo");
+        CreateHotKey.createHotkey(undo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK, Andie.bundle.getString("Undo"));
 
         ImageIcon redoIcon = new ImageIcon("src/cosc202/andie/icons/redo.png");
         //Image downloaded from: <a href="https://www.flaticon.com/free-icons/redo" title="redo icons">Redo icons created by Creatype - Flaticon</a>
-        redo = new RedoAction(Andie.bundle.getString("Redo"), redoIcon, Andie.bundle.getString("Redo"),
+        redo = new RedoAction(Andie.bundle.getString("Redo"), redoIcon, Andie.bundle.getString(Andie.bundle.getString("Redo")),
                 Integer.valueOf(KeyEvent.VK_R));
         actions.add(redo);
-        CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, "Redo");
-        CreateHotKey.createHotkey(redo, KeyEvent.VK_Y, InputEvent.META_DOWN_MASK, "Redo");
+        CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, Andie.bundle.getString("Redo"));
+        CreateHotKey.createHotkey(redo, KeyEvent.VK_Y, InputEvent.META_DOWN_MASK, Andie.bundle.getString("Redo"));
 
-        Action changeTheme = new ChangeThemeAction("Change Theme (C)", null, Andie.bundle.getString("Redo"),
+        Action changeTheme = new ChangeThemeAction(Andie.bundle.getString("ThemeMenu"), null, Andie.bundle.getString("Redo"),
                 Integer.valueOf(KeyEvent.VK_C));
         actions.add(changeTheme);
     }
@@ -226,14 +226,14 @@ public class EditActions {
             try {
                 JFrame frame = new JFrame();
                 JPanel panel = new JPanel();
-                followOSTheme = new JCheckBox("Follow OS theme");
-                JLabel label = new JLabel("Theme:");
+                followOSTheme = new JCheckBox(Andie.bundle.getString("FollowOSTheme"));
+                JLabel label = new JLabel(Andie.bundle.getString("Theme:"));
                 String[] themes = { "FlatLightLaf", "FlatMacDarkLaf", "FlatMacLightLaf", "FlatDarkLaf",
                         "FlatIntelliJLaf",
                         "FlatDarculaLaf" };
                 themeSelector = new JComboBox<>(themes);
-                cancelButton = new JButton("Cancel");
-                okButton = new JButton("OK");
+                cancelButton = new JButton(Andie.bundle.getString("Cancel"));
+                okButton = new JButton(Andie.bundle.getString("OK"));
 
                 // Listener for "Follow OS theme" checkbox
                 followOSTheme.addItemListener(e -> {
@@ -250,7 +250,7 @@ public class EditActions {
                     ThemeConfig.SetTheme(followOSTheme.isSelected(), (String) themeSelector.getSelectedItem());
                     Andie.createTheme();
                     JOptionPane.showMessageDialog(Andie.getFrame(),
-                            "New theme will be applied next time when the program runs.",
+                            Andie.bundle.getString("NewThemeMSG"),
                             Andie.bundle.getString("Warning"), 1); // Handle OK button click
                 });
 
