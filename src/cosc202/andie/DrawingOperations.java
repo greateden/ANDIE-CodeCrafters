@@ -90,7 +90,7 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
       g.setColor(color);
 
 
-      g.drawRect(x, y, width, height);
+      g.fillRect(x, y, width, height);
       //g.dispose();
 
       DrawingOperations.isDrawingRect=false;
