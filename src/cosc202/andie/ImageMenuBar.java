@@ -76,7 +76,7 @@ public class ImageMenuBar {
     /**The preview panel */
     public JPanel previewPanel;
     /**The crop action */
-    private Action crop;
+    public Action crop;
 
     /**
      * <p>
@@ -794,7 +794,7 @@ public class ImageMenuBar {
         }
         /**The JSlider used in the code below. */
         JSlider radiusSlider;
-        
+
         /**
          * <p>
          * Callback for when the Random Scattering action is triggered.
