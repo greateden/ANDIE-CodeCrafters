@@ -207,12 +207,13 @@ public class FilterActions {
                     @Override
                     public void stateChanged(ChangeEvent e) {
 
-                        int rad = meanSlider.getValue();
-
-                        BufferedImage curr = MeanFilter.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
-                        updatePreviewImage(curr);
-
-
+                        try{
+                            int rad = meanSlider.getValue();
+                            BufferedImage curr = MeanFilter.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
+                            updatePreviewImage(curr);
+                        }catch(IllegalArgumentException hu){
+                            System.out.println("The illegal argument exception has been caught and handled.");
+                        }
                     }
                 };
 
@@ -435,10 +436,13 @@ public class FilterActions {
                     @Override
                     public void stateChanged(ChangeEvent e) {
 
-                        int rad = gaussianSlider.getValue();
-
-                        BufferedImage curr = GaussianFilter.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
-                        updatePreviewImage(curr);
+                        try{
+                            int rad = gaussianSlider.getValue();
+                            BufferedImage curr = GaussianFilter.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
+                            updatePreviewImage(curr);
+                        }catch(IllegalArgumentException hu){
+                            System.out.println("Illegal Argument Exception caught");
+                        }
 
 
                     }
