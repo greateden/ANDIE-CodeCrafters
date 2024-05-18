@@ -30,9 +30,9 @@ import javax.swing.JOptionPane;
 
 
 public class DrawingActions {
+    /** An arrayList of actions needed for this class. Ask Yuxing I guess. */
     protected ArrayList<Action> actions;
     /** The file where the operation sequence is stored. */
-
     public ResourceBundle bundle = Andie.bundle;
 
     /**
@@ -69,6 +69,7 @@ public class DrawingActions {
     /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
+     * @param status The boolean value to control the behaviour of this method.
      */
     public void changeCertainMenuStatus(boolean status) {
         for (Action action : actions) {
@@ -84,6 +85,12 @@ public class DrawingActions {
      */
     public class DrawOvalAction extends ImageAction {
 
+        /**Constructor for the action
+         * @param name the name
+         * @param icon the icon
+         * @param desc the desc
+         * @param mnemonic the mnemonic
+         */
         DrawOvalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
 
@@ -124,6 +131,12 @@ public class DrawingActions {
      */
     public class DrawRectAction extends ImageAction {
 
+        /**A method that requires comments
+         * @param name name
+         * @param icon icon
+         * @param desc desc
+         * @param mnemonic mnemonic
+         */
         DrawRectAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
 
