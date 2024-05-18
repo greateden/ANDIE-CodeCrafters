@@ -45,6 +45,9 @@ ANDIE Code Crafters © 2024 by Emma Boult, Eden Li, Angus Lyall, Kevin Sathyanat
 * Image resize
 * Image invert
 * Image scaling
+* Block averaging
+* Drawing functions
+* Macros
 
 `Emma`
 * Sharpen filter
@@ -55,6 +58,8 @@ ANDIE Code Crafters © 2024 by Emma Boult, Eden Li, Angus Lyall, Kevin Sathyanat
 * Created Issues.txt
 * Encapsulation of code to pad border of images - FilterBorder.java
 * Extended filters
+* Mouse Selection
+* Image Crop
 
 `Angus`
 * Guassian blur filter
