@@ -27,7 +27,7 @@ import javax.swing.*;
  * @version 1.0
  */
 public class ViewActions {
-
+    /**The resource bundle for multilingual support */
     public ResourceBundle bundle = Andie.bundle;
 
     /**
@@ -35,6 +35,7 @@ public class ViewActions {
      */
     protected ArrayList<Action> actions;
 
+    /**Actions representing zoom in,out and full */
     public Action zoomIn, zoomOut, zoomFull;
 
     /**
@@ -88,6 +89,7 @@ public class ViewActions {
         /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
+     * @param status the status for the menu
      */
     public void changeCertainMenuStatus(boolean status) {
         for (Action action : actions) {

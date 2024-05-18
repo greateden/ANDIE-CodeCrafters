@@ -19,7 +19,7 @@ import java.awt.image.BufferedImage;
  */
 
 public class DrawingOperations implements ImageOperation, java.io.Serializable {
-
+  /**The type of shape to be drawn. */
   private char shape;
   /**A boolean to control behaviour of mouse selection */
   public static boolean isDrawingRect;
@@ -29,8 +29,11 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
   public static boolean isDrawingLine;
   /**A boolean to control behaviour of mouse selection */
   public static double zoom;
+  /**The start point */
   private Point start;
+  /**The end point */
   private Point end;
+  /**The colour to be drawn with */
   private Color color;
 
 

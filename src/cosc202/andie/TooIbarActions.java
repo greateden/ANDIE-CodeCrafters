@@ -183,7 +183,9 @@ public class TooIbarActions {
         toolbar.add(zoomInButton);
         toolbar.add(zoomOutButton);
     }
-
+    /**A method to change the toolbar status
+     * @param status the status of the toolbar
+     */
     public void changeCertainToolbarStatus(boolean status) {
         saveButton.setEnabled(status);
         exportButton.setEnabled(status);
@@ -195,7 +197,9 @@ public class TooIbarActions {
         zoomInButton.setEnabled(status);
         zoomOutButton.setEnabled(status);
     }
-
+    /**A method to change the status of the crop
+     * @param status the boolean impacting the status of the crop
+     */
     public void changeCropStatus(boolean status){
         cropButton.setEnabled(status);
     }

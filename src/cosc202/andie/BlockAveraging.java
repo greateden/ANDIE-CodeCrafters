@@ -20,7 +20,9 @@ import java.awt.image.BufferedImage;
  * @version 1.0
  */
 public class BlockAveraging implements ImageOperation, java.io.Serializable {
+    /**The height of the blocks */
     private int blockSizeHeight;
+    /**The width of the blocks */
     private int blockSizeWidth;
 
     /**
