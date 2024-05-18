@@ -48,17 +48,17 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
     }
 
     // public static Point getStartPoint() {
-    //     return start;
+    // return start;
     // }
 
     // public static Point getEndPoint() {
-    //     return end;
+    // return end;
     // }
 
     // public static ImagePanel getImagePanel(){
-    //     return imagePanel;
+    // return imagePanel;
     // }
-   
+
     /**
      * Records start coordinates of selection when mouse is pressed
      */
@@ -83,21 +83,21 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(DrawingOperations.isDrawingRect){
-           Color color=ColourWheel.getChosenColour();
-            imagePanel.getImage().apply(new DrawingOperations('r',start,end,color));
-            //DrawingOperations.isDrawingRect=false;
-        }else if(DrawingOperations.isDrawingOval){
-           Color color=ColourWheel.getChosenColour();
+        if (DrawingOperations.isDrawingRect) {
+            Color color = ColourWheel.getChosenColour();
+            imagePanel.getImage().apply(new DrawingOperations('r', start, end, color));
+            // DrawingOperations.isDrawingRect=false;
+        } else if (DrawingOperations.isDrawingOval) {
+            Color color = ColourWheel.getChosenColour();
 
-            imagePanel.getImage().apply(new DrawingOperations('o',start,end,color));
-            DrawingOperations.isDrawingOval=false;
+            imagePanel.getImage().apply(new DrawingOperations('o', start, end, color));
+            DrawingOperations.isDrawingOval = false;
 
-        }else if(DrawingOperations.isDrawingLine){
-           Color color=ColourWheel.getChosenColour();
+        } else if (DrawingOperations.isDrawingLine) {
+            Color color = ColourWheel.getChosenColour();
 
-            imagePanel.getImage().apply(new DrawingOperations('l',start,end,color));
-            DrawingOperations.isDrawingLine=false;
+            imagePanel.getImage().apply(new DrawingOperations('l', start, end, color));
+            DrawingOperations.isDrawingLine = false;
 
         }
 
@@ -118,15 +118,15 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
             // Reset selection rectangle if it's just a click
             selectionRect = null;
         }
-        if(!DrawingOperations.isDrawingRect||!DrawingOperations.isDrawingOval||!DrawingOperations.isDrawingLine){
 
-        
-        imagePanel.setSelectionRect(selectionRect);
-        imagePanel.repaint();
-        imagePanel.setCrop(true);
+        if (!DrawingOperations.isDrawingRect || !DrawingOperations.isDrawingOval || !DrawingOperations.isDrawingLine) {
+            System.out.println("imagesetcrop");
+
+            imagePanel.setSelectionRect(selectionRect);
+            imagePanel.repaint();
+            imagePanel.setCrop(true);
+        }
     }
-}
-
 
     /**
      * Calculates and draws the selction box
@@ -152,6 +152,7 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
     private void clearSelection() {
         // Removes the selection box
         imagePanel.repaint();
+        imagePanel.setCrop(false);
     }
 
     @Override
@@ -201,7 +202,7 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         imagePanel.repaint();
     }
 
-    public Rectangle getSelectionRect(){
+    public Rectangle getSelectionRect() {
         return selectionRect;
     }
 
