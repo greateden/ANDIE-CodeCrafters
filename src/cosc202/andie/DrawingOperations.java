@@ -4,18 +4,18 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * 
- * 
+ *
+ *
  * <p>
  * ImageOperation to apply drawing functions.
  * </p>
- * 
+ *
  * <p>
  * The image drawing operation takes and image and draw some
  * basic shapes(rectangle oval and line) on the image
  * </p>
- * 
- * 
+ *
+ *
  * </p>
  *
  * @author YUXING ZHANG
@@ -28,6 +28,7 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
   public static boolean isDrawingRect;
   public static boolean isDrawingOval;
   public static boolean isDrawingLine;
+  public static double zoom;
   private Point start;
   private Point end;
   private Color color;
@@ -37,10 +38,12 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
    * Construct an DrawingOperations with no parameters.
    */
   public DrawingOperations(char shape, Point start, Point end,Color color) {
-this.start=start;
-this.end=end;
+    System.out.print("AM I BEING CONSTUCED?");
+    this.start=start;
+    this.end=end;
     this.shape = shape;
     this.color=color;
+
 
   }
 
@@ -52,8 +55,14 @@ this.end=end;
    */
   @Override
   public BufferedImage apply(BufferedImage input) {
-  
-     
+    // Move the start and end coords based on the zoom level.
+    if (start != null && end != null) {
+      start.x = (int) (start.getX() / (this.zoom / 100));
+      start.y = (int) (start.getY() / (this.zoom / 100));
+      end.x = (int) (end.getX() / (this.zoom / 100));
+      end.y = (int) (end.getY() / (this.zoom / 100));
+    }
+
     if (shape == 'r') {
     System.out.println("Drawing rect");
 
@@ -62,22 +71,24 @@ this.end=end;
     Point startPoint= start;//MouseSelection.getStartPoint();
     Point endPoint= end; //MouseSelection.getEndPoint();
     if (startPoint != null && endPoint != null) {
+      System.out.println(this.zoom);
+
+
       int x = Math.min(startPoint.x, endPoint.x);
       int y = Math.min(startPoint.y, endPoint.y);
       int width = Math.abs(startPoint.x - endPoint.x);
       int height = Math.abs(startPoint.y - endPoint.y);
 
-     
      //  color=ColourWheel.getChosenColour();
       g.setColor(color);
 
-     
+
       g.drawRect(x, y, width, height);
       //g.dispose();
 
       DrawingOperations.isDrawingRect=false;
     }
-  
+
   }else if (shape == 'o') {// draw an oval
 
     System.out.println("Drawing oval");
@@ -104,7 +115,7 @@ this.end=end;
         height = yEnd - yStart;
       }
 
-    
+
       g2d.setColor(color);
       g2d.fillOval(x, y, width, height); // (x, y, width, height)
 
@@ -123,7 +134,7 @@ this.end=end;
       int yEnd = end.y;//MouseSelection.getEndPoint().y;
 
 
-     
+
       g2d.setColor(color);
       g2d.drawLine(xStart, yStart,xEnd, yEnd); // (x, y,x2, y2)
 

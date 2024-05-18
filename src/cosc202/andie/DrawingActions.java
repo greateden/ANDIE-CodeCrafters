@@ -1,17 +1,17 @@
 package cosc202.andie;
 
 /**
- * 
+ *
  * <p>
  * ImageOperation to apply drawing functions.
  * </p>
- * 
+ *
  * <p>
  * The DrawingActions menu contains actions 3 drawing shapes actions.
  * Users are able to choose to draw rectangle, oval and line use different colors
- * 
+ *
  * </p>
- * 
+ *
  * </p>
  *
  * @author YUXING ZHANG
@@ -93,7 +93,7 @@ public class DrawingActions {
             if (FileActions.isOpened == true) {
                 try {
                     ColourWheel.pickColour();
-
+                    DrawingOperations.zoom = target.getZoom();
                     DrawingOperations.isDrawingOval=true;
 
                     // target.getImage().apply(new DrawingOperations('o'));
@@ -133,7 +133,8 @@ public class DrawingActions {
             if (FileActions.isOpened == true) {
                 try {
                     ColourWheel.pickColour();
-                   DrawingOperations.isDrawingRect=true;
+                    DrawingOperations.zoom = target.getZoom();
+                    DrawingOperations.isDrawingRect=true;
                     //target.getImage().apply(new DrawingOperations('r'));
                     target.repaint();
                     target.getParent().revalidate();
@@ -171,7 +172,7 @@ public class DrawingActions {
             if (FileActions.isOpened == true) {
                 try {
                     ColourWheel.pickColour();
-
+                    DrawingOperations.zoom = target.getZoom();
                     DrawingOperations.isDrawingLine=true;
 
                     // target.getImage().apply(new DrawingOperations('l'));

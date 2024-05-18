@@ -58,7 +58,7 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
     // public static ImagePanel getImagePanel(){
     //     return imagePanel;
     // }
-   
+
     /**
      * Records start coordinates of selection when mouse is pressed
      */
@@ -104,27 +104,27 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         imagePanel.repaint();
         imagePanel.getParent().revalidate();
 
-        isSelecting = false;
-        imagePanel.setIsSelecting(isSelecting);
+        //isSelecting = false;
+        //imagePanel.setIsSelecting(isSelecting);
 
-        if (selectionRect != null && selectionRect.width != 0 && selectionRect.height != 0) {
-            // Ensure selection rectangle is normalized
-            selectionRect = new Rectangle(
-                    Math.min(start.x, end.x),
-                    Math.min(start.y, end.y),
-                    Math.abs(end.x - start.x),
-                    Math.abs(end.y - start.y));
-        } else {
-            // Reset selection rectangle if it's just a click
-            selectionRect = null;
-        }
-        if(!DrawingOperations.isDrawingRect||!DrawingOperations.isDrawingOval||!DrawingOperations.isDrawingLine){
+        // if (selectionRect != null && selectionRect.width != 0 && selectionRect.height != 0) {
+        //     // Ensure selection rectangle is normalized
+        //     selectionRect = new Rectangle(
+        //             Math.min(start.x, end.x),
+        //             Math.min(start.y, end.y),
+        //             Math.abs(end.x - start.x),
+        //             Math.abs(end.y - start.y));
+        // } else {
+        //     // Reset selection rectangle if it's just a click
+        //     selectionRect = null;
+        // }
+        // if(!DrawingOperations.isDrawingRect||!DrawingOperations.isDrawingOval||!DrawingOperations.isDrawingLine){
 
-        
-        imagePanel.setSelectionRect(selectionRect);
+
+        //imagePanel.setSelectionRect(selectionRect);
         imagePanel.repaint();
         imagePanel.setCrop(true);
-    }
+
 }
 
 
