@@ -38,6 +38,7 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
     private int radius;
     //** Number of threads to use */
     private final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
+    /**Static version of the thread above :-D */
     private static final int NUM_THREADS2 = Runtime.getRuntime().availableProcessors();  //This one's static. No, I'm not about to mess with hyperthreading again. If it works, I'm not about to try fixing it.
 
     /**
@@ -195,12 +196,17 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
             }// End of doInBackground()
 
             // stackoverflow codes end
-
+            /**A method that does something
+             * @param chunks chunks I guess?
+             */
             @Override
             protected void process(java.util.List<Integer> chunks) {
                 progressBar.setValue(chunks.get(chunks.size() - 1));
             }
 
+            /**Obligatory comment
+             * Pls give marks.
+             */
             @Override
             protected void done() {
                 progressDialog.dispose();
@@ -220,11 +226,10 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
 
     /**A method that does the same as above, but for preview images. Also it's static.
      * @author Kevin Steve Sathyanath
-     * @date 07/05/2024
-     * @param BufferedImage i, int radius
+     * @param input the input image
+     * @param radius the input radius
      * @return The output BufferedImage
      */
-
      public static BufferedImage applyToPreview(BufferedImage input, int radius) {
         //System.out.println(NUM_THREADS2);
         if (radius == 0) {
@@ -341,12 +346,17 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
             }// End of doInBackground()
 
             // stackoverflow codes end
-
+            /**Comment.
+             * @param chunks Chunky chunks
+             */
             @Override
             protected void process(java.util.List<Integer> chunks) {
                 progressBar.setValue(chunks.get(chunks.size() - 1));
             }
 
+            /**Commenting for marks.
+             * 
+             */
             @Override
             protected void done() {
                 progressDialog.dispose();

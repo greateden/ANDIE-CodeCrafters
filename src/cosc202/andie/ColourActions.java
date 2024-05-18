@@ -161,7 +161,6 @@ public class ColourActions {
          * It changes the image to greyscale.
          * </p>
          *
-         * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
             try {
@@ -211,7 +210,6 @@ public class ColourActions {
          * It changes the image.
          * </p>
          *
-         * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
             try {
@@ -260,7 +258,6 @@ public class ColourActions {
          * It changes the order of the color channels in the image based on user preferences.
          * </p>
          *
-         * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
             try {
@@ -441,7 +438,6 @@ public class ColourActions {
          * It changes the image's brightness and contrast depending on user input.
          * </p>
          *
-         * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e){
             //Yeah this is a mess. But it took 3 weeks and 4 demonstrators to make this work. Please just leave it as it is.
@@ -586,7 +582,6 @@ public class ColourActions {
      * Action to convert an image to Sepia.
      * </p>
      *
-     * @see ConvertToSepia
      */
     public class ConvertToSepiaAction extends ImageAction {
 
@@ -614,7 +609,6 @@ public class ColourActions {
          * It changes the image to greyscale.
          * </p>
          *
-         * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
             try {
@@ -634,7 +628,6 @@ public class ColourActions {
 
     /**A class to implement the change temperature action
      * @author Kevin Steve Sathyanath
-     * @date 19/04/2024
      */
     public class ChangeTemperatureAction extends ImageAction{
 
@@ -653,6 +646,7 @@ public class ColourActions {
         ChangeTemperatureAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
+        JSlider tempSlider;
 
         /**
          * <p>
@@ -664,12 +658,7 @@ public class ColourActions {
          * It changes the image's brightness and contrast depending on user input.
          * </p>
          *
-         * @param e The event triggering this callback.
          */
-        JSlider tempSlider;
-
-
-
         public void actionPerformed(ActionEvent e){
             try{
                 BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
@@ -792,7 +781,7 @@ public class ColourActions {
 
         /**
          * A method to update the preview image.
-         * @param i
+         * @param i The BufferedImage input
          */
         public void updatePreviewImage(BufferedImage i){
             BufferedImage j = ImageResize.applyToPreview(i);
@@ -806,9 +795,8 @@ public class ColourActions {
 
 
 
-        /**A class to implement the GUI for B&C manipulation.
+    /**A class to implement the GUI for B and C manipulation.
      * @author Kevin Steve Sathyanath
-     * @date 19/04/2024
      */
     public class ChangeHSVAction extends ImageAction{
 
@@ -830,6 +818,11 @@ public class ColourActions {
             super(name, icon, desc, mnemonic);
         }
 
+        JSlider HueSlider;
+        JSlider SaturationSlider;
+        JSlider BrightnessSlider;
+
+
         /**
          * <p>
          * Callback for when the brightnessAndContrast action is triggered.
@@ -840,14 +833,7 @@ public class ColourActions {
          * It changes the image's brightness and contrast depending on user input.
          * </p>
          *
-         * @param e The event triggering this callback.
          */
-        JSlider HueSlider;
-        JSlider SaturationSlider;
-        JSlider BrightnessSlider;
-
-
-
         public void actionPerformed(ActionEvent e){
             try{
                 BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
@@ -1002,7 +988,6 @@ public class ColourActions {
          * This method is called to chooe a colour from the colour wheel.
          * </p>
          *
-         * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
             try {

@@ -14,10 +14,6 @@ import java.awt.image.BufferedImage;
  * The image drawing operation takes and image and draw some
  * basic shapes(rectangle oval and line) on the image
  * </p>
- *
- *
- * </p>
- *
  * @author YUXING ZHANG
  * @version 1.0
  */
@@ -25,9 +21,13 @@ import java.awt.image.BufferedImage;
 public class DrawingOperations implements ImageOperation, java.io.Serializable {
 
   private char shape;
+  /**A boolean to control behaviour of mouse selection */
   public static boolean isDrawingRect;
+  /**A boolean to control behaviour of mouse selection */
   public static boolean isDrawingOval;
+  /**A boolean to control behaviour of mouse selection */
   public static boolean isDrawingLine;
+  /**A boolean to control behaviour of mouse selection */
   public static double zoom;
   private Point start;
   private Point end;
@@ -36,12 +36,19 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
 
   /**
    * Construct an DrawingOperations with no parameters.
+   * @param shape the shape of the selection
+   * @param start the start point
+   * @param end the end point
+   * @param color the color
    */
   public DrawingOperations(char shape, Point start, Point end,Color color) {
+    System.out.print("AM I BEING CONSTUCED?");
     this.start=start;
     this.end=end;
     this.shape = shape;
     this.color=color;
+
+
   }
 
   /**
