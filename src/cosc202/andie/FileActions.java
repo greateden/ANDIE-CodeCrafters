@@ -148,7 +148,7 @@ public class FileActions {
         Action fileChangeLangue = new FileChangeLanguageAction(Andie.bundle.getString("ChangeLanguage"), languageIcon,
                 Andie.bundle.getString("ChangeLanguage"), Integer.valueOf(KeyEvent.VK_L));
         actions.add(fileChangeLangue);
-        CreateHotKey.createHotkey(fileChangeLangue, 0, 0, "fileChangeLangue");
+        //CreateHotKey.createHotkey(fileChangeLangue, 0, 0, "fileChangeLangue");
 
         ImageIcon exitIcon = new ImageIcon("src/cosc202/andie/icons/logout.png");
         //Downloaded from: <a href="https://www.flaticon.com/free-icons/mobile-app" title="mobile app icons">Mobile app icons created by Andy Horvath - Flaticon</a>
@@ -954,7 +954,7 @@ public class FileActions {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Andie.exitFullScreen();
+            Andie.exitFullScreen();// to prevent the window from resizing unexpectedly
 
             JFrame l = new JFrame();
 

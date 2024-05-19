@@ -227,7 +227,7 @@ public class EditActions {
                 JFrame frame = new JFrame();
                 JPanel panel = new JPanel();
                 followOSTheme = new JCheckBox(Andie.bundle.getString("FollowOSTheme"));
-                JLabel label = new JLabel(Andie.bundle.getString("Theme:"));
+                JLabel label = new JLabel(Andie.bundle.getString("Theme"));
                 String[] themes = { "FlatLightLaf", "FlatMacDarkLaf", "FlatMacLightLaf", "FlatDarkLaf",
                         "FlatIntelliJLaf",
                         "FlatDarculaLaf" };
