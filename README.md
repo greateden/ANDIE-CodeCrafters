@@ -1,5 +1,5 @@
 <div align="center">
-<img src = src/icon.png>
+<img src = src/icon.png width="50%" height="auto">
 <h2>
  ANDIE - A Non-Destructive Image Editor
 
