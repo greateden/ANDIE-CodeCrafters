@@ -194,6 +194,7 @@ Throughout the entirety of our development we had a good system or reporting bug
         dateFormat  DD-MM-YYYY
         Start of project: milestone, m1,05-03-2024,
         First deliverable: milestone, m2, 28-03-2024,
+        Second deliverable: milestone, m3, 22-05-2024
 
         section Developing
             Colour Channel Cycling              :done, des1, 08-03-2024, 3d
