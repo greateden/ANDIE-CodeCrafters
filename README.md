@@ -165,7 +165,10 @@ Throughout the entirety of our development we had a good system or reporting bug
 
 ## Show Us Something
 * Multithreading
-* Print function
+* Print Function
+* HSV Editor
+* Temperature Editor
+* Sepia Filter
 
 ## Gantt Diagram for Our Project
 
