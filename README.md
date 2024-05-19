@@ -73,7 +73,10 @@ ANDIE Code Crafters © 2024 by Emma Boult, Eden Li, Angus Lyall, Kevin Sathyanat
 
 
 ## Testing
-We tested our code mainly via brute force. We went through and thought of all the senarios that could occur when a user would use the program and serched for errors. We also checked for silent errors by using try catch loops and having the program print out a message to the terminal anytime an error was caught.
+The majority of our testing was done via a brute force method. After each feature was complete we thought of all the scenarios that could occur when a user used said feature and checked for any errors or unexpected outcomes. Once we were completely featured complete, we moved into testing all the different combinations of features available. This allowed us to uncover issues that could occur, particularly with feature that in practice would be commonly used together.
+The bulk of our last round of testing was done as an entire group, we booked out a study room for a day and all rigorously tested, trying our best to break our program. This uncovered quite a few errors we had not originally caught, we then noted them all down under the "issues" tab in our Git Lab repository.
+
+Throughout the entirety of our development we had a good system or reporting bugs found in testing. Each time a new bug was found, whoever uncovered it would add it as an "issue" in our Git Lab repository. This way we could all see the complete list of bugs we needed to fix and discuss in the comments on how we planned to fix them. This kept all of our team in the loop and ensured no known bug accidentally got forgotten about.
 
 ## Known Issues
 - When user is prompted to enter a value for an action, if they exit out of the pop-up, the action will still be performed with the default value.
