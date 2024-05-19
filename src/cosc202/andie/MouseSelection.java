@@ -25,21 +25,23 @@ import javax.swing.*;
  */
 public class MouseSelection implements MouseListener, MouseMotionListener {
 
-    /**The start point */
+    /** The start point */
     private Point start;
-    /**The end point */
+    /** The end point */
     private Point end;
     /** Our imagePanel */
     public static ImagePanel imagePanel;
-    /**The width of the image */
+    /** The width of the image */
     private int imageWidth;
-    /**The height of the image */
+    /** The height of the image */
     private int imageHeight;
-    /**The seclection rectangle */
+    /** The seclection rectangle */
     private Rectangle selectionRect;
-    /**A boolean that decides whether the dotten lines box should stay on the screen */
+    /**
+     * A boolean that decides whether the dotten lines box should stay on the screen
+     */
     private boolean isSelecting;
-    /**The rotation angle to make the dotted lines move */
+    /** The rotation angle to make the dotted lines move */
     private int rotationAngle = 0;
 
     /**
@@ -91,25 +93,27 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (DrawingOperations.isDrawingRect) {
-            Color color = ColourWheel.getChosenColour();
-            imagePanel.getImage().apply(new DrawingOperations('r', start, end, color));
-            DrawingOperations.isDrawingRect=false;
-            selectionRect = null;
-        } else if (DrawingOperations.isDrawingOval) {
-            Color color = ColourWheel.getChosenColour();
+        if (start != end) {
+            if (DrawingOperations.isDrawingRect) {
+                Color color = ColourWheel.getChosenColour();
+                imagePanel.getImage().apply(new DrawingOperations('r', start, end, color));
+                DrawingOperations.isDrawingRect = false;
+                selectionRect = null;
+            } else if (DrawingOperations.isDrawingOval) {
+                Color color = ColourWheel.getChosenColour();
 
-            imagePanel.getImage().apply(new DrawingOperations('o', start, end, color));
-            DrawingOperations.isDrawingOval = false;
-            selectionRect = null;
+                imagePanel.getImage().apply(new DrawingOperations('o', start, end, color));
+                DrawingOperations.isDrawingOval = false;
+                selectionRect = null;
 
-        } else if (DrawingOperations.isDrawingLine) {
-            Color color = ColourWheel.getChosenColour();
+            } else if (DrawingOperations.isDrawingLine) {
+                Color color = ColourWheel.getChosenColour();
 
-            imagePanel.getImage().apply(new DrawingOperations('l', start, end, color));
-            DrawingOperations.isDrawingLine = false;
-            selectionRect = null;
+                imagePanel.getImage().apply(new DrawingOperations('l', start, end, color));
+                DrawingOperations.isDrawingLine = false;
+                selectionRect = null;
 
+            }
         }
 
         imagePanel.repaint();
@@ -129,14 +133,13 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
             // Reset selection rectangle if it's just a click
             selectionRect = null;
         }
-        if(!DrawingOperations.isDrawingRect||!DrawingOperations.isDrawingOval||!DrawingOperations.isDrawingLine){
+        if (!DrawingOperations.isDrawingRect || !DrawingOperations.isDrawingOval || !DrawingOperations.isDrawingLine) {
             imagePanel.setSelectionRect(selectionRect);
             imagePanel.repaint();
             imagePanel.setCrop(true);
             Andie.toolbar.changeCropStatus(true);
         }
-}
-
+    }
 
     /**
      * Calculates and draws the selction box
@@ -166,7 +169,7 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         Andie.toolbar.changeCropStatus(false);
     }
 
-    /**Decides app behaviour when the mouse is dragged. */
+    /** Decides app behaviour when the mouse is dragged. */
     @Override
     public void mouseDragged(MouseEvent e) {
         this.imageWidth = (int) (imagePanel.getImage().getCurrentImage().getWidth() * (imagePanel.getZoom() / 100));
@@ -214,7 +217,9 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
         imagePanel.repaint();
     }
 
-    /**a getter for the selection rectangle
+    /**
+     * a getter for the selection rectangle
+     *
      * @return the selection rectangle
      */
     public Rectangle getSelectionRect() {
@@ -226,6 +231,11 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
+        if (DrawingOperations.isDrawingRect || DrawingOperations.isDrawingOval || DrawingOperations.isDrawingLine) {
+            DrawingOperations.isDrawingRect = false;
+            DrawingOperations.isDrawingOval = false;
+            DrawingOperations.isDrawingLine = false;
+        }
         clearSelection();
     }
 
@@ -242,7 +252,8 @@ public class MouseSelection implements MouseListener, MouseMotionListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
-    /**not needed ofr this implementation */
+
+    /** not needed ofr this implementation */
     @Override
     public void mouseMoved(MouseEvent e) {
     }
