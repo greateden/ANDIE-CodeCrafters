@@ -13,14 +13,14 @@ import java.util.ResourceBundle;
  * <p>
  * A support class to pick a colour
  * </p>
- * 
+ *
  * <p>
  * This support class enables the user to pick a colour to use on the drawing tool.
  * </p>
- * 
- 
- * 
- * 
+ *
+
+ *
+ *
  * @author Kevin Steve Sathyanath
  * @version 1.0
  */
@@ -80,22 +80,21 @@ public class ColourWheel {
         if(a!=null){
             chosenColour = a;
         }
-     }//End of try
-    
-        catch(Exception err){
+     } catch (Exception err) {
             if (err instanceof NullPointerException) {
                 JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                 Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             } else {
-                System.out.println(err);
+                JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
             }
         } //End of catch
 
     } //Method of pickColour
-    
 
 
-    /**A getter method for the class that allows the program to get the colour the user has chosen. 
+
+    /**A getter method for the class that allows the program to get the colour the user has chosen.
      * @return The chosen colour
     */
     public static Color getChosenColour(){
@@ -103,5 +102,5 @@ public class ColourWheel {
     }
 
 
-    
+
 }
