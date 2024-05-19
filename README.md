@@ -59,7 +59,7 @@ ANDIE Code Crafters © 2024 by Emma Boult, Eden Li, Angus Lyall, Kevin Sathyanat
 * Encapsulation of code to pad border of images - FilterBorder.java
 * Extended filters
 * Mouse Selection
-* Image Crop
+* Crop to Selection
 
 `Angus`
 * Guassian blur filter
@@ -80,12 +80,15 @@ Throughout the entirety of our development we had a good system or reporting bug
 
 ## Known Issues
 - When user is prompted to enter a value for an action, if they exit out of the pop-up, the action will still be performed with the default value.
-- When the median filter is applied, the outer ring of pixels is effected adversely. As it does not use a convolution, the same method we applied to the other filters to fix this doesn't work.
-- For the remaining filters, when applied, the image will lose its outer ring of pixels each time they are applied
 - If an image's ops file is deleted after actions are performed, when the user exits they will not be prompted to save
 - Rotating images by arbitrary angles is an experimental feature and is needing refinement
 - UI is not as harmonious as we would like it to be
+- When the user opens the dialog to open a different file but then cancels, the selection function will break
 
+### Previous known issues that have now been fixed
+- When the median filter is applied, the outer ring of pixels is effected adversely. As it does not use a convolution, the same method we applied to the other filters to fix this doesn't work. (fixed)
+- For the remaining filters, when applied, the image will lose its outer ring of pixels each time they are applied. (fixed)
+  
 ## User Guide
 
 ⚠️Prerequisites⚠️
