@@ -194,7 +194,7 @@ Throughout the entirety of our development we had a good system or reporting bug
         dateFormat  DD-MM-YYYY
         Start of project: milestone, m1,05-03-2024,
         First deliverable: milestone, m2, 28-03-2024,
-        Second deliverable: milestone, m3, 22-05-2024
+        Second deliverable: milestone, m3, 22-05-2024, 
 
         section Developing
             Colour Channel Cycling              :done, des1, 08-03-2024, 3d
@@ -224,7 +224,7 @@ Throughout the entirety of our development we had a good system or reporting bug
             HSV                                 :done, des2, 02-05-2024, 03-05-2024
             Brightness and Contrast             :done, des2, 22-04-2024, 28-04-2024
             Temperature                         :done, des2, 01-05-2024, 02-05-2024
-            Colour Chooser                      :done, des2. 03-05-2024, 04-05-2024
+            Colour Chooser                      :done, des2, 03-05-2024, 04-05-2024
             UI Tweaks                           :active, des2, 26-04-2024, 20-05-2024
 
 
@@ -243,6 +243,7 @@ Throughout the entirety of our development we had a good system or reporting bug
             Filter Border Fix                   :done, 13-03-2024, 18-03-2024
             Bulk Brute-force Testing            :done, 18-05-2024, 19-05-2024
 
-
-
 ```
+
+
+
