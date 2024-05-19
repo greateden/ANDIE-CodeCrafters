@@ -789,8 +789,8 @@ public class FilterActions {
                 info2.setText(Andie.bundle.getString("Width")+" ("+Andie.bundle.getString("PleaseEnter")+")");
                 // Pop-up dialog box to ask for the radius value.
 
-                SpinnerNumberModel blockSizeHeightModel = new SpinnerNumberModel(0, 0, 1000, 1);
-                SpinnerNumberModel blockSizeWidthModel = new SpinnerNumberModel(0, 0, 1000, 1);
+                SpinnerNumberModel blockSizeHeightModel = new SpinnerNumberModel(1, 1, 1000, 1);
+                SpinnerNumberModel blockSizeWidthModel = new SpinnerNumberModel(1, 1, 1000, 1);
                 JSpinner blockSizeHeightSpinner = new JSpinner(blockSizeHeightModel);
                 JSpinner blockSizeWidthSpinner = new JSpinner(blockSizeWidthModel);
 
