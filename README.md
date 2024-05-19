@@ -197,6 +197,7 @@ Throughout the entirety of our development we had a good system or reporting bug
             Selection Tool                 :active, des2, 16-03-2024, 18-03-2024
             Selection Tool                 :active, des2, 23-04-2024, 30-04-2024
             Print Image                    :done, des2, 23-04-2024, 25-04-2024
+            Crop to Selection              :done, des2, 06-05-2024, 17-05-2024
 
 
 
