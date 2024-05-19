@@ -334,6 +334,9 @@ public class Andie {
 
             public void run() {
 
+                //new SplashScreen(2000);
+
+
                 Locale.setDefault(new Locale("en", "NZ"));
 
                 // Now making the ResourceBundle
@@ -345,6 +348,7 @@ public class Andie {
                 try {
                     //calling ThemeConfig for changing themes
                     createTheme();
+
                     // Keeping in case we need to revert. Also change dependency in Gradle file.
                     // try{
                     // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
