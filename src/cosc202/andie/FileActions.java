@@ -53,7 +53,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @version 1.0
  */
 public class FileActions {
-    /**Multilingual support */
+    /** Multilingual support */
     public ResourceBundle bundle = Andie.bundle;
 
     /** A list of actions for the File menu. */
@@ -62,15 +62,14 @@ public class FileActions {
     protected static boolean isOpened = false;
     // protected boolean isSaved = false;
 
-    /**Action to open a file */
+    /** Action to open a file */
     public Action fileOpen;
-    /**Action to save a file */
+    /** Action to save a file */
     public Action fileSave;
-    /**Action to export a file */
+    /** Action to export a file */
     public Action fileExport;
-    /**Action to print a file */
+    /** Action to print a file */
     public Action filePrint;
-
 
     /**
      * To get the state of the isOpened variable
@@ -100,25 +99,24 @@ public class FileActions {
 
     public FileActions() {
 
-
         actions = new ArrayList<Action>();
 
         ImageIcon openFileIcon = new ImageIcon("src/cosc202/andie/icons/open-file.png");
-        //Image downloaded from: <a href="https://www.flaticon.com/free-icons/folder" title="folder icons">Folder icons created by stockes_02 - Flaticon</a>
+        // Image downloaded from: <a href="https://www.flaticon.com/free-icons/folder"
+        // title="folder icons">Folder icons created by stockes_02 - Flaticon</a>
         fileOpen = new FileOpenAction(Andie.bundle.getString("OpenAction"), openFileIcon,
                 Andie.bundle.getString("OpenDesc"),
                 Integer.valueOf(KeyEvent.VK_O));
         actions.add(fileOpen);
         CreateHotKey.createHotkey(fileOpen, KeyEvent.VK_O, InputEvent.META_DOWN_MASK, "fileOpen");
 
-
         ImageIcon saveIcon = new ImageIcon("src/cosc202/andie/icons/diskette.png");
-        //Downloaded from : <a href="https://www.flaticon.com/free-icons/folder" title="folder icons">Folder icons created by stockes_02 - Flaticon</a>
+        // Downloaded from : <a href="https://www.flaticon.com/free-icons/folder"
+        // title="folder icons">Folder icons created by stockes_02 - Flaticon</a>
         fileSave = new FileSaveAction(Andie.bundle.getString("SaveAction"), saveIcon,
                 Andie.bundle.getString("SaveDesc"), Integer.valueOf(KeyEvent.VK_S));
         actions.add(fileSave);
         CreateHotKey.createHotkey(fileSave, KeyEvent.VK_S, InputEvent.META_DOWN_MASK, "fileSave");
-
 
         Action fileSaveAs = new FileSaveAsAction(Andie.bundle.getString("SaveAsAction"), null,
                 Andie.bundle.getString("SaveAsDesc"),
@@ -128,7 +126,8 @@ public class FileActions {
                 "fileSaveAs");
 
         ImageIcon exportIcon = new ImageIcon("src/cosc202/andie/icons/upload.png");
-        //Downloaded from: <a href="https://www.flaticon.com/free-icons/output" title="output icons">Output icons created by NajmunNahar - Flaticon</a>
+        // Downloaded from: <a href="https://www.flaticon.com/free-icons/output"
+        // title="output icons">Output icons created by NajmunNahar - Flaticon</a>
         fileExport = new FileExportAction(Andie.bundle.getString("ExportAction"), exportIcon,
                 Andie.bundle.getString("ExportDesc"),
                 Integer.valueOf(KeyEvent.VK_E));
@@ -136,7 +135,8 @@ public class FileActions {
         CreateHotKey.createHotkey(fileExport, KeyEvent.VK_E, InputEvent.META_DOWN_MASK, "fileExport");
 
         ImageIcon printIcon = new ImageIcon("src/cosc202/andie/icons/printing.png");
-        //Downloaded from: <a href="https://www.flaticon.com/free-icons/print" title="print icons">Print icons created by Freepik - Flaticon</a>
+        // Downloaded from: <a href="https://www.flaticon.com/free-icons/print"
+        // title="print icons">Print icons created by Freepik - Flaticon</a>
         filePrint = new FilePrintAction(Andie.bundle.getString("PrintAction"), printIcon,
                 Andie.bundle.getString("PrintDesc"),
                 Integer.valueOf(KeyEvent.VK_P));
@@ -144,14 +144,18 @@ public class FileActions {
         CreateHotKey.createHotkey(filePrint, KeyEvent.VK_P, InputEvent.META_DOWN_MASK, "filePrint");
 
         ImageIcon languageIcon = new ImageIcon("src/cosc202/andie/icons/arrow.png");
-        //Downloaded from: <a href="https://www.flaticon.com/free-icons/translate" title="translate icons">Translate icons created by Roundicons Premium - Flaticon</a>
+        // Downloaded from: <a href="https://www.flaticon.com/free-icons/translate"
+        // title="translate icons">Translate icons created by Roundicons Premium -
+        // Flaticon</a>
         Action fileChangeLangue = new FileChangeLanguageAction(Andie.bundle.getString("ChangeLanguage"), languageIcon,
                 Andie.bundle.getString("ChangeLanguage"), Integer.valueOf(KeyEvent.VK_L));
         actions.add(fileChangeLangue);
-        //CreateHotKey.createHotkey(fileChangeLangue, 0, 0, "fileChangeLangue");
+        // CreateHotKey.createHotkey(fileChangeLangue, 0, 0, "fileChangeLangue");
 
         ImageIcon exitIcon = new ImageIcon("src/cosc202/andie/icons/logout.png");
-        //Downloaded from: <a href="https://www.flaticon.com/free-icons/mobile-app" title="mobile app icons">Mobile app icons created by Andy Horvath - Flaticon</a>
+        // Downloaded from: <a href="https://www.flaticon.com/free-icons/mobile-app"
+        // title="mobile app icons">Mobile app icons created by Andy Horvath -
+        // Flaticon</a>
         Action fileExit = new FileExitAction(Andie.bundle.getString("ExitAction"), exitIcon,
                 Andie.bundle.getString("ExitDesc"),
                 Integer.valueOf(KeyEvent.VK_Q));
@@ -177,13 +181,13 @@ public class FileActions {
         keystrokes.add(0);
         keystrokes.add(KeyEvent.VK_Q);
 
-        int index=0;
+        int index = 0;
 
         JMenu fileMenu = new JMenu(Andie.bundle.getString("File"));
 
-        //  JMenuItem fileOpenMenuManual = new JMenuItem("Open");
-        //  fileOpenMenuManual.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,0));
-        //  fileMenu.add(fileOpenMenuManual);
+        // JMenuItem fileOpenMenuManual = new JMenuItem("Open");
+        // fileOpenMenuManual.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,0));
+        // fileMenu.add(fileOpenMenuManual);
 
         for (Action action : actions) {
             // JMenuItem newItem = new JMenuItem(action);
@@ -200,6 +204,7 @@ public class FileActions {
     /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
+     *
      * @param status the status of the menubar
      */
     public void changeCertainMenuStatus(boolean status) {
@@ -292,11 +297,6 @@ public class FileActions {
          */
         public void openFile() {
 
-            // Removes any previous mouse listener instances
-            for (MouseListener listener : target.getMouseListeners()) {
-                target.removeMouseListener(listener);
-            }
-
             JFileChooser fileChooser = new JFileChooser();
 
             // Cannot resolve .dYSM files
@@ -345,6 +345,11 @@ public class FileActions {
 
                     target.getImage().open(imageFilepath);
 
+                    // Removes any previous mouse listener instances
+                    for (MouseListener listener : target.getMouseListeners()) {
+                        target.removeMouseListener(listener);
+                    }
+
                     // Adding mouse lisener to target panel
                     target.addMouseListener(new MouseSelection(target));
 
@@ -354,11 +359,11 @@ public class FileActions {
                     target.repaint();
                     target.getParent().revalidate();
                 } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("FileTypeErr"),
-                        Andie.bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("FileTypeErr"),
+                            Andie.bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
                 }
+            } else {
             }
-
 
         }
 
@@ -917,13 +922,13 @@ public class FileActions {
      *
      */
     public class FileChangeLanguageAction extends ImageAction {
-        /**The height */
+        /** The height */
         int height;
-        /**The width */
+        /** The width */
         int width;
-        /**The labels  */
+        /** The labels */
         JLabel widthJLabel, heightLabel, titleLabel, blankLabel;
-        /**The textfields containing language options */
+        /** The textfields containing language options */
         JTextField widthField, heightField;
 
         /**
@@ -986,7 +991,7 @@ public class FileActions {
                     p.put("language", "en");
                     p.put("country", "NZ");
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
-                    //System.out.println(p.get("language", "id"));
+                    // System.out.println(p.get("language", "id"));
                     Andie.setLanguage();
                     // l.setExtendedState(JFrame.NORMAL);
                     l.dispose();
@@ -1003,7 +1008,7 @@ public class FileActions {
                     p.put("language", "id");
                     p.put("country", "ID");
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
-                    //System.out.println(p.get("language", "en"));
+                    // System.out.println(p.get("language", "en"));
                     Andie.getStatus();
                     Andie.setLanguage();
                     // l.setExtendedState(JFrame.NORMAL);
@@ -1021,7 +1026,7 @@ public class FileActions {
                     p.put("country", "TW");
                     Andie.bundle = ResourceBundle.getBundle("cosc202/andie/MessageBundle");
 
-                    //System.out.println(p.get("language", "zh"));
+                    // System.out.println(p.get("language", "zh"));
                     Andie.setLanguage();
                     // System.out.println(Andie.bundle.getString("EnterFilterRadius"));
                     // l.setExtendedState(JFrame.NORMAL);
