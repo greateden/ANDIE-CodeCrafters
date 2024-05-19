@@ -49,7 +49,7 @@ ANDIE Code Crafters © 2024 by Emma Boult, Eden Li, Angus Lyall, Kevin Sathyanat
 * Added themes
 * Made preview panels for major image operations
 * Fixed Javadocs pipeline
-  
+
 
 `Yuxing`
 * Image resize
@@ -100,6 +100,7 @@ Throughout the entirety of our development we had a good system or reporting bug
 ### Previous known issues that have now been fixed
 - When the median filter is applied, the outer ring of pixels is effected adversely. As it does not use a convolution, the same method we applied to the other filters to fix this doesn't work. (fixed)
 - For the remaining filters, when applied, the image will lose its outer ring of pixels each time they are applied. (fixed)
+- When the user opens the dialog to open a different file but then cancels, the selection function will break. (fixed)
 
 ## User Guide
 
