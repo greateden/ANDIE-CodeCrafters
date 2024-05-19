@@ -84,6 +84,7 @@ Throughout the entirety of our development we had a good system or reporting bug
 - Rotating images by arbitrary angles is an experimental feature and is needing refinement
 - UI is not as harmonious as we would like it to be
 - When the user opens the dialog to open a different file but then cancels, the selection function will break
+- The language support for JColourChooser cannot be implimented. This would be quite tedious and convoulted to fix.
 
 ### Previous known issues that have now been fixed
 - When the median filter is applied, the outer ring of pixels is effected adversely. As it does not use a convolution, the same method we applied to the other filters to fix this doesn't work. (fixed)
