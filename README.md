@@ -38,8 +38,18 @@ ANDIE Code Crafters © 2024 by Emma Boult, Eden Li, Angus Lyall, Kevin Sathyanat
 * Added Bahasa Indonesia as language option
 * Added a Help option and an About Us.
 * Testing and debugging
-* Added progress bar to median filter
+* Added progress bar to random scattering
 * Random Scattering
+* Added the Brightness and Contrast feature
+* Added temperature modification for images
+* Added HSV modification feature
+* Added Sepia filter
+* Added a colour chooser
+* Added icons to menus
+* Added themes
+* Made preview panels for major image operations
+* Fixed Javadocs pipeline
+  
 
 `Yuxing`
 * Image resize
@@ -80,6 +90,8 @@ Throughout the entirety of our development we had a good system or reporting bug
 
 ## Known Issues
 - When user is prompted to enter a value for an action, if they exit out of the pop-up, the action will still be performed with the default value.
+- When the median filter is applied, the outer ring of pixels is effected adversely. As it does not use a convolution, the same method we applied to the other filters to fix this doesn't work.
+- For the remaining filters, when applied, the image will lose its outer ring of pixels each time they are applied
 - If an image's ops file is deleted after actions are performed, when the user exits they will not be prompted to save
 - Rotating images by arbitrary angles is an experimental feature and is needing refinement
 - UI is not as harmonious as we would like it to be
@@ -188,26 +200,30 @@ Throughout the entirety of our development we had a good system or reporting bug
             File Saving                         :done,  des2, 14-03-2024, 19-03-2024
             File Save As                        :done,  des2, 14-03-2024, 19-03-2024
             File Export                         :done,  des2, 17-03-2024, 19-03-2024
-            Multilingual support                :active, des2, 14-03-2024, 27-03-2024
+            Multilingual support                :done, des2, 14-03-2024, 19-05-2024
             Help Action                         :done, des1, 06-03-2024, 07-03-2024
             Image flip                          :done, des1, 16-03-2024, 17-03-2024
             Median filter                       :done, des2, 13-03-2024, 15-03-2024
-            Gaussian Filter               :done, 08-03-2024, 09-03-2024
-            Image Rotation                :done, 16-03-2024, 17-03-2024
-            Sharpen Filter                 :done, des2, 10-03-2024, 11-03-2024
-            Soft Blur Filter               :done, des2, 11-03-2024, 12-03-2024
-            README                         :done, des2, 26-03-2024, 28-03-2024
-            Multithreading                :active, des2, 30-03-2024, 31-03-2024
-            Progress Bar                   :active, des2, 30-03-2024, 01-04-2024
+            Gaussian Filter                     :done, 08-03-2024, 09-03-2024
+            Image Rotation                      :done, 16-03-2024, 17-03-2024
+            Sharpen Filter                      :done, des2, 10-03-2024, 11-03-2024
+            Soft Blur Filter                    :done, des2, 11-03-2024, 12-03-2024
+            README                              :done, des2, 26-03-2024, 28-03-2024
+            Multithreading                      :active, des2, 30-03-2024, 31-03-2024
+            Progress Bar                        :active, des2, 30-03-2024, 01-04-2024
             Extended Filters (Convolution filters) :done, des2, 09-04-2024, 18-04-2024
-            Extended Filters (Median Filter) :done, des2, 19-04-2024, 23-04-2024
-            Selection Tool                 :active, des2, 16-03-2024, 18-03-2024
-            Selection Tool                 :active, des2, 23-04-2024, 30-04-2024
-            Print Image                    :done, des2, 23-04-2024, 25-04-2024
-            Crop to Selection              :done, des2, 06-05-2024, 08-05-2024
-            Crop to Selection              :done, des2, 14-05-2024, 17-05-2024
-
-
+            Extended Filters (Median Filter)    :done, des2, 19-04-2024, 23-04-2024
+            Selection Tool                      :active, des2, 16-03-2024, 18-03-2024
+            Selection Tool                      :active, des2, 23-04-2024, 30-04-2024
+            Print Image                         :done, des2, 23-04-2024, 25-04-2024
+            Crop to Selection                   :done, des2, 06-05-2024, 08-05-2024
+            Crop to Selection                   :done, des2, 14-05-2024, 17-05-2024
+            Random Scattering                   :done, des2, 04-04-2024, 05-04-2024
+            HSV                                 :done, des2, 02-05-2024, 03-05-2024
+            Brightness and Contrast             :done, des2, 22-04-2024, 28-04-2024
+            Temperature                         :done, des2, 01-05-2024, 02-05-2024
+            Colour Chooser                      :done, des2. 03-05-2024, 04-05-2024
+            UI Tweaks                           :active, des2, 26-04-2024, 20-05-2024
 
 
         section Debugging
