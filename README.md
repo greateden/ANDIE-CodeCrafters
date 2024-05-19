@@ -112,34 +112,48 @@ Throughout the entirety of our development we had a good system or reporting bug
 
 | Menus  | <span style="color:red;font-weight:700;font-size:16px">Actions</span>                | Windows                | macOS   | Windows & macOS   | Alternative                    |
 |--------|------------------------|------------------------|---------|-------------------|--------------------------------|
-| **F**ile   | **O**pen File              | Ctrl + O               | ⌘ O     | F - O             |                                |
-|        | **S**ave File              | Ctrl + S               | ⌘ S     | F - S             |                                |
+| **F**ile   | **O**pen              | Ctrl + O               | ⌘ O     | F - O             |                                |
+|        | **S**ave              | Ctrl + S               | ⌘ S     | F - S             |                                |
 |        | Save **A**s                | Ctrl + Shift + S       | ⇧⌘ S    | F - A             |                                |
 |        | **E**xport                 | Ctrl + E               | ⌘ E     | F - E             |                                |
 |        | **P**rint                   | Ctrl + P               | ⌘ P     | F - P             |                                   |
-|        | Exit (**Q**)                   | Ctrl + Q               | ⌘ Q     | F - Q             | Alt + F4 (Windows)             |
 |        | **S**et Language               |                        |         | F - L             |                                |
+|        | Exit (**Q**)                   | Ctrl + Q               | ⌘ Q     | F - Q             | Alt + F4 (Windows)             |
 | **E**dit   | **U**ndo                   | Ctrl + Z               | ⌘ Z     | E - U             |                                |
 |        | **R**edo                   | Ctrl + Y               | ⌘ Y     | E - R             | Ctrl/Cmd + Shift + Y (Win/Mac) |
+|        | **C**hange Theme              |                       |         | E - C             |                                 |
 | **V**iew   | Zoom **i**n                | Ctrl + "+"             | ⌘ +     | V - I             |                                |
 |        | Zoom **o**ut               | Ctrl + "-"             | ⌘ -     | V - O             |                                |
 |        | Zoom **f**ull              | Ctrl + 0               | ⌘ 0     | V - F             | Ctrl/Cmd + 1 (Win/Mac)         |
+| **I**mage  | Flip **H**orizontal        |                        |         | I - H             |                                |
+|        | Flip **V**ertical          |                        |         | I - V             |                                |
+|        | Crop                       |                        |         |                   |                                |
+|        | **R**otate                 |                        |         | I - R             |                                |
+|        | R**e**size                 | Ctrl + Alt + I         | ⌥ ⇧ ⌘ I | I - E             |                                |
+|        | R**a**ndom Scattering      |                        |         | I - A             |                                |
+|        | **S**caling                |                        |         | I - S - 1/2/3/4/5 |                                |
+|        | R**o**tate By              |                        |         | I - O - 1/2/3     |                                |
 | Fi**l**ter | **M**ean Filter            |                        |         | L - M             |                                |
 |        | **S**oft Blur              |                        |         | L - S             |                                |
 |        | S**h**arpen Filter         |                        |         | L - H             |                                |
 |        | **G**aussian Filter        |                        |         | L - G             |                                |
 |        | Me**d**ian Filter          |                        |         | L - D             |                                |
 |        | **E**mboss Filter          |                        |         | L - E             |                                |
+|        | S**o**bel Filter          |                        |         | L - O             |                                |
+|        | **B**lock Averaging          |                        |         | L - B             |                                |
 | **C**olour | **G**reyscale              |                        |         | C - G             |                                |
 |        | **I**nvert Colour          | Ctrl + I               | ⌘ I     | C - I             |                                |
 |        | **C**olour Channel Cycling |                        |         | C - C             |                                |
-| **I**mage  | Flip **H**orizontal        |                        |         | I - H             |                                |
-|        | Flip **V**ertical          |                        |         | I - V             |                                |
-|        | **R**otate Image           |                        |         | I - R             |                                |
-|        | Image R**e**size           | Ctrl + Alt + I         | ⌥ ⇧ ⌘ I | I - E             |                                |
-|        | R**a**ndom Scattering      |                        |         | I - A             |                                |
-|        | Image **S**caling          |                        |         | I - S - 1/2/3/4/5 |                                |
-|        | R**o**tate By              |                        |         | I - O - 1/2/3     |                                |
+|        | **B**rightness and Contrast	 |                        |         | C - B             |                                |
+|        | **S**epia Filter |                        |         | C - S             |                                |
+|        | **T**emperature |                        |         | C - T             |                                |
+|        | **H**SV |                        |         | C - H             |                                |
+| **M**acro | Start |                        |         | M - S             |                                |
+|        | Stop |                        |         | M - T             |                                |
+|        | Apply |                        |         | M - A             |                                |
+| **D**rawing | **O**val |                        |         | D - O             |                                |
+|        | **R**ectangle |                        |         | D - R             |                                |
+|        | **L**ine |                        |         | D - L             |                                |
 | **H**elp   | **A**bout us               |                        |         | H - A             |                                |
 |        | **H**otkey Instructions    | Alt + Shift + Ctrl + K | ⌥ ⇧ ⌘ K | H - H             | F1                             |
 ## Significant Refactoring
