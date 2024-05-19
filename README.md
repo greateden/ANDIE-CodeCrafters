@@ -163,6 +163,10 @@ Throughout the entirety of our development we had a good system or reporting bug
 
 * Multithreading has been implimented
 
+## Show Us Something
+* Multithreading
+* Print function
+
 ## Gantt Diagram for Our Project
 
 ```mermaid
