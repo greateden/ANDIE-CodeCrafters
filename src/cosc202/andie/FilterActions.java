@@ -263,6 +263,9 @@ public class FilterActions {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
 
@@ -484,6 +487,9 @@ public class FilterActions {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
 
@@ -533,6 +539,9 @@ public class FilterActions {
             catch (Exception err){
                 if (err instanceof NullPointerException){
                     JOptionPane.showMessageDialog(Andie.getFrame(),Andie.bundle.getString("YouDidNotOpen"), Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -608,6 +617,9 @@ public class FilterActions {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
 
@@ -662,6 +674,9 @@ public class FilterActions {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -709,6 +724,9 @@ public class FilterActions {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -844,6 +862,9 @@ public class FilterActions {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }

@@ -171,6 +171,9 @@ public class ColourActions {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -220,6 +223,9 @@ public class ColourActions {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -394,7 +400,8 @@ public class ColourActions {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 } else {
-                    System.out.println(err);
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -562,17 +569,15 @@ public class ColourActions {
                     target.getParent().revalidate();
                     target.repaint();
                 }
-            } //End of try
-
-
-            catch(Exception err){
+            } catch (Exception err){
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                     Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 } else {
-                    System.out.println(err);
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
                 }
-            } //End of catch
+            }
 
 
             } //End of actionPerformed()
@@ -621,6 +626,9 @@ public class ColourActions {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -767,17 +775,15 @@ public class ColourActions {
                     target.getParent().revalidate();
                     target.repaint();
                 }
-            } //End of try
-
-
-            catch(Exception err){
+            } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                     Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 } else {
-                    System.out.println(err);
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
-            } //End of catch
+            }
 
 
             } //End of actionPerformed()
@@ -947,17 +953,15 @@ public class ColourActions {
                     target.getParent().revalidate();
                     target.repaint();
                 }
-            } //End of try
-
-
-            catch(Exception err){
+            } catch (Exception err) {
                 if (err instanceof NullPointerException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("YouDidNotOpen"),
                     Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 } else {
-                    System.out.println(err);
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
-            } //End of catch
+            }
 
 
             } //End of actionPerformed()
@@ -1001,7 +1005,7 @@ public class ColourActions {
             try {
 
                 ColourWheel.pickColour();
-                System.out.println(ColourWheel.getChosenColour());
+                //System.out.println(ColourWheel.getChosenColour());
                 // JFrame f = new JFrame();
                 // f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 // JPanel p = new JPanel();
@@ -1011,9 +1015,9 @@ public class ColourActions {
                 // f.pack();
                 // f.setVisible(true);
 
-            }
-            catch(Exception err){
-                System.out.println(Andie.bundle.getString("ColourErr"));
+            } catch (Exception err) {
+                JOptionPane.showMessageDialog(null, err.toString(),
+                Andie.bundle.getString("ColourErr"), JOptionPane.WARNING_MESSAGE);
             }
         }
     }

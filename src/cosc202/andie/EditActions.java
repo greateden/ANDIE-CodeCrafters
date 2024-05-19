@@ -32,9 +32,9 @@ public class EditActions {
 
     /** A list of actions for the Edit menu. */
     protected ArrayList<Action> actions;
-    /**The bundle for multilingual support */
+    /** The bundle for multilingual support */
     public ResourceBundle bundle = Andie.bundle;
-    /**Undo and redo I think? */
+    /** Undo and redo I think? */
     public Action undo, redo;
 
     /**
@@ -46,21 +46,25 @@ public class EditActions {
         actions = new ArrayList<Action>();
 
         ImageIcon undoIcon = new ImageIcon("src/cosc202/andie/icons/undo.png");
-        //Icon downloaded from: <a href="https://www.flaticon.com/free-icons/undo" title="undo icons">Undo icons created by Creatype - Flaticon</a>
+        // Icon downloaded from: <a href="https://www.flaticon.com/free-icons/undo"
+        // title="undo icons">Undo icons created by Creatype - Flaticon</a>
         undo = new UndoAction(Andie.bundle.getString("Undo"), undoIcon, Andie.bundle.getString("Undo"),
                 Integer.valueOf(KeyEvent.VK_U));
         actions.add(undo);
         CreateHotKey.createHotkey(undo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK, Andie.bundle.getString("Undo"));
 
         ImageIcon redoIcon = new ImageIcon("src/cosc202/andie/icons/redo.png");
-        //Image downloaded from: <a href="https://www.flaticon.com/free-icons/redo" title="redo icons">Redo icons created by Creatype - Flaticon</a>
+        // Image downloaded from: <a href="https://www.flaticon.com/free-icons/redo"
+        // title="redo icons">Redo icons created by Creatype - Flaticon</a>
         redo = new RedoAction(Andie.bundle.getString("Redo"), redoIcon, Andie.bundle.getString("Redo"),
                 Integer.valueOf(KeyEvent.VK_R));
         actions.add(redo);
-        CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, Andie.bundle.getString("Redo"));
+        CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK,
+                Andie.bundle.getString("Redo"));
         CreateHotKey.createHotkey(redo, KeyEvent.VK_Y, InputEvent.META_DOWN_MASK, Andie.bundle.getString("Redo"));
 
-        Action changeTheme = new ChangeThemeAction(Andie.bundle.getString("ThemeMenu"), null, Andie.bundle.getString("Redo"),
+        Action changeTheme = new ChangeThemeAction(Andie.bundle.getString("ThemeMenu"), null,
+                Andie.bundle.getString("Redo"),
                 Integer.valueOf(KeyEvent.VK_C));
         actions.add(changeTheme);
     }
@@ -85,7 +89,9 @@ public class EditActions {
     /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
-     * @param status the conditional affecting the method of execution of the program.
+     *
+     * @param status the conditional affecting the method of execution of the
+     *               program.
      */
     public void changeCertainMenuStatus(boolean status) {
         undo.setEnabled(status);
@@ -136,7 +142,9 @@ public class EditActions {
                 if (err instanceof EmptyStackException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("NotOpenedOrFirstStep"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
-
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -186,6 +194,9 @@ public class EditActions {
                 if (err instanceof EmptyStackException) {
                     JOptionPane.showMessageDialog(null, Andie.bundle.getString("NotOpenedOrLastStep"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
@@ -198,11 +209,11 @@ public class EditActions {
      * @version 1.0
      */
     public class ChangeThemeAction extends ImageAction {
-        /**The checkbox to be shown in the UI */
+        /** The checkbox to be shown in the UI */
         private JCheckBox followOSTheme;
-        /**The combobox containing theme options */
+        /** The combobox containing theme options */
         private JComboBox<String> themeSelector;
-        /**The ok and cancel buttons */
+        /** The ok and cancel buttons */
         private JButton okButton, cancelButton;
 
         /**
@@ -275,7 +286,8 @@ public class EditActions {
                 frame.setVisible(true);
 
             } catch (Exception exc) {
-                System.out.println(exc.toString());
+                JOptionPane.showMessageDialog(null, exc.toString(),
+                        Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
             }
         }
 

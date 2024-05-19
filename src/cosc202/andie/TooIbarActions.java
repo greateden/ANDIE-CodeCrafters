@@ -131,8 +131,9 @@ public class TooIbarActions {
                 // Implement crop functionality here
                 try{
                     Andie.imageMenuBar.crop.actionPerformed(e);
-                }catch(Exception ex){
-                    System.out.println(ex.toString());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString(),
+                    Andie.bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         });

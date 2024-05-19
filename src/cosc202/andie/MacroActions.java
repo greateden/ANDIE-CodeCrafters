@@ -110,6 +110,9 @@ public class MacroActions {
                         JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("NotOpenedOrFirstStep"),
                                 Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
 
+                    } else {
+                        JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                     }
                 }
             } else {
@@ -232,7 +235,9 @@ public class MacroActions {
                 if (err instanceof EmptyStackException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("NotOpenedOrFirstStep"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
-
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
 
@@ -315,7 +320,9 @@ public class MacroActions {
                 if (err instanceof EmptyStackException) {
                     JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("NotOpenedOrFirstStep"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
-
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
 

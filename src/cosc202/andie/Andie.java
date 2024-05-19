@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.JTabbedPane;
@@ -20,7 +21,6 @@ import javax.swing.UIManager;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import javax.swing.JPanel;
-
 
 /**
  * <p>
@@ -99,7 +99,7 @@ public class Andie {
      * The actions associated with macro operations.
      */
     private static MacroActions macroActions;
-    /**The actions associated with drawing operations. */
+    /** The actions associated with drawing operations. */
     private static DrawingActions drawingActions;
     /**
      * The status of all certain menu items.
@@ -149,27 +149,26 @@ public class Andie {
         // tabs.addTab("Welcome", null, null, "Does nothing yet");
         JScrollPane scrollPane = new JScrollPane(imagePanel);
 
-
-        scrollPane.getViewport().getView().addMouseWheelListener(new MouseWheelListener(){
+        scrollPane.getViewport().getView().addMouseWheelListener(new MouseWheelListener() {
 
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
                 int verticalScrollAmount = e.getUnitsToScroll();
-                //int horizontalScrollAmount = e.getUnitsToScroll();
+                // int horizontalScrollAmount = e.getUnitsToScroll();
 
                 JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
-                //JScrollBar horizontalScrollBar = scrollPane.getHorizontalScrollBar();
+                // JScrollBar horizontalScrollBar = scrollPane.getHorizontalScrollBar();
 
                 verticalScrollBar.setValue(verticalScrollBar.getValue() - verticalScrollAmount);
-                //horizontalScrollBar.setValue(horizontalScrollBar.getValue() - horizontalScrollAmount);
+                // horizontalScrollBar.setValue(horizontalScrollBar.getValue() -
+                // horizontalScrollAmount);
             }
-
 
         });
 
         frame.add(scrollPane, BorderLayout.CENTER);
 
-        //We hereby beget toolbar.
+        // We hereby beget toolbar.
         toolbar = new TooIbarActions();
         frame.getContentPane().add(toolbar.createToolBar(), BorderLayout.NORTH);
 
@@ -200,6 +199,7 @@ public class Andie {
     /**
      * Method to change all the related "grey buttons'" status
      * before/after the image get imported.
+     *
      * @param status updates the status of all of the menu buttons.
      */
     public static void changeAllCertainMenuStatus(boolean status) {
@@ -230,7 +230,7 @@ public class Andie {
         imageMenuBar = new ImageMenuBar();
         colourActions = new ColourActions();
         macroActions = new MacroActions();
-        drawingActions=new DrawingActions();
+        drawingActions = new DrawingActions();
         helpActions = new HelpActions();
         // File menus are pretty standard, so things that usually go in File menus go
         // here.
@@ -272,7 +272,6 @@ public class Andie {
         newMenuBar.add(helpMenu);
 
         frame.setJMenuBar(newMenuBar);
-
 
         CreateHotKey.createHotkey(fileMenu, KeyEvent.VK_F, 0, "filemenu");
         CreateHotKey.createHotkey(editMenu, KeyEvent.VK_E, 0, "editmenu");
@@ -334,8 +333,7 @@ public class Andie {
 
             public void run() {
 
-                //new SplashScreen(2000);
-
+                // new SplashScreen(2000);
 
                 Locale.setDefault(new Locale("en", "NZ"));
 
@@ -346,14 +344,8 @@ public class Andie {
                 // System.out.println(bundle.getString("convertToGreyAction"));
 
                 try {
-                    //calling ThemeConfig for changing themes
+                    // calling ThemeConfig for changing themes
                     createTheme();
-
-                    // Keeping in case we need to revert. Also change dependency in Gradle file.
-                    // try{
-                    // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    // }
-                    // catch(Exception ignored){}
                     createAndShowGUI();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -366,14 +358,16 @@ public class Andie {
     /**
      * Method to create the theme for the GUI.
      */
-    public static void createTheme(){
+    public static void createTheme() {
         LookAndFeel laf = ThemeConfig.CreateTheme();
-                    try {
-                        UIManager.setLookAndFeel(laf);
-                    } catch (Exception ex) {
-                        System.err.println(Andie.bundle.getString("FailedLAF"));
-                    }
+        try {
+            UIManager.setLookAndFeel(laf);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "FATAL: " + ex.toString(),
+                    Andie.bundle.getString("FailedLAF"), JOptionPane.WARNING_MESSAGE);
+        }
     }
+
     /**
      * An accessor for the imagePanel that is used in the preview panels for
      * Brightness and Contrast, among others.

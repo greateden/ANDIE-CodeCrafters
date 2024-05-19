@@ -37,11 +37,15 @@ import javax.swing.JOptionPane;
  * <p>
  * This method draws stuff.
  * </p>
+ *
  * @author YUXING ZHANG
  * @version 1.0
  */
 public class DrawingActions {
-    /** An arrayList of actions needed for this class. Ask Yuxing what it does I guess. */
+    /**
+     * An arrayList of actions needed for this class. Ask Yuxing what it does I
+     * guess.
+     */
     protected ArrayList<Action> actions;
     /** The file where the operation sequence is stored. */
     public ResourceBundle bundle = Andie.bundle;
@@ -53,20 +57,23 @@ public class DrawingActions {
      */
     public DrawingActions() {
         actions = new ArrayList<Action>();
-        //Icon downloaded from: <a href="https://www.flaticon.com/free-icons/oval" title="oval icons">Oval icons created by Freepik - Flaticon</a>
+        // Icon downloaded from: <a href="https://www.flaticon.com/free-icons/oval"
+        // title="oval icons">Oval icons created by Freepik - Flaticon</a>
         ImageIcon ellipseIcon = new ImageIcon("src/cosc202/andie/icons/ellipse.png");
-        //Icon taken from: <a href="https://www.flaticon.com/free-icons/rectangle" title="rectangle icons">Rectangle icons created by Freepik - Flaticon</a>
+        // Icon taken from: <a href="https://www.flaticon.com/free-icons/rectangle"
+        // title="rectangle icons">Rectangle icons created by Freepik - Flaticon</a>
         ImageIcon rectangleIcon = new ImageIcon("src/cosc202/andie/icons/rectangle.png");
-        //Icon taken from: <a href="https://www.flaticon.com/free-icons/line" title="line icons">Line icons created by Freepik - Flaticon</a>
+        // Icon taken from: <a href="https://www.flaticon.com/free-icons/line"
+        // title="line icons">Line icons created by Freepik - Flaticon</a>
         ImageIcon lineIcon = new ImageIcon("src/cosc202/andie/icons/diagonal-line.png");
 
-
-
-        actions.add(new DrawOvalAction(Andie.bundle.getString("Oval"), ellipseIcon, Andie.bundle.getString("OvalDesc"), Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new DrawRectAction(Andie.bundle.getString("Rectangle"), rectangleIcon, Andie.bundle.getString("RectangleDesc"),
-        Integer.valueOf(KeyEvent.VK_R)));
+        actions.add(new DrawOvalAction(Andie.bundle.getString("Oval"), ellipseIcon, Andie.bundle.getString("OvalDesc"),
+                Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new DrawRectAction(Andie.bundle.getString("Rectangle"), rectangleIcon,
+                Andie.bundle.getString("RectangleDesc"),
+                Integer.valueOf(KeyEvent.VK_R)));
         actions.add(new DrawLineAction(Andie.bundle.getString("Line"), lineIcon, Andie.bundle.getString("LineDesc"),
-        Integer.valueOf(KeyEvent.VK_L)));
+                Integer.valueOf(KeyEvent.VK_L)));
     }
 
     /**
@@ -88,6 +95,7 @@ public class DrawingActions {
     /**
      * Change all the actions that require to change their availability before
      * and/or after opening an image.
+     *
      * @param status The boolean value to control the behaviour of this method.
      */
     public void changeCertainMenuStatus(boolean status) {
@@ -104,10 +112,12 @@ public class DrawingActions {
      */
     public class DrawOvalAction extends ImageAction {
 
-        /**Constructor for the action
-         * @param name the name
-         * @param icon the icon
-         * @param desc the desc
+        /**
+         * Constructor for the action
+         *
+         * @param name     the name
+         * @param icon     the icon
+         * @param desc     the desc
          * @param mnemonic the mnemonic
          */
         DrawOvalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
@@ -120,7 +130,7 @@ public class DrawingActions {
                 try {
                     ColourWheel.pickColour();
                     DrawingOperations.zoom = target.getZoom();
-                    DrawingOperations.isDrawingOval=true;
+                    DrawingOperations.isDrawingOval = true;
 
                     // target.getImage().apply(new DrawingOperations('o'));
                     target.repaint();
@@ -129,7 +139,9 @@ public class DrawingActions {
                     if (err instanceof EmptyStackException) {
                         JOptionPane.showMessageDialog(null, Andie.bundle.getString("NotOpenedOrFirstStep"),
                                 Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
-
+                    } else {
+                        JOptionPane.showMessageDialog(null, err.toString(),
+                                Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                     }
                 }
             } else {
@@ -150,10 +162,12 @@ public class DrawingActions {
      */
     public class DrawRectAction extends ImageAction {
 
-        /**A method that requires comments
-         * @param name name
-         * @param icon icon
-         * @param desc desc
+        /**
+         * A method that requires comments
+         *
+         * @param name     name
+         * @param icon     icon
+         * @param desc     desc
          * @param mnemonic mnemonic
          */
         DrawRectAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
@@ -166,15 +180,17 @@ public class DrawingActions {
                 try {
                     ColourWheel.pickColour();
                     DrawingOperations.zoom = target.getZoom();
-                    DrawingOperations.isDrawingRect=true;
-                    //target.getImage().apply(new DrawingOperations('r'));
+                    DrawingOperations.isDrawingRect = true;
+                    // target.getImage().apply(new DrawingOperations('r'));
                     target.repaint();
                     target.getParent().revalidate();
                 } catch (Exception err) {
                     if (err instanceof EmptyStackException) {
                         JOptionPane.showMessageDialog(null, Andie.bundle.getString("NotOpenedOrFirstStep"),
                                 Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
-
+                    } else {
+                        JOptionPane.showMessageDialog(null, err.toString(),
+                                Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                     }
                 }
             } else {
@@ -205,7 +221,7 @@ public class DrawingActions {
                 try {
                     ColourWheel.pickColour();
                     DrawingOperations.zoom = target.getZoom();
-                    DrawingOperations.isDrawingLine=true;
+                    DrawingOperations.isDrawingLine = true;
 
                     // target.getImage().apply(new DrawingOperations('l'));
                     target.repaint();
@@ -214,7 +230,9 @@ public class DrawingActions {
                     if (err instanceof EmptyStackException) {
                         JOptionPane.showMessageDialog(null, Andie.bundle.getString("NotOpenedOrFirstStep"),
                                 Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
-
+                    } else {
+                        JOptionPane.showMessageDialog(null, err.toString(),
+                                Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                     }
                 }
             } else {
