@@ -26,7 +26,7 @@ ANDIE Code Crafters © 2024 by Emma Boult, Eden Li, Angus Lyall, Kevin Sathyanat
 * Implemented multithreading for median filter
 * Added two types of keyboard hotkeys and their instructions
 * Print Image
-* Skeleton Code for ToolBar
+* ToolBar
 * Theme Change
 
 `Kevin`
@@ -194,56 +194,53 @@ Throughout the entirety of our development we had a good system or reporting bug
         dateFormat  DD-MM-YYYY
         Start of project: milestone, m1,05-03-2024,
         First deliverable: milestone, m2, 28-03-2024,
-        Second deliverable: milestone, m3, 22-05-2024, 
+        Second deliverable: milestone, m3, 22-05-2024,
 
         section Developing
             Colour Channel Cycling              :done, des1, 08-03-2024, 3d
             Image Opening                       :done,  des2, 14-03-2024, 19-03-2024
-            File Saving                         :done,  des2, 14-03-2024, 19-03-2024
-            File Save As                        :done,  des2, 14-03-2024, 19-03-2024
-            File Export                         :done,  des2, 17-03-2024, 19-03-2024
-            Multilingual support                :done, des2, 14-03-2024, 19-05-2024
-            Help Action                         :done, des1, 06-03-2024, 07-03-2024
-            Image flip                          :done, des1, 16-03-2024, 17-03-2024
-            Median filter                       :done, des2, 13-03-2024, 15-03-2024
-            Gaussian Filter                     :done, 08-03-2024, 09-03-2024
-            Image Rotation                      :done, 16-03-2024, 17-03-2024
-            Sharpen Filter                      :done, des2, 10-03-2024, 11-03-2024
-            Soft Blur Filter                    :done, des2, 11-03-2024, 12-03-2024
-            README                              :done, des2, 26-03-2024, 28-03-2024
-            Multithreading                      :active, des2, 30-03-2024, 31-03-2024
-            Progress Bar                        :active, des2, 30-03-2024, 01-04-2024
-            Extended Filters (Convolution filters) :done, des2, 09-04-2024, 18-04-2024
-            Extended Filters (Median Filter)    :done, des2, 19-04-2024, 23-04-2024
-            Selection Tool                      :active, des2, 16-03-2024, 18-03-2024
-            Selection Tool                      :active, des2, 23-04-2024, 30-04-2024
-            Print Image                         :done, des2, 23-04-2024, 25-04-2024
-            Crop to Selection                   :done, des2, 06-05-2024, 08-05-2024
-            Crop to Selection                   :done, des2, 14-05-2024, 17-05-2024
-            Random Scattering                   :done, des2, 04-04-2024, 05-04-2024
-            HSV                                 :done, des2, 02-05-2024, 03-05-2024
-            Brightness and Contrast             :done, des2, 22-04-2024, 28-04-2024
-            Temperature                         :done, des2, 01-05-2024, 02-05-2024
-            Colour Chooser                      :done, des2, 03-05-2024, 04-05-2024
-            UI Tweaks                           :active, des2, 26-04-2024, 20-05-2024
+            File Saving                         :done,  des3, 14-03-2024, 19-03-2024
+            File Save As                        :done,  des4, 14-03-2024, 19-03-2024
+            File Export                         :done,  des5, 17-03-2024, 19-03-2024
+            Multilingual support                :done, des6, 14-03-2024, 19-05-2024
+            Help Action                         :done, des7, 06-03-2024, 07-03-2024
+            Image flip                          :done, des8, 16-03-2024, 17-03-2024
+            Median filter                       :done, des9, 13-03-2024, 15-03-2024
+            Gaussian Filter                     :done, des10, 08-03-2024, 09-03-2024
+            Image Rotation                      :done, des11, 16-03-2024, 17-03-2024
+            Sharpen Filter                      :done, des12, 10-03-2024, 11-03-2024
+            Soft Blur Filter                    :done, des13, 11-03-2024, 12-03-2024
+            README                              :done, des14, 26-03-2024, 28-03-2024
+            Multithreading                      :active, des15, 30-03-2024, 31-03-2024
+            Progress Bar                        :active, des16, 30-03-2024, 01-04-2024
+            Extended Filters (Convolution filters) :done, des17, 09-04-2024, 18-04-2024
+            Extended Filters (Median Filter)    :done, des18, 19-04-2024, 23-04-2024
+            Selection Tool                      :active, des19, 16-03-2024, 18-03-2024
+            Selection Tool                      :active, des20, 23-04-2024, 30-04-2024
+            Print Image                         :done, des21, 23-04-2024, 25-04-2024
+            Crop to Selection                   :done, des22, 06-05-2024, 08-05-2024
+            Crop to Selection                   :done, des23, 14-05-2024, 17-05-2024
+            Random Scattering                   :done, des24, 04-04-2024, 05-04-2024
+            HSV                                 :done, des25, 02-05-2024, 03-05-2024
+            Brightness and Contrast             :done, des26, 22-04-2024, 28-04-2024
+            Temperature                         :done, des27, 01-05-2024, 02-05-2024
+            Colour Chooser                      :done, des28, 03-05-2024, 04-05-2024
+            UI Tweaks                           :active, des29, 26-04-2024, 20-05-2024
 
 
         section Debugging
-            Image Opening                      :done , 22-03-2024, 23-03-2024
-            Image Opening                      :done , 27-03-2024, 28-03-2024
-            General Testing                    :done, 27-03-2024, 28-03-2024
-            File Export                         :done, 27-03-2024, 28-03-2024
-            File Saving                         :done, 27-03-2024, 28-03-2024
-            File Save As                        :done, 22-03-2024, 27-03-2024
-            Multilingual support                :done, 26-03-2024, 27-03-2024
-            Handling Merge Conflict             :done, 10-03-2024, 11-03-2024
-            Handling Merge Conflict             :done, 12-03-2024, 13-03-2024
-            Handling Merge Conflict             :done, 15-03-2024, 16-03-2024
-            Handling Merge Conflict             :done, 26-03-2024, 27-03-2024
-            Filter Border Fix                   :done, 13-03-2024, 18-03-2024
-            Bulk Brute-force Testing            :done, 18-05-2024, 19-05-2024
+            Image Opening                      :done , dbg1, 22-03-2024, 23-03-2024
+            Image Opening                      :done , dbg2, 27-03-2024, 28-03-2024
+            General Testing                    :done, dbg3, 27-03-2024, 28-03-2024
+            File Export                         :done, dbg4, 27-03-2024, 28-03-2024
+            File Saving                         :done, dbg5, 27-03-2024, 28-03-2024
+            File Save As                        :done, dbg6, 22-03-2024, 27-03-2024
+            Multilingual support                :done, dbg7, 26-03-2024, 27-03-2024
+            Handling Merge Conflict             :done, dbg8, 10-03-2024, 11-03-2024
+            Handling Merge Conflict             :done, dbg9, 12-03-2024, 13-03-2024
+            Handling Merge Conflict             :done, dbg10, 15-03-2024, 16-03-2024
+            Handling Merge Conflict             :done, dbg11, 26-03-2024, 27-03-2024
+            Filter Border Fix                   :done, dbg12, 13-03-2024, 18-03-2024
+            Bulk Brute-force Testing            :done, dbg13, 18-05-2024, 19-05-2024
 
 ```
-
-
-
