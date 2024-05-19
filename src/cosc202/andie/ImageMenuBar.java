@@ -320,8 +320,11 @@ public class ImageMenuBar {
                 Andie.toolbar.changeCropStatus(false);
             } catch (Exception err) {
                 if (err instanceof NullPointerException) {
-                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotSelect"),
                             Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(Andie.getFrame(), "Calling crop action: " + err.toString(),
+                            Andie.bundle.getString("Error"), JOptionPane.WARNING_MESSAGE);
                 }
             }
         }

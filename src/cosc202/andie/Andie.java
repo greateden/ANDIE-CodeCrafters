@@ -169,13 +169,11 @@ public class Andie {
 
         frame.add(scrollPane, BorderLayout.CENTER);
 
-        createMenuBar();
-
         //We hereby beget toolbar.
         toolbar = new TooIbarActions();
         frame.getContentPane().add(toolbar.createToolBar(), BorderLayout.NORTH);
 
-        changeAllCertainMenuStatus(allCertainMenuStatus);// before open an image, set all to unable to click
+        createMenuBar();
 
         frame.repaint();
 
@@ -290,6 +288,9 @@ public class Andie {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+        changeAllCertainMenuStatus(allCertainMenuStatus);
+        toolbar.changeCropStatus(false);
     }
 
     /**
