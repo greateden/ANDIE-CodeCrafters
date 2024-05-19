@@ -585,7 +585,7 @@ public class FilterActions {
                 int angle = 0;
                 int radius =0;
                 SpinnerNumberModel angleModel = new SpinnerNumberModel(0, 0, 360, 1);
-                SpinnerNumberModel radiusModel = new SpinnerNumberModel(0, 0, 10, 1);
+                SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
                 JPanel panel = new JPanel(new GridLayout(4, 1));
                 JLabel l1 = new JLabel(Andie.bundle.getString("EnterEmbossDirection"));
                 JSpinner s1 = new JSpinner(angleModel);
