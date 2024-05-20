@@ -1,8 +1,0 @@
-
-
-LANGUAGE
-- When switching languages, swing goes weird and when it reloads it resizes back to original window size
-
-NOT URGENT
-- Gaussian and median filter’s popup's for value input dont explain why they need a value
-- Improve popups, to make them all match and feel integrated
