@@ -92,6 +92,7 @@ Throughout the entirety of our development we had a good system or reporting bug
 - The language support for JColourChooser cannot be implimented. This would be quite tedious and convoulted to fix
 - UI is not as harmonious as we would like it to be
 - In our menu bar we have implimented icons for main operations, however not every feature has an icon
+- There is an error that appears for the preview panel for some of the filters intermittently. It does not appear often enough to debug effectively. 
 
 ### Previous known issues that have now been fixed
 - When the median filter is applied, the outer ring of pixels is effected adversely. As it does not use a convolution, the same method we applied to the other filters to fix this doesn't work. (fixed)
