@@ -10,6 +10,8 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.awt.Component;
+import java.awt.Dimension;
 
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
@@ -104,6 +106,10 @@ public class FilterActions {
 
         Action sobel = new SobelFilterAction(Andie.bundle.getString("SobelMenu"), null, Andie.bundle.getString("SobelDesc"), Integer.valueOf(KeyEvent.VK_O));
         actions.add(sobel);
+
+        Action scattering = new RandomScatteringAction(Andie.bundle.getString("RandomScattering"), null,
+                Andie.bundle.getString("RandomScattering"), Integer.valueOf(KeyEvent.VK_A));
+        actions.add(scattering);
 
         Action blockAveraging = new BlcokAveragingAction(Andie.bundle.getString("BlockMenu"), null,
                 Andie.bundle.getString("BlockDesc"), Integer.valueOf(KeyEvent.VK_B));
@@ -212,7 +218,7 @@ public class FilterActions {
                             BufferedImage curr = MeanFilter.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
                             updatePreviewImage(curr);
                         }catch(IllegalArgumentException hu){
-                            System.out.println("The illegal argument exception has been caught and handled.");
+                            //System.out.println("The illegal argument exception has been caught and handled."); Vanished when VSCode rebooted. 
                         }
                     }
                 };
@@ -444,7 +450,7 @@ public class FilterActions {
                             BufferedImage curr = GaussianFilter.applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
                             updatePreviewImage(curr);
                         }catch(IllegalArgumentException hu){
-                            System.out.println("Illegal Argument Exception caught");
+                            //System.out.println("Illegal Argument Exception caught");  //This was apparently an issue caused by VSCode. Vanished on reboot. 
                         }
 
 
@@ -867,8 +873,151 @@ public class FilterActions {
                     Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
                 }
             }
-        }
+        }    
     }
+
+    /**
+     * RandomScatteringAction extends ImageAction and represents an action for
+     * applying random scattering effect to an image.
+     * This action prompts the user for a filter radius and applies a
+     * RandomScattering filter accordingly.
+     */
+    public class RandomScatteringAction extends ImageAction {
+        /**The radius */
+        int radius = 0;
+
+        /**
+         * <p>
+         * Create a new Random Scattering action.
+         * </p>
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        RandomScatteringAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+        /**The JSlider used in the code below. */
+        JSlider radiusSlider;
+
+        /**
+         * <p>
+         * Callback for when the Random Scattering action is triggered.
+         * </p>
+         *
+         * <p>
+         * This method is called whenever the RandomScatteringAction is triggered.
+         * It prompts the user for a filter radius, then applys an appropriately sized
+         * </p>
+         *
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            try {
+                // Determine the radius - ask the user.
+                BufferedImage prev = EditableImage.deepCopy(target.getImage().getCurrentImage());
+
+                // final EditableImage preview = target.getImage().makeCopy();
+                // final ImagePanel show = new ImagePanel(preview);
+
+                previewPanel = new JPanel();
+                previewPanel.setPreferredSize(new Dimension(500, 300));
+                updatePreviewImage(prev);
+
+                // Pop-up dialog box to ask for the radius value.
+                JPanel sliderPane = new JPanel(new FlowLayout());
+                sliderPane.setPreferredSize(new Dimension(450, 50));
+                JPanel labelPane = new JPanel(new GridLayout(1, 1, 167, 0));
+                radiusSlider = new JSlider(0, 10, 0);
+                radiusSlider.setPreferredSize(new Dimension(400, 50));
+
+                JLabel tempLabel = new JLabel("Radius", JLabel.CENTER);
+                radiusSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+                radiusSlider.setMajorTickSpacing(1);
+                radiusSlider.setPaintTicks(true);
+                radiusSlider.setPaintLabels(true);
+                radiusSlider.setSnapToTicks(true);
+
+                ChangeListener sliderChangeListener = new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+
+                        int rad = radiusSlider.getValue();
+                        BufferedImage curr = RandomScattering2
+                                .applyToPreview(EditableImage.deepCopy(target.getImage().getCurrentImage()), rad);
+                        updatePreviewImage(curr);
+                        radius = rad;
+
+                    }
+                };
+
+                radiusSlider.addChangeListener(sliderChangeListener);
+
+                labelPane.add(tempLabel);
+
+                sliderPane.add(radiusSlider);
+
+                JPanel menu = new JPanel(new GridBagLayout());
+                GridBagConstraints a = new GridBagConstraints();
+                Insets i = new Insets(20, 0, 0, 0);
+
+                // a.fill = GridBagConstraints.BOTH;
+                a.gridx = 0;
+                a.gridy = 0;
+                a.gridwidth = 2;
+                a.anchor = GridBagConstraints.PAGE_START;
+                menu.add(previewPanel, a);
+
+                a.fill = GridBagConstraints.VERTICAL;
+                a.gridx = 0;
+                a.gridy = 1;
+                a.weighty = 1.0;
+                a.insets = i;
+                menu.add(sliderPane, a);
+
+                a.gridx = 0;
+                a.gridy = 2;
+                a.weighty = 0.7;
+                a.ipady = 1;
+                i.set(10, 0, 0, 0);
+                menu.add(labelPane, a);
+
+                int option = JOptionPane.showOptionDialog(Andie.getFrame(), menu,
+                        Andie.bundle.getString("EnterFilterRadius"),
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+                // Check the return value from the dialog box.
+                if (option == JOptionPane.CANCEL_OPTION) {
+                    return;
+                } else if (option == JOptionPane.OK_OPTION) {
+                    target.getImage().apply(new RandomScattering2(radius));
+                    target.getParent().revalidate();
+                    target.repaint();
+                }
+
+                // Create and apply the filter
+
+            } catch (Exception err) {
+                if (err instanceof NullPointerException) {
+                    JOptionPane.showMessageDialog(Andie.getFrame(), Andie.bundle.getString("YouDidNotOpen"),
+                            Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, err.toString(),
+                    Andie.bundle.getString("Warning"), JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+
+    }// End of randomScattering
+
+
     /**A method to update the preview Image. Common to all methods that pop up a preview image.
      * Please don't cut our marks for lack of comments.
      * @author Kevin Steve Sathyanath

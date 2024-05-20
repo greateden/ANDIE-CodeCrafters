@@ -331,7 +331,7 @@ public class FileActions {
                     "wbep");
             fileChooser.setFileFilter(filterAllTypes);
 
-            int result = fileChooser.showOpenDialog(target);
+            int result = fileChooser.showOpenDialog(Andie.getFrame());
 
             if (result == JFileChooser.APPROVE_OPTION) {
                 try {
