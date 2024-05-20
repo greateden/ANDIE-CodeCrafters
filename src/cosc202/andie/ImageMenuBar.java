@@ -98,9 +98,9 @@ public class ImageMenuBar {
                 Andie.bundle.getString("CropDesc"), Integer.valueOf(KeyEvent.VK_J));
         actions.add(crop);
 
-        Action rotate = new RotateImageAction(Andie.bundle.getString("RotateImageAction"), null,
-                Andie.bundle.getString("RIADesc"), Integer.valueOf(KeyEvent.VK_R));
-        actions.add(rotate);
+        // Action rotate = new RotateImageAction(Andie.bundle.getString("RotateImageAction"), null,
+        //         Andie.bundle.getString("RIADesc"), Integer.valueOf(KeyEvent.VK_R));
+        // actions.add(rotate);
 
         Action resize = new ImageResizeAction(Andie.bundle.getString("ImageResizeAction"), null,
                 Andie.bundle.getString("ImageResizeAction"), Integer.valueOf(KeyEvent.VK_E));
