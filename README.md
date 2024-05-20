@@ -103,6 +103,8 @@ Throughout the entirety of our development we had a good system or reporting bug
 
 ## User Guide
 
+### Installation
+
 ⚠️Prerequisites⚠️
 - Java Development Kit (JDK): You'll need a recent version of the JDK installed on your system. Download and install it from the official Oracle website: https://www.oracle.com/nz/java/technologies/downloads/. Verify the installation by opening a terminal and running java -version.
 
@@ -117,6 +119,46 @@ Throughout the entirety of our development we had a good system or reporting bug
 - Run `gradle build`
 - Run `gradle run`
 - To open files, go to file > open
+
+### Using ANDIE
+
+#### Opening Image
+    1. Click on ‘File’ in the menu bar
+    2. Select ‘Open’
+    3. Browse to the image file you want to edit and click ‘Open’
+
+#### Saving Image
+    1. Click on ‘File’ in the menu bar
+    2. Select ‘Save As’
+    3. Choose the location and format for the image and click ‘save’
+
+#### Saving Operations
+    1. Click on ‘File’ in the menu bar
+    2. Select ‘Save’
+    3. A popup will confirm that the .ops file has saved successfully
+
+#### Change Theme
+    1. Click on ‘Edit’ in the menu bar
+    2. Select ‘Change Theme’
+    3. Select which theme you wish to use from the drop down menu and click ‘Ok’
+    4. Then restart the application for the new theme to take effect
+
+#### Selection
+    1. Click, within the image area, where you would like to start the selection
+    2. Drag the mouse until you have the desired selection size
+    3. Release the mouse to confirm selection
+
+#### Cropping
+    1. Make a selection (see above)
+    2. Click on ‘Image’ in the menu bar
+    3. Select ‘Crop’
+
+#### Drawing Functions
+    1. Click on ‘Drawing’ in the menu bar
+    2. Select your desired shape to draw
+    3. Select a colour swatch from the colour chooser, then click ‘Ok’
+
+
 
 <span style="color:red;font-weight:700;font-size:16px">
    🔥Hot
