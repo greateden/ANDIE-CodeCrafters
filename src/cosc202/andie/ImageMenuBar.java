@@ -105,7 +105,7 @@ public class ImageMenuBar {
         Action resize = new ImageResizeAction(Andie.bundle.getString("ImageResizeAction"), null,
                 Andie.bundle.getString("ImageResizeAction"), Integer.valueOf(KeyEvent.VK_E));
         actions.add(resize);
-        CreateHotKey.createHotkey(resize, KeyEvent.VK_I, InputEvent.META_DOWN_MASK | InputEvent.ALT_DOWN_MASK,
+        CreateHotKey.createHotkey(resize, KeyEvent.VK_I, Andie.controlOrCmd | InputEvent.ALT_DOWN_MASK,
                 "resize");
 
         Action scattering = new RandomScatteringAction(Andie.bundle.getString("RandomScattering"), null,

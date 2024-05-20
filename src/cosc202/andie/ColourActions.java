@@ -79,7 +79,7 @@ public class ColourActions {
                 Andie.bundle.getString("ImageInvertDesc"),
                 Integer.valueOf(KeyEvent.VK_I));
         actions.add(invert);
-        CreateHotKey.createHotkey(invert, KeyEvent.VK_I, InputEvent.META_DOWN_MASK, "invert");
+        CreateHotKey.createHotkey(invert, KeyEvent.VK_I, Andie.controlOrCmd, "invert");
 
         Action rgbSwap = new RGBSwappingAction(Andie.bundle.getString("RGBSwappingAction"), null,
                 Andie.bundle.getString("RGBSwapDesc"),

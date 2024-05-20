@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.awt.event.InputEvent;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -107,6 +108,11 @@ public class Andie {
     public static boolean allCertainMenuStatus;
 
     /**
+     * The relative control or command key.
+     */
+    public static int controlOrCmd;
+
+    /**
      * <p>
      * Launches the main GUI for the ANDIE program.
      * </p>
@@ -133,6 +139,8 @@ public class Andie {
      * @throws Exception if something goes wrong.
      */
     public static void createAndShowGUI() throws Exception {
+        changeHotKey();
+
         // Set up the main GUI frame
         frame = new JFrame("ANDIE: CodeCrafters");
 
@@ -389,5 +397,38 @@ public class Andie {
      */
     public static void addTab(EditableImage i) {
 
+    }
+
+    /**
+     * A method to identify the current OS.
+     * return 1 if OS is Windows.
+     * return 2 if OS is Mac.
+     * return 0 if either.
+     *
+     * @return the OS
+     */
+    public static int whatsTheOS() {
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win"))
+            return 1;
+        if (os.contains("mac"))
+            return 2;
+        else
+            return 0; // Sincerely Eden: sorry Linux, cry myself to sleep... Wait, programmers should
+                      // have no sleeps.
+    }
+
+    /**
+     * A method that determine whether to use control or command based on the
+     * current OS.
+     */
+    public static void changeHotKey() {
+        if (whatsTheOS() == 1) {
+            controlOrCmd = 128;// CTRL_DOWN_MASK
+        } else if (whatsTheOS() == 2) {
+            controlOrCmd = 256;// META_DOWN_MASK
+        } else {
+            controlOrCmd = 128;// set it to control
+        }
     }
 }

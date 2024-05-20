@@ -51,7 +51,7 @@ public class EditActions {
         undo = new UndoAction(Andie.bundle.getString("Undo"), undoIcon, Andie.bundle.getString("Undo"),
                 Integer.valueOf(KeyEvent.VK_U));
         actions.add(undo);
-        CreateHotKey.createHotkey(undo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK, Andie.bundle.getString("Undo"));
+        CreateHotKey.createHotkey(undo, KeyEvent.VK_Z, Andie.controlOrCmd, Andie.bundle.getString("Undo"));
 
         ImageIcon redoIcon = new ImageIcon("src/cosc202/andie/icons/redo.png");
         // Image downloaded from: <a href="https://www.flaticon.com/free-icons/redo"
@@ -59,9 +59,9 @@ public class EditActions {
         redo = new RedoAction(Andie.bundle.getString("Redo"), redoIcon, Andie.bundle.getString("Redo"),
                 Integer.valueOf(KeyEvent.VK_R));
         actions.add(redo);
-        CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK,
+        CreateHotKey.createHotkey(redo, KeyEvent.VK_Z, Andie.controlOrCmd | InputEvent.SHIFT_DOWN_MASK,
                 Andie.bundle.getString("Redo"));
-        CreateHotKey.createHotkey(redo, KeyEvent.VK_Y, InputEvent.META_DOWN_MASK, Andie.bundle.getString("Redo"));
+        CreateHotKey.createHotkey(redo, KeyEvent.VK_Y, Andie.controlOrCmd, Andie.bundle.getString("Redo"));
 
         Action changeTheme = new ChangeThemeAction(Andie.bundle.getString("ThemeMenu"), null,
                 Andie.bundle.getString("Redo"),

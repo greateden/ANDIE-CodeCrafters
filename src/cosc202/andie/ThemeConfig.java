@@ -98,18 +98,17 @@ public class ThemeConfig {
      */
     public static int whatsTheOSTheme() {
         try {
-            String os = System.getProperty("os.name").toLowerCase();
             ProcessBuilder processBuilder;
 
-            if (os.contains("win")) {
+            if (Andie.whatsTheOS() == 1) {
                 // Command for Windows
                 processBuilder = new ProcessBuilder("powershell", "-Command",
                         "Get-ItemProperty -Path HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize | Select-Object AppsUseLightTheme");
-            } else if (os.contains("mac")) {
+            } else if (Andie.whatsTheOS() == 2) {
                 // Command for MacOS
                 processBuilder = new ProcessBuilder("/bin/bash", "-c", "defaults read -g AppleInterfaceStyle");
             } else {
-                return 0;// Sincerely Eden: sorry Linux, cry myself to sleep...
+                return 0;
             }
 
             Process process = processBuilder.start();
@@ -118,9 +117,9 @@ public class ThemeConfig {
             int theme = 0; // Default to light theme
 
             while ((line = reader.readLine()) != null) {
-                if (os.contains("win")) {
+                if (Andie.whatsTheOS() == 1) {
                     theme = line.contains("0") ? 1 : 0; // 0 for dark theme in Windows
-                } else if (os.contains("mac")) {
+                } else if (Andie.whatsTheOS() == 2) {
                     theme = line.contains("Dark") ? 1 : 0; // Dark for dark theme in MacOS
                 }
             }

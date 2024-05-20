@@ -110,7 +110,7 @@ public class FileActions {
                 Andie.bundle.getString("OpenDesc"),
                 Integer.valueOf(KeyEvent.VK_O));
         actions.add(fileOpen);
-        CreateHotKey.createHotkey(fileOpen, KeyEvent.VK_O, InputEvent.META_DOWN_MASK, "fileOpen");
+        CreateHotKey.createHotkey(fileOpen, KeyEvent.VK_O, Andie.controlOrCmd, "fileOpen");
 
         ImageIcon saveIcon = new ImageIcon("src/cosc202/andie/icons/diskette.png");
         // Downloaded from : <a href="https://www.flaticon.com/free-icons/folder"
@@ -118,13 +118,13 @@ public class FileActions {
         fileSave = new FileSaveAction(Andie.bundle.getString("SaveAction"), saveIcon,
                 Andie.bundle.getString("SaveDesc"), Integer.valueOf(KeyEvent.VK_S));
         actions.add(fileSave);
-        CreateHotKey.createHotkey(fileSave, KeyEvent.VK_S, InputEvent.META_DOWN_MASK, "fileSave");
+        CreateHotKey.createHotkey(fileSave, KeyEvent.VK_S, Andie.controlOrCmd, "fileSave");
 
         fileSaveAs = new FileSaveAsAction(Andie.bundle.getString("SaveAsAction"), null,
                 Andie.bundle.getString("SaveAsDesc"),
                 Integer.valueOf(KeyEvent.VK_A));
         actions.add(fileSaveAs);
-        CreateHotKey.createHotkey(fileSaveAs, KeyEvent.VK_S, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK,
+        CreateHotKey.createHotkey(fileSaveAs, KeyEvent.VK_S, Andie.controlOrCmd | InputEvent.SHIFT_DOWN_MASK,
                 "fileSaveAs");
 
         ImageIcon exportIcon = new ImageIcon("src/cosc202/andie/icons/upload.png");
@@ -134,7 +134,7 @@ public class FileActions {
                 Andie.bundle.getString("ExportDesc"),
                 Integer.valueOf(KeyEvent.VK_E));
         actions.add(fileExport);
-        CreateHotKey.createHotkey(fileExport, KeyEvent.VK_E, InputEvent.META_DOWN_MASK, "fileExport");
+        CreateHotKey.createHotkey(fileExport, KeyEvent.VK_E, Andie.controlOrCmd, "fileExport");
 
         ImageIcon printIcon = new ImageIcon("src/cosc202/andie/icons/printing.png");
         // Downloaded from: <a href="https://www.flaticon.com/free-icons/print"
@@ -143,7 +143,7 @@ public class FileActions {
                 Andie.bundle.getString("PrintDesc"),
                 Integer.valueOf(KeyEvent.VK_P));
         actions.add(filePrint);
-        CreateHotKey.createHotkey(filePrint, KeyEvent.VK_P, InputEvent.META_DOWN_MASK, "filePrint");
+        CreateHotKey.createHotkey(filePrint, KeyEvent.VK_P, Andie.controlOrCmd, "filePrint");
 
         ImageIcon languageIcon = new ImageIcon("src/cosc202/andie/icons/arrow.png");
         // Downloaded from: <a href="https://www.flaticon.com/free-icons/translate"
@@ -162,7 +162,7 @@ public class FileActions {
                 Andie.bundle.getString("ExitDesc"),
                 Integer.valueOf(KeyEvent.VK_Q));
         actions.add(fileExit);
-        CreateHotKey.createHotkey(fileExit, KeyEvent.VK_Q, InputEvent.META_DOWN_MASK, "fileExit");
+        CreateHotKey.createHotkey(fileExit, KeyEvent.VK_Q, Andie.controlOrCmd, "fileExit");
     }
 
     /**

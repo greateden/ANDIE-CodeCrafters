@@ -109,7 +109,7 @@ public class FilterActions {
                 Andie.bundle.getString("BlockDesc"), Integer.valueOf(KeyEvent.VK_B));
         actions.add(blockAveraging);
         // CreateHotKey.createHotkey(blockAveraging, KeyEvent.VK_I,
-        // InputEvent.META_DOWN_MASK | InputEvent.ALT_DOWN_MASK, "blockAveraging");
+        // Andie.controlOrCmd | InputEvent.ALT_DOWN_MASK, "blockAveraging");
     }
 
     /**

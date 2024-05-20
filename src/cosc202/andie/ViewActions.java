@@ -51,20 +51,20 @@ public class ViewActions {
                 Andie.bundle.getString("ZoomInAction"),
                 Integer.valueOf(KeyEvent.VK_I));
         actions.add(zoomIn);
-        CreateHotKey.createHotkey(zoomIn, KeyEvent.VK_EQUALS, InputEvent.META_DOWN_MASK, "zoomIn");
+        CreateHotKey.createHotkey(zoomIn, KeyEvent.VK_EQUALS, Andie.controlOrCmd, "zoomIn");
 
         zoomOut = new ZoomOutAction(Andie.bundle.getString("ZoomOutAction"), null,
                 Andie.bundle.getString("ZoomOutAction"),
                 Integer.valueOf(KeyEvent.VK_O));
         actions.add(zoomOut);
-        CreateHotKey.createHotkey(zoomOut, KeyEvent.VK_MINUS, InputEvent.META_DOWN_MASK, "zoomOut");
+        CreateHotKey.createHotkey(zoomOut, KeyEvent.VK_MINUS, Andie.controlOrCmd, "zoomOut");
 
         zoomFull = new ZoomFullAction(Andie.bundle.getString("ZoomFullAction"), null,
                 Andie.bundle.getString("ZoomFullAction"),
                 Integer.valueOf(KeyEvent.VK_F));
         actions.add(zoomFull);
-        CreateHotKey.createHotkey(zoomFull, KeyEvent.VK_1, InputEvent.META_DOWN_MASK, "zoomFull");
-        CreateHotKey.createHotkey(zoomFull, KeyEvent.VK_0, InputEvent.META_DOWN_MASK, "zoomFull");
+        CreateHotKey.createHotkey(zoomFull, KeyEvent.VK_1, Andie.controlOrCmd, "zoomFull");
+        CreateHotKey.createHotkey(zoomFull, KeyEvent.VK_0, Andie.controlOrCmd, "zoomFull");
 
     }
 

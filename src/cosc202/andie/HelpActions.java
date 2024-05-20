@@ -33,7 +33,7 @@ public class HelpActions {
         Action hotKey = new HotKeyInstructions(Andie.bundle.getString("HotKey"), hotkeyIcon,
                 Andie.bundle.getString("HotKeyMessage"), Integer.valueOf(KeyEvent.VK_H));
         actions.add(hotKey);
-        CreateHotKey.createHotkey(hotKey, KeyEvent.VK_K, InputEvent.META_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK | InputEvent.ALT_DOWN_MASK, "hotKey");
+        CreateHotKey.createHotkey(hotKey, KeyEvent.VK_K, Andie.controlOrCmd | InputEvent.SHIFT_DOWN_MASK | InputEvent.ALT_DOWN_MASK, "hotKey");
 
     }
 
@@ -57,14 +57,14 @@ public class HelpActions {
      * <p>
      * Gives help and stuff
      * </p>
-     * 
+     *
      * <p>
      * Just some info about us and our app
      * </p>
-     * 
-     
-    * 
-    * 
+     *
+
+    *
+    *
     * @author Kevin Steve Sathyanath
     * @version 1.0
     */
@@ -108,11 +108,11 @@ public class HelpActions {
      * <p>
      * Info about hotkeys
      * </p>
-     * 
+     *
      * <p>
      * Info if you need it
      * </p>
-     *     
+     *
      * @author The Greatest Eden
      * @version 1.0
      */
