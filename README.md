@@ -24,10 +24,11 @@ ANDIE Code Crafters © 2024 by Emma Boult, Eden Li, Angus Lyall, Kevin Sathyanat
 * Adding Traditional Chinese (Taiwan) language support
 * Created the icon
 * Implemented multithreading for median filter
-* Added two types of keyboard hotkeys and their instructions
+* Added two types of keyboard hotkeys for MacOS and Windows and their instructions
 * Print Image
-* ToolBar
-* Theme Change
+* ToolBar (and its icons)
+* Theme Change for MacOS and Windows (big sorry for Linux)
+* Implemented Selection Box with Emma
 
 `Kevin`
 * Enabled Multilingual support
