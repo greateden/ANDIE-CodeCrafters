@@ -92,7 +92,7 @@ Throughout the entirety of our development we had a good system or reporting bug
 - The language support for JColourChooser cannot be implimented. This would be quite tedious and convoulted to fix
 - UI is not as harmonious as we would like it to be
 - In our menu bar we have implimented icons for main operations, however not every feature has an icon
-- There is an error that appears for the preview panel for some of the filters intermittently. It does not appear often enough to debug effectively. 
+- There is an error that appears for the preview panel for some of the filters intermittently. It does not appear often enough to debug effectively.
 
 ### Previous known issues that have now been fixed
 - When the median filter is applied, the outer ring of pixels is effected adversely. As it does not use a convolution, the same method we applied to the other filters to fix this doesn't work. (fixed)
@@ -144,7 +144,6 @@ Throughout the entirety of our development we had a good system or reporting bug
 |        | Crop                       |                        |         |                   |                                |
 |        | **R**otate                 |                        |         | I - R             |                                |
 |        | R**e**size                 | Ctrl + Alt + I         | ⌥ ⇧ ⌘ I | I - E             |                                |
-|        | R**a**ndom Scattering      |                        |         | I - A             |                                |
 |        | **S**caling                |                        |         | I - S - 1/2/3/4/5 |                                |
 |        | R**o**tate By              |                        |         | I - O - 1/2/3     |                                |
 | Fi**l**ter | **M**ean Filter            |                        |         | L - M             |                                |
@@ -154,6 +153,7 @@ Throughout the entirety of our development we had a good system or reporting bug
 |        | Me**d**ian Filter          |                        |         | L - D             |                                |
 |        | **E**mboss Filter          |                        |         | L - E             |                                |
 |        | S**o**bel Filter          |                        |         | L - O             |                                |
+|        | R**a**ndom Scattering      |                        |         | L - A             |                                |
 |        | **B**lock Averaging          |                        |         | L - B             |                                |
 | **C**olour | **G**reyscale              |                        |         | C - G             |                                |
 |        | **I**nvert Colour          | Ctrl + I               | ⌘ I     | C - I             |                                |
