@@ -38,7 +38,7 @@ public class DrawingOperations implements ImageOperation, java.io.Serializable {
 
 
   /**
-   * Construct an DrawingOperations with no parameters.
+   * Construct DrawingOperations.
    * @param shape the shape of the selection
    * @param start the start point
    * @param end the end point
