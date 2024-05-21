@@ -334,8 +334,6 @@ public class ImageMenuBar {
 
     /**
      * Action class code layout created by Steven Mills
-     * /**
-     * Action class code layout created by Steven Mills
      */
     public class RotateImageAction extends ImageAction {
 
@@ -668,8 +666,6 @@ public class ImageMenuBar {
     } // End of Image Scaling Action
 
     /**
-     * Action class code layout created by Steven Mills
-     * /**
      * Action class code layout created by Steven Mills
      */
     public class RotateImageStrictAction extends ImageAction {
